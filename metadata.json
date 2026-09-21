@@ -1,0 +1,6 @@
+{
+  "name": "Le Vert Angkor Hotel",
+  "description": "Luxury boutique hotel in Siem Reap, Cambodia, featuring rooftop pool, spa, dining, and curated Angkor temple tours.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
