@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Sparkles, MapPin, Award, ArrowRight, ShieldCheck, Utensils, Compass, Heart, Check, Clock, Phone, ChevronRight } from 'lucide-react';
 import { Hero } from '../components/Hero';
-import { BookingBar } from '../components/BookingBar';
 import { RoomCard } from '../components/RoomCard';
 import { TourCard } from '../components/TourCard';
 import { HeroConfig, Room, Tour, AppRoute } from '../types';
@@ -32,7 +31,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
   return (
     <div className="space-y-0">
-      {/* 1. Cinematic Hero with Booking Bar */}
+      {/* 1. Cinematic Hero */}
       <Hero
         config={heroConfig}
         onPrimaryClick={() => onOpenBooking()}
@@ -40,14 +39,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
         onSecondaryClick={() => onNavigate('/rooms/')}
         secondaryButtonText="Explore All Suites"
         onOpenHeroManager={onOpenHeroManager}
-      >
-        <BookingBar
-          onSearch={({ roomType }) => {
-            onOpenBooking(roomType === 'all' ? undefined : roomType);
-          }}
-          className="mt-8"
-        />
-      </Hero>
+      />
 
       {/* 2. Hotel Story & Philosophy */}
       <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
