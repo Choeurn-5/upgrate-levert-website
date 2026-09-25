@@ -1,4 +1,9 @@
-@import "tailwindcss";
+@import "tailwindcss" source(none);
+@source "..";
+@source "../components";
+@source "../views";
+@source "../data";
+@source "../lib";
 
 @theme {
   --font-serif: "Cormorant Garamond", Georgia, serif;

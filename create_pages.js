@@ -30,11 +30,6 @@ const pages = [
     props: ['heroConfig={heroConfigs.spa}', 'spaTreatments={spaList}', 'onNavigate={handleNavigate}', 'onOpenBooking={() => handleOpenBooking("spa-treatment")}', 'onOpenHeroManager={() => setIsHeroManagerOpen(true)}'],
   },
   {
-    path: 'facilities-levertangkorhotel',
-    viewName: 'FacilitiesView',
-    props: ['heroConfig={heroConfigs.facilities}', 'onNavigate={handleNavigate}', 'onOpenBooking={handleOpenBooking}', 'onOpenHeroManager={() => setIsHeroManagerOpen(true)}'],
-  },
-  {
     path: 'gallery',
     viewName: 'GalleryView',
     props: ['heroConfig={heroConfigs.gallery}', 'onNavigate={handleNavigate}', 'onOpenBooking={handleOpenBooking}', 'onOpenHeroManager={() => setIsHeroManagerOpen(true)}'],

@@ -87,14 +87,6 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('/facilities-levertangkorhotel/')}
-                  className="hover:text-[#C5A880] transition-colors"
-                >
-                  Rooftop Swimming Pool
-                </button>
-              </li>
-              <li>
-                <button
                   onClick={() => onNavigate('/gallery/')}
                   className="hover:text-[#C5A880] transition-colors"
                 >

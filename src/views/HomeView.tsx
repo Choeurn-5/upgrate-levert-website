@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Sparkles, MapPin, Award, ArrowRight, ShieldCheck, Waves, Utensils, Compass, Heart, Check, Clock, Phone, ChevronRight } from 'lucide-react';
+import { Sparkles, MapPin, Award, ArrowRight, ShieldCheck, Utensils, Compass, Heart, Check, Clock, Phone, ChevronRight } from 'lucide-react';
 import { Hero } from '../components/Hero';
 import { BookingBar } from '../components/BookingBar';
 import { RoomCard } from '../components/RoomCard';
@@ -94,10 +94,10 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
             <div className="pt-2">
               <button
-                onClick={() => onNavigate('/facilities-levertangkorhotel/')}
+                onClick={() => onNavigate('/rooms/')}
                 className="inline-flex items-center space-x-2 text-xs uppercase tracking-widest font-semibold text-[#1C3829] hover:text-[#2D5540] group underline underline-offset-8"
               >
-                <span>Discover Our Rooftop Swimming Pool & Sun Deck</span>
+                <span>Explore Our Luxury Rooms & Suites</span>
                 <ArrowRight className="w-4 h-4 text-[#C5A880] group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
@@ -188,24 +188,24 @@ export const HomeView: React.FC<HomeViewProps> = ({
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* Card 1: Rooftop Pool */}
+          {/* Card 1: Temple Packages */}
           <div
-            onClick={() => onNavigate('/facilities-levertangkorhotel/')}
+            onClick={() => onNavigate('/temple-package/')}
             className="group cursor-pointer bg-[#FAF8F5] rounded-3xl p-6 border border-[#E7E0D5] hover:border-[#C5A880] hover:shadow-xl transition-all flex flex-col justify-between"
           >
             <div>
               <div className="w-12 h-12 rounded-2xl bg-[#1C3829] text-[#DFCAA8] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <Waves className="w-6 h-6" />
+                <Sparkles className="w-6 h-6" />
               </div>
               <h3 className="font-luxury-serif text-xl font-bold text-[#1C3829] mb-2">
-                Rooftop Pool Oasis
+                Temple Packages
               </h3>
               <p className="text-xs text-[#68726B] leading-relaxed font-light mb-4">
-                Soak beneath the sky or unwind on shaded loungers with panoramic views across Siem Reap's city skyline.
+                All-inclusive 3-night Angkor discoveries with private chauffeured tours, airport pickup, daily breakfast, and spa.
               </p>
             </div>
             <div className="text-xs font-semibold text-[#1C3829] flex items-center space-x-1 group-hover:text-[#C5A880] transition-colors pt-2">
-              <span>View Pool Details</span>
+              <span>View Packages</span>
               <ChevronRight className="w-3.5 h-3.5" />
             </div>
           </div>

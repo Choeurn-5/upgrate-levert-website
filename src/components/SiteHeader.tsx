@@ -33,11 +33,10 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({
 
   const navLinks: { label: string; route: AppRoute }[] = [
     { label: 'Home', route: '/' },
-    { label: 'Rooms & Suites', route: '/rooms/' },
-    { label: 'Temple Tours', route: '/touring/' },
-    { label: 'Dining & Rooftop', route: '/dining/' },
-    { label: 'Spa & Wellness', route: '/spa/' },
-    { label: 'Swimming Pool', route: '/facilities-levertangkorhotel/' },
+    { label: 'Rooms', route: '/rooms/' },
+    { label: 'Tours', route: '/touring/' },
+    { label: 'Dining', route: '/dining/' },
+    { label: 'Spa', route: '/spa/' },
     { label: 'Gallery', route: '/gallery/' },
     { label: 'Accolades', route: '/awards/' },
     { label: 'Contact', route: '/contact-levertangkorhotel/' },

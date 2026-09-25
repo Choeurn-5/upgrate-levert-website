@@ -147,7 +147,6 @@ export function GlobalProvider({ children }: { children: React.ReactNode }) {
     if (pathname.startsWith('/our-tours/')) return 'tourDetail';
     if (pathname === '/dining/') return 'dining';
     if (pathname === '/spa/') return 'spa';
-    if (pathname === '/facilities-levertangkorhotel/') return 'facilities';
     if (pathname === '/gallery/') return 'gallery';
     if (pathname === '/contact-levertangkorhotel/') return 'contact';
     if (pathname === '/awards/') return 'awards';

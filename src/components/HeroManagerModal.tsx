@@ -172,7 +172,6 @@ export const HeroManagerModal: React.FC<HeroManagerModalProps> = ({
                   <option value="tourDetail">Tour Details (/our-tours/[slug]/)</option>
                   <option value="dining">Dining & Rooftop (/dining/)</option>
                   <option value="spa">Spa & Wellness (/spa/)</option>
-                  <option value="facilities">Swimming Pool (/facilities-levertangkorhotel/)</option>
                   <option value="gallery">Photo Gallery (/gallery/)</option>
                   <option value="contact">Contact (/contact-levertangkorhotel/)</option>
                   <option value="awards">Accolades & Awards (/awards/)</option>

@@ -90,14 +90,6 @@ export const HERO_CONFIGS: Record<string, HeroConfig> = {
     imagePlaceholderNote: 'Replaceable Hero Asset (Holistic Spa Treatment Atmosphere)',
     badge: 'Signature Herbal Treatments',
   },
-  facilities: {
-    eyebrow: 'ROOFTOP SWIMMING POOL',
-    title: 'An Intimate Skyline Pool & Sun Deck Oasis',
-    subtitle: 'Perched on our rooftop above Siem Reap, enjoy crystal-clear waters, plush cushioned loungers, chilled cocktails, and breathtaking sunset panoramas.',
-    imageUrl: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=2000&q=85',
-    imagePlaceholderNote: 'Replaceable Hero Asset (Rooftop Pool & Sky Horizon)',
-    badge: 'Open Daily 6:30 AM – 10:00 PM',
-  },
   gallery: {
     eyebrow: 'VISUAL CHRONICLE',
     title: 'Moments of Serenity & Discovery',
