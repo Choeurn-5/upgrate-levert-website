@@ -38,7 +38,7 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({
     { label: 'Dining', route: '/dining/' },
     { label: 'Spa', route: '/spa/' },
     { label: 'Gallery', route: '/gallery/' },
-    { label: 'Accolades', route: '/awards/' },
+    // { label: 'Accolades', route: '/awards/' },
     { label: 'Contact', route: '/contact-levertangkorhotel/' },
   ];
 
