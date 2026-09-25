@@ -547,7 +547,7 @@ export const FACILITIES_DATA: FacilityItem[] = [
     id: 'location-prime',
     title: 'Prime Old Market & Pub Street Location',
     hours: 'Ideal Proximity',
-    description: 'Conveniently situated in quiet Steung Thmey Village, just 150 meters (2-minute stroll) from the famous Pub Street, Night Market, and Old Market (Phsar Chas).',
+    description: 'Conveniently situated in quiet Steung Thmey Village, just 5 minutes stroll from the famous Pub Street, Night Market, and Old Market (Phsar Chas).',
     iconName: 'MapPin',
     image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
     features: [

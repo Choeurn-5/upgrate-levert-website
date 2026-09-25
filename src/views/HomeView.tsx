@@ -56,7 +56,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
             </h2>
 
             <p className="text-base text-[#4A554F] font-light leading-relaxed">
-              Nestled quietly in Steung Thmey Village, <strong>Le Vert Angkor Hotel</strong> offers an intimate oasis where modern boutique design meets warm Cambodian hospitality. Located just a 2-minute stroll (150 meters) from the vibrant Old Market, Night Market, and famous Pub Street, our sanctuary lets you indulge in serene tranquility while keeping the best of Siem Reap at your doorstep.
+              Nestled quietly in Steung Thmey Village, <strong>Le Vert Angkor Hotel</strong> offers an intimate oasis where modern boutique design meets warm Cambodian hospitality. Located just a 5-minute stroll from the vibrant Old Market, Night Market, and famous Pub Street, our sanctuary lets you indulge in serene tranquility while keeping the best of Siem Reap at your doorstep.
             </p>
 
             <p className="text-base text-[#4A554F] font-light leading-relaxed">
@@ -67,7 +67,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
             <div className="grid grid-cols-2 gap-4 pt-4">
               <div className="p-4 rounded-2xl bg-[#F2EDE4] border border-[#E7E0D5]">
                 <div className="font-luxury-serif text-2xl font-bold text-[#1C3829]">
-                  150 m
+                  5 mins
                 </div>
                 <div className="text-xs text-[#68726B] font-medium mt-0.5">
                   Walk to Old Market & Pub Street
@@ -76,7 +76,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
               <div className="p-4 rounded-2xl bg-[#F2EDE4] border border-[#E7E0D5]">
                 <div className="font-luxury-serif text-2xl font-bold text-[#1C3829]">
-                  7 km
+                  15 mins
                 </div>
                 <div className="text-xs text-[#68726B] font-medium mt-0.5">
                   To Angkor Wat Temple Gates
@@ -447,7 +447,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 Quiet Village Calm, Steps from the Night Market
               </h3>
               <p className="text-sm text-[#FAF8F5]/80 font-light leading-relaxed">
-                Stay just 150 meters away from the bustling Old Market, vibrant nightlife, artisan cafes, and the Siem Reap riverside, while sleeping peacefully in our quiet residential enclave.
+                Stay just 5 minutes away from the bustling Old Market, vibrant nightlife, artisan cafes, and the Siem Reap riverside, while sleeping peacefully in our quiet residential enclave.
               </p>
 
               <div className="pt-2 space-y-2 text-xs text-[#DFCAA8]">

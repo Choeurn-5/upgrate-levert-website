@@ -11,7 +11,7 @@ export const SITE_SETTINGS = {
   whatsappUrl: 'https://wa.me/85570247282?text=Hello%20Le%20Vert%20Angkor%20Hotel%2C%20I%20would%20like%20to%20inquire%20about%20a%20reservation.',
   email: 'reservation@levertangkorhotel.com',
   address: 'Steung Thmey Village, Svay Dangkum Commune, Siem Reap District, Siem Reap Province, Cambodia',
-  locationSummary: '150 meters to Old Market & Pub Street • 7 km to Angkor Wat Temple Complex',
+  locationSummary: '5 minutes to Old Market & Pub Street • 15 minutes to Angkor Wat Temple Complex',
   googleMapsEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3881.9961621217036!2d103.8541243!3d13.3504899!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31101777242c1629%3A0x6d9f783aaef3b88!2sLe%20Vert%20Angkor%20Hotel!5e0!3m2!1sen!2skh!4v1700000000000!5m2!1sen!2skh',
   social: {
     facebook: 'https://www.facebook.com/levertangkorhotel',
@@ -39,7 +39,7 @@ export const HERO_CONFIGS: Record<string, HeroConfig> = {
   home: {
     eyebrow: 'SIEM REAP • CAMBODIA',
     title: 'A Sanctuary of Calm & Khmer Elegance',
-    subtitle: 'Step into an oasis of understated luxury, perched just 150 meters from the lively Old Market and moments from the timeless wonder of Angkor Wat.',
+    subtitle: 'Step into an oasis of understated luxury, perched just 5 minutes from the lively Old Market and moments from the timeless wonder of Angkor Wat.',
     imageUrl: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=2000&q=85',
     imagePlaceholderNote: 'Replaceable Hero Asset (Tropical Boutique Hotel Canvas)',
     badge: 'TripAdvisor Travelers’ Choice 2026',
@@ -100,7 +100,7 @@ export const HERO_CONFIGS: Record<string, HeroConfig> = {
   contact: {
     eyebrow: 'GET IN TOUCH',
     title: 'We Await the Pleasure of Welcoming You',
-    subtitle: 'Located on Steung Thmey Village, 150 meters from the heartbeat of Siem Reap. Reach out to our concierge for bespoke requests and direct booking benefits.',
+    subtitle: 'Located on Steung Thmey Village, 5 minutes from the heartbeat of Siem Reap. Reach out to our concierge for bespoke requests and direct booking benefits.',
     imageUrl: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=2000&q=85',
     imagePlaceholderNote: 'Replaceable Hero Asset (Concierge Hospitality Setting)',
   },

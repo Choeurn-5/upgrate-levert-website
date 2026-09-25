@@ -72,7 +72,7 @@ export const ContactView: React.FC<ContactViewProps> = ({
                   </p>
                   <p className="text-[11px] text-[#C5A880] font-semibold mt-1 flex items-center space-x-1">
                     <Navigation className="w-3 h-3" />
-                    <span>150 meters (2-minute walk) to Old Market & Pub Street</span>
+                    <span>5 minutes walk to Old Market & Pub Street</span>
                   </p>
                 </div>
               </div>
