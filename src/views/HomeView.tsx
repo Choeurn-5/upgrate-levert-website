@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { Sparkles, MapPin, Award, ArrowRight, ShieldCheck, Utensils, Compass, Heart, Check, Clock, Phone, ChevronRight } from 'lucide-react';
 import { Hero } from '../components/Hero';
@@ -25,9 +25,34 @@ export const HomeView: React.FC<HomeViewProps> = ({
   onOpenBooking,
   onOpenHeroManager,
 }) => {
+  const [activeAboutIndex, setActiveAboutIndex] = useState(0);
   const featuredRooms = rooms.slice(0, 3);
   const featuredTours = tours.slice(0, 2);
   const previewPhotos = GALLERY_PHOTOS.slice(0, 6);
+
+  const ABOUT_GALLERY = [
+    {
+      id: 'building',
+      title: 'Boutique Architecture',
+      subtitle: 'Steung Thmey Sanctuary',
+      src: '/images/Home/home-about-image/building-view.png',
+      alt: 'Le Vert Angkor Hotel - Exterior Architecture',
+    },
+    {
+      id: 'room-deluxe',
+      title: 'Deluxe Balcony Suite',
+      subtitle: 'Artisan Khmer Comfort',
+      src: '/images/Home/home-about-image/room.jpg',
+      alt: 'Le Vert Angkor Hotel - Deluxe Balcony Suite',
+    },
+    {
+      id: 'room-executive',
+      title: 'Executive King Living',
+      subtitle: 'Serene Sanctuary Style',
+      src: '/images/Home/home-about-image/room1.jpg',
+      alt: 'Le Vert Angkor Hotel - Executive King Room',
+    },
+  ];
 
   return (
     <div className="space-y-0">
@@ -95,23 +120,113 @@ export const HomeView: React.FC<HomeViewProps> = ({
             </div>
           </div>
 
-          {/* Visual Composition */}
-          <div className="lg:col-span-6 relative">
-            <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border border-[#E7E0D5]">
-              <img
-                src="https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/03/photo_2024-08-21_11-26-27-2.jpg"
-                alt="Le Vert Angkor Hotel Suite"
-                className="w-full h-80 sm:h-[440px] object-cover"
-              />
+          {/* Visual Composition: Multi-layer Architectural & Room Collage */}
+          <div className="lg:col-span-6 relative pt-4 sm:pt-6 pb-12 sm:pb-8">
+            {/* Ambient Background Warmth */}
+            <div className="absolute -inset-4 bg-gradient-to-tr from-[#C5A880]/15 via-stone-200/40 to-transparent rounded-full blur-3xl -z-10 pointer-events-none" />
+
+            {/* Main Featured Showcase Frame */}
+            <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border border-[#E7E0D5] bg-stone-100 group">
+              <motion.div
+                key={activeAboutIndex}
+                initial={{ opacity: 0.7, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.45, ease: 'easeOut' }}
+                className="relative h-80 sm:h-[450px] w-full overflow-hidden"
+              >
+                <img
+                  src={ABOUT_GALLERY[activeAboutIndex].src}
+                  alt={ABOUT_GALLERY[activeAboutIndex].alt}
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+
+                {/* Subtle bottom shadow gradient to elevate the label */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+
+                {/* Perspective Tag on Main Image */}
+                <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between pointer-events-none">
+                  <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-black/55 backdrop-blur-md border border-white/20 text-[#FAF8F5]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#C5A880] animate-pulse" />
+                    <span className="text-xs font-semibold tracking-wider font-serif">
+                      {ABOUT_GALLERY[activeAboutIndex].title}
+                    </span>
+                    <span className="text-white/40">•</span>
+                    <span className="text-[11px] text-[#DFCAA8] font-light hidden sm:inline">
+                      {ABOUT_GALLERY[activeAboutIndex].subtitle}
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* View perspective selector pills at top */}
+              <div className="absolute top-4 left-4 z-20 flex items-center space-x-1.5 bg-black/45 backdrop-blur-md p-1 rounded-full border border-white/20">
+                {ABOUT_GALLERY.map((item, idx) => (
+                  <button
+                    key={item.id}
+                    onClick={() => setActiveAboutIndex(idx)}
+                    className={`px-3 py-1 rounded-full text-[11px] font-medium tracking-wider transition-all cursor-pointer ${
+                      activeAboutIndex === idx
+                        ? 'bg-[#C5A880] text-[#12241A] font-semibold shadow-sm'
+                        : 'text-white/80 hover:text-white hover:bg-white/10'
+                    }`}
+                  >
+                    {idx === 0 ? 'Building' : `Room ${idx}`}
+                  </button>
+                ))}
+              </div>
             </div>
 
-            {/* Overlapping secondary card */}
-            <div className="absolute -bottom-8 -left-4 sm:-left-8 z-20 w-64 sm:w-72 bg-[#FAF8F5] p-5 rounded-2xl shadow-xl border border-[#E7E0D5]">
+            {/* Floating Secondary Room Card 1 (Bottom Right) */}
+            <motion.div
+              animate={{ y: [0, -7, 0] }}
+              transition={{ repeat: Infinity, duration: 5.5, ease: 'easeInOut' }}
+              onClick={() => setActiveAboutIndex(activeAboutIndex === 1 ? 0 : 1)}
+              className="absolute -bottom-4 -right-2 sm:-right-6 z-20 w-36 sm:w-48 h-28 sm:h-36 rounded-2xl overflow-hidden shadow-2xl border-3 border-[#FAF8F5] cursor-pointer group hover:scale-105 transition-transform duration-300 bg-stone-100"
+              title="Click to spotlight this room view"
+            >
+              <img
+                src={ABOUT_GALLERY[1].src}
+                alt={ABOUT_GALLERY[1].alt}
+                className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between text-[10px] text-white font-medium">
+                <span className="truncate">Deluxe Suite</span>
+                <span className="text-[#C5A880] font-bold text-[9px] uppercase tracking-wider">
+                  {activeAboutIndex === 1 ? 'Active' : 'Tap'}
+                </span>
+              </div>
+            </motion.div>
+
+            {/* Floating Secondary Room Card 2 (Top Right) */}
+            <motion.div
+              animate={{ y: [0, 7, 0] }}
+              transition={{ repeat: Infinity, duration: 6.2, ease: 'easeInOut', delay: 1 }}
+              onClick={() => setActiveAboutIndex(activeAboutIndex === 2 ? 0 : 2)}
+              className="absolute -top-3 sm:-top-5 -right-2 sm:-right-4 z-20 w-32 sm:w-44 h-24 sm:h-32 rounded-2xl overflow-hidden shadow-2xl border-3 border-[#FAF8F5] cursor-pointer group hover:scale-105 transition-transform duration-300 bg-stone-100"
+              title="Click to spotlight this room view"
+            >
+              <img
+                src={ABOUT_GALLERY[2].src}
+                alt={ABOUT_GALLERY[2].alt}
+                className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between text-[10px] text-white font-medium">
+                <span className="truncate">Executive King</span>
+                <span className="text-[#C5A880] font-bold text-[9px] uppercase tracking-wider">
+                  {activeAboutIndex === 2 ? 'Active' : 'Tap'}
+                </span>
+              </div>
+            </motion.div>
+
+            {/* Overlapping TripAdvisor Award Badge (Bottom Left) */}
+            <div className="absolute -bottom-8 -left-2 sm:-left-6 z-30 max-w-[260px] sm:max-w-xs bg-[#FAF8F5]/95 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-[#E7E0D5]">
               <div className="flex items-center space-x-3">
                 <img
                   src="https://www.cms.levertangkorhotel.com/wp-content/uploads/2026/04/Digital-Award_TRA-2026.png"
                   alt="Tripadvisor award"
-                  className="w-12 h-12 object-contain shrink-0"
+                  className="w-11 h-11 object-contain shrink-0"
                 />
                 <div>
                   <div className="text-xs font-bold text-[#1C3829]">
