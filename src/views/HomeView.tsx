@@ -26,9 +26,32 @@ export const HomeView: React.FC<HomeViewProps> = ({
   onOpenHeroManager,
 }) => {
   const [activeAboutIndex, setActiveAboutIndex] = useState(0);
+  const [activeDiningIndex, setActiveDiningIndex] = useState(0);
   const featuredRooms = rooms.slice(0, 3);
   const featuredTours = tours.slice(0, 2);
   const previewPhotos = GALLERY_PHOTOS.slice(0, 6);
+
+  const DINING_GALLERY = [
+    {
+      id: 'khmer-cuisine',
+      src: '/images/Home/home-dining-image/0D9A2325.jpg',
+      alt: 'Signature Authentic Khmer Gastronomy at Le Vert Angkor',
+    },
+    {
+      id: 'rooftop-lounge',
+      src: '/images/Home/home-dining-image/0D9A3873.jpg',
+      alt: 'Rooftop Sunset Lounge & Bar at Le Vert Angkor',
+    },
+    {
+      id: 'breakfast-table',
+      src: '/images/Home/home-dining-image/IMG_8302.jpg',
+      alt: 'Artisan Daily Breakfast Spread at Le Vert Angkor',
+    },
+  ];
+
+  const otherDiningIndices = [0, 1, 2].filter((i) => i !== activeDiningIndex);
+  const secondaryDining1 = otherDiningIndices[0];
+  const secondaryDining2 = otherDiningIndices[1];
 
   const ABOUT_GALLERY = [
     {
@@ -292,158 +315,133 @@ export const HomeView: React.FC<HomeViewProps> = ({
         </div>
       </section>
 
-      {/* 3.5. Gastronomy & Dining Showcase */}
-      <section className="py-20 sm:py-28 bg-[#12241A] text-[#FAF8F5] relative overflow-hidden">
-        {/* Subtle Luxury Ambient Glow */}
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#C5A880]/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-[#2D5540]/20 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Header row */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 lg:mb-16 gap-6">
-            <div className="max-w-2xl">
-              <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-md border border-[#C5A880]/40 text-[#DFCAA8] text-xs font-semibold tracking-widest uppercase mb-3">
-                <Utensils className="w-3.5 h-3.5 text-[#C5A880]" />
-                <span>Gastronomy & Sunset Lounge</span>
-              </div>
-              <h2 className="font-luxury-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-[#FAF8F5] leading-tight">
-                Authentic Khmer Flavors & Rooftop Vistas
-              </h2>
-              <p className="text-sm sm:text-base text-[#FAF8F5]/80 font-light mt-3 leading-relaxed">
-                From morning breakfast buffets with artisan tropical fruits and hot Cambodian noodle soups to candlelit evening dining with hand-crafted cocktails overlooking the Siem Reap skyline.
-              </p>
+      {/* 3.5. Gastronomy & Sunset Lounge Showcase */}
+      <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-[#E7E0D5]/70">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* Text block */}
+          <div className="lg:col-span-6 space-y-6">
+            <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#1C3829]/10 text-[#1C3829] text-xs font-semibold tracking-widest uppercase">
+              <Utensils className="w-3.5 h-3.5 text-[#C5A880]" />
+              <span>Gastronomy & Sunset Lounge</span>
             </div>
 
-            <div className="shrink-0">
+            <h2 className="font-luxury-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-[#1C3829] leading-[1.15]">
+              Authentic Khmer Flavors & Rooftop Vistas
+            </h2>
+
+            <p className="text-base text-[#4A554F] font-light leading-relaxed">
+              Indulge your senses with the vibrant flavors of Cambodian gastronomy at Le Vert Angkor. Sourcing freshly ground Kampot peppercorns, fragrant lemongrass, and peak-season produce from local Siem Reap growers, our culinary team transforms authentic recipes into refined culinary experiences.
+            </p>
+
+            <p className="text-base text-[#4A554F] font-light leading-relaxed">
+              Begin each morning with an artisan breakfast buffet featuring fresh tropical fruits, warm pastries, and comforting Cambodian noodle soups. In the evening, ascend to our rooftop lounge for handcrafted signature cocktails, chilled wines, and tapas as the golden sunset bathes the city.
+            </p>
+
+            {/* Micro Highlights Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
+              <div className="p-4 rounded-2xl bg-[#F2EDE4] border border-[#E7E0D5]">
+                <div className="font-luxury-serif text-lg sm:text-xl font-bold text-[#1C3829]">
+                  6:30 – 10:00 AM
+                </div>
+                <div className="text-xs text-[#68726B] font-medium mt-0.5">
+                  Artisan Breakfast Buffet
+                </div>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-[#F2EDE4] border border-[#E7E0D5]">
+                <div className="font-luxury-serif text-lg sm:text-xl font-bold text-[#1C3829]">
+                  Sunset Hours
+                </div>
+                <div className="text-xs text-[#68726B] font-medium mt-0.5">
+                  Rooftop Cocktails & Wine
+                </div>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-[#F2EDE4] border border-[#E7E0D5] col-span-2 sm:col-span-1">
+                <div className="font-luxury-serif text-lg sm:text-xl font-bold text-[#1C3829]">
+                  All-Day
+                </div>
+                <div className="text-xs text-[#68726B] font-medium mt-0.5">
+                  Khmer & Western Dining
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-2">
               <button
                 onClick={() => onNavigate('/dining/')}
-                className="inline-flex items-center space-x-2.5 px-6 py-3 rounded-full bg-[#C5A880] text-[#12241A] text-xs font-semibold uppercase tracking-wider hover:bg-[#DFCAA8] hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer shadow-md"
+                className="inline-flex items-center space-x-2 text-xs uppercase tracking-widest font-semibold text-[#1C3829] hover:text-[#2D5540] group underline underline-offset-8 cursor-pointer"
               >
-                <span>Explore Dining & Menus</span>
-                <ArrowRight className="w-4 h-4 text-[#12241A]" />
+                <span>Explore Menus & Dining Details</span>
+                <ArrowRight className="w-4 h-4 text-[#C5A880] group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
           </div>
 
-          {/* 3 Dining Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-            {/* Card 1: Authentic Khmer Gastronomy */}
+          {/* Visual Composition: Multi-layer Dining Collage (Pure Photography, No Text on Images) */}
+          <div className="lg:col-span-6 relative pt-4 sm:pt-6 pb-12 sm:pb-8">
+            {/* Ambient Background Warmth */}
+            <div className="absolute -inset-4 bg-gradient-to-tr from-[#C5A880]/15 via-stone-200/40 to-transparent rounded-full blur-3xl -z-10 pointer-events-none" />
+
+            {/* Main Featured Showcase Frame */}
+            <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border border-[#E7E0D5] bg-[#1C3829]/5 group">
+              <motion.div
+                key={activeDiningIndex}
+                initial={{ opacity: 0.7, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.45, ease: 'easeOut' }}
+                className="relative h-[440px] sm:h-[500px] lg:h-[540px] w-full overflow-hidden flex items-center justify-center bg-stone-900/10"
+              >
+                <img
+                  src={DINING_GALLERY[activeDiningIndex].src}
+                  alt={DINING_GALLERY[activeDiningIndex].alt}
+                  className="w-full h-full object-cover object-center group-hover:scale-[1.03] transition-transform duration-700 ease-out"
+                />
+              </motion.div>
+            </div>
+
+            {/* Floating Secondary Image Card 1 (Bottom Right) */}
             <motion.div
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              onClick={() => onNavigate('/dining/')}
-              className="group relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 bg-[#1A3325] flex flex-col justify-end min-h-[380px] sm:min-h-[420px] cursor-pointer"
+              animate={{ y: [0, -7, 0] }}
+              transition={{ repeat: Infinity, duration: 5.5, ease: 'easeInOut' }}
+              onClick={() => setActiveDiningIndex(secondaryDining1)}
+              className="absolute -bottom-3 sm:-bottom-5 -right-1 sm:-right-6 lg:-right-8 z-20 w-36 sm:w-48 h-28 sm:h-36 rounded-2xl overflow-hidden shadow-2xl border-3 border-[#FAF8F5] cursor-pointer group hover:scale-105 transition-transform duration-300 bg-stone-100"
+              title="Click to spotlight this view"
             >
               <img
-                src="/images/Home/home-dining-image/0D9A2325.jpg"
-                alt="Signature Khmer Cuisine at Le Vert Angkor"
-                className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                src={DINING_GALLERY[secondaryDining1].src}
+                alt={DINING_GALLERY[secondaryDining1].alt}
+                className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#12241A] via-[#12241A]/50 to-black/20 group-hover:via-[#12241A]/40 transition-colors" />
-
-              <div className="relative z-10 p-6 sm:p-7 space-y-2">
-                <span className="inline-block px-3 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/20 text-[10px] uppercase tracking-widest text-[#DFCAA8] font-semibold">
-                  Authentic Khmer Gastronomy
-                </span>
-                <h3 className="font-luxury-serif text-xl sm:text-2xl font-bold text-[#FAF8F5] leading-snug group-hover:text-[#DFCAA8] transition-colors">
-                  Signature Dining Delicacies
-                </h3>
-                <p className="text-xs sm:text-sm text-[#FAF8F5]/80 font-light line-clamp-2 leading-relaxed">
-                  Carefully sourced Kampot peppercorns, fresh local herbs, and time-honored Cambodian recipes crafted by master chefs.
-                </p>
-                <div className="pt-2 flex items-center space-x-1.5 text-xs text-[#C5A880] font-semibold uppercase tracking-wider group-hover:translate-x-1 transition-transform">
-                  <span>View Dinner Menu</span>
-                  <ChevronRight className="w-3.5 h-3.5" />
-                </div>
-              </div>
             </motion.div>
 
-            {/* Card 2: Rooftop Sunset Lounge */}
+            {/* Floating Secondary Image Card 2 (Top Right) */}
             <motion.div
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              onClick={() => onNavigate('/dining/')}
-              className="group relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 bg-[#1A3325] flex flex-col justify-end min-h-[380px] sm:min-h-[420px] cursor-pointer"
+              animate={{ y: [0, 7, 0] }}
+              transition={{ repeat: Infinity, duration: 6.2, ease: 'easeInOut', delay: 1 }}
+              onClick={() => setActiveDiningIndex(secondaryDining2)}
+              className="absolute -top-2 sm:-top-4 -right-1 sm:-right-6 lg:-right-8 z-20 w-32 sm:w-44 h-24 sm:h-32 rounded-2xl overflow-hidden shadow-2xl border-3 border-[#FAF8F5] cursor-pointer group hover:scale-105 transition-transform duration-300 bg-stone-100"
+              title="Click to spotlight this view"
             >
               <img
-                src="/images/Home/home-dining-image/0D9A3873.jpg"
-                alt="Rooftop Sunset Lounge and Bar"
-                className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                src={DINING_GALLERY[secondaryDining2].src}
+                alt={DINING_GALLERY[secondaryDining2].alt}
+                className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#12241A] via-[#12241A]/50 to-black/20 group-hover:via-[#12241A]/40 transition-colors" />
-
-              <div className="relative z-10 p-6 sm:p-7 space-y-2">
-                <span className="inline-block px-3 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/20 text-[10px] uppercase tracking-widest text-[#DFCAA8] font-semibold">
-                  Rooftop Sunset Lounge
-                </span>
-                <h3 className="font-luxury-serif text-xl sm:text-2xl font-bold text-[#FAF8F5] leading-snug group-hover:text-[#DFCAA8] transition-colors">
-                  Sunset Cocktails & Skyline
-                </h3>
-                <p className="text-xs sm:text-sm text-[#FAF8F5]/80 font-light line-clamp-2 leading-relaxed">
-                  Sip tropical signature libations and chilled wines as the golden sunset glows over the rooftops of Siem Reap.
-                </p>
-                <div className="pt-2 flex items-center space-x-1.5 text-xs text-[#C5A880] font-semibold uppercase tracking-wider group-hover:translate-x-1 transition-transform">
-                  <span>Explore Sunset Bar</span>
-                  <ChevronRight className="w-3.5 h-3.5" />
-                </div>
-              </div>
             </motion.div>
 
-            {/* Card 3: Morning Breakfast Table */}
-            <motion.div
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              onClick={() => onNavigate('/dining/')}
-              className="group relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 bg-[#1A3325] flex flex-col justify-end min-h-[380px] sm:min-h-[420px] cursor-pointer"
-            >
-              <img
-                src="/images/Home/home-dining-image/IMG_8302.jpg"
-                alt="Daily Artisan Breakfast Buffet"
-                className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#12241A] via-[#12241A]/50 to-black/20 group-hover:via-[#12241A]/40 transition-colors" />
-
-              <div className="relative z-10 p-6 sm:p-7 space-y-2">
-                <span className="inline-block px-3 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/20 text-[10px] uppercase tracking-widest text-[#DFCAA8] font-semibold">
-                  Morning Breakfast Table
-                </span>
-                <h3 className="font-luxury-serif text-xl sm:text-2xl font-bold text-[#FAF8F5] leading-snug group-hover:text-[#DFCAA8] transition-colors">
-                  Artisan Daily Breakfast
-                </h3>
-                <p className="text-xs sm:text-sm text-[#FAF8F5]/80 font-light line-clamp-2 leading-relaxed">
-                  Start your temple expeditions with fresh fruit, warm pastries, organic eggs, and fragrant Cambodian noodle soups.
-                </p>
-                <div className="pt-2 flex items-center space-x-1.5 text-xs text-[#C5A880] font-semibold uppercase tracking-wider group-hover:translate-x-1 transition-transform">
-                  <span>Breakfast Hours & Details</span>
-                  <ChevronRight className="w-3.5 h-3.5" />
-                </div>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Quick Highlight Strip */}
-          <div className="mt-12 pt-8 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-            <div className="p-3">
-              <span className="block text-base sm:text-lg font-luxury-serif font-bold text-[#DFCAA8]">6:30 AM – 10:00 AM</span>
-              <span className="text-[11px] sm:text-xs text-white/70 font-light uppercase tracking-wider">Breakfast Service</span>
-            </div>
-            <div className="p-3">
-              <span className="block text-base sm:text-lg font-luxury-serif font-bold text-[#DFCAA8]">11:00 AM – 10:30 PM</span>
-              <span className="text-[11px] sm:text-xs text-white/70 font-light uppercase tracking-wider">All-Day Dining</span>
-            </div>
-            <div className="p-3">
-              <span className="block text-base sm:text-lg font-luxury-serif font-bold text-[#DFCAA8]">Rooftop Poolside</span>
-              <span className="text-[11px] sm:text-xs text-white/70 font-light uppercase tracking-wider">Sunset Bar & Lounge</span>
-            </div>
-            <div className="p-3">
-              <span className="block text-base sm:text-lg font-luxury-serif font-bold text-[#DFCAA8]">Room Service</span>
-              <span className="text-[11px] sm:text-xs text-white/70 font-light uppercase tracking-wider">In-Suite Dining Available</span>
+            {/* Photo Selector Dots (Clean & unobtrusive, outside the image) */}
+            <div className="flex items-center justify-center space-x-2 pt-5">
+              {DINING_GALLERY.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveDiningIndex(idx)}
+                  aria-label={`View photo ${idx + 1}`}
+                  className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                    activeDiningIndex === idx ? 'w-8 bg-[#1C3829]' : 'w-2 bg-[#E7E0D5] hover:bg-[#C5A880]'
+                  }`}
+                />
+              ))}
             </div>
           </div>
         </div>
