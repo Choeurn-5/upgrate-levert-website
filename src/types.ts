@@ -133,6 +133,7 @@ export interface HeroConfig {
   title: string;
   subtitle: string;
   imageUrl: string;
+  images?: string[];
   imagePlaceholderNote: string;
   badge?: string;
 }

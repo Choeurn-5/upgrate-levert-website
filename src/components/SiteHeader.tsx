@@ -85,11 +85,10 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({
 
       {/* Main Sticky Luxury Header */}
       <header
-        className={`sticky top-0 z-40 transition-all duration-300 ${
-          isScrolled
-            ? 'bg-[#FAF8F5]/95 backdrop-blur-md shadow-sm border-b border-[#E7E0D5]/80 py-3.5'
-            : 'bg-[#FAF8F5]/80 backdrop-blur-sm border-b border-[#E7E0D5]/50 py-4.5'
-        }`}
+        className={`sticky top-0 z-40 transition-all duration-300 ${isScrolled
+          ? 'bg-[#FAF8F5]/95 backdrop-blur-md shadow-sm border-b border-[#E7E0D5]/80 py-3.5'
+          : 'bg-[#FAF8F5]/80 backdrop-blur-sm border-b border-[#E7E0D5]/50 py-4.5'
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Brand Logo & Name */}
@@ -124,11 +123,10 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({
                 <button
                   key={link.route}
                   onClick={() => handleNavClick(link.route)}
-                  className={`px-3 py-1.5 text-xs xl:text-sm font-medium tracking-wide rounded-full transition-all duration-200 relative ${
-                    isActive
-                      ? 'text-[#1C3829] font-semibold bg-[#2D5540]/10'
-                      : 'text-[#4A554F] hover:text-[#1C3829] hover:bg-stone-200/50'
-                  }`}
+                  className={`px-3 py-1.5 text-xs xl:text-sm font-medium tracking-wide rounded-full transition-all duration-200 relative ${isActive
+                    ? 'text-[#1C3829] font-semibold bg-[#2D5540]/10'
+                    : 'text-[#4A554F] hover:text-[#1C3829] hover:bg-stone-200/50'
+                    }`}
                 >
                   {link.label}
                   {isActive && (
@@ -219,11 +217,10 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({
                     <button
                       key={link.route}
                       onClick={() => handleNavClick(link.route)}
-                      className={`flex items-center justify-between px-4 py-3 rounded-xl text-left text-sm font-medium transition-colors ${
-                        isActive
-                          ? 'bg-[#1C3829] text-[#FAF8F5]'
-                          : 'text-[#2D3748] hover:bg-stone-200/70'
-                      }`}
+                      className={`flex items-center justify-between px-4 py-3 rounded-xl text-left text-sm font-medium transition-colors ${isActive
+                        ? 'bg-[#1C3829] text-[#FAF8F5]'
+                        : 'text-[#2D3748] hover:bg-stone-200/70'
+                        }`}
                     >
                       <span>{link.label}</span>
                       <ChevronRight

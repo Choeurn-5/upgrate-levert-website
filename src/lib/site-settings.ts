@@ -40,8 +40,15 @@ export const HERO_CONFIGS: Record<string, HeroConfig> = {
     eyebrow: 'SIEM REAP • CAMBODIA',
     title: 'A Sanctuary of Calm & Khmer Elegance',
     subtitle: 'Step into an oasis of understated luxury, perched just 5 minutes from the lively Old Market and moments from the timeless wonder of Angkor Wat.',
-    imageUrl: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=2000&q=85',
-    imagePlaceholderNote: 'Replaceable Hero Asset (Tropical Boutique Hotel Canvas)',
+    imageUrl: '/images/Home/home-hero-image/1.jpg',
+    images: [
+      '/images/Home/home-hero-image/1.jpg',
+      '/images/Home/home-hero-image/2.jpg',
+      '/images/Home/home-hero-image/3.jpg',
+      '/images/Home/home-hero-image/4.jpg',
+      '/images/Home/home-hero-image/5.jpg',
+    ],
+    imagePlaceholderNote: 'Hotel Authentic Photography Slideshow (5 scenes)',
     badge: 'TripAdvisor Travelers’ Choice 2026',
   },
   rooms: {
