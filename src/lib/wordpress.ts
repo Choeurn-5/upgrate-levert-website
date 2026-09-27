@@ -283,7 +283,12 @@ export async function getTours(): Promise<Tour[]> {
           );
           if (wpMatch) {
             processedTourSlugs.add(wpMatch.slug);
-            const mediaUrl = wpMatch._embedded?.['wp:featuredmedia']?.[0]?.source_url;
+            const mediaUrl =
+              wpMatch._embedded?.['wp:featuredmedia']?.[0]?.source_url ||
+              wpMatch._embedded?.['wp:featuredmedia']?.[0]?.media_details?.sizes?.full?.source_url ||
+              wpMatch._embedded?.['wp:featuredmedia']?.[0]?.media_details?.sizes?.large?.source_url ||
+              extractImagesFromHtml(wpMatch.content?.rendered || '')[0];
+
             return {
               ...baseTour,
               title: cleanHtml(wpMatch.title?.rendered) || baseTour.title,
@@ -302,10 +307,17 @@ export async function getTours(): Promise<Tour[]> {
         // 2. CRITICAL: Automatically add NEW tours created in WordPress!
         for (const wpTour of wpTours) {
           if (!processedTourSlugs.has(wpTour.slug)) {
-            const mediaUrl = wpTour._embedded?.['wp:featuredmedia']?.[0]?.source_url;
             const contentHtml = wpTour.content?.rendered || '';
             const excerptClean = cleanHtml(wpTour.excerpt?.rendered || '');
             const contentClean = cleanHtml(contentHtml);
+            const inContentImages = extractImagesFromHtml(contentHtml);
+            const mediaUrl =
+              wpTour._embedded?.['wp:featuredmedia']?.[0]?.source_url ||
+              wpTour._embedded?.['wp:featuredmedia']?.[0]?.media_details?.sizes?.full?.source_url ||
+              wpTour._embedded?.['wp:featuredmedia']?.[0]?.media_details?.sizes?.large?.source_url ||
+              inContentImages[0] ||
+              'https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/01/R-3.jpg';
+
             const stops = parseTourStopsFromHtml(contentHtml);
 
             const newTour: Tour = {
@@ -318,7 +330,7 @@ export async function getTours(): Promise<Tour[]> {
               vehicleType: 'Private Air-Conditioned Vehicle',
               shortDescription: excerptClean || contentClean.slice(0, 160) || 'Private guided expedition to the ancient temples of Angkor.',
               longDescription: contentClean || excerptClean || 'Explore majestic Khmer heritage in private climate-controlled comfort.',
-              featuredImage: mediaUrl || 'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=80',
+              featuredImage: mediaUrl,
               itinerary: stops.length > 0 ? stops : [
                 {
                   templeName: 'Angkor Wat',

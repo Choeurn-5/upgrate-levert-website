@@ -28,6 +28,7 @@ export const TourDetailView: React.FC<TourDetailViewProps> = ({
           title: tour.title,
           subtitle: tour.shortDescription,
           badge: `Private Tour $${tour.price} USD`,
+          imageUrl: tour.featuredImage || heroConfig?.imageUrl,
         }}
         onPrimaryClick={() => onOpenBooking(`tour-${tour.slug}`)}
         primaryButtonText={`Reserve ${tour.title}`}
@@ -48,7 +49,18 @@ export const TourDetailView: React.FC<TourDetailViewProps> = ({
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Left: Overview & Itinerary Timeline */}
-          <div className="lg:col-span-8 space-y-12">
+          <div className="lg:col-span-8 space-y-10">
+            {/* Tour Featured Image from WordPress */}
+            {tour.featuredImage && (
+              <div className="relative h-64 sm:h-80 md:h-[400px] w-full rounded-3xl overflow-hidden shadow-xl border border-[#E7E0D5]">
+                <img
+                  src={tour.featuredImage}
+                  alt={tour.title}
+                  className="w-full h-full object-cover object-center"
+                />
+              </div>
+            )}
+
             {/* Overview Card */}
             <div className="p-8 rounded-3xl bg-[#FAF8F5] border border-[#E7E0D5] space-y-4">
               <div className="flex flex-wrap gap-4 text-xs font-semibold text-[#1C3829] pb-4 border-b border-[#E7E0D5]">
