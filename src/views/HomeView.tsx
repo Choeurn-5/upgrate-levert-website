@@ -126,25 +126,38 @@ export const HomeView: React.FC<HomeViewProps> = ({
             <div className="absolute -inset-4 bg-gradient-to-tr from-[#C5A880]/15 via-stone-200/40 to-transparent rounded-full blur-3xl -z-10 pointer-events-none" />
 
             {/* Main Featured Showcase Frame */}
-            <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border border-[#E7E0D5] bg-stone-100 group">
+            <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border border-[#E7E0D5] bg-[#1C3829]/5 group">
               <motion.div
                 key={activeAboutIndex}
                 initial={{ opacity: 0.7, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.45, ease: 'easeOut' }}
-                className="relative h-80 sm:h-[450px] w-full overflow-hidden"
+                className="relative h-[480px] sm:h-[560px] lg:h-[620px] w-full overflow-hidden flex items-center justify-center bg-stone-900/10"
               >
+                {/* Ambient soft glow backdrop for building view so the full frame is richly filled */}
+                {activeAboutIndex === 0 && (
+                  <img
+                    src={ABOUT_GALLERY[0].src}
+                    alt=""
+                    aria-hidden="true"
+                    className="absolute inset-0 w-full h-full object-cover filter blur-3xl opacity-35 scale-110 pointer-events-none"
+                  />
+                )}
+
                 <img
                   src={ABOUT_GALLERY[activeAboutIndex].src}
                   alt={ABOUT_GALLERY[activeAboutIndex].alt}
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                  className={`relative z-[1] w-full h-full ${activeAboutIndex === 0
+                    ? 'object-contain object-center p-1 sm:p-2'
+                    : 'object-cover object-center'
+                    } group-hover:scale-[1.02] transition-transform duration-700 ease-out`}
                 />
 
                 {/* Subtle bottom shadow gradient to elevate the label */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 z-[2] bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
 
                 {/* Perspective Tag on Main Image */}
-                <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between pointer-events-none">
+                <div className="absolute bottom-5 left-5 right-5 z-[3] flex items-center justify-between pointer-events-none">
                   <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-black/55 backdrop-blur-md border border-white/20 text-[#FAF8F5]">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#C5A880] animate-pulse" />
                     <span className="text-xs font-semibold tracking-wider font-serif">
@@ -164,11 +177,10 @@ export const HomeView: React.FC<HomeViewProps> = ({
                   <button
                     key={item.id}
                     onClick={() => setActiveAboutIndex(idx)}
-                    className={`px-3 py-1 rounded-full text-[11px] font-medium tracking-wider transition-all cursor-pointer ${
-                      activeAboutIndex === idx
-                        ? 'bg-[#C5A880] text-[#12241A] font-semibold shadow-sm'
-                        : 'text-white/80 hover:text-white hover:bg-white/10'
-                    }`}
+                    className={`px-3 py-1 rounded-full text-[11px] font-medium tracking-wider transition-all cursor-pointer ${activeAboutIndex === idx
+                      ? 'bg-[#C5A880] text-[#12241A] font-semibold shadow-sm'
+                      : 'text-white/80 hover:text-white hover:bg-white/10'
+                      }`}
                   >
                     {idx === 0 ? 'Building' : `Room ${idx}`}
                   </button>
@@ -181,7 +193,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
               animate={{ y: [0, -7, 0] }}
               transition={{ repeat: Infinity, duration: 5.5, ease: 'easeInOut' }}
               onClick={() => setActiveAboutIndex(activeAboutIndex === 1 ? 0 : 1)}
-              className="absolute -bottom-4 -right-2 sm:-right-6 z-20 w-36 sm:w-48 h-28 sm:h-36 rounded-2xl overflow-hidden shadow-2xl border-3 border-[#FAF8F5] cursor-pointer group hover:scale-105 transition-transform duration-300 bg-stone-100"
+              className="absolute -bottom-3 sm:-bottom-5 -right-1 sm:-right-6 lg:-right-8 z-20 w-36 sm:w-48 h-28 sm:h-36 rounded-2xl overflow-hidden shadow-2xl border-3 border-[#FAF8F5] cursor-pointer group hover:scale-105 transition-transform duration-300 bg-stone-100"
               title="Click to spotlight this room view"
             >
               <img
@@ -203,7 +215,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
               animate={{ y: [0, 7, 0] }}
               transition={{ repeat: Infinity, duration: 6.2, ease: 'easeInOut', delay: 1 }}
               onClick={() => setActiveAboutIndex(activeAboutIndex === 2 ? 0 : 2)}
-              className="absolute -top-3 sm:-top-5 -right-2 sm:-right-4 z-20 w-32 sm:w-44 h-24 sm:h-32 rounded-2xl overflow-hidden shadow-2xl border-3 border-[#FAF8F5] cursor-pointer group hover:scale-105 transition-transform duration-300 bg-stone-100"
+              className="absolute -top-2 sm:-top-4 -right-1 sm:-right-6 lg:-right-8 z-20 w-32 sm:w-44 h-24 sm:h-32 rounded-2xl overflow-hidden shadow-2xl border-3 border-[#FAF8F5] cursor-pointer group hover:scale-105 transition-transform duration-300 bg-stone-100"
               title="Click to spotlight this room view"
             >
               <img
