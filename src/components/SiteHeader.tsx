@@ -60,7 +60,7 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({
             </span>
             <span className="text-[#C5A880]/50">•</span>
             <span className="text-[#FAF8F5]/80">
-              Direct Booking Benefit: Complimentary Airport Pick-Up & Daily Breakfast
+              Direct Booking Benefit: Complimentary Bus Pick-Up & Daily Breakfast
             </span>
           </div>
           <div className="flex items-center space-x-4">
