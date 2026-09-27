@@ -276,7 +276,7 @@ export const ContactView: React.FC<ContactViewProps> = ({
               </h3>
             </div>
             <a
-              href="https://maps.app.goo.gl/LeVertAngkorHotel"
+              href={SITE_SETTINGS.googleMapsUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="text-xs font-semibold text-[#1C3829] hover:underline uppercase tracking-wider flex items-center space-x-1"

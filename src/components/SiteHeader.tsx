@@ -143,13 +143,15 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({
 
           {/* Header Actions */}
           <div className="flex items-center space-x-3">
-            <button
-              onClick={() => onOpenBooking()}
+            <a
+              href={SITE_SETTINGS.bookingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="hidden sm:inline-flex items-center space-x-2 px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#1C3829] text-[#FAF8F5] hover:bg-[#12241A] transition-all duration-200 shadow-sm hover:shadow active:scale-95 border border-[#C5A880]/30"
             >
               <Calendar className="w-3.5 h-3.5 text-[#C5A880]" />
               <span>Book Your Stay</span>
-            </button>
+            </a>
 
             {/* Mobile menu hamburger toggle */}
             <button
@@ -233,16 +235,16 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({
 
               {/* Drawer Footer Actions */}
               <div className="mt-auto pt-6 border-t border-[#E7E0D5] flex flex-col space-y-3">
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenBooking();
-                  }}
+                <a
+                  href={SITE_SETTINGS.bookingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="w-full py-3 px-4 rounded-xl bg-[#1C3829] text-[#FAF8F5] font-semibold text-xs uppercase tracking-wider flex items-center justify-center space-x-2 shadow-md hover:bg-[#12241A] transition-colors"
                 >
                   <Calendar className="w-4 h-4 text-[#C5A880]" />
                   <span>Book Your Stay Direct</span>
-                </button>
+                </a>
 
                 <a
                   href={`tel:${SITE_SETTINGS.phoneClean}`}
