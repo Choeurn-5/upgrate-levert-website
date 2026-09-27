@@ -48,7 +48,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
           <div className="lg:col-span-6 space-y-6">
             <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#1C3829]/10 text-[#1C3829] text-xs font-semibold tracking-widest uppercase">
               <Sparkles className="w-3.5 h-3.5 text-[#C5A880]" />
-              <span>Boutique Sanctuary • Siem Reap</span>
+              <span>Hotel Sanctuary • Siem Reap</span>
             </div>
 
             <h2 className="font-luxury-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-[#1C3829] leading-[1.15]">
