@@ -38,20 +38,26 @@ export const HomeView: React.FC<HomeViewProps> = ({
       alt: 'Signature Authentic Khmer Gastronomy at Le Vert Angkor',
     },
     {
-      id: 'rooftop-lounge',
+      id: 'restaurant-hall',
       src: '/images/Home/home-dining-image/0D9A3873.jpg',
-      alt: 'Rooftop Sunset Lounge & Bar at Le Vert Angkor',
+      alt: 'Le Vert Restaurant Dining Hall & Buffet at Le Vert Angkor',
     },
     {
       id: 'breakfast-table',
       src: '/images/Home/home-dining-image/IMG_8302.jpg',
-      alt: 'Artisan Daily Breakfast Spread at Le Vert Angkor',
+      alt: 'Artisan Fresh Kampot Pepper Seafood at Le Vert Angkor',
+    },
+    {
+      id: 'lounge-bar',
+      src: '/images/Home/home-dining-image/0D9A2379.jpg',
+      alt: 'Le Vert Lounge Bar & Dining Counter at Le Vert Angkor',
     },
   ];
 
-  const otherDiningIndices = [0, 1, 2].filter((i) => i !== activeDiningIndex);
+  const otherDiningIndices = [0, 1, 2, 3].filter((i) => i !== activeDiningIndex);
   const secondaryDining1 = otherDiningIndices[0];
   const secondaryDining2 = otherDiningIndices[1];
+  const secondaryDining3 = otherDiningIndices[2];
 
   const ABOUT_GALLERY = [
     {
@@ -430,6 +436,21 @@ export const HomeView: React.FC<HomeViewProps> = ({
               />
             </motion.div>
 
+            {/* Floating Secondary Image Card 3 (Bottom Left) */}
+            <motion.div
+              animate={{ y: [0, -6, 0] }}
+              transition={{ repeat: Infinity, duration: 5.8, ease: 'easeInOut', delay: 0.5 }}
+              onClick={() => setActiveDiningIndex(secondaryDining3)}
+              className="absolute -bottom-4 sm:-bottom-6 -left-2 sm:-left-6 lg:-left-8 z-20 w-36 sm:w-48 h-28 sm:h-36 rounded-2xl overflow-hidden shadow-2xl border-3 border-[#FAF8F5] cursor-pointer group hover:scale-105 transition-transform duration-300 bg-stone-100"
+              title="Click to spotlight this view"
+            >
+              <img
+                src={DINING_GALLERY[secondaryDining3].src}
+                alt={DINING_GALLERY[secondaryDining3].alt}
+                className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500"
+              />
+            </motion.div>
+
             {/* Photo Selector Dots (Clean & unobtrusive, outside the image) */}
             <div className="flex items-center justify-center space-x-2 pt-5">
               {DINING_GALLERY.map((_, idx) => (
@@ -437,9 +458,8 @@ export const HomeView: React.FC<HomeViewProps> = ({
                   key={idx}
                   onClick={() => setActiveDiningIndex(idx)}
                   aria-label={`View photo ${idx + 1}`}
-                  className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                    activeDiningIndex === idx ? 'w-8 bg-[#1C3829]' : 'w-2 bg-[#E7E0D5] hover:bg-[#C5A880]'
-                  }`}
+                  className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${activeDiningIndex === idx ? 'w-8 bg-[#1C3829]' : 'w-2 bg-[#E7E0D5] hover:bg-[#C5A880]'
+                    }`}
                 />
               ))}
             </div>
