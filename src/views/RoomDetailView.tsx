@@ -4,6 +4,7 @@ import { ArrowLeft, Users, BedDouble, Maximize2, Sparkles, Check, Calendar, Shie
 import { Room, HeroConfig, AppRoute } from '../types';
 import { Hero } from '../components/Hero';
 import { RoomCard } from '../components/RoomCard';
+import { SITE_SETTINGS } from '../lib/site-settings';
 
 interface RoomDetailViewProps {
   room: Room;
@@ -35,7 +36,7 @@ export const RoomDetailView: React.FC<RoomDetailViewProps> = ({
           subtitle: room.subtitle || room.shortDescription,
           badge: `From $${room.pricePerNight} / Night`,
         }}
-        onPrimaryClick={() => onOpenBooking(room.slug)}
+        onPrimaryClick={() => window.open(SITE_SETTINGS.bookingUrl, '_blank', 'noopener,noreferrer')}
         primaryButtonText={`Reserve ${room.title}`}
         onSecondaryClick={() => onNavigate('/rooms/')}
         secondaryButtonText="View All Suites"
@@ -204,13 +205,15 @@ export const RoomDetailView: React.FC<RoomDetailViewProps> = ({
               </div>
 
               {/* Booking Action */}
-              <button
-                onClick={() => onOpenBooking(room.slug)}
-                className="w-full py-4 rounded-xl bg-[#1C3829] text-[#FAF8F5] font-semibold text-xs uppercase tracking-widest hover:bg-[#12241A] transition-all shadow-md active:scale-95 flex items-center justify-center space-x-2"
+              <a
+                href={SITE_SETTINGS.bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-4 rounded-xl bg-[#1C3829] text-[#FAF8F5] font-semibold text-xs uppercase tracking-widest hover:bg-[#12241A] transition-all shadow-md active:scale-95 flex items-center justify-center space-x-2 text-center"
               >
                 <Calendar className="w-4 h-4 text-[#C5A880]" />
                 <span>Reserve This Suite</span>
-              </button>
+              </a>
 
               <div className="pt-2 text-center">
                 <span className="inline-flex items-center space-x-1 text-[11px] text-[#68726B]">

@@ -158,12 +158,14 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({
             <p className="text-xs text-[#FAF8F5]/80 leading-relaxed mb-4">
               Book directly with us for guaranteed lowest rates, priority early check-in, complimentary airport pick-up, and 15% discount on spa treatments.
             </p>
-            <button
-              onClick={onOpenBooking}
-              className="w-full py-2.5 px-4 rounded-xl bg-[#C5A880] text-[#12241A] font-semibold text-xs uppercase tracking-wider hover:bg-[#DFCAA8] transition-colors shadow-sm"
+            <a
+              href={SITE_SETTINGS.bookingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full py-2.5 px-4 rounded-xl bg-[#C5A880] text-[#12241A] font-semibold text-xs uppercase tracking-wider hover:bg-[#DFCAA8] transition-colors shadow-sm block text-center"
             >
               Reserve Directly Now
-            </button>
+            </a>
             <div className="mt-3 text-[11px] text-[#FAF8F5]/60 text-center">
               Powered by Inn-Connect Engine
             </div>

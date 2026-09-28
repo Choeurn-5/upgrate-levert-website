@@ -65,6 +65,7 @@ export interface Tour {
 }
 
 export interface MenuItem {
+  code?: string;
   name: string;
   khmerName?: string;
   description: string;
@@ -84,6 +85,7 @@ export interface DiningExperience {
   location: string;
   description: string;
   image: string;
+  images?: string[];
   menuHighlights: string[];
   menuSections?: MenuSection[];
 }

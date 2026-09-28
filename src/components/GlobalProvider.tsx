@@ -7,7 +7,7 @@ import { SiteFooter } from './SiteFooter';
 import { BookingModal } from './BookingModal';
 import { HeroManagerModal } from './HeroManagerModal';
 import { AppRoute, HeroConfig, Room, Tour, DiningExperience, SpaTreatment } from '../types';
-import { HERO_CONFIGS } from '../lib/site-settings';
+import { HERO_CONFIGS, SITE_SETTINGS } from '../lib/site-settings';
 import { STATIC_ROOMS, STATIC_TOURS, DINING_EXPERIENCES, SPA_TREATMENTS } from '../data/hotelData';
 import { getWordPressRooms, getWordPressTours, getWordPressDining, getWordPressSpa } from '../lib/wordpress';
 
@@ -103,8 +103,22 @@ export function GlobalProvider({ children }: { children: React.ReactNode }) {
 
   // Open Booking Handler
   const handleOpenBooking = (preferredItem?: string) => {
-    setSelectedBookingRoom(preferredItem);
-    setIsBookingModalOpen(true);
+    // If it's specifically for a tour, temple package, spa, or dining inquiry, open the specialized concierge modal
+    if (
+      preferredItem &&
+      (preferredItem.startsWith('tour-') ||
+        preferredItem.startsWith('package-') ||
+        preferredItem === 'spa' ||
+        preferredItem === 'dining')
+    ) {
+      setSelectedBookingRoom(preferredItem);
+      setIsBookingModalOpen(true);
+    } else {
+      // Every book action related to rooms redirects directly to the official Inn-Connect booking engine
+      if (typeof window !== 'undefined') {
+        window.open(SITE_SETTINGS.bookingUrl, '_blank', 'noopener,noreferrer');
+      }
+    }
   };
 
   // Update Hero Config

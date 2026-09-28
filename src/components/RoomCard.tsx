@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Users, BedDouble, Maximize2, Sparkles, ArrowRight } from 'lucide-react';
 import { Room } from '../types';
+import { SITE_SETTINGS } from '../lib/site-settings';
 
 interface RoomCardProps {
   room: Room;
@@ -41,20 +42,7 @@ export const RoomCard: React.FC<RoomCardProps> = ({
             </span>
           </div>
         )}
-        {/* Price Tag Overlay */}
-        <div className="absolute bottom-4 right-4 z-10">
-          <div className="px-3.5 py-1.5 rounded-2xl bg-[#FAF8F5]/95 backdrop-blur-md text-[#1C3829] shadow-lg border border-[#E7E0D5]">
-            <span className="text-[10px] uppercase font-semibold text-[#68726B] block -mb-1">
-              From
-            </span>
-            <div className="flex items-baseline space-x-0.5">
-              <span className="font-luxury-serif text-xl font-bold text-[#1C3829]">
-                ${room.pricePerNight}
-              </span>
-              <span className="text-xs text-[#68726B] font-light">/ night</span>
-            </div>
-          </div>
-        </div>
+
       </div>
 
       {/* Content */}
@@ -96,12 +84,18 @@ export const RoomCard: React.FC<RoomCardProps> = ({
             <span>Explore Suite</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
-          <button
-            onClick={() => onBookNow(room.slug)}
-            className="py-2.5 px-5 rounded-full bg-[#1C3829] hover:bg-[#12241A] text-[#FAF8F5] transition-all text-xs font-semibold uppercase tracking-wider shadow-sm"
+          <a
+            href={SITE_SETTINGS.bookingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => {
+              e.stopPropagation();
+              onBookNow?.(room.slug);
+            }}
+            className="py-2.5 px-5 rounded-full bg-[#1C3829] hover:bg-[#12241A] text-[#FAF8F5] transition-all text-xs font-semibold uppercase tracking-wider shadow-sm inline-flex items-center justify-center cursor-pointer"
           >
             Book
-          </button>
+          </a>
         </div>
       </div>
     </motion.div>

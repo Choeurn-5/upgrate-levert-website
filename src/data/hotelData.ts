@@ -1,4 +1,4 @@
-import { Room, Tour, DiningExperience, SpaTreatment, FacilityItem, GalleryPhoto, AwardPlatform } from '../types';
+import { Room, Tour, DiningExperience, SpaTreatment, FacilityItem, GalleryPhoto, AwardPlatform, MenuSection } from '../types';
 
 export const ROOMS_DATA: Room[] = [
   {
@@ -341,134 +341,242 @@ export const TOURS_DATA: Tour[] = [
   },
 ];
 
+export interface DiningArtboard {
+  id: string;
+  pageNumber: number;
+  title: string;
+  subtitle: string;
+  imageUrl: string;
+}
+
+export const RESTAURANT_MENU_ARTBOARDS: DiningArtboard[] = [
+  {
+    id: 'starter',
+    pageNumber: 1,
+    title: 'Starter',
+    subtitle: 'Items A01 – A11 • Fresh salads, rolls, tempura & satay',
+    imageUrl: 'https://www.cms.levertangkorhotel.com/wp-content/uploads/2025/01/Artboard-1.png',
+  },
+  {
+    id: 'main-soup-stirfried',
+    pageNumber: 2,
+    title: 'Main Course: Soup & Stir Fried',
+    subtitle: 'Items A12 – A21 • Traditional Khmer Amok, curries & Beef Lok Lak',
+    imageUrl: 'https://www.cms.levertangkorhotel.com/wp-content/uploads/2025/01/Artboard4.png',
+  },
+  {
+    id: 'main-western',
+    pageNumber: 3,
+    title: 'Main Course & Western Food',
+    subtitle: 'Items A22 – A31 • Seafood, Kampot pepper, club sandwiches & pasta',
+    imageUrl: 'https://www.cms.levertangkorhotel.com/wp-content/uploads/2025/01/Artboard1.png',
+  },
+  {
+    id: 'western-dessert',
+    pageNumber: 4,
+    title: 'Western Specialties & Dessert',
+    subtitle: 'Items A32 – A43 • Steaks, burgers, and mango sticky rice',
+    imageUrl: 'https://www.cms.levertangkorhotel.com/wp-content/uploads/2025/01/Artboard2.png',
+  },
+];
+
+export const FULL_RESTAURANT_MENU_SECTIONS: MenuSection[] = [
+  {
+    category: 'Starter',
+    items: [
+      { code: 'A01', name: 'Mix Green Salad Basami Dressing', price: '$3.50', description: 'Iceberg salad, tomato, onion, carrot, cheese served with basami dressing' },
+      { code: 'A02', name: 'Cesar Salad', price: '$3.50', description: 'Chicken, roman salad, bacon, ham, egg, cheese, cesar sauce' },
+      { code: 'A03', name: 'Fresh Spring Roll', price: '$3.00', description: 'Rice paper, cucumber, carrot, bean sprout, long bean, khmer salad, khmer herb, peanut, fish sauce' },
+      { code: 'A04', name: 'Deep Fried Spring Roll', price: '$3.00', description: 'Rice paper, cabbage, black mushroom, carrot, taro, onion, sweet chili sauce' },
+      { code: 'A05', name: 'Banana Blossom with Chicken', price: '$3.50', description: 'Chicken, carrot, onion, green pepper, peanut, khmer dressing' },
+      { code: 'A06', name: 'Mango Salad with Tiger Prawn', price: '$3.50', description: '4 X Shrimp, carrot, onion, green pepper, peanut, khmer dressing', tag: 'Popular' },
+      { code: 'A07', name: 'French Fries', price: '$3.00', description: 'Potato, mayonnaise, tomato ketchup, salt' },
+      { code: 'A08', name: 'Prawn Tempura', price: '$4.00', description: 'Shrimp, tempura flour, crumble bread, egg, salt, pepper, tata sauce' },
+      { code: 'A09', name: 'Chicken Satay', price: '$4.00', description: '4 X Chicken, khmer herb, coconut, bean, peanut sauce', tag: 'Chef Recommended' },
+      { code: 'A10', name: 'Beef Skewer round Bacon', price: '$4.00', description: 'Khmer herb, pickle' },
+      { code: 'A11', name: 'Fish and chips', price: '$4.00', description: 'Fish, egg, flour, french fries, tata sauce' },
+    ],
+  },
+  {
+    category: 'Main Course: Soup',
+    items: [
+      { code: 'A12', name: 'Khmer Amok', price: '$5.00', description: 'Fish, chicken or pork, noni leave, kaffir leave, coconut cream, galangal, coriander, served with steam rice.', tag: 'National Dish' },
+      { code: 'A13', name: 'Red Chicken Curry', price: '$5.00', description: 'Chicken, or pork, shallot, turmeric, lemongrass, kaffir leave, potato, coconut milk served with steam rice.' },
+      { code: 'A14', name: 'Khmer Beef Curry Saraman', price: '$6.00', description: 'Beef, shallot, turmeric, lemongrass, kaffir leave, coconut milk serve with steam rice', tag: 'Traditional Royal' },
+      { code: 'A15', name: 'Tom Yam Soup', price: '$4.50', description: 'Seafood, chicken or pork, onion, tomato, lemongrass, kaffir leave, served with steam rice.' },
+      { code: 'A16', name: 'Korko Soup', price: '$4.50', description: 'Fish, chicken or pork, mixed vegetable, turmeric, lemongrass, kaffir leave, coconut milk served with steam rice.' },
+      { code: 'A17', name: 'Mchu Ktis', price: '$4.50', description: 'Fish, chicken or pork, shallot, turmeric, lemongrass, kaffir leave, coconut milk, pineapple, tamarind served with steam rice.' },
+      { code: 'A18', name: 'Lemongrass Sour Soup with Morning Glory', price: '$4.50', description: 'Beef, chicken, pork, shallot, turmeric, lemongrass, kaffir leave, coconut milk, morning glory, tamarind, holy basil, served with steam rice.' },
+    ],
+  },
+  {
+    category: 'Main Course: Stir Fried',
+    items: [
+      { code: 'A19', name: 'Beef Lok Lak', price: '$5.00', description: 'Local beef, tenderloin, oyster sauce, garlic, kampot pepper served with steam rice.', tag: 'Must Try' },
+      { code: 'A20', name: 'Stir Fried with Ginger', price: '$4.00', description: 'Fish, chicken or pork, ginger, garlic, spring onion, served with steam rice.' },
+      { code: 'A21', name: 'Stir Fried Lemongrass with Holy Basil', price: '$4.00', description: 'Chicken, beef or pork, shallot, lemongrass, kaffir leave, holy basil, served with steam rice.' },
+      { code: 'A22', name: 'Fish Fillet with Mango Salad', price: '$4.00', description: 'Fish, mango, shallot, garlic, tomato, basil, served with steam rice.' },
+      { code: 'A23', name: 'Seafood with Kampot Green Pepper', price: '$5.00', description: 'Seafood, garlic, Kampot green pepper, onion, carrot, bell pepper, served with steam rice.', tag: 'Signature' },
+      { code: 'A24', name: 'Sweet and Sour', price: '$4.00', description: 'Chicken, pork, garlic, onion, carrot, tomato, bell pepper, pineapple served with steam rice.' },
+      { code: 'A25', name: 'Stir fried Mixed Vegetable', price: '$3.50', description: 'Mixed vegetable with oyster sauce served with steam rice.' },
+      { code: 'A26', name: 'Pineapple Chicken with Cashew-Nut', price: '$4.50', description: 'Green pepper, carrot, cashew-nut, onion, tomato, pineapple' },
+    ],
+  },
+  {
+    category: 'Western Food',
+    items: [
+      { code: 'A27', name: 'Club Sandwich', price: '$4.00', description: 'White toast, lettuce, cucumber, tomato, bacon, chicken, cheese, french fries.' },
+      { code: 'A28', name: 'Ham & Cheese Sandwich', price: '$4.00', description: 'White toast, ham, cheese, lettuce, shallot.' },
+      { code: 'A29', name: 'Chicken Sandwich', price: '$4.00', description: 'White toast, lettuce, tomato, onion, mayonnaise, pickle, french fries' },
+      { code: 'A30', name: 'Beef Burger', price: '$5.00', description: 'Burger bun, tomato, lettuce, onion, cheese, beef.' },
+      { code: 'A31', name: 'Carbonara', price: '$5.00', description: 'Selection of spaghetti or penne, bacon, cheese.' },
+      { code: 'A32', name: 'Bolognese', price: '$5.00', description: 'Selection of spaghetti or penne, beef, bolognese sauce.' },
+      { code: 'A33', name: 'Spaghetti Tomato Sauce', price: '$5.00', description: 'Tomato, garlic, salt, pepper and butter' },
+      { code: 'A34', name: 'Tuna Sandwich', price: '$4.00', description: 'White toast, lettuce, tomato, onion, mayonnaise, pickle, french fries' },
+      { code: 'A35', name: 'Chicken Burger', price: '$5.00', description: 'Burger bun, tomato, lettuce, onion, cheese, chicken' },
+      { code: 'A36', name: 'Chicken Steak', price: '$7.00', description: 'Chicken, potato, carrot, broccoli, served with mixed salad.' },
+      { code: 'A37', name: 'Beef Steak', price: '$8.00', description: 'Khmer beef, potato, carrot, broccoli, served with mixed salad.', tag: 'Chef Choice' },
+      { code: 'A38', name: 'Seafood Spicy', price: '$6.00', description: 'Selection of spaghetti or penne, seafood, holy basil' },
+      { code: 'A39', name: 'Fish Round Bacon with Paprika Sauce', price: '$6.00', description: 'Mashed potato, paprika sauce served with salad' },
+    ],
+  },
+  {
+    category: 'Dessert',
+    items: [
+      { code: 'A40', name: 'Seasonal Fresh Fruit Platter', price: '$3.00', description: 'Assorted seasonal tropical Cambodian fruits' },
+      { code: 'A41', name: 'Mango with Black Sticky Rice', price: '$4.00', description: 'Sweet ripe mango served with warm coconut black sticky rice', tag: 'Favorite' },
+      { code: 'A42', name: 'Banana Passion Fruit', price: '$3.00', description: 'Caramelized sweet bananas in tangy passion fruit reduction' },
+      { code: 'A43', name: 'Deep Fried Banana with Vanilla Ice-Cream', price: '$3.50', description: 'Crispy fried banana fritters accompanied by creamy vanilla ice cream' },
+    ],
+  },
+];
+
 export const DINING_EXPERIENCES: DiningExperience[] = [
   {
-    id: 'rooftop-pool-bar',
-    name: 'Rooftop Pool & Sunset Bar',
-    hours: '10:00 AM – 10:00 PM Daily',
+    id: 'rooftop-bar-swimming-pool',
+    name: 'ROOFTOP BAR (SWIMMING POOL)',
+    hours: 'Pool: 10:00 – 22:00 | Swim-Up Bar: From 14:00',
     location: 'Rooftop Level (Top Floor)',
-    description: 'Elevated above the bustle of Siem Reap, our rooftop pool bar is the ultimate spot for sunset cocktails, artisanal mocktails, freshly squeezed tropical fruit juices, and light poolside bites. Unwind on cushioned sun loungers while our bartenders shake hand-crafted signature concoctions featuring Cambodian spices and botanicals.',
-    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80',
+    description: 'Our rooftop pool is open from 10:00 hours to 22:00 hours. Here you can relax after a hard day’s working or after sightseeing tour. The swim-up bar at the poolside is open from 2.00 hours to serve you afternoon or evening drinks. The pool area includes changing facilities and waterfall showers, you can enjoy the ambiance. Sunsets from the rooftop are particularly spectacular. Come and see the sun goes down over the Siem Reap city. This is a nice view that you will never forget it.\n\nDine at the in-house restaurant and sample authentic Cambodian-style meals. A selection of cocktails, wines, and beers can be enjoyed at the bar or in the restaurant. In-room dining options are also available.',
+    image: 'https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/01/513212141.jpg',
+    images: [
+      'https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/01/513212141.jpg',
+      'https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/09/0D9A3910-2048x1366.jpg',
+    ],
     menuHighlights: [
-      'Le Vert Botanical Sunset Cocktail (Local Gin, Kaffir Lime, Lemongrass, Tonic)',
-      'Angkor Golden Mango Daiquiri (Fresh Battambang Mangoes, White Rum)',
-      'Crispy Vegetable Spring Rolls with Sweet Tamarind Dip',
-      'Chilled Coconut Water straight from the shell',
-      'Artisan Tapas & Tropical Fruit Platters',
+      'Rooftop pool open from 10:00 to 22:00 hours',
+      'Swim-up poolside bar serving drinks from 14:00 hours',
+      'Waterfall showers and comfortable changing facilities',
+      'Spectacular sunset views over Siem Reap city skyline',
+      'Cocktails, fine wines, chilled beers & in-room dining options',
     ],
     menuSections: [
       {
-        category: 'Signature Cocktails',
+        category: 'Rooftop Bar Drinks & Bites',
         items: [
-          { name: 'Le Vert Sunset Elixir', description: 'Cambodian rum, pressed passion fruit, kaffir lime syrup, splash of sparkling wine', price: '$6.50', tag: 'Signature' },
-          { name: 'Khmer Lemongrass Mojito', description: 'Local dark rum, muddled fresh mint, lemongrass infusion, brown cane sugar, soda', price: '$6.00' },
-          { name: 'Angkor Heritage Gin & Tonic', description: 'Craft botanic gin, hand-bruised cardamom, star anise, premium tonic', price: '$6.50' },
-        ],
-      },
-      {
-        category: 'Poolside Bites',
-        items: [
-          { name: 'Crispy Khmer Spring Rolls', description: 'Minced pork or vegetarian, glass noodles, wood-ear mushroom, sweet chili dip', price: '$4.50' },
-          { name: 'Marinated Chicken Satay Skewers', description: 'Grilled over coals, served with rich peanut sauce and pickled cucumber', price: '$5.50' },
-          { name: 'Lotus Root Chips with Lime Sea Salt', description: 'Thinly shaved fresh lotus root crisps, Kampot pepper dust', price: '$3.50' },
+          { name: 'Signature Tropical Cocktails', price: 'From $4.50', description: 'Handcrafted cocktails, Cambodian craft beers and chilled coconut water' },
+          { name: 'Poolside Light Bites & Starters', price: 'From $3.00', description: 'Fresh spring rolls, prawn tempura, chicken satay and crispy french fries' },
+          { name: 'In-Room Balcony Dining', price: 'Full Menu', description: 'Order any dish from our restaurant menu delivered directly to your room or rooftop lounger' },
         ],
       },
     ],
   },
   {
     id: 'le-vert-restaurant',
-    name: 'Le Vert Restaurant',
-    hours: 'Breakfast: 6:30 AM – 10:30 AM | Lunch: 11:30 AM – 2:30 PM | Dinner: 6:00 PM – 10:00 PM',
+    name: 'LE VERT RESTAURANT',
+    hours: 'Breakfast: 06:30 – 10:00 | Lunch: 11:30 – 15:00 | Dinner: 16:30 – 22:00',
     location: 'Ground Floor & Garden Terrace',
-    description: 'Le Vert Restaurant celebrates the richness of classical Cambodian cuisine while offering thoughtful Western comfort dishes. Our culinary team sources organic produce from local Siem Reap farmer cooperatives and Kampot peppercorns directly from southern plantations. Start your morning with a multi-course breakfast buffet and enjoy romantic dinners illuminated by warm candlelight.',
-    image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80',
+    description: 'All day dining restaurant and sample authentic Cambodian-style combine with western meals. A la carte menu for breakfast, lunch and dinner.\n\n*Breakfast from 6:30 hours to 10:00 hours and it will be served either ala carte or buffet mixed Asian and Western.\n*Lunch is served from 11:30 hours to 15:00 hours for all Asian and Western set menu and ala carte order.\n*Dinner is served from 16:30 hours to 22:00 hours for all Asian and Western set menu and ala carte order.',
+    image: 'https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/09/0D9A3910-2048x1366.jpg',
+    images: [
+      'https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/09/0D9A3910-2048x1366.jpg',
+      'https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/01/513212141.jpg',
+    ],
     menuHighlights: [
-      'Traditional Royal Fish Amok steamed in banana leaves with creamy coconut curry and noni leaves',
-      'Tender Beef Lok Lak with crisp Kampot black pepper, fresh lime juice dip, and jasmine rice',
-      'Green Mango Salad with Smoked Fish or Grilled River Prawns and roasted peanuts',
-      'Gourmet Breakfast with French pastries, tropical fruits, eggs made to order, and Khmer noodle soup (Kuy Teav)',
+      'Breakfast: 06:30 – 10:00 (Buffet or à la carte mixed Asian & Western)',
+      'Lunch: 11:30 – 15:00 (Asian and Western set menu & à la carte)',
+      'Dinner: 16:30 – 22:00 (Asian and Western set menu & à la carte)',
+      'All-day dining blending authentic Cambodian recipes with Western comfort foods',
+      'Full 4-page printed menu with 43 items (Starters, Soups, Stir Fries, Steaks, Desserts)',
     ],
-    menuSections: [
-      {
-        category: 'Authentic Khmer Specialties',
-        items: [
-          { name: 'Royal Fish Amok (ត្រីអាម៉ុក)', khmerName: 'Amok Trey', description: 'Fresh Tonle Sap snakehead fish fillets baked in fragrant kroeung lemongrass paste, coconut cream, and fresh herbs in banana leaf', price: '$7.50', tag: 'Must Try' },
-          { name: 'Kampot Black Pepper Beef Lok Lak (ឡុកឡាក់សាច់គោ)', description: 'Wok-seared tenderloin strips on watercress, accompanied by our signature lime and cracked Kampot peppercorn sauce', price: '$8.50', tag: 'Chef Special' },
-          { name: 'Siem Reap Green Mango Salad', description: 'Crisp shredded green mango, fresh holy basil, mint, shallots, roasted crushed peanuts, and sweet tamarind dressing', price: '$5.00' },
-          { name: 'Tom Yum Tonle Sap Soup', description: 'Fragrant spicy broth with fresh prawns, straw mushrooms, galangal, lemongrass, and kaffir lime leaves', price: '$6.50' },
-        ],
-      },
-      {
-        category: 'Western & Comfort Classics',
-        items: [
-          { name: 'Le Vert Gourmet Beef Burger', description: 'Char-grilled Australian beef patty, melted cheddar, caramelized onions, crisp lettuce, brioche bun, hand-cut fries', price: '$8.50' },
-          { name: 'Fettuccine with Wild Mushrooms & Truffle Cream', description: 'Handmade pasta, sautéed woodland mushrooms, white wine cream reduction, shaved parmesan', price: '$7.50' },
-          { name: 'Pan-Seared Sea Bass Fillet', description: 'Served with crushed baby potatoes, asparagus spears, and lemon herb butter sauce', price: '$9.50' },
-        ],
-      },
-    ],
+    menuSections: FULL_RESTAURANT_MENU_SECTIONS,
   },
 ];
 
 export const SPA_TREATMENTS: SpaTreatment[] = [
   {
     id: 'khmer-body-massage',
-    name: 'Traditional Khmer Body Massage',
+    name: 'KHMER BODY MASSAGE',
     duration: '60 min / 90 min',
-    price: '$18 / $25',
+    price: '$18 / $25 USD',
     category: 'massage',
-    description: 'An ancient dry pressure-point therapy utilizing rhythmic acupressure and gentle stretching without oils to relieve muscular tension, enhance flexibility, and balance energy pathways.',
-    benefits: ['Releases deep physical tension', 'Improves blood circulation', 'Restores vitality after temple walking'],
-    image: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80',
+    description: 'Experience yourself in a Traditional Khmer way of therapeutic work call “Chab Ta Shai”. A vigorous, firm massage for effective pain relief; the touch technique are deep and reasonable forceful in continuous, elastic and rhythmic. The strength is vary from gently to moderately and intense pressure. Relaxing Aromatherapy: Experience the healing effects of Asian aromatherapy in a relaxing and restorative massage that combines the sense of tropical smells with the soothing value of acupressure point. Individually chosen to suit your personal requirements, the essential oils will rebalance your vital energies restoring harmony and calm to your body and mind.',
+    benefits: [
+      'Traditional "Chab Ta Shai" therapeutic technique',
+      'Vigorous, firm massage for effective pain relief',
+      'Deep, continuous, elastic and rhythmic touches',
+      'Asian aromatherapy with customized tropical essential oils',
+    ],
+    image: 'https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/09/fgsdfg-4200-x-2938-scaled.jpg',
   },
   {
     id: 'anti-stress-back-shoulder',
-    name: 'Anti-Stress Back & Shoulder Therapy',
+    name: 'ANTI-STRESS BACK & SHOULDER MASSAGE',
     duration: '45 min / 60 min',
-    price: '$15 / $20',
+    price: '$15 / $20 USD',
     category: 'massage',
-    description: 'A focused deep-tissue treatment targeting knots and tightness in the shoulders, neck, and upper back using warm therapeutic herbal balm infused with camphor and lemongrass.',
-    benefits: ['Relieves postural strain and headaches', 'Soothes shoulder stiffness', 'Deep relaxation in under an hour'],
-    image: 'https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=800&q=80',
+    description: 'Chronic fatigue and extreme muscle spasms possible tissue damage and pain, Surrender yourself to our skilled full therapist help to soothe this trouble.',
+    benefits: [
+      'Relieves chronic fatigue and extreme muscle spasms',
+      'Helps prevent possible tissue damage and discomfort',
+      'Soothing care by our skilled full certified therapists',
+      'Fast relief for upper body and shoulder tension',
+    ],
+    image: 'https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/09/Spa-treatment.webp',
   },
   {
     id: 'relief-relax-package',
-    name: 'Relief, Relax & Rejuvenation 2-Hour Package',
+    name: 'RELIEF, RELAX & REJUVENATION PACKAGE',
     duration: '120 min',
-    price: '$35',
+    price: '$35 USD',
     category: 'package',
-    description: 'Our signature holistic journey: starts with an aromatic herbal foot soak, followed by a warm coconut body polish, 60-minute therapeutic massage, and culminating with a soothing scalp acupressure.',
-    benefits: ['Full body detoxification', 'Deep mental serenity', 'Leaves skin radiant and velvety soft'],
-    image: 'https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=800&q=80',
+    description: 'Chronic fatigue and extreme muscle spasms possible tissue damage and pain, Surrender yourself to our skilled therapist help to soothe this trouble. Pamper yourself with the most recommended specialized spa package designed to offer you the true spa experience of relaxing, relieving, and revitalizing at the same time. The package included Swedish Massage, Calming Head Massage and Revitalizing Facial Treatment.',
+    benefits: [
+      'Most recommended specialized 3-in-1 spa package',
+      'True experience of relaxing, relieving & revitalizing',
+      'Includes full Swedish Massage',
+      'Includes Calming Head Massage & Revitalizing Facial',
+    ],
+    image: 'https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/09/sad-4200-x-2963-scaled.jpg',
   },
   {
-    id: 'swedish-aroma-massage',
-    name: 'Swedish Aromatic Oil Massage',
-    duration: '60 min / 90 min',
-    price: '$20 / $28',
+    id: 'swedish-massage',
+    name: 'Swedish Massage',
+    duration: '60 min',
+    price: '$20 USD',
     category: 'massage',
-    description: 'Gentle, flowing effleurage strokes with warm sweet almond and jasmine essential oils, dissolving mental fatigue and inducing profound calm.',
-    benefits: ['Promotes restful sleep', 'Nourishes the skin with pure plant oils', 'Eases anxiety and nervous stress'],
+    description: 'Included in our signature Relief, Relax & Rejuvenation Package. Gentle, flowing therapeutic strokes combined with restorative aromatic essential oils to ease muscular tension and improve circulation.',
+    benefits: ['Gentle muscle tension relief', 'Stimulates circulation and calm', 'Included in Rejuvenation Package'],
     image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80',
   },
   {
     id: 'calming-head-massage',
-    name: 'Calming Head, Neck & Face Massage',
+    name: 'Calming Head Massage',
     duration: '45 min',
-    price: '$14',
+    price: '$14 USD',
     category: 'facial',
-    description: 'Gentle acupressure on cranial and facial pressure points, combined with warm coconut oil hair conditioning to soothe headaches and ocular fatigue.',
-    benefits: ['Calms busy mental thoughts', 'Nourishes scalp and hair follicles', 'Refreshes facial complexion'],
+    description: 'Included in our signature Relief, Relax & Rejuvenation Package. Gentle acupressure focused on cranial pressure points to quiet busy thoughts, relieve headaches, and soothe ocular fatigue.',
+    benefits: ['Acupressure for cranial relaxation', 'Soothes headaches and fatigue', 'Included in Rejuvenation Package'],
     image: 'https://images.unsplash.com/photo-1512290900672-1f4a9b2b52ba?auto=format&fit=crop&w=800&q=80',
   },
   {
     id: 'revitalizing-facial-treatment',
-    name: 'Revitalizing Khmer Botanical Facial',
+    name: 'Revitalizing Facial Treatment',
     duration: '60 min',
-    price: '$22',
+    price: '$22 USD',
     category: 'facial',
-    description: 'A nourishing facial ritual using cucumber extract, raw organic wild honey from Kulen Mountain, and green tea antioxidants to cleanse, tone, and hydrate.',
-    benefits: ['Deep pore cleansing', 'Restores hydration after sun exposure', 'Natural radiant glow'],
+    description: 'Included in our signature Relief, Relax & Rejuvenation Package. A restorative botanical facial ritual using nourishing natural extracts to cleanse, hydrate, and renew sun-exposed skin.',
+    benefits: ['Botanical hydration & renewal', 'Gentle deep pore cleansing', 'Included in Rejuvenation Package'],
     image: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=800&q=80',
   },
 ];

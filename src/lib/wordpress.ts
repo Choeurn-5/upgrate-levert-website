@@ -205,8 +205,8 @@ export async function getRooms(): Promise<Room[]> {
               bedType: titleClean.toLowerCase().includes('twin')
                 ? '2 Single Beds'
                 : titleClean.toLowerCase().includes('family')
-                ? '2 Queen Beds'
-                : '1 King Size Bed',
+                  ? '2 Queen Beds'
+                  : '1 King Size Bed',
               sizeSqm: size,
               hasBalcony: titleClean.toLowerCase().includes('balcony') || true,
               viewType: titleClean.toLowerCase().includes('city') ? 'City View' : 'Garden or City View',
