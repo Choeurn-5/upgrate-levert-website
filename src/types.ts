@@ -5,6 +5,8 @@ export type AppRoute =
   | '/touring/'
   | '/our-tours/'
   | '/dining/'
+  | '/facilities-levertangkorhotel/'
+  | '/facility/'
   | '/spa/'
   | '/gallery/'
   | '/contact-levertangkorhotel/'

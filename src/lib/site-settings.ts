@@ -93,6 +93,18 @@ export const HERO_CONFIGS: Record<string, HeroConfig> = {
     imagePlaceholderNote: 'Authentic Le Vert Angkor Hotel Restaurant Photography',
     badge: 'All-Day Dining 06:30 – 22:00',
   },
+  facilities: {
+    eyebrow: 'HOTEL FACILITIES',
+    title: 'Rooftop Swimming Pool',
+    subtitle: 'Our rooftop pool is open from 10:00 hours to 22:00 hours. Relax after sightseeing with sunset panoramic views over Siem Reap city.',
+    imageUrl: 'https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/09/IMG_2364-2.jpg',
+    images: [
+      'https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/09/IMG_2364-2.jpg',
+      'https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/01/513212141.jpg',
+    ],
+    imagePlaceholderNote: 'Authentic Le Vert Angkor Hotel Rooftop Swimming Pool',
+    badge: 'Open Daily 10:00 – 22:00',
+  },
   spa: {
     eyebrow: 'WELLNESS & REJUVENATION',
     title: 'Authentic Khmer Spa & Healing Arts',
