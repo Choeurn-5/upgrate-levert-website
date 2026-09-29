@@ -453,35 +453,6 @@ export const FULL_RESTAURANT_MENU_SECTIONS: MenuSection[] = [
 
 export const DINING_EXPERIENCES: DiningExperience[] = [
   {
-    id: 'rooftop-bar-swimming-pool',
-    name: 'ROOFTOP BAR (SWIMMING POOL)',
-    hours: 'Pool: 10:00 – 22:00 | Swim-Up Bar: From 14:00',
-    location: 'Rooftop Level (Top Floor)',
-    description: 'Our rooftop pool is open from 10:00 hours to 22:00 hours. Here you can relax after a hard day’s working or after sightseeing tour. The swim-up bar at the poolside is open from 2.00 hours to serve you afternoon or evening drinks. The pool area includes changing facilities and waterfall showers, you can enjoy the ambiance. Sunsets from the rooftop are particularly spectacular. Come and see the sun goes down over the Siem Reap city. This is a nice view that you will never forget it.\n\nDine at the in-house restaurant and sample authentic Cambodian-style meals. A selection of cocktails, wines, and beers can be enjoyed at the bar or in the restaurant. In-room dining options are also available.',
-    image: 'https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/01/513212141.jpg',
-    images: [
-      'https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/01/513212141.jpg',
-      'https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/09/0D9A3910-2048x1366.jpg',
-    ],
-    menuHighlights: [
-      'Rooftop pool open from 10:00 to 22:00 hours',
-      'Swim-up poolside bar serving drinks from 14:00 hours',
-      'Waterfall showers and comfortable changing facilities',
-      'Spectacular sunset views over Siem Reap city skyline',
-      'Cocktails, fine wines, chilled beers & in-room dining options',
-    ],
-    menuSections: [
-      {
-        category: 'Rooftop Bar Drinks & Bites',
-        items: [
-          { name: 'Signature Tropical Cocktails', price: 'From $4.50', description: 'Handcrafted cocktails, Cambodian craft beers and chilled coconut water' },
-          { name: 'Poolside Light Bites & Starters', price: 'From $3.00', description: 'Fresh spring rolls, prawn tempura, chicken satay and crispy french fries' },
-          { name: 'In-Room Balcony Dining', price: 'Full Menu', description: 'Order any dish from our restaurant menu delivered directly to your room or rooftop lounger' },
-        ],
-      },
-    ],
-  },
-  {
     id: 'le-vert-restaurant',
     name: 'LE VERT RESTAURANT',
     hours: 'Breakfast: 06:30 – 10:00 | Lunch: 11:30 – 15:00 | Dinner: 16:30 – 22:00',
@@ -490,7 +461,6 @@ export const DINING_EXPERIENCES: DiningExperience[] = [
     image: 'https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/09/0D9A3910-2048x1366.jpg',
     images: [
       'https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/09/0D9A3910-2048x1366.jpg',
-      'https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/01/513212141.jpg',
     ],
     menuHighlights: [
       'Breakfast: 06:30 – 10:00 (Buffet or à la carte mixed Asian & Western)',

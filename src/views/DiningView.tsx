@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Clock,
-  Sparkles,
   Utensils,
-  Wine,
   Calendar,
   MessageSquare,
   ChevronLeft,
@@ -12,15 +10,11 @@ import {
   Maximize2,
   X,
   Search,
-  CheckCircle2,
-  Sunset,
-  Waves,
   Coffee,
   Sun,
   Moon,
   Eye,
   FileText,
-  Compass,
 } from 'lucide-react';
 import { Hero } from '../components/Hero';
 import { HeroConfig, AppRoute, DiningExperience } from '../types';
@@ -86,7 +80,7 @@ export const DiningView: React.FC<DiningViewProps> = ({
 
   return (
     <div className="bg-[#FAF8F5]">
-      {/* 1. Cinematic Hero with Real CMS Pool & Restaurant Photos */}
+      {/* 1. Cinematic Hero with Authentic Restaurant Photos */}
       <Hero
         config={heroConfig}
         onPrimaryClick={onOpenBooking}
@@ -106,17 +100,15 @@ export const DiningView: React.FC<DiningViewProps> = ({
           <span className="h-px w-12 sm:w-20 bg-[#C5A880]/60" />
         </div>
         <h2 className="font-luxury-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-[#1C3829] leading-tight">
-          Rooftop Vistas &amp; Authentic Culinary Arts
+          Authentic Culinary Arts &amp; Khmer Flavors
         </h2>
         <p className="text-sm sm:text-base text-[#555F59] font-light mt-4 max-w-2xl mx-auto leading-relaxed">
-          Welcome to our signature venues. Enjoy handcrafted cocktails by the poolside as the sun sets over Siem Reap, or savor classical Cambodian specialties and Western comfort dishes at Le Vert Restaurant.
+          Welcome to Le Vert Restaurant. Savor classical Cambodian specialties and Western comfort dishes prepared fresh with locally sourced ingredients, handcrafted beverages, and personalized hospitality.
         </p>
       </div>
 
-      {/* 3. The 2 Core CMS Venues with 100% Exact Copy and Photos */}
-      <section className="py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 sm:space-y-24">
-        
-        {/* Venue 1: ROOFTOP BAR (SWIMMING POOL) */}
+      {/* 3. The Signature Dining Venue: Le Vert Restaurant */}
+      <section className="py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -125,96 +117,6 @@ export const DiningView: React.FC<DiningViewProps> = ({
           className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center bg-[#F4EFE6]/60 p-6 sm:p-10 lg:p-12 rounded-3xl border border-[#E7E0D5] shadow-sm hover:shadow-xl transition-all"
         >
           <div className="lg:col-span-6 relative rounded-2xl overflow-hidden shadow-lg h-72 sm:h-96 w-full bg-stone-200">
-            <img
-              src="https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/01/513212141.jpg"
-              alt="ROOFTOP BAR (SWIMMING POOL)"
-              loading="lazy"
-              className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-105"
-            />
-            <div className="absolute top-4 left-4">
-              <span className="px-3.5 py-1.5 rounded-full bg-[#1C3829]/90 backdrop-blur-md text-[#DFCAA8] text-xs font-semibold tracking-wide border border-[#C5A880]/30 shadow">
-                Rooftop Level • Pool &amp; Sunset Bar
-              </span>
-            </div>
-            <div className="absolute bottom-4 right-4">
-              <span className="px-3 py-1 rounded-full bg-[#FAF8F5]/90 backdrop-blur-sm text-[#1C3829] text-xs font-bold shadow flex items-center space-x-1.5">
-                <Clock className="w-3.5 h-3.5 text-[#C5A880]" />
-                <span>10:00 – 22:00</span>
-              </span>
-            </div>
-          </div>
-
-          <div className="lg:col-span-6 space-y-5 text-left">
-            <div>
-              <span className="text-[11px] font-semibold uppercase tracking-widest text-[#C5A880] block mb-1">
-                Panoramic Sunset Sanctuary
-              </span>
-              <h3 className="font-luxury-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1C3829] leading-tight">
-                ROOFTOP BAR (SWIMMING POOL)
-              </h3>
-            </div>
-
-            {/* Exact CMS Text */}
-            <div className="space-y-4 text-sm sm:text-base text-[#4A554F] font-light leading-relaxed">
-              <p>
-                Our rooftop pool is open from 10:00 hours to 22:00 hours. Here you can relax after a hard day’s working or after sightseeing tour. The swim-up bar at the poolside is open from 2.00 hours to serve you afternoon or evening drinks. The pool area includes changing facilities and waterfall showers, you can enjoy the ambiance. Sunsets from the rooftop are particularly spectacular. Come and see the sun goes down over the Siem Reap city. This is a nice view that you will never forget it.
-              </p>
-              <p>
-                Dine at the in-house restaurant and sample authentic Cambodian-style meals. A selection of cocktails, wines, and beers can be enjoyed at the bar or in the restaurant. In-room dining options are also available.
-              </p>
-            </div>
-
-            {/* Key feature pills */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2">
-              <div className="p-3 bg-white/80 rounded-xl border border-[#E7E0D5] flex items-center space-x-2.5 text-xs text-[#1C3829]">
-                <Waves className="w-4 h-4 text-[#2D5540] shrink-0" />
-                <span>Pool open 10:00 – 22:00 hrs</span>
-              </div>
-              <div className="p-3 bg-white/80 rounded-xl border border-[#E7E0D5] flex items-center space-x-2.5 text-xs text-[#1C3829]">
-                <Wine className="w-4 h-4 text-[#2D5540] shrink-0" />
-                <span>Swim-up bar open from 14:00 hrs</span>
-              </div>
-              <div className="p-3 bg-white/80 rounded-xl border border-[#E7E0D5] flex items-center space-x-2.5 text-xs text-[#1C3829]">
-                <Sunset className="w-4 h-4 text-[#2D5540] shrink-0" />
-                <span>Spectacular city sunset panoramas</span>
-              </div>
-              <div className="p-3 bg-white/80 rounded-xl border border-[#E7E0D5] flex items-center space-x-2.5 text-xs text-[#1C3829]">
-                <Utensils className="w-4 h-4 text-[#2D5540] shrink-0" />
-                <span>In-room &amp; poolside dining available</span>
-              </div>
-            </div>
-
-            {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-3 pt-3">
-              <button
-                onClick={onOpenBooking}
-                className="px-6 py-3 rounded-full bg-[#1C3829] hover:bg-[#12241A] text-[#FAF8F5] text-xs font-semibold uppercase tracking-wider transition-all shadow-md active:scale-95 flex items-center space-x-2"
-              >
-                <Calendar className="w-3.5 h-3.5 text-[#C5A880]" />
-                <span>Reserve Pool Lounge</span>
-              </button>
-              <a
-                href={SITE_SETTINGS.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-5 py-3 rounded-full border border-[#1C3829]/25 hover:bg-[#1C3829]/10 text-[#1C3829] text-xs font-semibold uppercase tracking-wider transition-all flex items-center space-x-2"
-              >
-                <MessageSquare className="w-3.5 h-3.5 text-[#25D366]" />
-                <span>WhatsApp Bar Concierge</span>
-              </a>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Venue 2: LE VERT RESTAURANT */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.6 }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center bg-[#F4EFE6]/60 p-6 sm:p-10 lg:p-12 rounded-3xl border border-[#E7E0D5] shadow-sm hover:shadow-xl transition-all"
-        >
-          <div className="lg:col-span-6 lg:order-2 relative rounded-2xl overflow-hidden shadow-lg h-72 sm:h-96 w-full bg-stone-200">
             <img
               src="https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/09/0D9A3910-2048x1366.jpg"
               alt="LE VERT RESTAURANT"
@@ -234,7 +136,7 @@ export const DiningView: React.FC<DiningViewProps> = ({
             </div>
           </div>
 
-          <div className="lg:col-span-6 lg:order-1 space-y-5 text-left">
+          <div className="lg:col-span-6 space-y-5 text-left">
             <div>
               <span className="text-[11px] font-semibold uppercase tracking-widest text-[#C5A880] block mb-1">
                 Authentic Cambodian &amp; Western
@@ -587,7 +489,7 @@ export const DiningView: React.FC<DiningViewProps> = ({
               Private Balcony &amp; In-Room Dining
             </h3>
             <p className="text-xs sm:text-sm text-stone-300 font-light max-w-2xl leading-relaxed">
-              Every dish from our à la carte and set menus can be delivered directly to your room or private balcony. Savor hot Khmer curries or crisp poolside sandwiches in utmost serenity.
+              Every dish from our à la carte and set menus can be delivered directly to your room or private balcony. Savor hot Khmer curries or crisp gourmet sandwiches in utmost serenity.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">

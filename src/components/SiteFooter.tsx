@@ -74,7 +74,7 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({
                   onClick={() => onNavigate('/dining/')}
                   className="hover:text-[#C5A880] transition-colors"
                 >
-                  Rooftop Pool & Restaurant
+                  Le Vert Restaurant
                 </button>
               </li>
               <li>

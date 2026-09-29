@@ -83,16 +83,15 @@ export const HERO_CONFIGS: Record<string, HeroConfig> = {
     imagePlaceholderNote: 'WordPress Tour Asset (Angkor Wat Small Circuit Heritage)',
   },
   dining: {
-    eyebrow: 'DINING & ROOFTOP BAR',
-    title: 'Rooftop Bar & Le Vert Restaurant',
-    subtitle: 'Sunsets from the rooftop are particularly spectacular over Siem Reap city. Savor authentic Cambodian-style cuisine combined with Western favorites and refreshing poolside drinks.',
-    imageUrl: 'https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/01/513212141.jpg',
+    eyebrow: 'DINING & CULINARY ARTS',
+    title: 'Le Vert Restaurant & Bar',
+    subtitle: 'Savor authentic Cambodian-style cuisine combined with Western favorites, crafted with fresh local ingredients, artisanal beverages, and gracious Khmer hospitality.',
+    imageUrl: 'https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/09/0D9A3910-2048x1366.jpg',
     images: [
-      'https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/01/513212141.jpg',
       'https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/09/0D9A3910-2048x1366.jpg',
     ],
-    imagePlaceholderNote: 'Authentic Le Vert Angkor Hotel Dining & Rooftop Photography',
-    badge: 'Rooftop Pool & Restaurant 10:00 – 22:00',
+    imagePlaceholderNote: 'Authentic Le Vert Angkor Hotel Restaurant Photography',
+    badge: 'All-Day Dining 06:30 – 22:00',
   },
   spa: {
     eyebrow: 'WELLNESS & REJUVENATION',
