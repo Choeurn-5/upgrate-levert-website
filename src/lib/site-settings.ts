@@ -140,4 +140,12 @@ export const HERO_CONFIGS: Record<string, HeroConfig> = {
     imagePlaceholderNote: 'Replaceable Hero Asset (Award-Winning Hospitality Atmosphere)',
     badge: 'TripAdvisor Travelers’ Choice 2026',
   },
+  blog: {
+    eyebrow: 'STORIES & INSIDER GUIDES',
+    title: 'Journeys Through Angkor & Siem Reap',
+    subtitle: 'Curated travel advice, temple secrets, authentic Khmer culinary traditions, and wellness rituals from our local concierge experts.',
+    imageUrl: 'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=2000&q=85',
+    imagePlaceholderNote: 'Replaceable Hero Asset (Angkor Wat Twilight Horizon)',
+    badge: 'Curated Heritage Journal',
+  },
 };

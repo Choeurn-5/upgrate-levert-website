@@ -39,6 +39,7 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({
     { label: 'Facility', route: '/facilities-levertangkorhotel/' },
     { label: 'Spa', route: '/spa/' },
     { label: 'Gallery', route: '/gallery/' },
+    { label: 'Blog', route: '/blog/' },
     // { label: 'Accolades', route: '/awards/' },
     { label: 'Contact', route: '/contact-levertangkorhotel/' },
   ];
@@ -120,7 +121,8 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({
               const isActive =
                 activeCurrentRoute === link.route ||
                 (link.route === '/rooms/' && activeCurrentRoute === '/our-room/') ||
-                (link.route === '/touring/' && activeCurrentRoute === '/our-tours/');
+                (link.route === '/touring/' && activeCurrentRoute === '/our-tours/') ||
+                (link.route === '/blog/' && activeCurrentRoute.startsWith('/blog'));
               return (
                 <button
                   key={link.route}

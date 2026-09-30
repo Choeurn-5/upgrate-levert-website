@@ -10,7 +10,9 @@ export type AppRoute =
   | '/spa/'
   | '/gallery/'
   | '/contact-levertangkorhotel/'
-  | '/awards/';
+  | '/awards/'
+  | '/blog/'
+  | '/admin/blog/';
 
 export interface CmsImage {
   id: number;
@@ -140,3 +142,27 @@ export interface HeroConfig {
   imagePlaceholderNote: string;
   badge?: string;
 }
+
+export interface BlogAuthor {
+  name: string;
+  role: string;
+  avatar?: string;
+}
+
+export interface BlogPost {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  coverImage: string;
+  category: string;
+  tags: string[];
+  author: BlogAuthor;
+  publishedAt: string;
+  readTimeMinutes: number;
+  isFeatured?: boolean;
+  status: 'published' | 'draft';
+  updatedAt?: string;
+}
+

@@ -101,6 +101,14 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({
                   Visual Photo Gallery
                 </button>
               </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('/blog/')}
+                  className="hover:text-[#C5A880] transition-colors text-[#DFCAA8]"
+                >
+                  Angkor &amp; Travel Blog
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -202,6 +210,14 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({
                 </button>
               </>
             )}
+            <span>•</span>
+            <button
+              onClick={() => onNavigate('/admin/blog/')}
+              className="hover:text-[#C5A880] transition-colors text-[#DFCAA8]/60"
+              title="Hotel staff portal to write and publish blog articles"
+            >
+              Staff Portal
+            </button>
           </div>
         </div>
       </div>

@@ -165,6 +165,7 @@ export function GlobalProvider({ children }: { children: React.ReactNode }) {
     if (pathname === '/gallery/') return 'gallery';
     if (pathname === '/contact-levertangkorhotel/') return 'contact';
     if (pathname === '/awards/') return 'awards';
+    if (pathname.startsWith('/blog')) return 'blog';
     return 'home';
   };
 
@@ -172,6 +173,7 @@ export function GlobalProvider({ children }: { children: React.ReactNode }) {
   const currentHeroConfig = heroConfigs[activeHeroKey] || HERO_CONFIGS.home;
 
   const currentRoute = (pathname as AppRoute) || '/';
+  const isAdminRoute = Boolean(pathname?.startsWith('/admin'));
 
   const contextValue = {
     rooms,
@@ -187,21 +189,25 @@ export function GlobalProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <GlobalContext.Provider value={contextValue}>
-      <SiteHeader
-        activeRoute={currentRoute}
-        onNavigate={handleNavigate}
-        onOpenBooking={() => handleOpenBooking()}
-        onOpenHeroManager={() => setIsHeroManagerOpen(true)}
-      />
+      {!isAdminRoute && (
+        <SiteHeader
+          activeRoute={currentRoute}
+          onNavigate={handleNavigate}
+          onOpenBooking={() => handleOpenBooking()}
+          onOpenHeroManager={() => setIsHeroManagerOpen(true)}
+        />
+      )}
 
       <main className="flex-1 w-full overflow-hidden">
         {children}
       </main>
 
-      <SiteFooter
-        onNavigate={handleNavigate}
-        onOpenBooking={() => handleOpenBooking()}
-      />
+      {!isAdminRoute && (
+        <SiteFooter
+          onNavigate={handleNavigate}
+          onOpenBooking={() => handleOpenBooking()}
+        />
+      )}
 
       <BookingModal
         isOpen={isBookingModalOpen}

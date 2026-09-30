@@ -1,0 +1,238 @@
+import { NextRequest, NextResponse } from 'next/server';
+import fs from 'fs/promises';
+import path from 'path';
+import { BlogPost } from '@/types';
+import { INITIAL_BLOG_POSTS } from '@/data/blogData';
+
+export const dynamic = 'force-dynamic';
+
+const DATA_FILE_PATH = path.join(process.cwd(), 'src', 'data', 'blog-posts.json');
+
+async function getStoredPosts(): Promise<BlogPost[]> {
+  try {
+    const fileContent = await fs.readFile(DATA_FILE_PATH, 'utf-8');
+    const parsed = JSON.parse(fileContent);
+    if (Array.isArray(parsed) && parsed.length > 0) {
+      return parsed;
+    }
+  } catch (error) {
+    // If file doesn't exist or is invalid, write initial posts
+    try {
+      await fs.writeFile(DATA_FILE_PATH, JSON.stringify(INITIAL_BLOG_POSTS, null, 2), 'utf-8');
+    } catch {
+      // Ignore write errors in read-only environments
+    }
+  }
+  return INITIAL_BLOG_POSTS;
+}
+
+async function saveStoredPosts(posts: BlogPost[]): Promise<boolean> {
+  try {
+    await fs.writeFile(DATA_FILE_PATH, JSON.stringify(posts, null, 2), 'utf-8');
+    return true;
+  } catch (error) {
+    console.error('Failed to write blog-posts.json:', error);
+    return false;
+  }
+}
+
+function slugify(text: string): string {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/[^\w-]+/g, '')
+    .replace(/--+/g, '-')
+    .replace(/^-+/, '')
+    .replace(/-+$/, '');
+}
+
+// GET /api/blog
+export async function GET(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const slug = searchParams.get('slug');
+    const id = searchParams.get('id');
+    const category = searchParams.get('category');
+    const includeDrafts = searchParams.get('admin') === 'true';
+
+    const posts = await getStoredPosts();
+
+    if (slug) {
+      const post = posts.find((p) => p.slug === slug);
+      if (!post || (!includeDrafts && post.status === 'draft')) {
+        return NextResponse.json({ error: 'Post not found' }, { status: 404 });
+      }
+      return NextResponse.json(post);
+    }
+
+    if (id) {
+      const post = posts.find((p) => p.id === id);
+      if (!post || (!includeDrafts && post.status === 'draft')) {
+        return NextResponse.json({ error: 'Post not found' }, { status: 404 });
+      }
+      return NextResponse.json(post);
+    }
+
+    let filtered = posts;
+    if (!includeDrafts) {
+      filtered = filtered.filter((p) => p.status === 'published');
+    }
+
+    if (category && category !== 'All Stories') {
+      filtered = filtered.filter((p) => p.category.toLowerCase() === category.toLowerCase());
+    }
+
+    // Sort by published date descending
+    filtered.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
+
+    return NextResponse.json(filtered);
+  } catch (err: any) {
+    return NextResponse.json({ error: err.message || 'Server error' }, { status: 500 });
+  }
+}
+
+// POST /api/blog
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const { title, content, excerpt, category, coverImage, author, tags, status, isFeatured, readTimeMinutes } = body;
+
+    if (!title || !content) {
+      return NextResponse.json({ error: 'Title and content are required' }, { status: 400 });
+    }
+
+    const posts = await getStoredPosts();
+    let slug = body.slug ? slugify(body.slug) : slugify(title);
+
+    // Ensure unique slug
+    let uniqueSlug = slug;
+    let counter = 1;
+    while (posts.some((p) => p.slug === uniqueSlug)) {
+      uniqueSlug = `${slug}-${counter}`;
+      counter++;
+    }
+
+    const newPost: BlogPost = {
+      id: `post-${Date.now()}`,
+      slug: uniqueSlug,
+      title: title.trim(),
+      excerpt: excerpt?.trim() || content.replace(/<[^>]+>/g, '').slice(0, 160) + '...',
+      content: content.trim(),
+      coverImage: coverImage || 'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1600&q=85',
+      category: category || 'Temple Guides',
+      tags: Array.isArray(tags) ? tags : typeof tags === 'string' ? tags.split(',').map((t: string) => t.trim()).filter(Boolean) : [],
+      author: {
+        name: author?.name || 'Le Vert Editorial Team',
+        role: author?.role || 'Guest Concierge',
+        avatar: author?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+      },
+      publishedAt: body.publishedAt || new Date().toISOString().split('T')[0],
+      readTimeMinutes: Number(readTimeMinutes) || Math.max(1, Math.round(content.split(/\s+/).length / 200)),
+      isFeatured: Boolean(isFeatured),
+      status: status === 'draft' ? 'draft' : 'published',
+      updatedAt: new Date().toISOString(),
+    };
+
+    // If marked featured, unmark existing featured posts
+    if (newPost.isFeatured) {
+      posts.forEach((p) => {
+        p.isFeatured = false;
+      });
+    }
+
+    posts.unshift(newPost);
+    await saveStoredPosts(posts);
+
+    return NextResponse.json(newPost, { status: 201 });
+  } catch (err: any) {
+    return NextResponse.json({ error: err.message || 'Failed to create post' }, { status: 500 });
+  }
+}
+
+// PUT /api/blog
+export async function PUT(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const { id } = body;
+
+    if (!id) {
+      return NextResponse.json({ error: 'Post id is required for update' }, { status: 400 });
+    }
+
+    const posts = await getStoredPosts();
+    const index = posts.findIndex((p) => p.id === id);
+
+    if (index === -1) {
+      return NextResponse.json({ error: 'Post not found' }, { status: 404 });
+    }
+
+    const existing = posts[index];
+    const updatedSlug = body.slug ? slugify(body.slug) : existing.slug;
+
+    // Check slug uniqueness against other posts
+    if (updatedSlug !== existing.slug && posts.some((p) => p.id !== id && p.slug === updatedSlug)) {
+      return NextResponse.json({ error: 'Slug is already in use by another article' }, { status: 400 });
+    }
+
+    const updatedPost: BlogPost = {
+      ...existing,
+      title: body.title !== undefined ? body.title.trim() : existing.title,
+      slug: updatedSlug,
+      excerpt: body.excerpt !== undefined ? body.excerpt.trim() : existing.excerpt,
+      content: body.content !== undefined ? body.content.trim() : existing.content,
+      coverImage: body.coverImage !== undefined ? body.coverImage : existing.coverImage,
+      category: body.category !== undefined ? body.category : existing.category,
+      tags: body.tags !== undefined ? (Array.isArray(body.tags) ? body.tags : typeof body.tags === 'string' ? body.tags.split(',').map((t: string) => t.trim()).filter(Boolean) : existing.tags) : existing.tags,
+      author: {
+        ...existing.author,
+        ...(body.author || {}),
+      },
+      publishedAt: body.publishedAt || existing.publishedAt,
+      readTimeMinutes: body.readTimeMinutes !== undefined ? Number(body.readTimeMinutes) : existing.readTimeMinutes,
+      isFeatured: body.isFeatured !== undefined ? Boolean(body.isFeatured) : existing.isFeatured,
+      status: body.status !== undefined ? (body.status === 'draft' ? 'draft' : 'published') : existing.status,
+      updatedAt: new Date().toISOString(),
+    };
+
+    if (updatedPost.isFeatured) {
+      posts.forEach((p) => {
+        if (p.id !== id) p.isFeatured = false;
+      });
+    }
+
+    posts[index] = updatedPost;
+    await saveStoredPosts(posts);
+
+    return NextResponse.json(updatedPost);
+  } catch (err: any) {
+    return NextResponse.json({ error: err.message || 'Failed to update post' }, { status: 500 });
+  }
+}
+
+// DELETE /api/blog?id=...
+export async function DELETE(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get('id');
+
+    if (!id) {
+      return NextResponse.json({ error: 'Post id is required' }, { status: 400 });
+    }
+
+    const posts = await getStoredPosts();
+    const index = posts.findIndex((p) => p.id === id);
+
+    if (index === -1) {
+      return NextResponse.json({ error: 'Post not found' }, { status: 404 });
+    }
+
+    const deleted = posts.splice(index, 1)[0];
+    await saveStoredPosts(posts);
+
+    return NextResponse.json({ success: true, deletedPost: deleted });
+  } catch (err: any) {
+    return NextResponse.json({ error: err.message || 'Failed to delete post' }, { status: 500 });
+  }
+}

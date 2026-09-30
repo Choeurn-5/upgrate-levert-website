@@ -176,6 +176,7 @@ export const HeroManagerModal: React.FC<HeroManagerModalProps> = ({
                   <option value="gallery">Photo Gallery (/gallery/)</option>
                   <option value="contact">Contact (/contact-levertangkorhotel/)</option>
                   <option value="awards">Accolades & Awards (/awards/)</option>
+                  <option value="blog">Stories & Blog (/blog/)</option>
                 </select>
               </div>
 
