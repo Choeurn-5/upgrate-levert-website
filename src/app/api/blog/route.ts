@@ -3,6 +3,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import { BlogPost } from '@/types';
 import { INITIAL_BLOG_POSTS } from '@/data/blogData';
+import { getRedis, REDIS_KEYS } from '@/lib/redis';
 
 export const dynamic = 'force-dynamic';
 
@@ -20,6 +21,24 @@ declare global {
 }
 
 async function getStoredPosts(): Promise<BlogPost[]> {
+  const redis = getRedis();
+  if (redis) {
+    try {
+      const cached = await redis.get<BlogPost[]>(REDIS_KEYS.BLOG_POSTS);
+      if (Array.isArray(cached)) {
+        globalThis.__LEVERT_BLOG_POSTS__ = cached;
+        return cached;
+      }
+      // If redis is connected but key not found yet, seed it once
+      const initial = [...INITIAL_BLOG_POSTS];
+      await redis.set(REDIS_KEYS.BLOG_POSTS, initial);
+      globalThis.__LEVERT_BLOG_POSTS__ = initial;
+      return initial;
+    } catch (err) {
+      console.error('Redis read error, falling back to disk/memory:', err);
+    }
+  }
+
   if (globalThis.__LEVERT_BLOG_POSTS__ !== undefined) {
     return globalThis.__LEVERT_BLOG_POSTS__;
   }
@@ -39,21 +58,29 @@ async function getStoredPosts(): Promise<BlogPost[]> {
   }
 
   // If no file exists anywhere, initialize with INITIAL_BLOG_POSTS
-  globalThis.__LEVERT_BLOG_POSTS__ = [...INITIAL_BLOG_POSTS];
-  await saveStoredPosts(globalThis.__LEVERT_BLOG_POSTS__);
-  return globalThis.__LEVERT_BLOG_POSTS__;
+  const fallback = [...INITIAL_BLOG_POSTS];
+  globalThis.__LEVERT_BLOG_POSTS__ = fallback;
+  await saveStoredPosts(fallback);
+  return fallback;
 }
 
 async function saveStoredPosts(posts: BlogPost[]): Promise<boolean> {
   // Always update in-memory cache first
   globalThis.__LEVERT_BLOG_POSTS__ = posts;
 
-  let written = false;
+  const redis = getRedis();
+  if (redis) {
+    try {
+      await redis.set(REDIS_KEYS.BLOG_POSTS, posts);
+    } catch (err) {
+      console.error('Redis write error:', err);
+    }
+  }
+
   for (const filePath of CANDIDATE_PATHS) {
     try {
       await fs.mkdir(path.dirname(filePath), { recursive: true });
       await fs.writeFile(filePath, JSON.stringify(posts, null, 2), 'utf-8');
-      written = true;
     } catch {
       // Continue to next path
     }

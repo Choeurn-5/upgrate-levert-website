@@ -3,34 +3,81 @@ import fs from 'fs/promises';
 import path from 'path';
 import { HeroConfig } from '@/types';
 import { HERO_CONFIGS } from '@/lib/site-settings';
+import { getRedis, REDIS_KEYS } from '@/lib/redis';
 
 export const dynamic = 'force-dynamic';
 
-const HERO_FILE_PATH = path.join(process.cwd(), 'src', 'data', 'hero-settings.json');
+const CANDIDATE_PATHS = [
+  path.join(process.cwd(), 'src', 'data', 'hero-settings.json'),
+  path.join(process.cwd(), 'data', 'hero-settings.json'),
+  path.join(process.cwd(), 'public', 'data', 'hero-settings.json'),
+  path.join('/tmp', 'levert-hero-settings.json'),
+];
+
+declare global {
+  var __LEVERT_HERO_CONFIGS__: Record<string, HeroConfig> | undefined;
+}
 
 async function getStoredHeroConfigs(): Promise<Record<string, HeroConfig>> {
-  try {
-    const content = await fs.readFile(HERO_FILE_PATH, 'utf-8');
-    const parsed = JSON.parse(content);
-    if (parsed && typeof parsed === 'object') {
-      return { ...HERO_CONFIGS, ...parsed };
-    }
-  } catch (error) {
+  const redis = getRedis();
+  if (redis) {
     try {
-      await fs.writeFile(HERO_FILE_PATH, JSON.stringify(HERO_CONFIGS, null, 2), 'utf-8');
+      const cached = await redis.get<Record<string, HeroConfig>>(REDIS_KEYS.HERO_SETTINGS);
+      if (cached && typeof cached === 'object') {
+        const merged = { ...HERO_CONFIGS, ...cached };
+        globalThis.__LEVERT_HERO_CONFIGS__ = merged;
+        return merged;
+      }
+      await redis.set(REDIS_KEYS.HERO_SETTINGS, HERO_CONFIGS);
+      const initial = { ...HERO_CONFIGS };
+      globalThis.__LEVERT_HERO_CONFIGS__ = initial;
+      return initial;
+    } catch (err) {
+      console.error('Redis read hero error:', err);
+    }
+  }
+
+  if (globalThis.__LEVERT_HERO_CONFIGS__ !== undefined) {
+    return globalThis.__LEVERT_HERO_CONFIGS__;
+  }
+
+  for (const filePath of CANDIDATE_PATHS) {
+    try {
+      const content = await fs.readFile(filePath, 'utf-8');
+      const parsed = JSON.parse(content);
+      if (parsed && typeof parsed === 'object') {
+        const merged = { ...HERO_CONFIGS, ...parsed };
+        globalThis.__LEVERT_HERO_CONFIGS__ = merged;
+        return merged;
+      }
     } catch {}
   }
-  return HERO_CONFIGS;
+
+  const fallback = { ...HERO_CONFIGS };
+  globalThis.__LEVERT_HERO_CONFIGS__ = fallback;
+  await saveHeroConfigs(fallback);
+  return fallback;
 }
 
 async function saveHeroConfigs(configs: Record<string, HeroConfig>): Promise<boolean> {
-  try {
-    await fs.writeFile(HERO_FILE_PATH, JSON.stringify(configs, null, 2), 'utf-8');
-    return true;
-  } catch (err) {
-    console.error('Failed to save hero-settings.json:', err);
-    return false;
+  globalThis.__LEVERT_HERO_CONFIGS__ = configs;
+
+  const redis = getRedis();
+  if (redis) {
+    try {
+      await redis.set(REDIS_KEYS.HERO_SETTINGS, configs);
+    } catch (err) {
+      console.error('Redis save hero error:', err);
+    }
   }
+
+  for (const filePath of CANDIDATE_PATHS) {
+    try {
+      await fs.mkdir(path.dirname(filePath), { recursive: true });
+      await fs.writeFile(filePath, JSON.stringify(configs, null, 2), 'utf-8');
+    } catch {}
+  }
+  return true;
 }
 
 // GET /api/hero

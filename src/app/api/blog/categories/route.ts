@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
 
+import { getRedis, REDIS_KEYS } from '@/lib/redis';
+
 export const dynamic = 'force-dynamic';
 
 const CANDIDATE_PATHS = [
@@ -24,6 +26,23 @@ declare global {
 }
 
 async function getStoredCategories(): Promise<string[]> {
+  const redis = getRedis();
+  if (redis) {
+    try {
+      const cached = await redis.get<string[]>(REDIS_KEYS.BLOG_CATEGORIES);
+      if (Array.isArray(cached)) {
+        globalThis.__LEVERT_BLOG_CATEGORIES__ = cached;
+        return cached;
+      }
+      const initial = [...DEFAULT_CATEGORIES];
+      await redis.set(REDIS_KEYS.BLOG_CATEGORIES, initial);
+      globalThis.__LEVERT_BLOG_CATEGORIES__ = initial;
+      return initial;
+    } catch (err) {
+      console.error('Redis read categories error:', err);
+    }
+  }
+
   if (globalThis.__LEVERT_BLOG_CATEGORIES__ !== undefined) {
     return globalThis.__LEVERT_BLOG_CATEGORIES__;
   }
@@ -39,12 +58,23 @@ async function getStoredCategories(): Promise<string[]> {
     } catch {}
   }
 
-  globalThis.__LEVERT_BLOG_CATEGORIES__ = [...DEFAULT_CATEGORIES];
-  await saveCategories(globalThis.__LEVERT_BLOG_CATEGORIES__);
-  return globalThis.__LEVERT_BLOG_CATEGORIES__;
+  const fallback = [...DEFAULT_CATEGORIES];
+  globalThis.__LEVERT_BLOG_CATEGORIES__ = fallback;
+  await saveCategories(fallback);
+  return fallback;
 }
 
 async function getCategoriesFromPosts(): Promise<string[]> {
+  const redis = getRedis();
+  if (redis) {
+    try {
+      const posts = await redis.get<any[]>(REDIS_KEYS.BLOG_POSTS);
+      if (Array.isArray(posts)) {
+        return posts.map((p) => p.category).filter(Boolean);
+      }
+    } catch {}
+  }
+
   const postPaths = [
     path.join(process.cwd(), 'src', 'data', 'blog-posts.json'),
     path.join(process.cwd(), 'data', 'blog-posts.json'),
@@ -64,6 +94,15 @@ async function getCategoriesFromPosts(): Promise<string[]> {
 
 async function saveCategories(categories: string[]): Promise<boolean> {
   globalThis.__LEVERT_BLOG_CATEGORIES__ = categories;
+
+  const redis = getRedis();
+  if (redis) {
+    try {
+      await redis.set(REDIS_KEYS.BLOG_CATEGORIES, categories);
+    } catch (err) {
+      console.error('Redis write categories error:', err);
+    }
+  }
 
   for (const filePath of CANDIDATE_PATHS) {
     try {
