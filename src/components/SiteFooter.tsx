@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Mail, MapPin, ExternalLink, ShieldCheck, Award, Heart, Sparkles } from 'lucide-react';
+import { Phone, Mail, MapPin, ExternalLink, ShieldCheck, Award, Heart } from 'lucide-react';
 import { SITE_SETTINGS } from '../lib/site-settings';
 import { AppRoute } from '../types';
 
@@ -99,15 +99,6 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({
                   className="hover:text-[#C5A880] transition-colors"
                 >
                   Visual Photo Gallery
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => onNavigate('/temple-package/')}
-                  className="hover:text-[#C5A880] transition-colors text-[#C5A880] font-medium flex items-center space-x-1"
-                >
-                  <Sparkles className="w-3 h-3" />
-                  <span>3-Night Temple Package</span>
                 </button>
               </li>
             </ul>

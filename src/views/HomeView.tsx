@@ -482,9 +482,9 @@ export const HomeView: React.FC<HomeViewProps> = ({
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* Card 1: Temple Packages */}
+          {/* Card 1: Rooftop Pool & Facilities */}
           <div
-            onClick={() => onNavigate('/temple-package/')}
+            onClick={() => onNavigate('/facilities-levertangkorhotel/')}
             className="group cursor-pointer bg-[#FAF8F5] rounded-3xl p-6 border border-[#E7E0D5] hover:border-[#C5A880] hover:shadow-xl transition-all flex flex-col justify-between"
           >
             <div>
@@ -492,14 +492,14 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 <Sparkles className="w-6 h-6" />
               </div>
               <h3 className="font-luxury-serif text-xl font-bold text-[#1C3829] mb-2">
-                Temple Packages
+                Rooftop Pool & Serenity
               </h3>
               <p className="text-xs text-[#68726B] leading-relaxed font-light mb-4">
-                All-inclusive 3-night Angkor discoveries with private chauffeured tours, airport pickup, daily breakfast, and spa.
+                Unwind in our outdoor saltwater swimming pool and sun loungers overlooking Siem Reap after a day of temple exploration.
               </p>
             </div>
             <div className="text-xs font-semibold text-[#1C3829] flex items-center space-x-1 group-hover:text-[#C5A880] transition-colors pt-2">
-              <span>View Packages</span>
+              <span>Explore Facilities</span>
               <ChevronRight className="w-3.5 h-3.5" />
             </div>
           </div>
@@ -572,50 +572,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
         </div>
       </section>
 
-      {/* 5. Signature Temple Package Spotlight */}
-      <section className="py-16 bg-[#14281D] text-[#FAF8F5] relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-7 space-y-4">
-              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#2D5540]/60 border border-[#C5A880]/30 text-[#DFCAA8] text-xs font-semibold uppercase tracking-widest">
-                <Sparkles className="w-3.5 h-3.5 text-[#C5A880]" />
-                <span>Featured Package Offer</span>
-              </div>
-              <h2 className="font-luxury-serif text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight text-[#FAF8F5]">
-                The All-Inclusive Temple Experience Package
-              </h2>
-              <p className="text-sm sm:text-base text-[#FAF8F5]/80 font-light leading-relaxed">
-                Enjoy 3 nights in our signature Le Vert Suite, daily breakfast, private airport arrival pick-up, a private full-day Small Circuit temple expedition with chauffeured vehicle, and complimentary 60-minute relaxing Khmer massages for two.
-              </p>
-              <div className="flex flex-wrap gap-4 pt-2 text-xs text-[#DFCAA8]">
-                <span className="flex items-center space-x-1.5">
-                  <Check className="w-4 h-4 text-[#C5A880]" />
-                  <span>3 Nights in Le Vert Suite</span>
-                </span>
-                <span className="flex items-center space-x-1.5">
-                  <Check className="w-4 h-4 text-[#C5A880]" />
-                  <span>Private Chauffeur Tour</span>
-                </span>
-                <span className="flex items-center space-x-1.5">
-                  <Check className="w-4 h-4 text-[#C5A880]" />
-                  <span>Complimentary Spa Session</span>
-                </span>
-              </div>
-            </div>
-
-            <div className="lg:col-span-5 flex flex-col sm:flex-row items-center justify-end gap-4">
-              <button
-                onClick={() => onNavigate('/temple-package/')}
-                className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#C5A880] text-[#12241A] font-semibold text-xs uppercase tracking-widest hover:bg-[#DFCAA8] transition-all shadow-xl text-center"
-              >
-                View Package Details & Book
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 6. Curated Temple Tours Preview */}
+      {/* 5. Curated Temple Tours Preview */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div>

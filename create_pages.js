@@ -43,11 +43,6 @@ const pages = [
     path: 'awards',
     viewName: 'AwardsView',
     props: ['heroConfig={heroConfigs.awards}', 'onNavigate={handleNavigate}', 'onOpenBooking={handleOpenBooking}', 'onOpenHeroManager={() => setIsHeroManagerOpen(true)}'],
-  },
-  {
-    path: 'temple-package',
-    viewName: 'TemplePackageView',
-    props: ['heroConfig={heroConfigs.templePackage}', 'onNavigate={handleNavigate}', 'onOpenBooking={handleOpenBooking}', 'onOpenHeroManager={() => setIsHeroManagerOpen(true)}'],
   }
 ];
 

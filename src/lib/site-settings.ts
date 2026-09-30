@@ -140,12 +140,4 @@ export const HERO_CONFIGS: Record<string, HeroConfig> = {
     imagePlaceholderNote: 'Replaceable Hero Asset (Award-Winning Hospitality Atmosphere)',
     badge: 'TripAdvisor Travelers’ Choice 2026',
   },
-  templePackage: {
-    eyebrow: 'SIGNATURE RETREAT',
-    title: 'The Ultimate Siem Reap & Angkor Temple Package',
-    subtitle: 'A seamless 3-night experience including private suite accommodation, chauffeured Angkor expeditions, daily gourmet breakfast, and complimentary spa rejuvenation.',
-    imageUrl: 'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=2000&q=85',
-    imagePlaceholderNote: 'Replaceable Hero Asset (Angkor Wat Dramatic Horizon)',
-    badge: 'All-Inclusive Heritage Stay',
-  },
 };

@@ -165,7 +165,6 @@ export function GlobalProvider({ children }: { children: React.ReactNode }) {
     if (pathname === '/gallery/') return 'gallery';
     if (pathname === '/contact-levertangkorhotel/') return 'contact';
     if (pathname === '/awards/') return 'awards';
-    if (pathname === '/temple-package/') return 'templePackage';
     return 'home';
   };
 

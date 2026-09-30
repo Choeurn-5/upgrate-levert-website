@@ -10,8 +10,7 @@ export type AppRoute =
   | '/spa/'
   | '/gallery/'
   | '/contact-levertangkorhotel/'
-  | '/awards/'
-  | '/temple-package/';
+  | '/awards/';
 
 export interface CmsImage {
   id: number;

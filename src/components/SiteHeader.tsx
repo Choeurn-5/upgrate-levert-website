@@ -73,13 +73,14 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({
               <span>{SITE_SETTINGS.phone}</span>
             </a>
             <span className="text-[#C5A880]/40">|</span>
-            <button
-              onClick={() => handleNavClick('/temple-package/')}
+            <a
+              href={SITE_SETTINGS.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center space-x-1 text-[#C5A880] hover:underline font-medium"
             >
-              <Sparkles className="w-3 h-3" />
-              <span>Temple Package Special</span>
-            </button>
+              <span>WhatsApp Concierge</span>
+            </a>
           </div>
         </div>
       </div>
