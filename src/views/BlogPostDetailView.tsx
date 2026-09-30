@@ -205,17 +205,11 @@ export const BlogPostDetailView: React.FC<BlogPostDetailViewProps> = ({
           {/* Author & Meta Bar */}
           <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-center space-x-3.5">
-              {post.author.avatar ? (
-                <img
-                  src={post.author.avatar}
-                  alt={post.author.name}
-                  className="w-12 h-12 rounded-full object-cover border-2 border-[#C5A880]/60 shadow-sm"
-                />
-              ) : (
-                <div className="w-12 h-12 rounded-full bg-[#1C3829] text-[#DFCAA8] flex items-center justify-center font-bold text-base">
-                  {post.author.name[0]}
-                </div>
-              )}
+              <img
+                src={post.author.avatar || '/images/default-avatar.svg'}
+                alt={post.author.name}
+                className="w-12 h-12 rounded-full object-cover border-2 border-[#C5A880]/60 shadow-sm bg-[#14281D]"
+              />
               <div>
                 <h3 className="text-sm font-semibold text-[#1C3829]">
                   {post.author.name}
@@ -317,17 +311,11 @@ export const BlogPostDetailView: React.FC<BlogPostDetailViewProps> = ({
 
           {/* Author Bio Card */}
           <div className="mt-10 p-6 sm:p-8 rounded-2xl bg-[#FAF8F5] border border-[#E7E0D5] flex flex-col sm:flex-row items-center sm:items-start gap-5">
-            {post.author.avatar ? (
-              <img
-                src={post.author.avatar}
-                alt={post.author.name}
-                className="w-16 h-16 rounded-full object-cover border-2 border-[#C5A880]/80 shrink-0"
-              />
-            ) : (
-              <div className="w-16 h-16 rounded-full bg-[#1C3829] text-[#DFCAA8] flex items-center justify-center font-bold text-xl shrink-0">
-                {post.author.name[0]}
-              </div>
-            )}
+            <img
+              src={post.author.avatar || '/images/default-avatar.svg'}
+              alt={post.author.name}
+              className="w-16 h-16 rounded-full object-cover border-2 border-[#C5A880]/80 shrink-0 bg-[#14281D]"
+            />
             <div className="space-y-1.5 text-center sm:text-left">
               <span className="text-[11px] font-semibold tracking-wider text-[#C5A880] uppercase block">
                 Written by

@@ -126,7 +126,7 @@ export async function POST(request: NextRequest) {
       author: {
         name: author?.name || 'Le Vert Editorial Team',
         role: author?.role || 'Guest Concierge',
-        avatar: author?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+        avatar: author?.avatar?.trim() || '/images/default-avatar.svg',
       },
       publishedAt: body.publishedAt || new Date().toISOString().split('T')[0],
       readTimeMinutes: Number(readTimeMinutes) || Math.max(1, Math.round(content.split(/\s+/).length / 200)),
@@ -188,6 +188,7 @@ export async function PUT(request: NextRequest) {
       author: {
         ...existing.author,
         ...(body.author || {}),
+        avatar: body.author?.avatar?.trim() || existing.author.avatar || '/images/default-avatar.svg',
       },
       publishedAt: body.publishedAt || existing.publishedAt,
       readTimeMinutes: body.readTimeMinutes !== undefined ? Number(body.readTimeMinutes) : existing.readTimeMinutes,

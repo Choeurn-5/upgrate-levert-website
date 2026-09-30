@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="avatarBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14281D"/>
+      <stop offset="100%" stop-color="#1C3829"/>
+    </linearGradient>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#DFCAA8"/>
+      <stop offset="100%" stop-color="#C5A880"/>
+    </linearGradient>
+  </defs>
+  <!-- Background circle -->
+  <circle cx="60" cy="60" r="60" fill="url(#avatarBg)"/>
+  <!-- Decorative subtle gold ring -->
+  <circle cx="60" cy="60" r="56" fill="none" stroke="url(#goldGradient)" stroke-width="2" opacity="0.4"/>
+  <!-- Head -->
+  <circle cx="60" cy="46" r="20" fill="url(#goldGradient)"/>
+  <!-- Shoulders / Torso -->
+  <path d="M 26 98 C 26 76, 44 72, 60 72 C 76 72, 94 76, 94 98 Z" fill="url(#goldGradient)"/>
+</svg>

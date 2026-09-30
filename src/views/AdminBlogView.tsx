@@ -23,6 +23,7 @@ import {
   LogOut,
   RefreshCw,
   Sliders,
+  Upload,
 } from 'lucide-react';
 import { BlogPost, AppRoute } from '../types';
 import { BLOG_CATEGORIES, INITIAL_BLOG_POSTS } from '../data/blogData';
@@ -124,6 +125,12 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
   const [formIsFeatured, setFormIsFeatured] = useState(false);
   const [formStatus, setFormStatus] = useState<'published' | 'draft'>('published');
 
+  // File Upload State & Refs
+  const [isUploadingCover, setIsUploadingCover] = useState(false);
+  const [isUploadingAvatar, setIsUploadingAvatar] = useState(false);
+  const coverFileInputRef = React.useRef<HTMLInputElement | null>(null);
+  const avatarFileInputRef = React.useRef<HTMLInputElement | null>(null);
+
   // Check login state from localStorage
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -184,6 +191,47 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
     setTimeout(() => setNotification(null), 4000);
   };
 
+  // Upload image to /api/upload
+  const handleFileUpload = async (file: File, type: 'cover' | 'avatar') => {
+    if (!file) return;
+    if (!file.type.startsWith('image/')) {
+      showToast('error', 'Please upload a valid image file (PNG, JPG, WebP, SVG).');
+      return;
+    }
+
+    if (type === 'cover') setIsUploadingCover(true);
+    else setIsUploadingAvatar(true);
+
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!res.ok) {
+        const errData = await res.json();
+        throw new Error(errData.error || 'Failed to upload image');
+      }
+
+      const data = await res.json();
+      if (type === 'cover') {
+        setFormCoverImage(data.url);
+        showToast('success', 'Cover photo uploaded successfully!');
+      } else {
+        setFormAuthorAvatar(data.url);
+        showToast('success', 'Author photo uploaded successfully!');
+      }
+    } catch (err: any) {
+      showToast('error', err.message || 'Image upload failed');
+    } finally {
+      if (type === 'cover') setIsUploadingCover(false);
+      else setIsUploadingAvatar(false);
+    }
+  };
+
   // Open Editor for Creating New Post
   const handleOpenCreate = () => {
     setEditingPost(null);
@@ -196,7 +244,7 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
     setFormTags('Angkor Wat, Siem Reap, Travel Tips');
     setFormAuthorName(AUTHOR_PRESETS[0].name);
     setFormAuthorRole(AUTHOR_PRESETS[0].role);
-    setFormAuthorAvatar(AUTHOR_PRESETS[0].avatar);
+    setFormAuthorAvatar(AUTHOR_PRESETS[0].avatar || '/images/default-avatar.svg');
     setFormPublishedAt(new Date().toISOString().split('T')[0]);
     setFormReadTime(5);
     setFormIsFeatured(false);
@@ -217,7 +265,7 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
     setFormTags(post.tags.join(', '));
     setFormAuthorName(post.author.name);
     setFormAuthorRole(post.author.role);
-    setFormAuthorAvatar(post.author.avatar || '');
+    setFormAuthorAvatar(post.author.avatar || '/images/default-avatar.svg');
     setFormPublishedAt(post.publishedAt);
     setFormReadTime(post.readTimeMinutes);
     setFormIsFeatured(Boolean(post.isFeatured));
@@ -265,9 +313,9 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
       coverImage: formCoverImage,
       tags: formTags.split(',').map((t) => t.trim()).filter(Boolean),
       author: {
-        name: formAuthorName,
-        role: formAuthorRole,
-        avatar: formAuthorAvatar,
+        name: formAuthorName.trim() || 'Le Vert Editorial Team',
+        role: formAuthorRole.trim() || 'Guest Concierge',
+        avatar: formAuthorAvatar.trim() || '/images/default-avatar.svg',
       },
       publishedAt: formPublishedAt || new Date().toISOString().split('T')[0],
       readTimeMinutes: Number(formReadTime) || Math.max(1, Math.round(formContent.split(/\s+/).length / 200)),
@@ -846,99 +894,226 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
                     />
                   </div>
 
-                  {/* Cover Image & Quick Presets */}
-                  <div className="space-y-2 p-5 rounded-2xl bg-[#FAF8F5] border border-[#E7E0D5]">
+                  {/* Cover Image Upload & Presets */}
+                  <div className="space-y-4 p-5 rounded-2xl bg-[#FAF8F5] border border-[#E7E0D5]">
                     <div className="flex items-center justify-between">
                       <label className="text-xs font-semibold text-[#1C3829] uppercase tracking-wider flex items-center space-x-1.5">
                         <ImageIcon className="w-3.5 h-3.5 text-[#C5A880]" />
-                        <span>Cover Photo URL</span>
+                        <span>Cover Photo *</span>
                       </label>
                       <span className="text-[11px] text-[#68726B]">
-                        Click any preset below or paste custom image link
+                        Upload from device or choose a preset
                       </span>
                     </div>
 
+                    {/* Hidden File Input */}
                     <input
-                      type="text"
-                      value={formCoverImage}
-                      onChange={(e) => setFormCoverImage(e.target.value)}
-                      placeholder="https://..."
-                      className="w-full px-4 py-2 rounded-xl bg-white border border-[#E7E0D5] text-xs text-[#1C3829] focus:outline-none focus:border-[#C5A880]"
+                      type="file"
+                      ref={coverFileInputRef}
+                      onChange={(e) => {
+                        if (e.target.files?.[0]) handleFileUpload(e.target.files[0], 'cover');
+                      }}
+                      accept="image/*"
+                      className="hidden"
                     />
 
-                    {/* Presets */}
-                    <div className="pt-2 flex flex-wrap gap-2">
-                      {IMAGE_PRESETS.map((preset) => (
-                        <button
-                          key={preset.label}
-                          type="button"
-                          onClick={() => setFormCoverImage(preset.url)}
-                          className={`px-3 py-1 rounded-full text-[11px] font-medium transition-colors border ${
-                            formCoverImage === preset.url
-                              ? 'bg-[#1C3829] text-[#FAF8F5] border-[#1C3829]'
-                              : 'bg-white text-stone-700 border-[#E7E0D5] hover:border-[#C5A880]'
-                          }`}
-                        >
-                          {preset.label}
-                        </button>
-                      ))}
+                    {/* Upload Action Row */}
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                      <button
+                        type="button"
+                        onClick={() => coverFileInputRef.current?.click()}
+                        disabled={isUploadingCover}
+                        className="px-5 py-2.5 rounded-xl bg-[#1C3829] hover:bg-[#12241A] text-[#FAF8F5] text-xs font-semibold uppercase tracking-wider flex items-center justify-center space-x-2 transition-all shadow-xs cursor-pointer disabled:opacity-60 shrink-0"
+                      >
+                        {isUploadingCover ? (
+                          <>
+                            <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                            <span>Uploading Image...</span>
+                          </>
+                        ) : (
+                          <>
+                            <Upload className="w-3.5 h-3.5 text-[#C5A880]" />
+                            <span>Upload Cover Image</span>
+                          </>
+                        )}
+                      </button>
+
+                      <div className="relative flex-1">
+                        <input
+                          type="text"
+                          value={formCoverImage}
+                          onChange={(e) => setFormCoverImage(e.target.value)}
+                          placeholder="or paste custom image URL (https://...)"
+                          className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#E7E0D5] text-xs text-[#1C3829] focus:outline-none focus:border-[#C5A880]"
+                        />
+                      </div>
                     </div>
 
+                    {/* Presets */}
+                    <div className="space-y-1.5 pt-1">
+                      <span className="text-[10px] font-semibold text-[#68726B] uppercase tracking-wider block">
+                        Or Pick Authentic Photography Presets:
+                      </span>
+                      <div className="flex flex-wrap gap-2">
+                        {IMAGE_PRESETS.map((preset) => (
+                          <button
+                            key={preset.label}
+                            type="button"
+                            onClick={() => setFormCoverImage(preset.url)}
+                            className={`px-3 py-1 rounded-full text-[11px] font-medium transition-colors border cursor-pointer ${
+                              formCoverImage === preset.url
+                                ? 'bg-[#1C3829] text-[#FAF8F5] border-[#1C3829]'
+                                : 'bg-white text-stone-700 border-[#E7E0D5] hover:border-[#C5A880]'
+                            }`}
+                          >
+                            {preset.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Cover Preview */}
                     {formCoverImage && (
-                      <div className="pt-2 relative h-36 rounded-xl overflow-hidden border border-[#E7E0D5] bg-stone-100">
+                      <div className="pt-2 relative h-48 rounded-xl overflow-hidden border border-[#E7E0D5] bg-stone-100 group">
                         <img
                           src={formCoverImage}
                           alt="Cover Preview"
                           className="w-full h-full object-cover"
                         />
+                        <button
+                          type="button"
+                          onClick={() => setFormCoverImage('')}
+                          className="absolute top-3 right-3 p-1.5 rounded-full bg-black/60 text-white hover:bg-black/80 transition-colors"
+                          title="Remove Cover Photo"
+                        >
+                          <X className="w-3.5 h-3.5" />
+                        </button>
                       </div>
                     )}
                   </div>
 
-                  {/* Author Presets & Fields */}
-                  <div className="p-5 rounded-2xl bg-[#FAF8F5] border border-[#E7E0D5] space-y-3">
-                    <label className="text-xs font-semibold text-[#1C3829] uppercase tracking-wider flex items-center space-x-1.5">
-                      <User className="w-3.5 h-3.5 text-[#C5A880]" />
-                      <span>Author Details</span>
-                    </label>
-
-                    {/* Preset Author Buttons */}
-                    <div className="flex flex-wrap gap-2 pb-1">
-                      {AUTHOR_PRESETS.map((author) => (
-                        <button
-                          key={author.name}
-                          type="button"
-                          onClick={() => {
-                            setFormAuthorName(author.name);
-                            setFormAuthorRole(author.role);
-                            setFormAuthorAvatar(author.avatar);
-                          }}
-                          className={`px-3 py-1 rounded-full text-[11px] font-medium transition-colors border ${
-                            formAuthorName === author.name
-                              ? 'bg-[#1C3829] text-[#FAF8F5] border-[#1C3829]'
-                              : 'bg-white text-stone-700 border-[#E7E0D5] hover:border-[#C5A880]'
-                          }`}
-                        >
-                          {author.name}
-                        </button>
-                      ))}
+                  {/* Author Presets & Fields with Avatar Upload */}
+                  <div className="p-5 rounded-2xl bg-[#FAF8F5] border border-[#E7E0D5] space-y-4">
+                    <div className="flex items-center justify-between">
+                      <label className="text-xs font-semibold text-[#1C3829] uppercase tracking-wider flex items-center space-x-1.5">
+                        <User className="w-3.5 h-3.5 text-[#C5A880]" />
+                        <span>Author Details &amp; Avatar</span>
+                      </label>
+                      <span className="text-[11px] text-[#68726B]">
+                        Defaults to hotel avatar if not uploaded
+                      </span>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <input
-                        type="text"
-                        value={formAuthorName}
-                        onChange={(e) => setFormAuthorName(e.target.value)}
-                        placeholder="Author Name"
-                        className="px-3.5 py-2 rounded-xl bg-white border border-[#E7E0D5] text-xs text-[#1C3829]"
-                      />
-                      <input
-                        type="text"
-                        value={formAuthorRole}
-                        onChange={(e) => setFormAuthorRole(e.target.value)}
-                        placeholder="Role / Title (e.g. Chief Concierge)"
-                        className="px-3.5 py-2 rounded-xl bg-white border border-[#E7E0D5] text-xs text-[#1C3829]"
-                      />
+                    {/* Hidden Avatar File Input */}
+                    <input
+                      type="file"
+                      ref={avatarFileInputRef}
+                      onChange={(e) => {
+                        if (e.target.files?.[0]) handleFileUpload(e.target.files[0], 'avatar');
+                      }}
+                      accept="image/*"
+                      className="hidden"
+                    />
+
+                    {/* Avatar Upload + Preview Card */}
+                    <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 p-4 bg-white rounded-xl border border-[#E7E0D5]">
+                      <div className="relative shrink-0">
+                        <img
+                          src={formAuthorAvatar || '/images/default-avatar.svg'}
+                          alt="Author Avatar"
+                          className="w-16 h-16 rounded-full object-cover border-2 border-[#C5A880]/80 shadow-xs bg-[#14281D]"
+                        />
+                        {(!formAuthorAvatar || formAuthorAvatar === '/images/default-avatar.svg') && (
+                          <span className="absolute -bottom-1 -right-1 px-1.5 py-0.5 rounded-full bg-[#1C3829] text-[9px] text-[#DFCAA8] font-bold border border-[#C5A880]/40">
+                            Default
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="space-y-2 flex-1 text-center sm:text-left">
+                        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                          <button
+                            type="button"
+                            onClick={() => avatarFileInputRef.current?.click()}
+                            disabled={isUploadingAvatar}
+                            className="px-3.5 py-2 rounded-xl bg-[#1C3829] hover:bg-[#12241A] text-[#FAF8F5] text-xs font-semibold uppercase tracking-wider flex items-center space-x-1.5 shadow-xs cursor-pointer disabled:opacity-60"
+                          >
+                            {isUploadingAvatar ? (
+                              <>
+                                <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                <span>Uploading...</span>
+                              </>
+                            ) : (
+                              <>
+                                <Upload className="w-3.5 h-3.5 text-[#C5A880]" />
+                                <span>Upload Author Photo</span>
+                              </>
+                            )}
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => setFormAuthorAvatar('/images/default-avatar.svg')}
+                            className="px-3.5 py-2 rounded-xl bg-[#FAF8F5] hover:bg-stone-200 border border-[#E7E0D5] text-stone-700 text-xs font-medium transition-colors cursor-pointer"
+                          >
+                            Use Default Avatar
+                          </button>
+                        </div>
+
+                        <p className="text-[11px] text-[#68726B] font-light">
+                          Upload a staff or author portrait from your computer, or leave as default.
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Preset Author Buttons */}
+                    <div className="space-y-1.5 pt-1">
+                      <span className="text-[10px] font-semibold text-[#68726B] uppercase tracking-wider block">
+                        Or Pick Team Preset:
+                      </span>
+                      <div className="flex flex-wrap gap-2">
+                        {AUTHOR_PRESETS.map((author) => (
+                          <button
+                            key={author.name}
+                            type="button"
+                            onClick={() => {
+                              setFormAuthorName(author.name);
+                              setFormAuthorRole(author.role);
+                              setFormAuthorAvatar(author.avatar);
+                            }}
+                            className={`px-3 py-1 rounded-full text-[11px] font-medium transition-colors border cursor-pointer ${
+                              formAuthorName === author.name
+                                ? 'bg-[#1C3829] text-[#FAF8F5] border-[#1C3829]'
+                                : 'bg-white text-stone-700 border-[#E7E0D5] hover:border-[#C5A880]'
+                            }`}
+                          >
+                            {author.name}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                      <div className="space-y-1">
+                        <label className="text-[10px] font-semibold text-[#68726B] uppercase">Author Name</label>
+                        <input
+                          type="text"
+                          value={formAuthorName}
+                          onChange={(e) => setFormAuthorName(e.target.value)}
+                          placeholder="Author Name"
+                          className="w-full px-3.5 py-2 rounded-xl bg-white border border-[#E7E0D5] text-xs text-[#1C3829]"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <label className="text-[10px] font-semibold text-[#68726B] uppercase">Role / Title</label>
+                        <input
+                          type="text"
+                          value={formAuthorRole}
+                          onChange={(e) => setFormAuthorRole(e.target.value)}
+                          placeholder="Role / Title (e.g. Chief Concierge)"
+                          className="w-full px-3.5 py-2 rounded-xl bg-white border border-[#E7E0D5] text-xs text-[#1C3829]"
+                        />
+                      </div>
                     </div>
                   </div>
 
