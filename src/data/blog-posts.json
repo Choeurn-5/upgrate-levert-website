@@ -1,5 +1,29 @@
 [
   {
+    "id": "post-1790738051634",
+    "slug": "fagdvfdsvcsdac",
+    "title": "fagdvfdsvcsdac",
+    "excerpt": "fdsgaedfe",
+    "content": "## Introduction\n\nWrite your inspiring story here...\n\n### Key Highlights\n* Highlight point one\n* Highlight point two\n\n> \"A memorable quote from a guest or hotel concierge.\"\n\n### Recommendations for Travelers\nPractical guidance for staying at Le Vert Angkor Hotel.\n\n\nfdasfaweef",
+    "coverImage": "https://res.cloudinary.com/xhjr3zxl/image/upload/v1790738094/le-vert-angkor/blog/etomjgcv9lnzzkjl78zv.jpg",
+    "category": "Temple Guides",
+    "tags": [
+      "Angkor Wat",
+      "Siem Reap",
+      "Travel Tips"
+    ],
+    "author": {
+      "name": "fdrgre",
+      "role": "Chief Concierge & Heritage Specialist",
+      "avatar": "https://res.cloudinary.com/xhjr3zxl/image/upload/v1790738030/le-vert-angkor/blog/hdhuo9vxhqtfeqd1gerq.jpg"
+    },
+    "publishedAt": "2026-09-30",
+    "readTimeMinutes": 5,
+    "isFeatured": true,
+    "status": "published",
+    "updatedAt": "2026-09-30T03:14:56.030Z"
+  },
+  {
     "id": "post-1",
     "slug": "angkor-wat-sunrise-guide-secrets",
     "title": "The Connoisseur’s Guide to Angkor Wat Sunrise: Secrets for an Unforgettable Dawn",
@@ -20,7 +44,7 @@
     },
     "publishedAt": "2026-03-20",
     "readTimeMinutes": 6,
-    "isFeatured": true,
+    "isFeatured": false,
     "status": "published"
   },
   {

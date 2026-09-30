@@ -45,9 +45,47 @@ export function GlobalProvider({ children }: { children: React.ReactNode }) {
   const [isLoadingWp, setIsLoadingWp] = useState(false);
   const [lastSyncedTime, setLastSyncedTime] = useState<Date | null>(null);
 
-  // Hero Configuration State (Owner-replaceable)
-  const [heroConfigs, setHeroConfigs] = useState<Record<string, HeroConfig>>(HERO_CONFIGS);
+  // Hero Configuration State (Owner-replaceable & persistent)
+  const [heroConfigs, setHeroConfigs] = useState<Record<string, HeroConfig>>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const saved = localStorage.getItem('levert_hero_configs');
+        if (saved) return { ...HERO_CONFIGS, ...JSON.parse(saved) };
+      } catch {}
+    }
+    return HERO_CONFIGS;
+  });
   const [isHeroManagerOpen, setIsHeroManagerOpen] = useState(false);
+
+  // Sync Hero configs from server API
+  useEffect(() => {
+    let isMounted = true;
+    async function loadHeroConfigs() {
+      try {
+        const res = await fetch('/api/hero');
+        if (res.ok) {
+          const serverConfigs = await res.json();
+          if (serverConfigs && typeof serverConfigs === 'object' && isMounted) {
+            setHeroConfigs((prev) => {
+              const merged = { ...prev, ...serverConfigs };
+              if (typeof window !== 'undefined') {
+                try {
+                  localStorage.setItem('levert_hero_configs', JSON.stringify(merged));
+                } catch {}
+              }
+              return merged;
+            });
+          }
+        }
+      } catch (err) {
+        console.warn('Hero config fetch fallback:', err);
+      }
+    }
+    loadHeroConfigs();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   // Booking Modal State
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
@@ -121,12 +159,30 @@ export function GlobalProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  // Update Hero Config
-  const handleUpdateHero = (pageKey: string, newConfig: HeroConfig) => {
-    setHeroConfigs((prev) => ({
-      ...prev,
-      [pageKey]: newConfig,
-    }));
+  // Update Hero Config (persists to state, localStorage, and /api/hero)
+  const handleUpdateHero = async (pageKey: string, newConfig: HeroConfig) => {
+    setHeroConfigs((prev) => {
+      const updated = {
+        ...prev,
+        [pageKey]: newConfig,
+      };
+      if (typeof window !== 'undefined') {
+        try {
+          localStorage.setItem('levert_hero_configs', JSON.stringify(updated));
+        } catch {}
+      }
+      return updated;
+    });
+
+    try {
+      await fetch('/api/hero', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pageKey, config: newConfig }),
+      });
+    } catch (err) {
+      console.error('Failed to persist hero config to server:', err);
+    }
   };
 
   // Manual Trigger to Immediately Sync all Content from WordPress

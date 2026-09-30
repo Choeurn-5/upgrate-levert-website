@@ -27,6 +27,8 @@ import {
 } from 'lucide-react';
 import { BlogPost, AppRoute } from '../types';
 import { BLOG_CATEGORIES, INITIAL_BLOG_POSTS } from '../data/blogData';
+import { AdminCategoryManager } from '../components/admin/AdminCategoryManager';
+import { AdminHeroManager } from '../components/admin/AdminHeroManager';
 
 interface AdminBlogViewProps {
   onNavigate: (route: AppRoute, slug?: string) => void;
@@ -125,6 +127,21 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
   const [formIsFeatured, setFormIsFeatured] = useState(false);
   const [formStatus, setFormStatus] = useState<'published' | 'draft'>('published');
 
+  // Admin Navigation Section (posts | categories | hero)
+  const [adminSection, setAdminSection] = useState<'posts' | 'categories' | 'hero'>('posts');
+
+  // Categories State
+  const [categories, setCategories] = useState<string[]>([
+    'Temple Guides',
+    'Siem Reap Insider',
+    'Khmer Gastronomy',
+    'Wellness & Retreat',
+    'Hotel News & Stories',
+  ]);
+  const [inlineNewCategory, setInlineNewCategory] = useState(false);
+  const [inlineCategoryInput, setInlineCategoryInput] = useState('');
+  const [isCreatingCategoryInline, setIsCreatingCategoryInline] = useState(false);
+
   // File Upload State & Refs
   const [isUploadingCover, setIsUploadingCover] = useState(false);
   const [isUploadingAvatar, setIsUploadingAvatar] = useState(false);
@@ -140,6 +157,49 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
       }
     }
   }, []);
+
+  // Fetch all categories from API
+  const fetchCategories = async () => {
+    try {
+      const res = await fetch('/api/blog/categories');
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data) && data.length > 0) {
+          setCategories(data);
+        }
+      }
+    } catch (err) {
+      console.warn('Failed to fetch categories:', err);
+    }
+  };
+
+  // Inline category creation in editor
+  const handleCreateCategoryInline = async () => {
+    const trimmed = inlineCategoryInput.trim();
+    if (!trimmed) return;
+    setIsCreatingCategoryInline(true);
+    try {
+      const res = await fetch('/api/blog/categories', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: trimmed }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        showToast('success', `Category "${trimmed}" added!`);
+        await fetchCategories();
+        setFormCategory(trimmed);
+        setInlineCategoryInput('');
+        setInlineNewCategory(false);
+      } else {
+        showToast('error', data.error || 'Failed to add category');
+      }
+    } catch {
+      showToast('error', 'Error creating category');
+    } finally {
+      setIsCreatingCategoryInline(false);
+    }
+  };
 
   // Fetch all posts (including drafts)
   const fetchPosts = async () => {
@@ -162,6 +222,7 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
   useEffect(() => {
     if (isAuthenticated) {
       fetchPosts();
+      fetchCategories();
     }
   }, [isAuthenticated]);
 
@@ -544,8 +605,66 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
 
       {/* Main Admin Content Container */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-        {/* Top Summary Metrics */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        {/* Navigation Section Tabs (Articles | Categories | Hero Banners) */}
+        <div className="flex flex-wrap items-center gap-2 border-b border-[#E7E0D5] pb-4">
+          <button
+            type="button"
+            onClick={() => setAdminSection('posts')}
+            className={`flex items-center space-x-2 px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
+              adminSection === 'posts'
+                ? 'bg-[#1C3829] text-white shadow-sm'
+                : 'bg-white text-[#68726B] hover:text-[#1C3829] border border-[#E7E0D5]'
+            }`}
+          >
+            <FileText className="w-3.5 h-3.5" />
+            <span>Articles ({posts.length})</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setAdminSection('categories')}
+            className={`flex items-center space-x-2 px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
+              adminSection === 'categories'
+                ? 'bg-[#1C3829] text-white shadow-sm'
+                : 'bg-white text-[#68726B] hover:text-[#1C3829] border border-[#E7E0D5]'
+            }`}
+          >
+            <Tag className="w-3.5 h-3.5" />
+            <span>Categories ({categories.length})</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setAdminSection('hero')}
+            className={`flex items-center space-x-2 px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
+              adminSection === 'hero'
+                ? 'bg-[#1C3829] text-white shadow-sm'
+                : 'bg-white text-[#68726B] hover:text-[#1C3829] border border-[#E7E0D5]'
+            }`}
+          >
+            <ImageIcon className="w-3.5 h-3.5" />
+            <span>Hero &amp; Page Banners</span>
+          </button>
+        </div>
+
+        {/* View Component based on Active Section */}
+        {adminSection === 'categories' && (
+          <AdminCategoryManager
+            categories={categories}
+            posts={posts}
+            onRefreshCategories={fetchCategories}
+            showToast={showToast}
+          />
+        )}
+
+        {adminSection === 'hero' && (
+          <AdminHeroManager showToast={showToast} />
+        )}
+
+        {adminSection === 'posts' && (
+          <>
+            {/* Top Summary Metrics */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           <div className="bg-white p-5 rounded-2xl border border-[#E7E0D5] shadow-xs space-y-1">
             <span className="text-[11px] font-semibold uppercase tracking-wider text-[#68726B]">
               Total Articles
@@ -578,7 +697,7 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
               Categories
             </span>
             <div className="text-2xl font-bold font-luxury-serif text-[#1C3829]">
-              {BLOG_CATEGORIES.length - 1}
+              {categories.length}
             </div>
           </div>
         </div>
@@ -609,8 +728,8 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
               onChange={(e) => setCategoryFilter(e.target.value)}
               className="px-3 py-2 rounded-xl bg-[#FAF8F5] border border-[#E7E0D5] text-xs font-medium text-[#1C3829] focus:outline-none focus:border-[#C5A880]"
             >
-              <option value="All">All Categories</option>
-              {BLOG_CATEGORIES.filter((c) => c !== 'All Stories').map((c) => (
+              <option value="All">All Categories ({categories.length})</option>
+              {categories.map((c) => (
                 <option key={c} value={c}>
                   {c}
                 </option>
@@ -772,6 +891,8 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
             </div>
           )}
         </div>
+          </>
+        )}
       </main>
 
       {/* ---------------------------------------------------- */}
@@ -863,20 +984,66 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="text-xs font-semibold text-[#1C3829] uppercase tracking-wider">
-                        Category
-                      </label>
-                      <select
-                        value={formCategory}
-                        onChange={(e) => setFormCategory(e.target.value)}
-                        className="w-full px-4 py-2 rounded-xl border border-[#E7E0D5] text-xs text-[#1C3829] focus:outline-none focus:border-[#C5A880]"
-                      >
-                        {BLOG_CATEGORIES.filter((c) => c !== 'All Stories').map((c) => (
-                          <option key={c} value={c}>
-                            {c}
-                          </option>
-                        ))}
-                      </select>
+                      <div className="flex items-center justify-between">
+                        <label className="text-xs font-semibold text-[#1C3829] uppercase tracking-wider">
+                          Category *
+                        </label>
+                        <button
+                          type="button"
+                          onClick={() => setInlineNewCategory(!inlineNewCategory)}
+                          className="text-[11px] font-semibold text-[#C5A880] hover:text-[#1C3829] flex items-center space-x-1 cursor-pointer"
+                        >
+                          <Plus className="w-3 h-3" />
+                          <span>{inlineNewCategory ? 'Choose Existing' : '+ New Category'}</span>
+                        </button>
+                      </div>
+
+                      {!inlineNewCategory ? (
+                        <select
+                          value={formCategory}
+                          onChange={(e) => {
+                            if (e.target.value === '__CREATE_NEW__') {
+                              setInlineNewCategory(true);
+                            } else {
+                              setFormCategory(e.target.value);
+                            }
+                          }}
+                          className="w-full px-4 py-2 rounded-xl border border-[#E7E0D5] text-xs text-[#1C3829] focus:outline-none focus:border-[#C5A880]"
+                        >
+                          {categories.map((c) => (
+                            <option key={c} value={c}>
+                              {c}
+                            </option>
+                          ))}
+                          <option value="__CREATE_NEW__">+ Create New Category...</option>
+                        </select>
+                      ) : (
+                        <div className="flex items-center space-x-2">
+                          <input
+                            type="text"
+                            value={inlineCategoryInput}
+                            onChange={(e) => setInlineCategoryInput(e.target.value)}
+                            placeholder="Enter category name (e.g. Hidden Gems)"
+                            className="flex-1 px-4 py-2 rounded-xl border border-[#E7E0D5] text-xs text-[#1C3829] focus:outline-none focus:border-[#C5A880]"
+                            autoFocus
+                          />
+                          <button
+                            type="button"
+                            disabled={!inlineCategoryInput.trim() || isCreatingCategoryInline}
+                            onClick={handleCreateCategoryInline}
+                            className="px-3.5 py-2 rounded-xl bg-[#1C3829] text-white text-xs font-semibold hover:bg-[#2D5540] disabled:opacity-50 cursor-pointer shrink-0"
+                          >
+                            {isCreatingCategoryInline ? 'Adding...' : 'Add'}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setInlineNewCategory(false)}
+                            className="p-2 rounded-xl border border-[#E7E0D5] text-stone-500 hover:text-stone-800"
+                          >
+                            <X className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </div>
 

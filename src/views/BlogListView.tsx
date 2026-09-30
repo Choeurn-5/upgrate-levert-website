@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Search, Calendar, Clock, ArrowRight, User, Tag, Sparkles, Compass, MessageCircle, X } from 'lucide-react';
 import { Hero } from '../components/Hero';
@@ -21,6 +21,29 @@ export const BlogListView: React.FC<BlogListViewProps> = ({
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All Stories');
   const [searchQuery, setSearchQuery] = useState('');
+  const [categoriesList, setCategoriesList] = useState<string[]>(['All Stories', ...BLOG_CATEGORIES.filter((c) => c !== 'All Stories')]);
+
+  // Dynamically load categories from API and posts
+  useEffect(() => {
+    async function loadCategories() {
+      try {
+        const res = await fetch('/api/blog/categories');
+        if (res.ok) {
+          const apiCats = await res.json();
+          if (Array.isArray(apiCats)) {
+            const postCats = posts.map((p) => p.category).filter(Boolean);
+            const allUnique = Array.from(new Set(['All Stories', ...apiCats, ...postCats]));
+            setCategoriesList(allUnique);
+            return;
+          }
+        }
+      } catch {}
+      const postCats = posts.map((p) => p.category).filter(Boolean);
+      const allUnique = Array.from(new Set(['All Stories', ...BLOG_CATEGORIES.filter((c) => c !== 'All Stories'), ...postCats]));
+      setCategoriesList(allUnique);
+    }
+    loadCategories();
+  }, [posts]);
 
   // Filter posts based on search and category
   const filteredPosts = useMemo(() => {
@@ -93,7 +116,7 @@ export const BlogListView: React.FC<BlogListViewProps> = ({
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8 border-b border-[#E7E0D5]">
           {/* Categories Tab */}
           <div className="flex items-center space-x-2 overflow-x-auto pb-2 scrollbar-none">
-            {BLOG_CATEGORIES.map((cat) => {
+            {categoriesList.map((cat) => {
               const isSelected = selectedCategory === cat;
               return (
                 <button

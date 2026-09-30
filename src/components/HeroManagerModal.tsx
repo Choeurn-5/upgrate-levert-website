@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, Check, Image as ImageIcon, Sparkles, RefreshCw, Database, CheckCircle2, BedDouble, Compass, Utensils, Heart } from 'lucide-react';
+import { X, Check, Image as ImageIcon, Sparkles, RefreshCw, Database, CheckCircle2, BedDouble, Compass, Utensils, Heart, Upload } from 'lucide-react';
 import { HERO_CONFIGS } from '../lib/site-settings';
 import { HeroConfig } from '../types';
 
@@ -71,8 +71,36 @@ export const HeroManagerModal: React.FC<HeroManagerModalProps> = ({
   const [customUrl, setCustomUrl] = useState('');
   const [customTitle, setCustomTitle] = useState('');
   const [customSubtitle, setCustomSubtitle] = useState('');
+  const [isUploading, setIsUploading] = useState(false);
+  const fileInputRef = React.useRef<HTMLInputElement | null>(null);
 
   const targetConfig = HERO_CONFIGS[selectedPage] || currentHero;
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setIsUploading(true);
+    const formData = new FormData();
+    formData.append('file', file);
+    try {
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      });
+      const data = await res.json();
+      if (res.ok && data.url) {
+        onUpdateHero(selectedPage, {
+          ...targetConfig,
+          imageUrl: data.url,
+        });
+      }
+    } catch (err) {
+      console.error('Upload failed:', err);
+    } finally {
+      setIsUploading(false);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  };
 
   const handleSelectPreset = (url: string) => {
     onUpdateHero(selectedPage, {
@@ -236,12 +264,41 @@ export const HeroManagerModal: React.FC<HeroManagerModalProps> = ({
                 </div>
               </div>
 
-              {/* Custom URL Input */}
-              <form onSubmit={handleApplyCustom} className="pt-2 border-t border-[#E7E0D5] space-y-3">
-                <label className="block text-xs font-semibold text-[#1C3829] uppercase tracking-wider">
-                  Or Paste Custom Image URL / WordPress Media URL:
-                </label>
-                <div className="flex gap-2">
+              {/* Upload to Cloudinary & Custom URL Input */}
+              <div className="pt-2 border-t border-[#E7E0D5] space-y-3">
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleFileUpload}
+                  accept="image/*"
+                  className="hidden"
+                />
+
+                <div className="flex items-center justify-between">
+                  <label className="block text-xs font-semibold text-[#1C3829] uppercase tracking-wider">
+                    Upload New Image or Paste URL:
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    disabled={isUploading}
+                    className="px-3.5 py-1.5 rounded-xl bg-[#1C3829] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#2D5540] flex items-center space-x-1.5 shadow-xs transition-transform active:scale-95 disabled:opacity-50 cursor-pointer"
+                  >
+                    {isUploading ? (
+                      <>
+                        <RefreshCw className="w-3.5 h-3.5 animate-spin text-[#C5A880]" />
+                        <span>Uploading...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Upload className="w-3.5 h-3.5 text-[#C5A880]" />
+                        <span>Upload Image (Cloudinary)</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                <form onSubmit={handleApplyCustom} className="flex gap-2">
                   <input
                     type="url"
                     placeholder="https://.../hotel-hero.jpg"
@@ -256,8 +313,8 @@ export const HeroManagerModal: React.FC<HeroManagerModalProps> = ({
                   >
                     Apply
                   </button>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
           )}
 
