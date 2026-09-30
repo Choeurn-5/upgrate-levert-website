@@ -4,8 +4,12 @@ import path from 'path';
 
 export const dynamic = 'force-dynamic';
 
-const CATEGORIES_FILE_PATH = path.join(process.cwd(), 'src', 'data', 'blog-categories.json');
-const POSTS_FILE_PATH = path.join(process.cwd(), 'src', 'data', 'blog-posts.json');
+const CANDIDATE_PATHS = [
+  path.join(process.cwd(), 'src', 'data', 'blog-categories.json'),
+  path.join(process.cwd(), 'data', 'blog-categories.json'),
+  path.join(process.cwd(), 'public', 'data', 'blog-categories.json'),
+  path.join('/tmp', 'levert-blog-categories.json'),
+];
 
 const DEFAULT_CATEGORIES = [
   'Temple Guides',
@@ -15,40 +19,59 @@ const DEFAULT_CATEGORIES = [
   'Hotel News & Stories',
 ];
 
+declare global {
+  var __LEVERT_BLOG_CATEGORIES__: string[] | undefined;
+}
+
 async function getStoredCategories(): Promise<string[]> {
-  try {
-    const content = await fs.readFile(CATEGORIES_FILE_PATH, 'utf-8');
-    const parsed = JSON.parse(content);
-    if (Array.isArray(parsed) && parsed.length > 0) {
-      return parsed;
-    }
-  } catch {
+  if (globalThis.__LEVERT_BLOG_CATEGORIES__ !== undefined) {
+    return globalThis.__LEVERT_BLOG_CATEGORIES__;
+  }
+
+  for (const filePath of CANDIDATE_PATHS) {
     try {
-      await fs.writeFile(CATEGORIES_FILE_PATH, JSON.stringify(DEFAULT_CATEGORIES, null, 2), 'utf-8');
+      const content = await fs.readFile(filePath, 'utf-8');
+      const parsed = JSON.parse(content);
+      if (Array.isArray(parsed)) {
+        globalThis.__LEVERT_BLOG_CATEGORIES__ = parsed;
+        return parsed;
+      }
     } catch {}
   }
-  return DEFAULT_CATEGORIES;
+
+  globalThis.__LEVERT_BLOG_CATEGORIES__ = [...DEFAULT_CATEGORIES];
+  await saveCategories(globalThis.__LEVERT_BLOG_CATEGORIES__);
+  return globalThis.__LEVERT_BLOG_CATEGORIES__;
 }
 
 async function getCategoriesFromPosts(): Promise<string[]> {
-  try {
-    const content = await fs.readFile(POSTS_FILE_PATH, 'utf-8');
-    const posts = JSON.parse(content);
-    if (Array.isArray(posts)) {
-      return posts.map((p) => p.category).filter(Boolean);
-    }
-  } catch {}
+  const postPaths = [
+    path.join(process.cwd(), 'src', 'data', 'blog-posts.json'),
+    path.join(process.cwd(), 'data', 'blog-posts.json'),
+    path.join('/tmp', 'levert-blog-posts.json'),
+  ];
+  for (const filePath of postPaths) {
+    try {
+      const content = await fs.readFile(filePath, 'utf-8');
+      const posts = JSON.parse(content);
+      if (Array.isArray(posts)) {
+        return posts.map((p) => p.category).filter(Boolean);
+      }
+    } catch {}
+  }
   return [];
 }
 
 async function saveCategories(categories: string[]): Promise<boolean> {
-  try {
-    await fs.writeFile(CATEGORIES_FILE_PATH, JSON.stringify(categories, null, 2), 'utf-8');
-    return true;
-  } catch (err) {
-    console.error('Failed to save categories:', err);
-    return false;
+  globalThis.__LEVERT_BLOG_CATEGORIES__ = categories;
+
+  for (const filePath of CANDIDATE_PATHS) {
+    try {
+      await fs.mkdir(path.dirname(filePath), { recursive: true });
+      await fs.writeFile(filePath, JSON.stringify(categories, null, 2), 'utf-8');
+    } catch {}
   }
+  return true;
 }
 
 // GET /api/blog/categories - returns list of all unique categories

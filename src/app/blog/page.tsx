@@ -20,7 +20,14 @@ export default function BlogPage() {
         if (res.ok) {
           const data = await res.json();
           if (Array.isArray(data) && isMounted) {
-            setPosts(data);
+            let deletedIds: string[] = [];
+            if (typeof window !== 'undefined') {
+              try {
+                deletedIds = JSON.parse(localStorage.getItem('levert_deleted_post_ids') || '[]');
+              } catch {}
+            }
+            const activePosts = data.filter((p: BlogPost) => !deletedIds.includes(p.id));
+            setPosts(activePosts);
           }
         }
       } catch (err) {

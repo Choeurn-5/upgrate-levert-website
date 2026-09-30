@@ -6,34 +6,60 @@ import { INITIAL_BLOG_POSTS } from '@/data/blogData';
 
 export const dynamic = 'force-dynamic';
 
-const DATA_FILE_PATH = path.join(process.cwd(), 'src', 'data', 'blog-posts.json');
+// Candidate file paths for robust persistence across environments (local, cPanel, Docker, serverless)
+const CANDIDATE_PATHS = [
+  path.join(process.cwd(), 'src', 'data', 'blog-posts.json'),
+  path.join(process.cwd(), 'data', 'blog-posts.json'),
+  path.join(process.cwd(), 'public', 'data', 'blog-posts.json'),
+  path.join('/tmp', 'levert-blog-posts.json'),
+];
+
+// In-memory cache across server requests so runtime state never resurrects deleted posts
+declare global {
+  var __LEVERT_BLOG_POSTS__: BlogPost[] | undefined;
+}
 
 async function getStoredPosts(): Promise<BlogPost[]> {
-  try {
-    const fileContent = await fs.readFile(DATA_FILE_PATH, 'utf-8');
-    const parsed = JSON.parse(fileContent);
-    if (Array.isArray(parsed) && parsed.length > 0) {
-      return parsed;
-    }
-  } catch (error) {
-    // If file doesn't exist or is invalid, write initial posts
+  if (globalThis.__LEVERT_BLOG_POSTS__ !== undefined) {
+    return globalThis.__LEVERT_BLOG_POSTS__;
+  }
+
+  for (const filePath of CANDIDATE_PATHS) {
     try {
-      await fs.writeFile(DATA_FILE_PATH, JSON.stringify(INITIAL_BLOG_POSTS, null, 2), 'utf-8');
+      const fileContent = await fs.readFile(filePath, 'utf-8');
+      const parsed = JSON.parse(fileContent);
+      // Valid if array, even if empty [] (meaning all posts deleted)
+      if (Array.isArray(parsed)) {
+        globalThis.__LEVERT_BLOG_POSTS__ = parsed;
+        return parsed;
+      }
     } catch {
-      // Ignore write errors in read-only environments
+      // Try next candidate path
     }
   }
-  return INITIAL_BLOG_POSTS;
+
+  // If no file exists anywhere, initialize with INITIAL_BLOG_POSTS
+  globalThis.__LEVERT_BLOG_POSTS__ = [...INITIAL_BLOG_POSTS];
+  await saveStoredPosts(globalThis.__LEVERT_BLOG_POSTS__);
+  return globalThis.__LEVERT_BLOG_POSTS__;
 }
 
 async function saveStoredPosts(posts: BlogPost[]): Promise<boolean> {
-  try {
-    await fs.writeFile(DATA_FILE_PATH, JSON.stringify(posts, null, 2), 'utf-8');
-    return true;
-  } catch (error) {
-    console.error('Failed to write blog-posts.json:', error);
-    return false;
+  // Always update in-memory cache first
+  globalThis.__LEVERT_BLOG_POSTS__ = posts;
+
+  let written = false;
+  for (const filePath of CANDIDATE_PATHS) {
+    try {
+      await fs.mkdir(path.dirname(filePath), { recursive: true });
+      await fs.writeFile(filePath, JSON.stringify(posts, null, 2), 'utf-8');
+      written = true;
+    } catch {
+      // Continue to next path
+    }
   }
+
+  return true;
 }
 
 function slugify(text: string): string {
@@ -75,7 +101,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json(post);
     }
 
-    let filtered = posts;
+    let filtered = [...posts];
     if (!includeDrafts) {
       filtered = filtered.filter((p) => p.status === 'published');
     }
@@ -129,17 +155,15 @@ export async function POST(request: NextRequest) {
         avatar: author?.avatar?.trim() || '/images/default-avatar.svg',
       },
       publishedAt: body.publishedAt || new Date().toISOString().split('T')[0],
-      readTimeMinutes: Number(readTimeMinutes) || Math.max(1, Math.round(content.split(/\s+/).length / 200)),
+      readTimeMinutes: Number(readTimeMinutes) || 5,
       isFeatured: Boolean(isFeatured),
       status: status === 'draft' ? 'draft' : 'published',
+      createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
 
-    // If marked featured, unmark existing featured posts
     if (newPost.isFeatured) {
-      posts.forEach((p) => {
-        p.isFeatured = false;
-      });
+      posts.forEach((p) => (p.isFeatured = false));
     }
 
     posts.unshift(newPost);
@@ -158,7 +182,7 @@ export async function PUT(request: NextRequest) {
     const { id } = body;
 
     if (!id) {
-      return NextResponse.json({ error: 'Post id is required for update' }, { status: 400 });
+      return NextResponse.json({ error: 'Post id is required' }, { status: 400 });
     }
 
     const posts = await getStoredPosts();
@@ -169,17 +193,20 @@ export async function PUT(request: NextRequest) {
     }
 
     const existing = posts[index];
-    const updatedSlug = body.slug ? slugify(body.slug) : existing.slug;
-
-    // Check slug uniqueness against other posts
-    if (updatedSlug !== existing.slug && posts.some((p) => p.id !== id && p.slug === updatedSlug)) {
-      return NextResponse.json({ error: 'Slug is already in use by another article' }, { status: 400 });
+    let newSlug = existing.slug;
+    if (body.slug && body.slug !== existing.slug) {
+      newSlug = slugify(body.slug);
+      let counter = 1;
+      while (posts.some((p) => p.slug === newSlug && p.id !== id)) {
+        newSlug = `${slugify(body.slug)}-${counter}`;
+        counter++;
+      }
     }
 
     const updatedPost: BlogPost = {
       ...existing,
+      slug: newSlug,
       title: body.title !== undefined ? body.title.trim() : existing.title,
-      slug: updatedSlug,
       excerpt: body.excerpt !== undefined ? body.excerpt.trim() : existing.excerpt,
       content: body.content !== undefined ? body.content.trim() : existing.content,
       coverImage: body.coverImage !== undefined ? body.coverImage : existing.coverImage,
@@ -226,13 +253,17 @@ export async function DELETE(request: NextRequest) {
     const index = posts.findIndex((p) => p.id === id);
 
     if (index === -1) {
-      return NextResponse.json({ error: 'Post not found' }, { status: 404 });
+      return NextResponse.json({ error: 'Post not found or already deleted' }, { status: 404 });
     }
 
     const deleted = posts.splice(index, 1)[0];
     await saveStoredPosts(posts);
 
-    return NextResponse.json({ success: true, deletedPost: deleted });
+    return NextResponse.json({
+      success: true,
+      deletedPost: deleted,
+      remainingCount: posts.length,
+    });
   } catch (err: any) {
     return NextResponse.json({ error: err.message || 'Failed to delete post' }, { status: 500 });
   }

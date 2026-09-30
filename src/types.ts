@@ -163,6 +163,7 @@ export interface BlogPost {
   readTimeMinutes: number;
   isFeatured?: boolean;
   status: 'published' | 'draft';
+  createdAt?: string;
   updatedAt?: string;
 }
 

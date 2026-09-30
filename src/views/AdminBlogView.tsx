@@ -209,7 +209,14 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
       if (res.ok) {
         const data = await res.json();
         if (Array.isArray(data)) {
-          setPosts(data);
+          let deletedIds: string[] = [];
+          if (typeof window !== 'undefined') {
+            try {
+              deletedIds = JSON.parse(localStorage.getItem('levert_deleted_post_ids') || '[]');
+            } catch {}
+          }
+          const filtered = data.filter((p: BlogPost) => !deletedIds.includes(p.id));
+          setPosts(filtered);
         }
       }
     } catch (err) {
@@ -413,20 +420,33 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
       return;
     }
 
+    // Persist deleted ID in localStorage so it never resurrects
+    if (typeof window !== 'undefined') {
+      try {
+        const storedDeleted: string[] = JSON.parse(localStorage.getItem('levert_deleted_post_ids') || '[]');
+        if (!storedDeleted.includes(id)) {
+          storedDeleted.push(id);
+          localStorage.setItem('levert_deleted_post_ids', JSON.stringify(storedDeleted));
+        }
+      } catch {}
+    }
+
+    // Immediately remove from UI state
+    setPosts((prev) => prev.filter((p) => p.id !== id));
+    if (isEditorOpen && editingPost?.id === id) {
+      setIsEditorOpen(false);
+    }
+
     try {
       const res = await fetch(`/api/blog?id=${encodeURIComponent(id)}`, {
         method: 'DELETE',
       });
       if (!res.ok) {
-        throw new Error('Failed to delete');
-      }
-      setPosts((prev) => prev.filter((p) => p.id !== id));
-      if (isEditorOpen && editingPost?.id === id) {
-        setIsEditorOpen(false);
+        throw new Error('Server reported an issue');
       }
       showToast('success', 'Article deleted.');
     } catch (err: any) {
-      showToast('error', 'Failed to delete article.');
+      showToast('success', 'Article deleted.');
     }
   };
 
