@@ -27,7 +27,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
 }) => {
   const [activeAboutIndex, setActiveAboutIndex] = useState(0);
   const [activeDiningIndex, setActiveDiningIndex] = useState(0);
-  const featuredRooms = rooms.slice(0, 3);
+  // featuredRooms is removed since we show all rooms in the carousel
   const featuredTours = tours.slice(0, 2);
   const previewPhotos = GALLERY_PHOTOS.slice(0, 6);
 
@@ -307,16 +307,38 @@ export const HomeView: React.FC<HomeViewProps> = ({
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredRooms.map((room, i) => (
-              <RoomCard
-                key={room.slug}
-                room={room}
-                index={i}
-                onViewDetails={(slug) => onNavigate('/our-room/', slug)}
-                onBookNow={(slug) => onOpenBooking(slug)}
-              />
-            ))}
+          <style dangerouslySetInnerHTML={{ __html: `
+            @keyframes infinite-scroll {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            .animate-infinite-scroll {
+              display: flex;
+              width: max-content;
+              animation: infinite-scroll 45s linear infinite;
+            }
+            .animate-infinite-scroll:hover {
+              animation-play-state: paused;
+            }
+          `}} />
+
+          <div className="relative w-full overflow-hidden pb-8 -mx-4 px-4 sm:-mx-8 sm:px-8">
+            {/* Fade edges */}
+            <div className="absolute inset-y-0 left-0 w-8 sm:w-24 bg-gradient-to-r from-[#FDFBF8] to-transparent z-10 pointer-events-none" />
+            <div className="absolute inset-y-0 right-0 w-8 sm:w-24 bg-gradient-to-l from-[#FDFBF8] to-transparent z-10 pointer-events-none" />
+
+            <div className="animate-infinite-scroll gap-6 sm:gap-8">
+              {[...rooms, ...rooms].map((room, i) => (
+                <div key={`${room.slug}-${i}`} className="w-[85vw] sm:w-[360px] md:w-[400px] shrink-0 group/card-wrapper">
+                  <RoomCard
+                    room={room}
+                    index={i}
+                    onViewDetails={(slug) => onNavigate('/our-room/', slug)}
+                    onBookNow={(slug) => onOpenBooking(slug)}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
