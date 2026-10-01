@@ -3,10 +3,10 @@ import redis from '@/lib/redis';
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
-    const slug = params.slug;
+    const { slug } = await params;
     const views = await redis.get(`blog:views:${slug}`);
     
     return NextResponse.json({ views: views || 0 });
@@ -18,10 +18,10 @@ export async function GET(
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
-    const slug = params.slug;
+    const { slug } = await params;
     
     // Increment the view count in Redis
     const newViews = await redis.incr(`blog:views:${slug}`);
