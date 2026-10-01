@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import {
   ArrowLeft,
@@ -13,6 +13,7 @@ import {
   ExternalLink,
   ChevronRight,
   BookOpen,
+  Eye,
 } from 'lucide-react';
 import { BlogPost, AppRoute } from '../types';
 import { SITE_SETTINGS } from '../lib/site-settings';
@@ -29,6 +30,22 @@ export const BlogPostDetailView: React.FC<BlogPostDetailViewProps> = ({
   onNavigate,
 }) => {
   const [copied, setCopied] = useState(false);
+  const [viewCount, setViewCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    async function trackView() {
+      try {
+        const res = await fetch(`/api/blog/views/${post.slug}`, { method: 'POST' });
+        if (res.ok) {
+          const data = await res.json();
+          setViewCount(data.views);
+        }
+      } catch (error) {
+        console.error('Failed to track view', error);
+      }
+    }
+    trackView();
+  }, [post.slug]);
 
   const handleCopyLink = () => {
     if (typeof window !== 'undefined') {
@@ -256,6 +273,15 @@ export const BlogPostDetailView: React.FC<BlogPostDetailViewProps> = ({
                 <Clock className="w-4 h-4 text-[#C5A880]" />
                 <span>{post.readTimeMinutes} min read</span>
               </span>
+              {viewCount !== null && (
+                <>
+                  <span>•</span>
+                  <span className="flex items-center space-x-1.5 text-[#1C3829]">
+                    <Eye className="w-4 h-4 text-[#C5A880]" />
+                    <span>{viewCount} Views</span>
+                  </span>
+                </>
+              )}
             </div>
           </div>
 

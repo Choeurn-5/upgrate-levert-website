@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Search, Calendar, Clock, ArrowRight, User, Tag, Sparkles, Compass, MessageCircle, X } from 'lucide-react';
+import { Search, Calendar, Clock, ArrowRight, User, Tag, Sparkles, Compass, MessageCircle, X, Eye } from 'lucide-react';
 import { Hero } from '../components/Hero';
 import { HeroConfig, BlogPost, AppRoute } from '../types';
 import { BLOG_CATEGORIES } from '../data/blogData';
@@ -23,6 +23,7 @@ export const BlogListView: React.FC<BlogListViewProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [categoriesList, setCategoriesList] = useState<string[]>(['All Stories', ...BLOG_CATEGORIES.filter((c) => c !== 'All Stories')]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [viewCounts, setViewCounts] = useState<Record<string, number>>({});
   const POSTS_PER_PAGE = 6;
 
   // Reset page when filters change
@@ -41,15 +42,30 @@ export const BlogListView: React.FC<BlogListViewProps> = ({
             const postCats = posts.map((p) => p.category).filter(Boolean);
             const allUnique = Array.from(new Set(['All Stories', ...apiCats, ...postCats]));
             setCategoriesList(allUnique);
-            return;
           }
         }
-      } catch {}
+      } catch (err) {
+        // Fallback handled below
+      }
       const postCats = posts.map((p) => p.category).filter(Boolean);
       const allUnique = Array.from(new Set(['All Stories', ...BLOG_CATEGORIES.filter((c) => c !== 'All Stories'), ...postCats]));
       setCategoriesList(allUnique);
     }
+    
+    async function fetchViews() {
+      try {
+        const res = await fetch('/api/blog/views');
+        if (res.ok) {
+          const data = await res.json();
+          setViewCounts(data);
+        }
+      } catch (err) {
+        console.error('Failed to fetch views', err);
+      }
+    }
+    
     loadCategories();
+    fetchViews();
   }, [posts]);
 
   // Filter posts based on search and category
@@ -219,6 +235,15 @@ export const BlogListView: React.FC<BlogListViewProps> = ({
                     <Clock className="w-3.5 h-3.5 text-[#C5A880]" />
                     <span>{featuredPost.readTimeMinutes} min read</span>
                   </span>
+                  {viewCounts[featuredPost.slug] !== undefined && (
+                    <>
+                      <span>•</span>
+                      <span className="flex items-center space-x-1 text-[#1C3829]">
+                        <Eye className="w-3.5 h-3.5 text-[#C5A880]" />
+                        <span>{viewCounts[featuredPost.slug]} Views</span>
+                      </span>
+                    </>
+                  )}
                 </div>
 
                 <h2 className="font-luxury-serif text-2xl sm:text-3xl lg:text-4xl font-semibold text-[#1C3829] group-hover:text-[#2D5540] transition-colors leading-snug">
@@ -318,6 +343,15 @@ export const BlogListView: React.FC<BlogListViewProps> = ({
                         <Clock className="w-3 h-3 text-[#C5A880]" />
                         <span>{post.readTimeMinutes} min read</span>
                       </span>
+                      {viewCounts[post.slug] !== undefined && (
+                        <>
+                          <span>•</span>
+                          <span className="flex items-center space-x-1 text-[#1C3829]">
+                            <Eye className="w-3 h-3 text-[#C5A880]" />
+                            <span>{viewCounts[post.slug]} Views</span>
+                          </span>
+                        </>
+                      )}
                     </div>
 
                     <h3 className="font-luxury-serif text-xl sm:text-2xl font-bold text-[#1C3829] group-hover:text-[#2D5540] transition-colors leading-snug line-clamp-2">
