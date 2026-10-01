@@ -65,29 +65,39 @@ const IMAGE_PRESETS = [
 
 const AUTHOR_PRESETS = [
   {
-    name: 'Sophea Chan',
-    role: 'Chief Concierge & Heritage Specialist',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+    name: 'Deepool',
+    role: 'Front Office Manager',
+    avatar: '/images/staff-image/deepool-front-office-manager.jpg',
   },
   {
-    name: 'Chef Rattanak',
-    role: 'Executive Chef at Le Vert Angkor',
-    avatar: 'https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=200&q=80',
+    name: 'Sotheara',
+    role: 'Front Office Supervisor',
+    avatar: '/images/staff-image/sotheara-front-office-supervisor.jpg',
   },
   {
-    name: 'Vireak Meas',
-    role: 'Heritage Guide & Tour Coordinator',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
+    name: 'Veasna',
+    role: 'Restaurant & Rooftop Sky Bar Supervisor',
+    avatar: '/images/staff-image/veasna-restaurant-supervisor.jpg',
   },
   {
-    name: 'Bopha Khem',
-    role: 'Lead Spa Therapist at Le Vert Spa',
-    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80',
+    name: 'Sous Chef Chansy',
+    role: 'Sous Chef & Culinary Team',
+    avatar: '/images/Home/home-dining-image/IMG_8302.jpg',
   },
   {
-    name: 'Le Vert Concierge Team',
-    role: 'Guest Experience & Insider Guides',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+    name: 'Rin Kongvin',
+    role: 'Operations Manager',
+    avatar: '/images/default-avatar.svg',
+  },
+  {
+    name: 'Ek Darin',
+    role: 'Hotel Owner & Founder',
+    avatar: '/images/default-avatar.svg',
+  },
+  {
+    name: 'Le Vert Family Team',
+    role: 'Hospitality & Guest Experience',
+    avatar: '/images/default-avatar.svg',
   },
 ];
 
@@ -119,9 +129,9 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
   const [formContent, setFormContent] = useState('');
   const [formCoverImage, setFormCoverImage] = useState('');
   const [formTags, setFormTags] = useState('');
-  const [formAuthorName, setFormAuthorName] = useState('Sophea Chan');
-  const [formAuthorRole, setFormAuthorRole] = useState('Chief Concierge');
-  const [formAuthorAvatar, setFormAuthorAvatar] = useState('');
+  const [formAuthorName, setFormAuthorName] = useState(AUTHOR_PRESETS[0].name);
+  const [formAuthorRole, setFormAuthorRole] = useState(AUTHOR_PRESETS[0].role);
+  const [formAuthorAvatar, setFormAuthorAvatar] = useState(AUTHOR_PRESETS[0].avatar);
   const [formPublishedAt, setFormPublishedAt] = useState('');
   const [formReadTime, setFormReadTime] = useState(5);
   const [formIsFeatured, setFormIsFeatured] = useState(false);
@@ -1259,24 +1269,33 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
                         Or Pick Team Preset:
                       </span>
                       <div className="flex flex-wrap gap-2">
-                        {AUTHOR_PRESETS.map((author) => (
-                          <button
-                            key={author.name}
-                            type="button"
-                            onClick={() => {
-                              setFormAuthorName(author.name);
-                              setFormAuthorRole(author.role);
-                              setFormAuthorAvatar(author.avatar);
-                            }}
-                            className={`px-3 py-1 rounded-full text-[11px] font-medium transition-colors border cursor-pointer ${
-                              formAuthorName === author.name
-                                ? 'bg-[#1C3829] text-[#FAF8F5] border-[#1C3829]'
-                                : 'bg-white text-stone-700 border-[#E7E0D5] hover:border-[#C5A880]'
-                            }`}
-                          >
-                            {author.name}
-                          </button>
-                        ))}
+                        {AUTHOR_PRESETS.map((author) => {
+                          const isSelected = formAuthorName === author.name;
+                          return (
+                            <button
+                              key={author.name}
+                              type="button"
+                              onClick={() => {
+                                setFormAuthorName(author.name);
+                                setFormAuthorRole(author.role);
+                                setFormAuthorAvatar(author.avatar);
+                              }}
+                              title={`${author.name} — ${author.role}`}
+                              className={`inline-flex items-center space-x-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all border cursor-pointer ${
+                                isSelected
+                                  ? 'bg-[#1C3829] text-[#FAF8F5] border-[#1C3829] shadow-xs'
+                                  : 'bg-white text-stone-700 border-[#E7E0D5] hover:border-[#C5A880] hover:bg-[#FAF8F5]'
+                              }`}
+                            >
+                              <img
+                                src={author.avatar}
+                                alt={author.name}
+                                className="w-5 h-5 rounded-full object-cover border border-[#C5A880]/60 shrink-0 bg-[#1C3829]"
+                              />
+                              <span>{author.name}</span>
+                            </button>
+                          );
+                        })}
                       </div>
                     </div>
 
