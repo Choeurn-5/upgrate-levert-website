@@ -14,6 +14,7 @@ import {
   ChevronRight,
   BookOpen,
   Eye,
+  Heart,
 } from 'lucide-react';
 import { BlogPost, AppRoute } from '../types';
 import { SITE_SETTINGS } from '../lib/site-settings';
@@ -31,21 +32,59 @@ export const BlogPostDetailView: React.FC<BlogPostDetailViewProps> = ({
 }) => {
   const [copied, setCopied] = useState(false);
   const [viewCount, setViewCount] = useState<number | null>(null);
+  const [likesCount, setLikesCount] = useState<number | null>(null);
+  const [hasLiked, setHasLiked] = useState(false);
 
   useEffect(() => {
-    async function trackView() {
+    async function trackViewAndFetchLikes() {
       try {
-        const res = await fetch(`/api/blog/views/${post.slug}`, { method: 'POST' });
-        if (res.ok) {
-          const data = await res.json();
+        // Track View
+        const viewRes = await fetch(`/api/blog/views/${post.slug}`, { method: 'POST' });
+        if (viewRes.ok) {
+          const data = await viewRes.json();
           setViewCount(data.views);
         }
+
+        // Fetch Initial Likes
+        const likeRes = await fetch(`/api/blog/likes/${post.slug}`);
+        if (likeRes.ok) {
+          const data = await likeRes.json();
+          setLikesCount(data.likes);
+        }
       } catch (error) {
-        console.error('Failed to track view', error);
+        console.error('Failed to track view or fetch likes', error);
       }
     }
-    trackView();
+    
+    // Check local storage for like status
+    if (typeof window !== 'undefined') {
+      const liked = localStorage.getItem(`liked_${post.slug}`);
+      if (liked === 'true') setHasLiked(true);
+    }
+    
+    trackViewAndFetchLikes();
   }, [post.slug]);
+
+  const handleLike = async () => {
+    if (hasLiked) return;
+    
+    // Optimistic update
+    setLikesCount(prev => (prev || 0) + 1);
+    setHasLiked(true);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(`liked_${post.slug}`, 'true');
+    }
+
+    try {
+      await fetch(`/api/blog/likes/${post.slug}`, { method: 'POST' });
+    } catch (error) {
+      console.error('Failed to increment likes', error);
+      // Revert on failure
+      setLikesCount(prev => (prev || 1) - 1);
+      setHasLiked(false);
+      localStorage.removeItem(`liked_${post.slug}`);
+    }
+  };
 
   const handleCopyLink = () => {
     if (typeof window !== 'undefined') {
@@ -282,15 +321,25 @@ export const BlogPostDetailView: React.FC<BlogPostDetailViewProps> = ({
                   </span>
                 </>
               )}
+              {likesCount !== null && (
+                <>
+                  <span>•</span>
+                  <span className="flex items-center space-x-1.5 text-[#1C3829]">
+                    <Heart className={`w-4 h-4 ${hasLiked ? 'fill-red-500 text-red-500' : 'text-[#C5A880]'}`} />
+                    <span>{likesCount} Likes</span>
+                  </span>
+                </>
+              )}
             </div>
           </div>
 
-          {/* Social Share Strip */}
-          <div className="flex items-center space-x-2 pt-2 text-xs">
-            <span className="text-[#68726B] mr-2 flex items-center space-x-1 font-medium">
-              <Share2 className="w-3.5 h-3.5 text-[#C5A880]" />
-              <span>Share:</span>
-            </span>
+          {/* Social Share & Like Strip */}
+          <div className="flex items-center justify-between pt-2">
+            <div className="flex items-center space-x-2 text-xs">
+              <span className="text-[#68726B] mr-2 flex items-center space-x-1 font-medium">
+                <Share2 className="w-3.5 h-3.5 text-[#C5A880]" />
+                <span>Share:</span>
+              </span>
 
             <button
               onClick={handleCopyLink}
@@ -324,6 +373,27 @@ export const BlogPostDetailView: React.FC<BlogPostDetailViewProps> = ({
               title="Share on X"
             >
               X / Twitter
+            </button>
+            </div>
+
+            <button
+              onClick={handleLike}
+              disabled={hasLiked}
+              className={`inline-flex items-center space-x-2 px-5 py-2.5 rounded-full border transition-all shadow-sm ${
+                hasLiked
+                  ? 'bg-red-50 border-red-200 text-red-600'
+                  : 'bg-white border-[#E7E0D5] hover:border-red-200 hover:bg-red-50 text-stone-700 hover:text-red-600 cursor-pointer'
+              }`}
+            >
+              <Heart className={`w-4 h-4 ${hasLiked ? 'fill-current' : ''}`} />
+              <span className="text-xs font-semibold uppercase tracking-wider">
+                {hasLiked ? 'Liked' : 'Like'}
+              </span>
+              {likesCount !== null && (
+                <span className="ml-1 pl-2 border-l border-current/20 text-xs font-bold">
+                  {likesCount}
+                </span>
+              )}
             </button>
           </div>
         </header>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Search, Calendar, Clock, ArrowRight, User, Tag, Sparkles, Compass, MessageCircle, X, Eye } from 'lucide-react';
+import { Search, Calendar, Clock, ArrowRight, User, Tag, Sparkles, Compass, MessageCircle, X, Eye, Heart } from 'lucide-react';
 import { Hero } from '../components/Hero';
 import { HeroConfig, BlogPost, AppRoute } from '../types';
 import { BLOG_CATEGORIES } from '../data/blogData';
@@ -24,6 +24,7 @@ export const BlogListView: React.FC<BlogListViewProps> = ({
   const [categoriesList, setCategoriesList] = useState<string[]>(['All Stories', ...BLOG_CATEGORIES.filter((c) => c !== 'All Stories')]);
   const [currentPage, setCurrentPage] = useState(1);
   const [viewCounts, setViewCounts] = useState<Record<string, number>>({});
+  const [likeCounts, setLikeCounts] = useState<Record<string, number>>({});
   const POSTS_PER_PAGE = 6;
 
   // Reset page when filters change
@@ -52,20 +53,26 @@ export const BlogListView: React.FC<BlogListViewProps> = ({
       setCategoriesList(allUnique);
     }
     
-    async function fetchViews() {
+    async function fetchViewsAndLikes() {
       try {
-        const res = await fetch('/api/blog/views');
-        if (res.ok) {
-          const data = await res.json();
-          setViewCounts(data);
+        const [viewsRes, likesRes] = await Promise.all([
+          fetch('/api/blog/views'),
+          fetch('/api/blog/likes')
+        ]);
+        
+        if (viewsRes.ok) {
+          setViewCounts(await viewsRes.json());
+        }
+        if (likesRes.ok) {
+          setLikeCounts(await likesRes.json());
         }
       } catch (err) {
-        console.error('Failed to fetch views', err);
+        console.error('Failed to fetch views or likes', err);
       }
     }
     
     loadCategories();
-    fetchViews();
+    fetchViewsAndLikes();
   }, [posts]);
 
   // Filter posts based on search and category
@@ -240,7 +247,16 @@ export const BlogListView: React.FC<BlogListViewProps> = ({
                       <span>•</span>
                       <span className="flex items-center space-x-1 text-[#1C3829]">
                         <Eye className="w-3.5 h-3.5 text-[#C5A880]" />
-                        <span>{viewCounts[featuredPost.slug]} Views</span>
+                        <span>{viewCounts[featuredPost.slug]}</span>
+                      </span>
+                    </>
+                  )}
+                  {likeCounts[featuredPost.slug] !== undefined && (
+                    <>
+                      <span>•</span>
+                      <span className="flex items-center space-x-1 text-[#1C3829]">
+                        <Heart className="w-3.5 h-3.5 text-red-400 fill-red-400/20" />
+                        <span>{likeCounts[featuredPost.slug]}</span>
                       </span>
                     </>
                   )}
@@ -348,7 +364,16 @@ export const BlogListView: React.FC<BlogListViewProps> = ({
                           <span>•</span>
                           <span className="flex items-center space-x-1 text-[#1C3829]">
                             <Eye className="w-3 h-3 text-[#C5A880]" />
-                            <span>{viewCounts[post.slug]} Views</span>
+                            <span>{viewCounts[post.slug]}</span>
+                          </span>
+                        </>
+                      )}
+                      {likeCounts[post.slug] !== undefined && (
+                        <>
+                          <span>•</span>
+                          <span className="flex items-center space-x-1 text-[#1C3829]">
+                            <Heart className="w-3 h-3 text-red-400 fill-red-400/20" />
+                            <span>{likeCounts[post.slug]}</span>
                           </span>
                         </>
                       )}
