@@ -11,6 +11,90 @@ export const BLOG_CATEGORIES = [
 
 export const INITIAL_BLOG_POSTS: BlogPost[] = [
   {
+    id: 'post-family-hospitality',
+    slug: 'welcoming-you-to-our-family-heartfelt-hospitality-le-vert-angkor-hotel',
+    title: 'Welcoming You to Our Family: Heartfelt Hospitality at Le Vert Angkor Hotel',
+    excerpt: 'Discover the family vision, guiding philosophy, and dedicated leadership team behind Le Vert Angkor Hotel — from our founders Ek Darin and Rin Kongvin to our front office and culinary artisans.',
+    content: `When travelers step through the doors of a boutique hotel in Siem Reap, they often look for more than just a place to rest—they seek an authentic local connection, thoughtful care, and a warm sense of home away from home. Located in Steung Thmei Village, just minutes from the vibrant Old Market and the legendary temples of Angkor, Le Vert Angkor Hotel was founded on a simple yet profound vision: to blend authentic Khmer hospitality, genuine warmth, and passionate family leadership into an unforgettable stay.
+
+In this blog post, we want to open our doors wider and share the guiding principles and dedicated team behind our boutique sanctuary.
+
+---
+
+## 1. A Vision Rooted in Family and Passion
+
+At the heart of our hotel philosophy is our owner, **Ek Darin**, alongside his son, **Rin Kongvin**, who leads daily operations as our Operations Manager.
+
+For **Ek Darin**, hospitality is a labor of love and a tribute to rich Cambodian culture. Working side by side with his son, **Kongvin**, the father-and-son duo brings a unique balance of tradition and modern standards to Le Vert Angkor Hotel. While Ek Darin keeps our vision grounded in genuine Khmer warmth and long-term values, Kongvin ensures that every operational detail—from room comfort to guest experiences—runs seamlessly.
+
+Together, their goal is to create an intimate retreat where every guest feels valued, cared for, and personally welcomed into our extended family.
+
+---
+
+## 2. Service Driven by Heart: Meet Our Leadership Team
+
+A vision can only flourish when carried by a team that shares the same values. Every step of your stay at Le Vert Angkor Hotel is looked after by passionate leaders who care about your comfort:
+
+### Deepool – Front Office Manager
+![Deepool – Front Office Manager](/images/staff-image/deepool-front-office-manager.jpg)
+
+**Deepool** leads our front-desk team with an emphasis on attentive, seamless service. Whether overseeing daily operations, organizing temple tour itineraries, or arranging private transport, Deepool ensures every aspect of your visit feels personalized and effortless.
+
+---
+
+### Sotheara – Front Office Supervisor
+![Sotheara – Front Office Supervisor](/images/staff-image/sotheara-front-office-supervisor.jpg)
+
+Working closely alongside Deepool, **Sotheara** ensures your arrival, stay, and departure run smoothly. Sotheara brings a warm, welcoming presence to the lobby, always ready to share local secrets and assist with any guest requests.
+
+---
+
+### Veasna – Restaurant & Rooftop Sky Bar Supervisor
+![Veasna – Restaurant Supervisor](/images/staff-image/veasna-restaurant-supervisor.jpg)
+
+Dining and relaxing at Le Vert Angkor Hotel is an essential part of the experience. **Veasna** oversees both our main dining venue and our scenic Rooftop Sky Bar. Whether you are enjoying a peaceful breakfast or sipping sunset cocktails by the rooftop pool overlooking the Siem Reap skyline, Veasna ensures a warm, attentive, and cozy atmosphere.
+
+---
+
+### Sous Chef Chansy – Culinary Excellence
+![Authentic Khmer Gastronomy at Le Vert Angkor](/images/Home/home-dining-image/IMG_8302.jpg)
+
+Behind every memorable dish is the culinary artistry of **Sous Chef Chansy**. Crafting menus that celebrate authentic Cambodian specialties—such as traditional Fish Amok and Lok Lak—alongside popular international favorites, Chansy prepares every meal using fresh local ingredients and heartfelt care.
+
+---
+
+## 3. Our Core Philosophy: What Boutique Hospitality Means to Us
+
+Being an intimate boutique hotel gives us a distinct privilege: the power of quality, warmth, and personal connection over scale.
+
+* **Authentic Khmer Warmth:** We take pride in sharing local Cambodian culture, flavors, and genuine hospitality with travelers from across the globe.
+* **Personalized Service:** You are never just a room number to us. We tailor our recommendations and service to your specific preferences.
+* **A Peaceful Sanctuary:** Nestled quietly in Steung Thmei Village, our hotel offers a peaceful retreat complete with a refreshing rooftop pool, lush garden vibes, and cozy balconies after a day of exploring Angkor Wat.
+* **Community and Care:** We operate as a close family unit, supporting one another to ensure our guests enjoy an authentic and uplifting stay.
+
+---
+
+## Come Experience Our Hospitality
+
+Building a lasting reputation in the heart of Siem Reap requires dedication, consistency, and above all, heart. Under the guidance of **Ek Darin** and **Rin Kongvin**, and supported by **Deepool**, **Sotheara**, **Veasna**, and **Sous Chef Chansy**, we warmly invite you to experience hospitality that feels true, relaxed, and deeply welcoming.
+
+Whether you are visiting Siem Reap for the first time or returning to explore more of Angkor, our doors—and hearts—are open for you.
+
+We look forward to welcoming you soon to your home away from home at Le Vert Angkor Hotel!`,
+    coverImage: '/images/Home/home-about-image/building-view.png',
+    category: 'Hotel News & Stories',
+    tags: ['Le Vert Family', 'Khmer Hospitality', 'Meet Our Team', 'Siem Reap', 'Our Philosophy'],
+    author: {
+      name: 'Rin Kongvin',
+      role: 'Operations Manager',
+      avatar: '/images/default-avatar.svg',
+    },
+    publishedAt: '2026-10-01',
+    readTimeMinutes: 5,
+    isFeatured: true,
+    status: 'published',
+  },
+  {
     id: 'post-1',
     slug: 'angkor-wat-sunrise-guide-secrets',
     title: 'The Connoisseur’s Guide to Angkor Wat Sunrise: Secrets for an Unforgettable Dawn',
@@ -71,7 +155,7 @@ This is the perfect juncture to return to Le Vert Angkor Hotel. Relax by our **c
     },
     publishedAt: '2026-03-20',
     readTimeMinutes: 6,
-    isFeatured: true,
+    isFeatured: false,
     status: 'published',
   },
   {

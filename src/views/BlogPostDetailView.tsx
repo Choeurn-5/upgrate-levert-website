@@ -158,6 +158,32 @@ export const BlogPostDetailView: React.FC<BlogPostDetailViewProps> = ({
         );
       } else if (trimmed === '---') {
         elements.push(<hr key={index} className="my-8 border-t border-[#E7E0D5]" />);
+      } else if (trimmed.startsWith('![') && trimmed.includes('](') && trimmed.endsWith(')')) {
+        const match = trimmed.match(/^!\[(.*?)\]\((.*?)\)$/);
+        if (match) {
+          const altText = match[1];
+          const src = match[2];
+          elements.push(
+            <figure
+              key={index}
+              className="my-8 rounded-2xl overflow-hidden border border-[#E7E0D5] bg-white shadow-sm max-w-lg mx-auto"
+            >
+              <div className="relative aspect-[4/5] sm:aspect-[4/4] overflow-hidden bg-stone-100 flex items-center justify-center">
+                <img
+                  src={src}
+                  alt={altText}
+                  className="w-full h-full object-cover object-top hover:scale-[1.03] transition-transform duration-500"
+                  loading="lazy"
+                />
+              </div>
+              {altText && (
+                <figcaption className="py-2.5 px-4 text-center text-xs font-semibold text-[#1C3829] tracking-wider uppercase bg-[#FAF8F5] border-t border-[#E7E0D5]/70">
+                  {altText}
+                </figcaption>
+              )}
+            </figure>
+          );
+        }
       } else {
         elements.push(
           <p
