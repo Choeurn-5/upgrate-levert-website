@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Sparkles, Car, ShieldCheck, Compass, Info, Clock, LayoutGrid, List, Loader2, RefreshCw } from 'lucide-react';
 import { Hero } from '../components/Hero';
@@ -52,7 +52,7 @@ export const ToursView: React.FC<ToursViewProps> = ({
       {/* 1. Hero Section */}
       <Hero
         config={heroConfig}
-        onPrimaryClick={() => onOpenBooking('tour-circuit')}
+        onPrimaryClick={() => window.open('https://t.me/LeVertAngkorHotelSR', '_blank')}
         primaryButtonText="Inquire Private Temple Tour"
         onOpenHeroManager={onOpenHeroManager}
       />
@@ -239,13 +239,15 @@ export const ToursView: React.FC<ToursViewProps> = ({
 
             {/* CTA */}
             <div className="shrink-0">
-              <button
-                onClick={() => onOpenBooking('tour-custom-concierge')}
+              <a
+                href="https://t.me/LeVertAngkorHotelSR"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group/cta px-7 py-4 rounded-2xl bg-[#C5A880] hover:bg-[#D4BC94] text-[#0A1A10] text-xs font-bold uppercase tracking-wider transition-all shadow-[0_8px_25px_rgba(197,168,128,0.35)] hover:shadow-[0_12px_35px_rgba(197,168,128,0.45)] active:scale-95 flex items-center space-x-2.5 cursor-pointer"
               >
                 <Compass className="w-4 h-4" />
                 <span>Customize Your Tour</span>
-              </button>
+              </a>
             </div>
           </div>
         </motion.div>

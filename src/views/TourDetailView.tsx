@@ -175,13 +175,16 @@ export const TourDetailView: React.FC<TourDetailViewProps> = ({
                   </p>
                 </div>
 
-                <button
-                  onClick={() => onOpenBooking(`tour-${tour.slug}`)}
+                <a
+                  href="https://t.me/LeVertAngkorHotelSR"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-full py-4 rounded-xl bg-[#1C3829] text-[#FAF8F5] font-semibold text-xs uppercase tracking-widest hover:bg-[#12241A] transition-all shadow-md active:scale-95 flex items-center justify-center space-x-2"
                 >
                   <Calendar className="w-4 h-4 text-[#C5A880]" />
                   <span>Book This Tour</span>
-                </button>
+                </a>
+
 
                 <div className="p-4 rounded-2xl bg-[#F2EDE4] text-xs text-[#4A554F] space-y-2">
                   <div className="font-semibold text-[#1C3829]">Helpful Travel Notes:</div>
