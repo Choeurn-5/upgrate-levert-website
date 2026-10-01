@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
-import { Sparkles, MapPin, Award, ArrowRight, ShieldCheck, Utensils, Compass, Heart, Check, Clock, Phone, ChevronRight, Wine, Coffee, Star } from 'lucide-react';
+import { Sparkles, MapPin, Award, ArrowRight, ShieldCheck, Utensils, Compass, Heart, Check, Clock, Phone, ChevronRight, ChevronLeft, Wine, Coffee, Star } from 'lucide-react';
 import { Hero } from '../components/Hero';
 import { RoomCard } from '../components/RoomCard';
 import { TourCard } from '../components/TourCard';
@@ -27,9 +27,44 @@ export const HomeView: React.FC<HomeViewProps> = ({
 }) => {
   const [activeAboutIndex, setActiveAboutIndex] = useState(0);
   const [activeDiningIndex, setActiveDiningIndex] = useState(0);
-  // featuredRooms is removed since we show all rooms in the carousel
   const featuredTours = tours.slice(0, 2);
   const previewPhotos = GALLERY_PHOTOS.slice(0, 6);
+
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (carouselRef.current) {
+        const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+        // If we are at the end, jump back to start
+        if (scrollLeft + clientWidth >= scrollWidth - 20) {
+          carouselRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          // Scroll right by one card (using first card width + gap)
+          const firstChild = carouselRef.current.children[0] as HTMLElement;
+          const cardWidth = firstChild ? firstChild.offsetWidth + 24 : 400; // 24px is gap-6
+          carouselRef.current.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        }
+      }
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const handleScrollLeft = () => {
+    if (carouselRef.current) {
+      const firstChild = carouselRef.current.children[0] as HTMLElement;
+      const cardWidth = firstChild ? firstChild.offsetWidth + 24 : 400;
+      carouselRef.current.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+    }
+  };
+
+  const handleScrollRight = () => {
+    if (carouselRef.current) {
+      const firstChild = carouselRef.current.children[0] as HTMLElement;
+      const cardWidth = firstChild ? firstChild.offsetWidth + 24 : 400;
+      carouselRef.current.scrollBy({ left: cardWidth, behavior: 'smooth' });
+    }
+  };
 
   const DINING_GALLERY = [
     {
@@ -307,29 +342,34 @@ export const HomeView: React.FC<HomeViewProps> = ({
             </button>
           </div>
 
-          <style dangerouslySetInnerHTML={{ __html: `
-            @keyframes infinite-scroll {
-              0% { transform: translateX(0); }
-              100% { transform: translateX(-50%); }
-            }
-            .animate-infinite-scroll {
-              display: flex;
-              width: max-content;
-              animation: infinite-scroll 45s linear infinite;
-            }
-            .animate-infinite-scroll:hover {
-              animation-play-state: paused;
-            }
-          `}} />
-
-          <div className="relative w-full overflow-hidden pb-8 -mx-4 px-4 sm:-mx-8 sm:px-8">
+          <div className="relative w-full overflow-hidden pb-8 -mx-4 px-4 sm:-mx-8 sm:px-8 group/carousel">
             {/* Fade edges */}
-            <div className="absolute inset-y-0 left-0 w-8 sm:w-24 bg-gradient-to-r from-[#FDFBF8] to-transparent z-10 pointer-events-none" />
-            <div className="absolute inset-y-0 right-0 w-8 sm:w-24 bg-gradient-to-l from-[#FDFBF8] to-transparent z-10 pointer-events-none" />
+            <div className="absolute inset-y-0 left-0 w-12 sm:w-28 bg-gradient-to-r from-[#FDFBF8] to-transparent z-10 pointer-events-none" />
+            <div className="absolute inset-y-0 right-0 w-12 sm:w-28 bg-gradient-to-l from-[#FDFBF8] to-transparent z-10 pointer-events-none" />
 
-            <div className="animate-infinite-scroll gap-6 sm:gap-8">
-              {[...rooms, ...rooms].map((room, i) => (
-                <div key={`${room.slug}-${i}`} className="w-[85vw] sm:w-[360px] md:w-[400px] shrink-0 group/card-wrapper">
+            {/* Navigation Arrows */}
+            <button
+              onClick={handleScrollLeft}
+              className="absolute left-2 sm:left-6 top-1/2 -translate-y-[60%] z-20 w-10 h-10 rounded-full bg-white/95 shadow-[0_4px_15px_rgba(28,56,41,0.15)] border border-[#EDE8E0] flex items-center justify-center text-[#1C3829] hover:bg-[#F4EFE6] transition-all opacity-0 group-hover/carousel:opacity-100 hover:scale-105 active:scale-95 cursor-pointer"
+              aria-label="Previous room"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={handleScrollRight}
+              className="absolute right-2 sm:right-6 top-1/2 -translate-y-[60%] z-20 w-10 h-10 rounded-full bg-white/95 shadow-[0_4px_15px_rgba(28,56,41,0.15)] border border-[#EDE8E0] flex items-center justify-center text-[#1C3829] hover:bg-[#F4EFE6] transition-all opacity-0 group-hover/carousel:opacity-100 hover:scale-105 active:scale-95 cursor-pointer"
+              aria-label="Next room"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+
+            <div 
+              ref={carouselRef}
+              className="flex gap-6 sm:gap-8 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-6 pt-2"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              {rooms.map((room, i) => (
+                <div key={`${room.slug}-${i}`} className="w-[85vw] sm:w-[360px] md:w-[400px] shrink-0 snap-center group/card-wrapper">
                   <RoomCard
                     room={room}
                     index={i}
