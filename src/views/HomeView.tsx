@@ -323,8 +323,9 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <ArrowRight className="w-4 h-4 text-[#C5A880] group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
+        </div>
 
-          <div className="relative w-full overflow-hidden pb-8 -mx-4 px-4 sm:-mx-8 sm:px-8 group/carousel">
+        <div className="relative w-full overflow-hidden pb-8 group/carousel">
             {/* Fade edges */}
             <div className="absolute inset-y-0 left-0 w-12 sm:w-28 bg-gradient-to-r from-[#FDFBF8] to-transparent z-10 pointer-events-none" />
             <div className="absolute inset-y-0 right-0 w-12 sm:w-28 bg-gradient-to-l from-[#FDFBF8] to-transparent z-10 pointer-events-none" />
@@ -351,7 +352,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
               {rooms.map((room, i) => (
-                <div key={`${room.slug}-${i}`} className="w-[85vw] sm:w-[360px] md:w-[400px] shrink-0 snap-center group/card-wrapper">
+                <div key={`${room.slug}-${i}`} className="w-[85vw] sm:w-[360px] md:w-[400px] shrink-0 snap-center group/card-wrapper first:ml-4 sm:first:ml-6 lg:first:ml-8 xl:first:ml-[calc((100vw-80rem)/2)] last:mr-4 sm:last:mr-6 lg:last:mr-8 xl:last:mr-[calc((100vw-80rem)/2)]">
                   <RoomCard
                     room={room}
                     index={i}
@@ -362,7 +363,6 @@ export const HomeView: React.FC<HomeViewProps> = ({
               ))}
             </div>
           </div>
-        </div>
       </section>
 
       {/* 3.5. Gastronomy & Sunset Lounge Showcase */}
