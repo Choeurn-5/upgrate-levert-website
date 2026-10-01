@@ -1,8 +1,8 @@
-﻿import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import {
   Plus, Trash2, Edit3, Eye, Save, X, RefreshCw, Check, ChevronDown, ChevronUp,
   Compass, Car, Clock, DollarSign, Image as ImageIcon, AlignLeft, List, AlertCircle,
-  GripVertical, Lightbulb,
+  GripVertical, Lightbulb, Upload, Loader2,
 } from 'lucide-react';
 import { Tour, TourStop, AppRoute } from '../types';
 
@@ -39,12 +39,14 @@ export const AdminToursView: React.FC<AdminToursViewProps> = ({ onNavigate }) =>
   const [tours, setTours] = useState<Tour[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
   const [editingTour, setEditingTour] = useState<Partial<Tour> | null>(null);
   const [isCreating, setIsCreating] = useState(false);
   const [deleteConfirmId, setDeleteConfirmId] = useState<number | null>(null);
   const [expandedId, setExpandedId] = useState<number | null>(null);
+  const imageInputRef = useRef<HTMLInputElement>(null);
 
   const fetchTours = useCallback(async () => {
     setIsLoading(true);
@@ -66,6 +68,32 @@ export const AdminToursView: React.FC<AdminToursViewProps> = ({ onNavigate }) =>
   const showSuccess = (msg: string) => {
     setSuccessMsg(msg);
     setTimeout(() => setSuccessMsg(null), 3000);
+  };
+
+  const handleImageUpload = async (file: File) => {
+    if (!file) return;
+    if (!file.type.startsWith('image/')) {
+      setError('Please upload a valid image file (JPG, PNG, WebP).');
+      return;
+    }
+    setIsUploadingImage(true);
+    setError(null);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      const res = await fetch('/api/upload', { method: 'POST', body: formData });
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || 'Upload failed');
+      }
+      const data = await res.json();
+      setEditingTour(prev => prev ? { ...prev, featuredImage: data.url } : prev);
+      showSuccess('Image uploaded successfully!');
+    } catch (e: any) {
+      setError(e.message || 'Image upload failed');
+    } finally {
+      setIsUploadingImage(false);
+    }
   };
 
   const handleCreate = () => {
@@ -269,29 +297,69 @@ export const AdminToursView: React.FC<AdminToursViewProps> = ({ onNavigate }) =>
               <ImageIcon className="w-4 h-4 text-[#C5A880]" />
               <span>Featured Image</span>
             </h3>
+
+            {/* Upload from device */}
+            <input
+              ref={imageInputRef}
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={e => {
+                const file = e.target.files?.[0];
+                if (file) handleImageUpload(file);
+                e.target.value = '';
+              }}
+            />
+            <button
+              type="button"
+              onClick={() => imageInputRef.current?.click()}
+              disabled={isUploadingImage}
+              className="w-full flex flex-col items-center justify-center gap-2 py-6 rounded-xl border-2 border-dashed border-[#E4DDD3] hover:border-[#C5A880] hover:bg-[#FDFBF8] transition cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {isUploadingImage ? (
+                <>
+                  <Loader2 className="w-6 h-6 text-[#C5A880] animate-spin" />
+                  <span className="text-xs text-[#8A9490] font-medium">Uploading...</span>
+                </>
+              ) : (
+                <>
+                  <Upload className="w-6 h-6 text-[#C5A880]" />
+                  <span className="text-xs font-semibold text-[#4A554F]">Click to upload from device</span>
+                  <span className="text-[11px] text-[#8A9490]">JPG, PNG, WebP supported</span>
+                </>
+              )}
+            </button>
+
+            {/* Or paste URL */}
+            <div className="flex items-center space-x-3">
+              <div className="flex-1 h-px bg-[#EDE8E0]" />
+              <span className="text-[11px] text-[#8A9490] font-medium">or paste URL</span>
+              <div className="flex-1 h-px bg-[#EDE8E0]" />
+            </div>
             <input
               value={editingTour.featuredImage || ''}
               onChange={e => setEditingTour({ ...editingTour, featuredImage: e.target.value })}
               placeholder="https://..."
               className="w-full px-4 py-3 rounded-xl border border-[#EDE8E0] focus:border-[#C5A880] text-sm text-[#1C3829] outline-none transition"
             />
+
+            {/* Image preview */}
             {editingTour.featuredImage && (
-              <img src={editingTour.featuredImage} alt="Preview" className="w-full h-40 object-cover rounded-xl border border-[#EDE8E0]" onError={e => (e.currentTarget.style.display = 'none')} />
-            )}
-            <div>
-              <p className="text-xs text-[#8A9490] mb-2 font-medium">Quick Presets:</p>
-              <div className="flex flex-wrap gap-2">
-                {IMAGE_PRESETS.map(p => (
-                  <button
-                    key={p.label}
-                    onClick={() => setEditingTour({ ...editingTour, featuredImage: p.url })}
-                    className="px-3 py-1.5 text-xs rounded-lg border border-[#EDE8E0] hover:border-[#C5A880] hover:bg-[#F8F5F0] text-[#4A554F] transition cursor-pointer"
-                  >
-                    {p.label}
-                  </button>
-                ))}
+              <div className="relative">
+                <img
+                  src={editingTour.featuredImage}
+                  alt="Preview"
+                  className="w-full h-44 object-cover rounded-xl border border-[#EDE8E0]"
+                  onError={e => (e.currentTarget.style.display = 'none')}
+                />
+                <button
+                  onClick={() => setEditingTour({ ...editingTour, featuredImage: '' })}
+                  className="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 border border-[#EDE8E0] flex items-center justify-center hover:bg-red-50 hover:border-red-200 transition cursor-pointer shadow-sm"
+                >
+                  <X className="w-3.5 h-3.5 text-[#68726B] hover:text-red-500" />
+                </button>
               </div>
-            </div>
+            )}
           </div>
 
           {/* Itinerary */}
