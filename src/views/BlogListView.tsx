@@ -22,6 +22,13 @@ export const BlogListView: React.FC<BlogListViewProps> = ({
   const [selectedCategory, setSelectedCategory] = useState<string>('All Stories');
   const [searchQuery, setSearchQuery] = useState('');
   const [categoriesList, setCategoriesList] = useState<string[]>(['All Stories', ...BLOG_CATEGORIES.filter((c) => c !== 'All Stories')]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const POSTS_PER_PAGE = 6;
+
+  // Reset page when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, selectedCategory]);
 
   // Dynamically load categories from API and posts
   useEffect(() => {
@@ -84,6 +91,10 @@ export const BlogListView: React.FC<BlogListViewProps> = ({
     // Navigate to single post
     onNavigate('/blog/', slug);
   };
+
+  // Pagination Logic
+  const totalPages = Math.ceil(gridPosts.length / POSTS_PER_PAGE);
+  const paginatedPosts = gridPosts.slice((currentPage - 1) * POSTS_PER_PAGE, currentPage * POSTS_PER_PAGE);
 
   const formatDate = (dateStr: string) => {
     try {
@@ -272,7 +283,7 @@ export const BlogListView: React.FC<BlogListViewProps> = ({
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {gridPosts.map((post, index) => (
+            {paginatedPosts.map((post, index) => (
               <motion.article
                 key={post.id}
                 initial={{ opacity: 0, y: 16 }}
@@ -339,6 +350,47 @@ export const BlogListView: React.FC<BlogListViewProps> = ({
                 </div>
               </motion.article>
             ))}
+          </div>
+        )}
+
+        {/* Pagination Controls */}
+        {totalPages > 1 && (
+          <div className="mt-16 flex items-center justify-center space-x-2">
+            <button
+              onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+              disabled={currentPage === 1}
+              className="w-10 h-10 rounded-full border border-[#E7E0D5] flex items-center justify-center text-[#1C3829] hover:bg-[#F2EDE4] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            
+            <div className="flex items-center space-x-1 px-4">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+                <button
+                  key={pageNum}
+                  onClick={() => setCurrentPage(pageNum)}
+                  className={`w-10 h-10 rounded-full text-sm font-semibold transition-colors ${
+                    currentPage === pageNum 
+                      ? 'bg-[#1C3829] text-[#FAF8F5]' 
+                      : 'text-[#1C3829] hover:bg-[#F2EDE4]'
+                  }`}
+                >
+                  {pageNum}
+                </button>
+              ))}
+            </div>
+
+            <button
+              onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+              disabled={currentPage === totalPages}
+              className="w-10 h-10 rounded-full border border-[#E7E0D5] flex items-center justify-center text-[#1C3829] hover:bg-[#F2EDE4] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
           </div>
         )}
       </section>
