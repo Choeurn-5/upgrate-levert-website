@@ -32,24 +32,6 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
   const carouselRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      if (carouselRef.current) {
-        const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
-        // If we are at the end, jump back to start
-        if (scrollLeft + clientWidth >= scrollWidth - 20) {
-          carouselRef.current.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          // Scroll right by one card (using first card width + gap)
-          const firstChild = carouselRef.current.children[0] as HTMLElement;
-          const cardWidth = firstChild ? firstChild.offsetWidth + 24 : 400; // 24px is gap-6
-          carouselRef.current.scrollBy({ left: cardWidth, behavior: 'smooth' });
-        }
-      }
-    }, 5500);
-    return () => clearInterval(timer);
-  }, []);
-
   const handleScrollLeft = () => {
     if (carouselRef.current) {
       const firstChild = carouselRef.current.children[0] as HTMLElement;
