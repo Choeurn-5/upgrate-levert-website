@@ -114,6 +114,57 @@ export const ContactView: React.FC<ContactViewProps> = ({
               </div>
             </div>
 
+            {/* Front Desk Leadership Spotlight */}
+            <div className="p-6 sm:p-7 rounded-3xl bg-[#FAF8F5] border border-[#E7E0D5] space-y-4">
+              <span className="text-[11px] font-semibold text-[#C5A880] uppercase tracking-wider block">
+                At Your Service 24/7
+              </span>
+              <h4 className="font-luxury-serif text-xl font-bold text-[#1C3829]">
+                Meet Our Front Desk Leadership
+              </h4>
+              <p className="text-xs text-[#555F59] font-light leading-relaxed">
+                Every aspect of your stay—from private transport to custom Angkor itineraries—is looked after with genuine care by our front office leaders:
+              </p>
+
+              <div className="space-y-3 pt-1">
+                {/* Deepool */}
+                <div className="p-3.5 rounded-2xl bg-white border border-[#E7E0D5] flex items-center space-x-3.5 shadow-xs">
+                  <div className="w-12 h-12 rounded-xl overflow-hidden border border-[#C5A880]/60 shrink-0">
+                    <img
+                      src="/images/staff-image/deepool-front-office-manager.jpg"
+                      alt="Deepool - Front Office Manager"
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-sm font-bold text-[#1C3829]">Deepool</div>
+                    <div className="text-[11px] font-semibold text-[#C5A880]">Front Office Manager</div>
+                    <p className="text-[11px] text-[#68726B] font-light mt-0.5">
+                      Attentive seamless service, temple itineraries, and airport private transfers.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Sotheara */}
+                <div className="p-3.5 rounded-2xl bg-white border border-[#E7E0D5] flex items-center space-x-3.5 shadow-xs">
+                  <div className="w-12 h-12 rounded-xl overflow-hidden border border-[#C5A880]/60 shrink-0">
+                    <img
+                      src="/images/staff-image/sotheara-front-office-supervisor.jpg"
+                      alt="Sotheara - Front Office Supervisor"
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-sm font-bold text-[#1C3829]">Sotheara</div>
+                    <div className="text-[11px] font-semibold text-[#C5A880]">Front Office Supervisor</div>
+                    <p className="text-[11px] text-[#68726B] font-light mt-0.5">
+                      Warm lobby presence, ensuring seamless arrivals, departures, and local tips.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {/* Quick WhatsApp Action */}
             <div className="p-6 rounded-3xl bg-[#25D366]/10 border border-[#25D366]/20 flex items-center justify-between">
               <div>

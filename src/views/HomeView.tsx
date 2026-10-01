@@ -110,11 +110,11 @@ export const HomeView: React.FC<HomeViewProps> = ({
             </h2>
 
             <p className="text-base text-[#4A554F] font-light leading-relaxed">
-              Nestled quietly in Steung Thmey Village, <strong>Le Vert Angkor Hotel</strong> offers an intimate oasis where modern boutique design meets warm Cambodian hospitality. Located just a 5-minute stroll from the vibrant Old Market, Night Market, and famous Pub Street, our sanctuary lets you indulge in serene tranquility while keeping the best of Siem Reap at your doorstep.
+              Nestled quietly in Steung Thmei Village just minutes from the Old Market and Angkor Wat, <strong>Le Vert Angkor Hotel</strong> was founded on a simple yet profound vision: to blend authentic Khmer hospitality, genuine warmth, and passionate family leadership into an unforgettable boutique stay.
             </p>
 
             <p className="text-base text-[#4A554F] font-light leading-relaxed">
-              Unwind on your private balcony, take a rejuvenating dip in our rooftop pool with sunset city vistas, nourish yourself with authentic Khmer cuisine, and let our dedicated concierge curate seamless expeditions to the legendary temples of Angkor Wat.
+              Founded by our owner, <strong>Ek Darin</strong>, and led day-to-day by his son, Operations Manager <strong>Rin Kongvin</strong>, our father-and-son leadership brings a unique balance of Cambodian heritage and modern hospitality standards. Whether you are relaxing on your private balcony, enjoying sunset city vistas from our rooftop pool, or setting out for Angkor Wat, every guest is personally welcomed as part of our extended family.
             </p>
 
             {/* Micro Highlights Grid */}
@@ -567,6 +567,158 @@ export const HomeView: React.FC<HomeViewProps> = ({
             <div className="text-xs font-semibold text-[#1C3829] flex items-center space-x-1 group-hover:text-[#C5A880] transition-colors pt-2">
               <span>View Itineraries</span>
               <ChevronRight className="w-3.5 h-3.5" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4.5. Meet Our Leadership Team & Boutique Philosophy (From Family Story) */}
+      <section className="py-20 bg-[#F2EDE4]/80 border-y border-[#E7E0D5]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-14">
+            <span className="text-xs font-semibold tracking-widest text-[#C5A880] uppercase block mb-2">
+              Heartfelt Khmer Hospitality
+            </span>
+            <h2 className="font-luxury-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-[#1C3829]">
+              Service Driven by Heart: Meet Our Leadership Team
+            </h2>
+            <p className="text-sm sm:text-base text-[#4A554F] font-light mt-3 leading-relaxed">
+              Under the passionate guidance of owner <strong>Ek Darin</strong> and Operations Manager <strong>Rin Kongvin</strong>, every detail of your stay is looked after by dedicated leaders who care deeply about your comfort.
+            </p>
+          </div>
+
+          {/* Leadership Team Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            {/* Deepool */}
+            <div className="bg-[#FAF8F5] rounded-3xl p-6 border border-[#E7E0D5] flex flex-col items-center text-center shadow-xs hover:shadow-lg transition-all group">
+              <div className="w-28 h-28 rounded-2xl overflow-hidden mb-4 border-2 border-[#C5A880]/60 shadow-sm shrink-0">
+                <img
+                  src="/images/staff-image/deepool-front-office-manager.jpg"
+                  alt="Deepool - Front Office Manager"
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <h3 className="font-luxury-serif text-xl font-bold text-[#1C3829]">Deepool</h3>
+              <span className="text-xs font-semibold text-[#C5A880] uppercase tracking-wider mt-0.5">
+                Front Office Manager
+              </span>
+              <p className="text-xs text-[#555F59] font-light mt-3 leading-relaxed">
+                Leads our front-desk team with an emphasis on attentive service, organizing seamless temple tour itineraries, and private transport.
+              </p>
+            </div>
+
+            {/* Sotheara */}
+            <div className="bg-[#FAF8F5] rounded-3xl p-6 border border-[#E7E0D5] flex flex-col items-center text-center shadow-xs hover:shadow-lg transition-all group">
+              <div className="w-28 h-28 rounded-2xl overflow-hidden mb-4 border-2 border-[#C5A880]/60 shadow-sm shrink-0">
+                <img
+                  src="/images/staff-image/sotheara-front-office-supervisor.jpg"
+                  alt="Sotheara - Front Office Supervisor"
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <h3 className="font-luxury-serif text-xl font-bold text-[#1C3829]">Sotheara</h3>
+              <span className="text-xs font-semibold text-[#C5A880] uppercase tracking-wider mt-0.5">
+                Front Office Supervisor
+              </span>
+              <p className="text-xs text-[#555F59] font-light mt-3 leading-relaxed">
+                A warm, welcoming presence in our lobby, ensuring your arrival, stay, and departure run effortlessly while sharing local insider secrets.
+              </p>
+            </div>
+
+            {/* Veasna */}
+            <div className="bg-[#FAF8F5] rounded-3xl p-6 border border-[#E7E0D5] flex flex-col items-center text-center shadow-xs hover:shadow-lg transition-all group">
+              <div className="w-28 h-28 rounded-2xl overflow-hidden mb-4 border-2 border-[#C5A880]/60 shadow-sm shrink-0">
+                <img
+                  src="/images/staff-image/veasna-restaurant-supervisor.jpg"
+                  alt="Veasna - Restaurant & Rooftop Sky Bar Supervisor"
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <h3 className="font-luxury-serif text-xl font-bold text-[#1C3829]">Veasna</h3>
+              <span className="text-xs font-semibold text-[#C5A880] uppercase tracking-wider mt-0.5">
+                Restaurant &amp; Sky Bar Supervisor
+              </span>
+              <p className="text-xs text-[#555F59] font-light mt-3 leading-relaxed">
+                Oversees our main dining venue and scenic Rooftop Sky Bar, curating peaceful breakfasts and sunset cocktails by the rooftop pool.
+              </p>
+            </div>
+
+            {/* Sous Chef Chansy */}
+            <div className="bg-[#FAF8F5] rounded-3xl p-6 border border-[#E7E0D5] flex flex-col items-center text-center shadow-xs hover:shadow-lg transition-all group">
+              <div className="w-28 h-28 rounded-2xl overflow-hidden mb-4 border-2 border-[#C5A880]/60 shadow-sm shrink-0 bg-[#1C3829]/5">
+                <img
+                  src="/images/Home/home-dining-image/IMG_8302.jpg"
+                  alt="Sous Chef Chansy - Culinary Excellence"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <h3 className="font-luxury-serif text-xl font-bold text-[#1C3829]">Sous Chef Chansy</h3>
+              <span className="text-xs font-semibold text-[#C5A880] uppercase tracking-wider mt-0.5">
+                Culinary Excellence
+              </span>
+              <p className="text-xs text-[#555F59] font-light mt-3 leading-relaxed">
+                Behind every memorable dish, preparing authentic Cambodian specialties like traditional Fish Amok and Lok Lak with fresh local care.
+              </p>
+            </div>
+          </div>
+
+          {/* 4 Pillars of Boutique Hospitality */}
+          <div className="bg-[#FAF8F5] rounded-3xl p-8 sm:p-10 border border-[#E7E0D5]">
+            <div className="text-center max-w-2xl mx-auto mb-8">
+              <span className="text-xs font-semibold tracking-widest text-[#C5A880] uppercase block mb-1">
+                Our Core Philosophy
+              </span>
+              <h3 className="font-luxury-serif text-2xl sm:text-3xl font-bold text-[#1C3829]">
+                What Boutique Hospitality Means to Us
+              </h3>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="p-4 rounded-2xl bg-white border border-[#E7E0D5]">
+                <div className="text-xs font-bold text-[#1C3829] uppercase tracking-wider mb-1">
+                  1. Authentic Khmer Warmth
+                </div>
+                <p className="text-xs text-[#68726B] font-light leading-relaxed">
+                  We take pride in sharing local Cambodian culture, flavors, and genuine hospitality with travelers from across the globe.
+                </p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-white border border-[#E7E0D5]">
+                <div className="text-xs font-bold text-[#1C3829] uppercase tracking-wider mb-1">
+                  2. Personalized Service
+                </div>
+                <p className="text-xs text-[#68726B] font-light leading-relaxed">
+                  You are never just a room number to us. We tailor our recommendations and service to your specific preferences.
+                </p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-white border border-[#E7E0D5]">
+                <div className="text-xs font-bold text-[#1C3829] uppercase tracking-wider mb-1">
+                  3. A Peaceful Sanctuary
+                </div>
+                <p className="text-xs text-[#68726B] font-light leading-relaxed">
+                  Nestled quietly in Steung Thmei Village, complete with a refreshing rooftop pool, lush garden vibes, and cozy balconies.
+                </p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-white border border-[#E7E0D5]">
+                <div className="text-xs font-bold text-[#1C3829] uppercase tracking-wider mb-1">
+                  4. Community &amp; Care
+                </div>
+                <p className="text-xs text-[#68726B] font-light leading-relaxed">
+                  We operate as a close family unit, supporting one another to ensure our guests enjoy an authentic and uplifting stay.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-8 text-center">
+              <button
+                onClick={() => onNavigate('/blog/', 'welcoming-you-to-our-family-heartfelt-hospitality-le-vert-angkor-hotel')}
+                className="inline-flex items-center space-x-2 text-xs font-semibold uppercase tracking-wider text-[#1C3829] hover:text-[#C5A880] transition-colors"
+              >
+                <span>Read Full Story: Welcoming You to Our Family</span>
+                <ArrowRight className="w-4 h-4 text-[#C5A880]" />
+              </button>
             </div>
           </div>
         </div>

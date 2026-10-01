@@ -95,6 +95,43 @@ export const ToursView: React.FC<ToursViewProps> = ({
             </div>
           </div>
         </div>
+
+        {/* Personalized Concierge Tour Assistance */}
+        <div className="mt-12 p-8 sm:p-10 rounded-3xl bg-[#FAF8F5] border border-[#E7E0D5] flex flex-col md:flex-row items-center gap-8 shadow-xs">
+          <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border-2 border-[#C5A880]/60 shrink-0 shadow-sm">
+            <img
+              src="/images/staff-image/deepool-front-office-manager.jpg"
+              alt="Deepool - Front Office Manager"
+              className="w-full h-full object-cover object-top"
+            />
+          </div>
+
+          <div className="space-y-3 flex-1 text-center md:text-left">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#1C3829]/10 text-[#1C3829] text-xs font-semibold uppercase tracking-wider">
+              <Sparkles className="w-3.5 h-3.5 text-[#C5A880]" />
+              <span>Personalized Concierge Care</span>
+            </div>
+            <h3 className="font-luxury-serif text-2xl sm:text-3xl font-bold text-[#1C3829]">
+              Custom Angkor Itineraries with Deepool &amp; Team
+            </h3>
+            <p className="text-xs sm:text-sm text-[#4A554F] font-light leading-relaxed">
+              &quot;Whether you wish to experience the dawn serenity of Angkor Wat, explore the jungle-entangled stone roots of Ta Prohm, or arrange private air-conditioned transport with cold water and towels, our front-desk team ensures every detail of your journey feels personalized and effortless.&quot;
+            </p>
+            <div className="text-xs font-semibold text-[#1C3829]">
+              — Deepool, <span className="text-[#C5A880]">Front Office Manager</span>
+            </div>
+          </div>
+
+          <div className="shrink-0">
+            <button
+              onClick={() => onOpenBooking('tour-custom-concierge')}
+              className="px-6 py-3.5 rounded-full bg-[#1C3829] hover:bg-[#12241A] text-[#FAF8F5] text-xs font-semibold uppercase tracking-wider transition-all shadow-md active:scale-95 flex items-center space-x-2 cursor-pointer"
+            >
+              <Compass className="w-4 h-4 text-[#C5A880]" />
+              <span>Customize Your Tour</span>
+            </button>
+          </div>
+        </div>
       </section>
     </div>
   );

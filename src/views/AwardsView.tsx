@@ -114,6 +114,59 @@ export const AwardsView: React.FC<AwardsViewProps> = ({
           ))}
         </div>
 
+        {/* Core Philosophy: The Heart of Our Hospitality */}
+        <div className="mb-20 p-8 sm:p-12 rounded-3xl bg-[#FAF8F5] border border-[#E7E0D5] shadow-xs">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <span className="text-xs font-semibold tracking-widest text-[#C5A880] uppercase block mb-1">
+              Our Core Philosophy
+            </span>
+            <h3 className="font-luxury-serif text-2xl sm:text-3xl font-bold text-[#1C3829]">
+              What Boutique Hospitality Means to Us
+            </h3>
+            <p className="text-xs sm:text-sm text-[#555F59] font-light mt-2 leading-relaxed">
+              Under the guidance of owner <strong>Ek Darin</strong> and Operations Manager <strong>Rin Kongvin</strong>, supported by <strong>Deepool</strong>, <strong>Sotheara</strong>, <strong>Veasna</strong>, and <strong>Sous Chef Chansy</strong>, we believe true luxury is built on authentic connection, heart, and consistency.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="p-5 rounded-2xl bg-white border border-[#E7E0D5]">
+              <div className="text-xs font-bold text-[#1C3829] uppercase tracking-wider mb-1.5">
+                1. Authentic Khmer Warmth
+              </div>
+              <p className="text-xs text-[#555F59] font-light leading-relaxed">
+                We take pride in sharing local Cambodian culture, flavors, and genuine hospitality with travelers from across the globe.
+              </p>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-white border border-[#E7E0D5]">
+              <div className="text-xs font-bold text-[#1C3829] uppercase tracking-wider mb-1.5">
+                2. Personalized Service
+              </div>
+              <p className="text-xs text-[#555F59] font-light leading-relaxed">
+                You are never just a room number to us. We tailor our recommendations, itineraries, and service to your personal preferences.
+              </p>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-white border border-[#E7E0D5]">
+              <div className="text-xs font-bold text-[#1C3829] uppercase tracking-wider mb-1.5">
+                3. A Peaceful Sanctuary
+              </div>
+              <p className="text-xs text-[#555F59] font-light leading-relaxed">
+                Nestled quietly in Steung Thmei Village, our hotel offers a peaceful retreat complete with a refreshing rooftop pool, lush garden vibes, and cozy balconies.
+              </p>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-white border border-[#E7E0D5]">
+              <div className="text-xs font-bold text-[#1C3829] uppercase tracking-wider mb-1.5">
+                4. Community &amp; Care
+              </div>
+              <p className="text-xs text-[#555F59] font-light leading-relaxed">
+                We operate as a close family unit, supporting one another to ensure our guests enjoy an authentic and uplifting stay.
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Verified Guest Testimonials */}
         <div className="space-y-8">
           <div className="text-center">

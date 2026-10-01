@@ -224,6 +224,69 @@ export const DiningView: React.FC<DiningViewProps> = ({
         </motion.div>
       </section>
 
+      {/* 3.5. Culinary & Bar Leadership Spotlight */}
+      <section className="py-8 sm:py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-[#FAF8F5] rounded-3xl p-8 sm:p-12 border border-[#E7E0D5] shadow-xs">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <span className="text-xs font-semibold tracking-widest text-[#C5A880] uppercase block mb-1">
+              Culinary Passion &amp; Warm Service
+            </span>
+            <h3 className="font-luxury-serif text-2xl sm:text-3xl font-bold text-[#1C3829]">
+              Crafted with Heart: Meet Our Dining &amp; Bar Leadership
+            </h3>
+            <p className="text-xs sm:text-sm text-[#555F59] font-light mt-2 leading-relaxed">
+              Every flavor and gathering at Le Vert Angkor is guided by passionate artisans who elevate Cambodian gastronomy and hospitality.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Veasna Card */}
+            <div className="bg-white rounded-2xl p-6 sm:p-7 border border-[#E7E0D5] flex flex-col sm:flex-row gap-5 items-center sm:items-start shadow-xs hover:border-[#C5A880] transition-colors">
+              <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden border-2 border-[#C5A880]/60 shrink-0 shadow-sm">
+                <img
+                  src="/images/staff-image/veasna-restaurant-supervisor.jpg"
+                  alt="Veasna - Restaurant & Rooftop Sky Bar Supervisor"
+                  className="w-full h-full object-cover object-top"
+                />
+              </div>
+              <div className="space-y-2 text-center sm:text-left flex-1">
+                <div>
+                  <h4 className="font-luxury-serif text-xl font-bold text-[#1C3829]">Veasna</h4>
+                  <div className="text-xs font-semibold text-[#C5A880] uppercase tracking-wider">
+                    Restaurant &amp; Rooftop Sky Bar Supervisor
+                  </div>
+                </div>
+                <p className="text-xs text-[#4A554F] font-light leading-relaxed">
+                  Dining and relaxing at Le Vert Angkor Hotel is an essential part of the experience. Veasna oversees both our main dining venue and our scenic Rooftop Sky Bar. Whether you are enjoying a peaceful breakfast or sipping sunset cocktails by the rooftop pool overlooking the Siem Reap skyline, Veasna ensures a warm, attentive, and cozy atmosphere.
+                </p>
+              </div>
+            </div>
+
+            {/* Sous Chef Chansy Card */}
+            <div className="bg-white rounded-2xl p-6 sm:p-7 border border-[#E7E0D5] flex flex-col sm:flex-row gap-5 items-center sm:items-start shadow-xs hover:border-[#C5A880] transition-colors">
+              <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden border-2 border-[#C5A880]/60 shrink-0 shadow-sm bg-[#1C3829]/5">
+                <img
+                  src="/images/Home/home-dining-image/IMG_8302.jpg"
+                  alt="Sous Chef Chansy - Culinary Artistry"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="space-y-2 text-center sm:text-left flex-1">
+                <div>
+                  <h4 className="font-luxury-serif text-xl font-bold text-[#1C3829]">Sous Chef Chansy</h4>
+                  <div className="text-xs font-semibold text-[#C5A880] uppercase tracking-wider">
+                    Culinary Excellence &amp; Khmer Specialties
+                  </div>
+                </div>
+                <p className="text-xs text-[#4A554F] font-light leading-relaxed">
+                  Behind every memorable dish is the culinary artistry of Sous Chef Chansy. Crafting menus that celebrate authentic Cambodian specialties—such as traditional Fish Amok and Lok Lak—alongside popular international favorites, Chansy prepares every meal using fresh local ingredients and heartfelt care.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 4. "Our Menu" Section (Exact Heading from CMS with Artboards & Interactive Catalog) */}
       <section className="py-16 sm:py-24 bg-[#F2EDE4] border-t border-[#E7E0D5]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
