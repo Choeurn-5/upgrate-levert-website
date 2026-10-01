@@ -601,12 +601,12 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
               {/* Medallion Portrait */}
               <div className="relative mb-5">
-                <div className="w-32 h-32 sm:w-36 sm:h-36 rounded-full p-1.5 bg-gradient-to-tr from-[#C5A880] via-[#DFCAA8] to-[#1C3829]/40 shadow-md group-hover:shadow-[0_10px_25px_rgba(197,168,128,0.35)] transition-all duration-500 group-hover:scale-105">
+                <div className="w-40 h-40 sm:w-44 sm:h-44 rounded-full p-1.5 bg-gradient-to-tr from-[#C5A880] via-[#DFCAA8] to-[#1C3829]/40 shadow-md group-hover:shadow-[0_15px_35px_rgba(197,168,128,0.45)] transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-110 group-hover:-rotate-2">
                   <div className="w-full h-full rounded-full overflow-hidden bg-white ring-2 ring-white/90 shadow-inner">
                     <img
                       src="/images/staff-image/deepool-front-office-manager.jpg"
                       alt="Deepool - Front Office Manager"
-                      className="w-full h-full object-cover object-top filter contrast-[1.02] group-hover:scale-110 transition-transform duration-700"
+                      className="w-full h-full object-cover object-top filter contrast-[1.02] group-hover:scale-125 group-hover:rotate-2 transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
                     />
                   </div>
                 </div>
@@ -647,12 +647,12 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
               {/* Medallion Portrait */}
               <div className="relative mb-5">
-                <div className="w-32 h-32 sm:w-36 sm:h-36 rounded-full p-1.5 bg-gradient-to-tr from-[#C5A880] via-[#DFCAA8] to-[#1C3829]/40 shadow-md group-hover:shadow-[0_10px_25px_rgba(197,168,128,0.35)] transition-all duration-500 group-hover:scale-105">
+                <div className="w-40 h-40 sm:w-44 sm:h-44 rounded-full p-1.5 bg-gradient-to-tr from-[#C5A880] via-[#DFCAA8] to-[#1C3829]/40 shadow-md group-hover:shadow-[0_15px_35px_rgba(197,168,128,0.45)] transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-110 group-hover:-rotate-2">
                   <div className="w-full h-full rounded-full overflow-hidden bg-white ring-2 ring-white/90 shadow-inner">
                     <img
                       src="/images/staff-image/sotheara-front-office-supervisor.jpg"
                       alt="Sotheara - Front Office Supervisor"
-                      className="w-full h-full object-cover object-top filter contrast-[1.02] group-hover:scale-110 transition-transform duration-700"
+                      className="w-full h-full object-cover object-top filter contrast-[1.02] group-hover:scale-125 group-hover:rotate-2 transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
                     />
                   </div>
                 </div>
@@ -693,12 +693,12 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
               {/* Medallion Portrait */}
               <div className="relative mb-5">
-                <div className="w-32 h-32 sm:w-36 sm:h-36 rounded-full p-1.5 bg-gradient-to-tr from-[#C5A880] via-[#DFCAA8] to-[#1C3829]/40 shadow-md group-hover:shadow-[0_10px_25px_rgba(197,168,128,0.35)] transition-all duration-500 group-hover:scale-105">
+                <div className="w-40 h-40 sm:w-44 sm:h-44 rounded-full p-1.5 bg-gradient-to-tr from-[#C5A880] via-[#DFCAA8] to-[#1C3829]/40 shadow-md group-hover:shadow-[0_15px_35px_rgba(197,168,128,0.45)] transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-110 group-hover:-rotate-2">
                   <div className="w-full h-full rounded-full overflow-hidden bg-white ring-2 ring-white/90 shadow-inner">
                     <img
                       src="/images/staff-image/veasna-restaurant-supervisor.jpg"
                       alt="Veasna - Restaurant & Rooftop Sky Bar Supervisor"
-                      className="w-full h-full object-cover object-top filter contrast-[1.02] group-hover:scale-110 transition-transform duration-700"
+                      className="w-full h-full object-cover object-top filter contrast-[1.02] group-hover:scale-125 group-hover:rotate-2 transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
                     />
                   </div>
                 </div>
@@ -739,7 +739,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
               {/* Medallion Portrait */}
               <div className="relative mb-5">
-                <div className="w-32 h-32 sm:w-36 sm:h-36 rounded-full p-1.5 bg-gradient-to-tr from-[#C5A880] via-[#DFCAA8] to-[#1C3829]/40 shadow-md group-hover:shadow-[0_10px_25px_rgba(197,168,128,0.35)] transition-all duration-500 group-hover:scale-105">
+                <div className="w-40 h-40 sm:w-44 sm:h-44 rounded-full p-1.5 bg-gradient-to-tr from-[#C5A880] via-[#DFCAA8] to-[#1C3829]/40 shadow-md group-hover:shadow-[0_15px_35px_rgba(197,168,128,0.45)] transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-110 group-hover:-rotate-2">
                   <div className="w-full h-full rounded-full overflow-hidden bg-white ring-2 ring-white/90 shadow-inner">
                     <img
                       src="/images/staff-image/chansy-sous-chef-avatar.jpg"
