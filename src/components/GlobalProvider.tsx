@@ -245,7 +245,7 @@ export function GlobalProvider({ children }: { children: React.ReactNode }) {
   const currentRoute = (pathname as AppRoute) || '/';
   const isAdminRoute = Boolean(pathname?.startsWith('/admin'));
 
-  const sortedRooms = [...rooms].sort((a, b) => (a.price || 0) - (b.price || 0));
+  const sortedRooms = [...rooms].sort((a, b) => (a.pricePerNight || 0) - (b.pricePerNight || 0));
 
   const contextValue = {
     rooms: sortedRooms,
