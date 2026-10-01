@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { redis } from '@/lib/redis';
+import { getRedis } from '@/lib/redis';
 
 export async function GET(
   req: NextRequest,
@@ -7,6 +7,8 @@ export async function GET(
 ) {
   try {
     const { slug } = await params;
+    const redis = getRedis();
+    if (!redis) return NextResponse.json({ views: 0 });
     const views = await redis.get(`blog:views:${slug}`);
     
     return NextResponse.json({ views: views || 0 });
@@ -23,6 +25,9 @@ export async function POST(
   try {
     const { slug } = await params;
     
+    const redis = getRedis();
+    if (!redis) return NextResponse.json({ views: 0 });
+
     // Increment the view count in Redis
     const newViews = await redis.incr(`blog:views:${slug}`);
     

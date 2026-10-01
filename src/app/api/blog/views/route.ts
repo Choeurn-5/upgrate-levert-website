@@ -1,8 +1,11 @@
 import { NextResponse } from 'next/server';
-import { redis } from '@/lib/redis';
+import { getRedis } from '@/lib/redis';
 
 export async function GET() {
   try {
+    const redis = getRedis();
+    if (!redis) return NextResponse.json({});
+
     // We will use SCAN or KEYS to find all blog views. 
     // Upstash Redis provides keys() which is easy to use for this small dataset.
     const keys = await redis.keys('blog:views:*');
