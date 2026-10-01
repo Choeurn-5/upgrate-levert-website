@@ -118,7 +118,7 @@ export interface GalleryPhoto {
   id: number | string;
   url: string;
   title: string;
-  category: 'all' | 'rooms' | 'tours' | 'dining' | 'spa' | 'pool';
+  category: string;
   alt: string;
 }
 

@@ -1,15 +1,16 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { AdminBlogView } from '@/views/AdminBlogView';
 import { AdminToursView } from '@/views/AdminToursView';
+import { AdminGalleryView } from '@/views/AdminGalleryView';
 import { useGlobalContext } from '@/components/GlobalProvider';
 import { BookOpen, Compass, Lock, ArrowLeft } from 'lucide-react';
 
 const DEFAULT_PIN = 'levert2026';
 
-type AdminTab = 'blog' | 'tours';
+type AdminTab = 'blog' | 'tours' | 'gallery';
 
 export default function AdminRootPage() {
   const { handleNavigate } = useGlobalContext();
@@ -117,6 +118,17 @@ export default function AdminRootPage() {
               <Compass className="w-3.5 h-3.5" />
               <span>Tours Manager</span>
             </button>
+            <button
+              onClick={() => setActiveTab('gallery')}
+              className={`flex items-center space-x-2 px-5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                activeTab === 'gallery'
+                  ? 'bg-[#1C3829] text-white shadow-sm'
+                  : 'text-[#68726B] hover:text-[#1C3829] hover:bg-[#F8F5F0]'
+              }`}
+            >
+              <Compass className="w-3.5 h-3.5" />
+              <span>Gallery</span>
+            </button>
           </div>
         </div>
       </div>
@@ -133,7 +145,7 @@ export default function AdminRootPage() {
           >
             <AdminBlogView onNavigate={handleNavigate} />
           </motion.div>
-        ) : (
+        ) : activeTab === 'tours' ? (
           <motion.div
             key="tours"
             initial={{ opacity: 0, y: 12 }}
@@ -143,6 +155,17 @@ export default function AdminRootPage() {
             className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8"
           >
             <AdminToursView onNavigate={handleNavigate} />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="gallery"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="w-full px-4 sm:px-6 lg:px-8 py-8"
+          >
+            <AdminGalleryView />
           </motion.div>
         )}
       </AnimatePresence>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Sparkles, Maximize2, Image as ImageIcon } from 'lucide-react';
 import { Hero } from '../components/Hero';
@@ -19,22 +19,38 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
   onOpenBooking,
   onOpenHeroManager,
 }) => {
-  const [activeCategory, setActiveCategory] = useState<'all' | 'rooms' | 'tours' | 'dining' | 'spa' | 'pool'>('all');
+  const [activeCategory, setActiveCategory] = useState<string>('all');
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-
-  const filteredPhotos = GALLERY_PHOTOS.filter((photo) => {
-    if (activeCategory === 'all') return true;
-    return photo.category === activeCategory;
-  });
-
-  const categories: { label: string; value: 'all' | 'rooms' | 'tours' | 'dining' | 'spa' | 'pool' }[] = [
+  const [photos, setPhotos] = useState<GalleryPhoto[]>(GALLERY_PHOTOS);
+  const [categories, setCategories] = useState<{label: string, value: string}[]>([
     { label: 'All Photos', value: 'all' },
     { label: 'Suites & Rooms', value: 'rooms' },
     { label: 'Temple Tours', value: 'tours' },
     { label: 'Rooftop Pool', value: 'pool' },
     { label: 'Dining & Cocktails', value: 'dining' },
     { label: 'Khmer Spa', value: 'spa' },
-  ];
+  ]);
+
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const [photosRes, catsRes] = await Promise.all([
+          fetch('/api/gallery'),
+          fetch('/api/gallery/categories')
+        ]);
+        if (photosRes.ok) setPhotos(await photosRes.json());
+        if (catsRes.ok) setCategories(await catsRes.json());
+      } catch (err) {
+        console.error('Failed to load gallery data', err);
+      }
+    }
+    loadData();
+  }, []);
+
+  const filteredPhotos = photos.filter((photo) => {
+    if (activeCategory === 'all') return true;
+    return photo.category === activeCategory;
+  });
 
   return (
     <div>
@@ -97,7 +113,7 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
               {/* Hover Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
                 <span className="text-[10px] uppercase tracking-widest text-[#DFCAA8] font-semibold mb-1">
-                  {photo.category}
+                  {categories.find(c => c.value === photo.category)?.label || photo.category}
                 </span>
                 <h4 className="font-luxury-serif text-lg font-bold leading-tight">
                   {photo.title}
