@@ -49,21 +49,6 @@ export const TourCard: React.FC<TourCardProps> = ({ tour, onViewDetails, onBookT
           </div>
         </div>
 
-        {/* Vehicle Badge - Tuk-Tuk */}
-        <div className="absolute top-4 left-4 z-10">
-          <div className="flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-[#0A1A10]/75 backdrop-blur-md border border-[#C5A880]/30 shadow-sm">
-            {/* Tuk-Tuk SVG icon */}
-            <svg className="w-3.5 h-3.5 text-[#C5A880] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="3" y="7" width="13" height="9" rx="1.5" />
-              <path d="M16 10h3l2 3v3h-5V10z" />
-              <circle cx="6.5" cy="18" r="1.5" />
-              <circle cx="13.5" cy="18" r="1.5" />
-              <circle cx="19.5" cy="18" r="1.5" />
-              <path d="M3 11h13" />
-            </svg>
-            <span className="text-[10px] font-semibold text-[#E8D9BC] tracking-wide">Tuk-Tuk · Private</span>
-          </div>
-        </div>
 
         {/* Duration badge */}
         <div className="absolute bottom-4 left-4 z-10">
