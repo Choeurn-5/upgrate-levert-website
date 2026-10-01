@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Maximize2 } from 'lucide-react';
+import { Maximize2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Hero } from '../components/Hero';
 import { LightboxModal } from '../components/LightboxModal';
 import { HeroConfig, GalleryPhoto, AppRoute } from '../types';
+
+const PHOTOS_PER_PAGE = 12;
 
 interface GalleryViewProps {
   heroConfig: HeroConfig;
@@ -23,6 +25,7 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
   const [photos, setPhotos] = useState<GalleryPhoto[]>([]);
   const [categories, setCategories] = useState<{ label: string; value: string }[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     async function loadData() {
@@ -42,14 +45,31 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
     loadData();
   }, []);
 
+  // Reset to page 1 when category changes
+  useEffect(() => {
+    setCurrentPage(1);
+    setLightboxIndex(null);
+  }, [activeCategory]);
+
   const filteredPhotos = photos.filter((photo) => {
     if (activeCategory === 'all') return true;
     return photo.category === activeCategory;
   });
 
+  const totalPages = Math.ceil(filteredPhotos.length / PHOTOS_PER_PAGE);
+  const paginatedPhotos = filteredPhotos.slice(
+    (currentPage - 1) * PHOTOS_PER_PAGE,
+    currentPage * PHOTOS_PER_PAGE
+  );
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <div>
-      {/* 1. Replaceable Hero */}
+      {/* Hero */}
       <Hero
         config={heroConfig}
         onPrimaryClick={onOpenBooking}
@@ -57,7 +77,7 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
         onOpenHeroManager={onOpenHeroManager}
       />
 
-      {/* 2. Gallery Section */}
+      {/* Gallery Section */}
       <section className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between mb-12 gap-6">
           <div>
@@ -69,7 +89,7 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
             </h2>
           </div>
 
-          {/* Filter Pills — only show after loaded */}
+          {/* Filter Pills */}
           {!isLoading && categories.length > 0 && (
             <div className="flex flex-wrap items-center gap-2 p-1.5 rounded-full bg-[#F2EDE4] border border-[#E7E0D5]">
               {categories.map((cat) => (
@@ -89,10 +109,10 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
           )}
         </div>
 
-        {/* Loading skeleton */}
+        {/* Loading Skeleton */}
         {isLoading && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {Array.from({ length: 6 }).map((_, i) => (
+            {Array.from({ length: PHOTOS_PER_PAGE }).map((_, i) => (
               <div
                 key={i}
                 className="h-72 rounded-3xl bg-stone-200 animate-pulse border border-[#E7E0D5]"
@@ -103,45 +123,85 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
 
         {/* Image Grid */}
         {!isLoading && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredPhotos.map((photo, i) => (
-              <motion.div
-                key={photo.id}
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: i * 0.05 }}
-                onClick={() => setLightboxIndex(i)}
-                className="group relative h-72 rounded-3xl overflow-hidden cursor-pointer bg-stone-200 border border-[#E7E0D5] shadow-sm hover:shadow-xl transition-all"
-              >
-                <img
-                  src={photo.url}
-                  alt={photo.alt || photo.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
-                />
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {paginatedPhotos.map((photo, i) => (
+                <motion.div
+                  key={photo.id}
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.35, delay: i * 0.04 }}
+                  onClick={() => setLightboxIndex((currentPage - 1) * PHOTOS_PER_PAGE + i)}
+                  className="group relative h-72 rounded-3xl overflow-hidden cursor-pointer bg-stone-200 border border-[#E7E0D5] shadow-sm hover:shadow-xl transition-all"
+                >
+                  <img
+                    src={photo.url}
+                    alt={photo.alt || photo.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  />
 
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
-                  <span className="text-[10px] uppercase tracking-widest text-[#DFCAA8] font-semibold mb-1">
-                    {categories.find((c) => c.value === photo.category)?.label || photo.category}
-                  </span>
-                  <h4 className="font-luxury-serif text-lg font-bold leading-tight">
-                    {photo.title}
-                  </h4>
-                  <div className="mt-2 inline-flex items-center space-x-1 text-xs text-white/80">
-                    <Maximize2 className="w-3.5 h-3.5 text-[#C5A880]" />
-                    <span>View High-Resolution</span>
+                  {/* Hover Overlay — category badge + zoom icon only */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center">
+                    <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center">
+                      <Maximize2 className="w-5 h-5 text-white" />
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
 
-            {filteredPhotos.length === 0 && (
-              <div className="col-span-full py-20 text-center text-[#68726B]">
-                <p className="text-lg font-medium">No photos in this category yet.</p>
+              {paginatedPhotos.length === 0 && (
+                <div className="col-span-full py-20 text-center text-[#68726B]">
+                  <p className="text-lg font-medium">No photos in this category yet.</p>
+                </div>
+              )}
+            </div>
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="flex items-center justify-center gap-2 mt-14">
+                <button
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                  className="w-10 h-10 rounded-full flex items-center justify-center border border-[#E7E0D5] bg-white text-[#1C3829] hover:bg-[#F2EDE4] disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+
+                {Array.from({ length: totalPages }).map((_, i) => {
+                  const page = i + 1;
+                  return (
+                    <button
+                      key={page}
+                      onClick={() => handlePageChange(page)}
+                      className={`w-10 h-10 rounded-full text-sm font-semibold transition-all ${
+                        currentPage === page
+                          ? 'bg-[#1C3829] text-white shadow-md'
+                          : 'bg-white border border-[#E7E0D5] text-[#4A554F] hover:bg-[#F2EDE4] hover:text-[#1C3829]'
+                      }`}
+                    >
+                      {page}
+                    </button>
+                  );
+                })}
+
+                <button
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                  className="w-10 h-10 rounded-full flex items-center justify-center border border-[#E7E0D5] bg-white text-[#1C3829] hover:bg-[#F2EDE4] disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
               </div>
             )}
-          </div>
+
+            {/* Page info */}
+            {totalPages > 1 && (
+              <p className="text-center text-xs text-[#68726B] mt-4">
+                Page {currentPage} of {totalPages} &mdash; {filteredPhotos.length} photos total
+              </p>
+            )}
+          </>
         )}
 
         {/* Lightbox Modal */}
