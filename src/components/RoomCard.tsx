@@ -66,9 +66,17 @@ export const RoomCard: React.FC<RoomCardProps> = ({
             </span>
           </div>
 
-          <h3 className="font-luxury-serif text-xl sm:text-2xl font-bold text-[#1C3829] group-hover:text-[#2D5540] transition-colors leading-snug mb-2">
-            {room.title}
-          </h3>
+          <div className="flex justify-between items-start mb-2 gap-3">
+            <h3 className="font-luxury-serif text-xl sm:text-2xl font-bold text-[#1C3829] group-hover:text-[#2D5540] transition-colors leading-snug">
+              {room.title}
+            </h3>
+            {room.pricePerNight > 0 && (
+              <div className="text-right shrink-0 pt-0.5">
+                <span className="text-[#1C3829] font-bold text-lg sm:text-xl block leading-none">{room.currency === 'USD' ? '$' : ''}{room.pricePerNight}</span>
+                <span className="text-[#68726B] text-[9px] sm:text-[10px] uppercase tracking-wider font-semibold">Per Night</span>
+              </div>
+            )}
+          </div>
 
           <p className="text-xs sm:text-sm text-[#555F59] line-clamp-2 leading-relaxed mb-6 font-light">
             {room.shortDescription}

@@ -46,7 +46,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
           carouselRef.current.scrollBy({ left: cardWidth, behavior: 'smooth' });
         }
       }
-    }, 4000);
+    }, 5500);
     return () => clearInterval(timer);
   }, []);
 
