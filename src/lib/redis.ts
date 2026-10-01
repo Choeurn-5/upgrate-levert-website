@@ -28,4 +28,5 @@ export const REDIS_KEYS = {
   BLOG_POSTS: 'levert:blog_posts',
   BLOG_CATEGORIES: 'levert:blog_categories',
   HERO_SETTINGS: 'levert:hero_settings',
+  TOURS: 'levert:tours',
 } as const;

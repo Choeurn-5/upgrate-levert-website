@@ -97,15 +97,13 @@ export function GlobalProvider({ children }: { children: React.ReactNode }) {
     async function loadWpData() {
       setIsLoadingWp(true);
       try {
-        const [wpRooms, wpTours, wpDining, wpSpa] = await Promise.all([
+        const [wpRooms, wpDining, wpSpa] = await Promise.all([
           getWordPressRooms(),
-          getWordPressTours(),
           getWordPressDining(),
           getWordPressSpa(),
         ]);
         if (isMounted) {
           if (wpRooms && wpRooms.length > 0) setRooms(wpRooms);
-          if (wpTours && wpTours.length > 0) setTours(wpTours);
           if (wpDining && wpDining.length > 0) setDiningList(wpDining);
           if (wpSpa && wpSpa.length > 0) setSpaList(wpSpa);
           setLastSyncedTime(new Date());
@@ -117,17 +115,34 @@ export function GlobalProvider({ children }: { children: React.ReactNode }) {
       }
     }
 
+    // Load tours from our own API (admin-managed, Redis-backed)
+    async function loadApiTours() {
+      try {
+        const res = await fetch('/api/tours');
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data) && data.length > 0 && isMounted) {
+            setTours(data);
+          }
+        }
+      } catch {
+        // Keep static tours as fallback
+      }
+    }
+
     loadWpData();
+    loadApiTours();
 
     const intervalId = setInterval(() => {
-      loadWpData();
-    }, 45000);
+      loadApiTours();
+    }, 60000);
 
     return () => {
       isMounted = false;
       clearInterval(intervalId);
     };
   }, []);
+
 
   // Navigation Handler
   const handleNavigate = (route: AppRoute, slug?: string) => {
@@ -189,14 +204,12 @@ export function GlobalProvider({ children }: { children: React.ReactNode }) {
   const handleManualSync = async () => {
     setIsLoadingWp(true);
     try {
-      const [wpRooms, wpTours, wpDining, wpSpa] = await Promise.all([
+      const [wpRooms, wpDining, wpSpa] = await Promise.all([
         getWordPressRooms(),
-        getWordPressTours(),
         getWordPressDining(),
         getWordPressSpa(),
       ]);
       if (wpRooms && wpRooms.length > 0) setRooms(wpRooms);
-      if (wpTours && wpTours.length > 0) setTours(wpTours);
       if (wpDining && wpDining.length > 0) setDiningList(wpDining);
       if (wpSpa && wpSpa.length > 0) setSpaList(wpSpa);
       setLastSyncedTime(new Date());
@@ -206,6 +219,7 @@ export function GlobalProvider({ children }: { children: React.ReactNode }) {
       setIsLoadingWp(false);
     }
   };
+
 
   // Resolve Active Hero Key
   const getActiveHeroKey = (): string => {
