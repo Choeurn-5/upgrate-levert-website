@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { Sparkles, MapPin, Award, ArrowRight, ShieldCheck, Utensils, Compass, Heart, Check, Clock, Phone, ChevronRight } from 'lucide-react';
+import { Sparkles, MapPin, Award, ArrowRight, ShieldCheck, Utensils, Compass, Heart, Check, Clock, Phone, ChevronRight, Wine, Coffee, Star } from 'lucide-react';
 import { Hero } from '../components/Hero';
 import { RoomCard } from '../components/RoomCard';
 import { TourCard } from '../components/TourCard';
@@ -590,75 +590,187 @@ export const HomeView: React.FC<HomeViewProps> = ({
           {/* Leadership Team Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {/* Deepool */}
-            <div className="bg-[#FAF8F5] rounded-3xl p-6 border border-[#E7E0D5] flex flex-col items-center text-center shadow-xs hover:shadow-lg transition-all group">
-              <div className="w-28 h-28 rounded-2xl overflow-hidden mb-4 border-2 border-[#C5A880]/60 shadow-sm shrink-0">
-                <img
-                  src="/images/staff-image/deepool-front-office-manager.jpg"
-                  alt="Deepool - Front Office Manager"
-                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                />
+            <div className="relative bg-gradient-to-b from-white via-[#FCFAF7] to-[#F7F2E9] rounded-3xl p-7 border border-[#E4DDD3] hover:border-[#C5A880] shadow-[0_4px_25px_-5px_rgba(28,56,41,0.06)] hover:shadow-[0_20px_40px_-10px_rgba(28,56,41,0.15)] -translate-y-0 hover:-translate-y-2 transition-all duration-500 flex flex-col items-center text-center overflow-hidden group">
+              <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#C5A880] to-transparent opacity-40 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute -top-10 -right-10 w-24 h-24 rounded-full bg-[#DFCAA8]/15 blur-xl pointer-events-none group-hover:scale-150 transition-transform duration-700" />
+
+              <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-[10px] font-bold tracking-[0.16em] uppercase bg-[#1C3829]/5 text-[#1C3829] border border-[#1C3829]/10 mb-6 group-hover:bg-[#1C3829] group-hover:text-[#DFCAA8] transition-colors duration-300">
+                <Compass className="w-3 h-3 text-[#C5A880]" />
+                <span>Front Office</span>
+              </span>
+
+              {/* Medallion Portrait */}
+              <div className="relative mb-5">
+                <div className="w-32 h-32 sm:w-36 sm:h-36 rounded-full p-1.5 bg-gradient-to-tr from-[#C5A880] via-[#DFCAA8] to-[#1C3829]/40 shadow-md group-hover:shadow-[0_10px_25px_rgba(197,168,128,0.35)] transition-all duration-500 group-hover:scale-105">
+                  <div className="w-full h-full rounded-full overflow-hidden bg-white ring-2 ring-white/90 shadow-inner">
+                    <img
+                      src="/images/staff-image/deepool-front-office-manager.jpg"
+                      alt="Deepool - Front Office Manager"
+                      className="w-full h-full object-cover object-top filter contrast-[1.02] group-hover:scale-110 transition-transform duration-700"
+                    />
+                  </div>
+                </div>
+                <div className="absolute -bottom-1 -right-1 w-9 h-9 rounded-full bg-[#1C3829] border-2 border-white text-[#DFCAA8] flex items-center justify-center shadow-md">
+                  <Compass className="w-4 h-4" />
+                </div>
               </div>
-              <h3 className="font-luxury-serif text-xl font-bold text-[#1C3829]">Deepool</h3>
-              <span className="text-xs font-semibold text-[#C5A880] uppercase tracking-wider mt-0.5">
+
+              <h3 className="font-luxury-serif text-2xl font-bold text-[#1C3829] tracking-tight group-hover:text-[#2D5540] transition-colors">
+                Deepool
+              </h3>
+              <span className="text-[11px] font-semibold text-[#A8824B] uppercase tracking-[0.14em] mt-1">
                 Front Office Manager
               </span>
-              <p className="text-xs text-[#555F59] font-light mt-3 leading-relaxed">
-                Leads our front-desk team with an emphasis on attentive service, organizing seamless temple tour itineraries, and private transport.
+
+              <div className="w-12 h-px bg-gradient-to-r from-transparent via-[#C5A880] to-transparent my-3.5" />
+
+              <p className="text-xs text-[#555F59] font-light leading-relaxed flex-1">
+                Leads our front-desk team with attentive warmth, curating private temple itineraries, chauffeured transfers, and round-the-clock personalized guest care.
               </p>
+
+              <div className="mt-5 pt-3.5 border-t border-[#E7E0D5]/70 w-full flex items-center justify-between text-[11px] text-[#8C7654]">
+                <span className="font-medium tracking-wide">Family Leadership</span>
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#C5A880]" />
+                <span className="italic font-light">Le Vert Angkor</span>
+              </div>
             </div>
 
             {/* Sotheara */}
-            <div className="bg-[#FAF8F5] rounded-3xl p-6 border border-[#E7E0D5] flex flex-col items-center text-center shadow-xs hover:shadow-lg transition-all group">
-              <div className="w-28 h-28 rounded-2xl overflow-hidden mb-4 border-2 border-[#C5A880]/60 shadow-sm shrink-0">
-                <img
-                  src="/images/staff-image/sotheara-front-office-supervisor.jpg"
-                  alt="Sotheara - Front Office Supervisor"
-                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                />
+            <div className="relative bg-gradient-to-b from-white via-[#FCFAF7] to-[#F7F2E9] rounded-3xl p-7 border border-[#E4DDD3] hover:border-[#C5A880] shadow-[0_4px_25px_-5px_rgba(28,56,41,0.06)] hover:shadow-[0_20px_40px_-10px_rgba(28,56,41,0.15)] -translate-y-0 hover:-translate-y-2 transition-all duration-500 flex flex-col items-center text-center overflow-hidden group">
+              <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#C5A880] to-transparent opacity-40 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute -top-10 -right-10 w-24 h-24 rounded-full bg-[#DFCAA8]/15 blur-xl pointer-events-none group-hover:scale-150 transition-transform duration-700" />
+
+              <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-[10px] font-bold tracking-[0.16em] uppercase bg-[#1C3829]/5 text-[#1C3829] border border-[#1C3829]/10 mb-6 group-hover:bg-[#1C3829] group-hover:text-[#DFCAA8] transition-colors duration-300">
+                <Heart className="w-3 h-3 text-[#C5A880]" />
+                <span>Guest Relations</span>
+              </span>
+
+              {/* Medallion Portrait */}
+              <div className="relative mb-5">
+                <div className="w-32 h-32 sm:w-36 sm:h-36 rounded-full p-1.5 bg-gradient-to-tr from-[#C5A880] via-[#DFCAA8] to-[#1C3829]/40 shadow-md group-hover:shadow-[0_10px_25px_rgba(197,168,128,0.35)] transition-all duration-500 group-hover:scale-105">
+                  <div className="w-full h-full rounded-full overflow-hidden bg-white ring-2 ring-white/90 shadow-inner">
+                    <img
+                      src="/images/staff-image/sotheara-front-office-supervisor.jpg"
+                      alt="Sotheara - Front Office Supervisor"
+                      className="w-full h-full object-cover object-top filter contrast-[1.02] group-hover:scale-110 transition-transform duration-700"
+                    />
+                  </div>
+                </div>
+                <div className="absolute -bottom-1 -right-1 w-9 h-9 rounded-full bg-[#1C3829] border-2 border-white text-[#DFCAA8] flex items-center justify-center shadow-md">
+                  <Heart className="w-4 h-4" />
+                </div>
               </div>
-              <h3 className="font-luxury-serif text-xl font-bold text-[#1C3829]">Sotheara</h3>
-              <span className="text-xs font-semibold text-[#C5A880] uppercase tracking-wider mt-0.5">
+
+              <h3 className="font-luxury-serif text-2xl font-bold text-[#1C3829] tracking-tight group-hover:text-[#2D5540] transition-colors">
+                Sotheara
+              </h3>
+              <span className="text-[11px] font-semibold text-[#A8824B] uppercase tracking-[0.14em] mt-1">
                 Front Office Supervisor
               </span>
-              <p className="text-xs text-[#555F59] font-light mt-3 leading-relaxed">
-                A warm, welcoming presence in our lobby, ensuring your arrival, stay, and departure run effortlessly while sharing local insider secrets.
+
+              <div className="w-12 h-px bg-gradient-to-r from-transparent via-[#C5A880] to-transparent my-3.5" />
+
+              <p className="text-xs text-[#555F59] font-light leading-relaxed flex-1">
+                A gracious, welcoming presence in our lobby ensuring seamless arrivals, effortless departures, and sharing insider secrets on local Siem Reap culture.
               </p>
+
+              <div className="mt-5 pt-3.5 border-t border-[#E7E0D5]/70 w-full flex items-center justify-between text-[11px] text-[#8C7654]">
+                <span className="font-medium tracking-wide">Family Leadership</span>
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#C5A880]" />
+                <span className="italic font-light">Le Vert Angkor</span>
+              </div>
             </div>
 
             {/* Veasna */}
-            <div className="bg-[#FAF8F5] rounded-3xl p-6 border border-[#E7E0D5] flex flex-col items-center text-center shadow-xs hover:shadow-lg transition-all group">
-              <div className="w-28 h-28 rounded-2xl overflow-hidden mb-4 border-2 border-[#C5A880]/60 shadow-sm shrink-0">
-                <img
-                  src="/images/staff-image/veasna-restaurant-supervisor.jpg"
-                  alt="Veasna - Restaurant & Rooftop Sky Bar Supervisor"
-                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                />
+            <div className="relative bg-gradient-to-b from-white via-[#FCFAF7] to-[#F7F2E9] rounded-3xl p-7 border border-[#E4DDD3] hover:border-[#C5A880] shadow-[0_4px_25px_-5px_rgba(28,56,41,0.06)] hover:shadow-[0_20px_40px_-10px_rgba(28,56,41,0.15)] -translate-y-0 hover:-translate-y-2 transition-all duration-500 flex flex-col items-center text-center overflow-hidden group">
+              <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#C5A880] to-transparent opacity-40 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute -top-10 -right-10 w-24 h-24 rounded-full bg-[#DFCAA8]/15 blur-xl pointer-events-none group-hover:scale-150 transition-transform duration-700" />
+
+              <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-[10px] font-bold tracking-[0.16em] uppercase bg-[#1C3829]/5 text-[#1C3829] border border-[#1C3829]/10 mb-6 group-hover:bg-[#1C3829] group-hover:text-[#DFCAA8] transition-colors duration-300">
+                <Wine className="w-3 h-3 text-[#C5A880]" />
+                <span>Food &amp; Beverage</span>
+              </span>
+
+              {/* Medallion Portrait */}
+              <div className="relative mb-5">
+                <div className="w-32 h-32 sm:w-36 sm:h-36 rounded-full p-1.5 bg-gradient-to-tr from-[#C5A880] via-[#DFCAA8] to-[#1C3829]/40 shadow-md group-hover:shadow-[0_10px_25px_rgba(197,168,128,0.35)] transition-all duration-500 group-hover:scale-105">
+                  <div className="w-full h-full rounded-full overflow-hidden bg-white ring-2 ring-white/90 shadow-inner">
+                    <img
+                      src="/images/staff-image/veasna-restaurant-supervisor.jpg"
+                      alt="Veasna - Restaurant & Rooftop Sky Bar Supervisor"
+                      className="w-full h-full object-cover object-top filter contrast-[1.02] group-hover:scale-110 transition-transform duration-700"
+                    />
+                  </div>
+                </div>
+                <div className="absolute -bottom-1 -right-1 w-9 h-9 rounded-full bg-[#1C3829] border-2 border-white text-[#DFCAA8] flex items-center justify-center shadow-md">
+                  <Wine className="w-4 h-4" />
+                </div>
               </div>
-              <h3 className="font-luxury-serif text-xl font-bold text-[#1C3829]">Veasna</h3>
-              <span className="text-xs font-semibold text-[#C5A880] uppercase tracking-wider mt-0.5">
+
+              <h3 className="font-luxury-serif text-2xl font-bold text-[#1C3829] tracking-tight group-hover:text-[#2D5540] transition-colors">
+                Veasna
+              </h3>
+              <span className="text-[11px] font-semibold text-[#A8824B] uppercase tracking-[0.14em] mt-1">
                 Restaurant &amp; Sky Bar Supervisor
               </span>
-              <p className="text-xs text-[#555F59] font-light mt-3 leading-relaxed">
-                Oversees our main dining venue and scenic Rooftop Sky Bar, curating peaceful breakfasts and sunset cocktails by the rooftop pool.
+
+              <div className="w-12 h-px bg-gradient-to-r from-transparent via-[#C5A880] to-transparent my-3.5" />
+
+              <p className="text-xs text-[#555F59] font-light leading-relaxed flex-1">
+                Oversees our ground-floor restaurant and open-air Rooftop Sky Bar, curating peaceful poolside breakfasts and sunset cocktail hours with attentive care.
               </p>
+
+              <div className="mt-5 pt-3.5 border-t border-[#E7E0D5]/70 w-full flex items-center justify-between text-[11px] text-[#8C7654]">
+                <span className="font-medium tracking-wide">Family Leadership</span>
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#C5A880]" />
+                <span className="italic font-light">Le Vert Angkor</span>
+              </div>
             </div>
 
             {/* Sous Chef Chansy */}
-            <div className="bg-[#FAF8F5] rounded-3xl p-6 border border-[#E7E0D5] flex flex-col items-center text-center shadow-xs hover:shadow-lg transition-all group">
-              <div className="w-28 h-28 rounded-2xl overflow-hidden mb-4 border-2 border-[#C5A880]/60 shadow-sm shrink-0 bg-[#1C3829]/5">
-                <img
-                  src="/images/Home/home-dining-image/IMG_8302.jpg"
-                  alt="Sous Chef Chansy - Culinary Excellence"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+            <div className="relative bg-gradient-to-b from-white via-[#FCFAF7] to-[#F7F2E9] rounded-3xl p-7 border border-[#E4DDD3] hover:border-[#C5A880] shadow-[0_4px_25px_-5px_rgba(28,56,41,0.06)] hover:shadow-[0_20px_40px_-10px_rgba(28,56,41,0.15)] -translate-y-0 hover:-translate-y-2 transition-all duration-500 flex flex-col items-center text-center overflow-hidden group">
+              <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#C5A880] to-transparent opacity-40 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute -top-10 -right-10 w-24 h-24 rounded-full bg-[#DFCAA8]/15 blur-xl pointer-events-none group-hover:scale-150 transition-transform duration-700" />
+
+              <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-[10px] font-bold tracking-[0.16em] uppercase bg-[#1C3829]/5 text-[#1C3829] border border-[#1C3829]/10 mb-6 group-hover:bg-[#1C3829] group-hover:text-[#DFCAA8] transition-colors duration-300">
+                <Utensils className="w-3 h-3 text-[#C5A880]" />
+                <span>Culinary Arts</span>
+              </span>
+
+              {/* Medallion Portrait */}
+              <div className="relative mb-5">
+                <div className="w-32 h-32 sm:w-36 sm:h-36 rounded-full p-1.5 bg-gradient-to-tr from-[#C5A880] via-[#DFCAA8] to-[#1C3829]/40 shadow-md group-hover:shadow-[0_10px_25px_rgba(197,168,128,0.35)] transition-all duration-500 group-hover:scale-105">
+                  <div className="w-full h-full rounded-full overflow-hidden bg-white ring-2 ring-white/90 shadow-inner">
+                    <img
+                      src="/images/staff-image/chansy-sous-chef-avatar.jpg"
+                      alt="Sous Chef Chansy - Culinary Artistry"
+                      className="w-full h-full object-cover filter contrast-[1.02] group-hover:scale-110 transition-transform duration-700"
+                    />
+                  </div>
+                </div>
+                <div className="absolute -bottom-1 -right-1 w-9 h-9 rounded-full bg-[#1C3829] border-2 border-white text-[#DFCAA8] flex items-center justify-center shadow-md">
+                  <Utensils className="w-4 h-4" />
+                </div>
               </div>
-              <h3 className="font-luxury-serif text-xl font-bold text-[#1C3829]">Sous Chef Chansy</h3>
-              <span className="text-xs font-semibold text-[#C5A880] uppercase tracking-wider mt-0.5">
+
+              <h3 className="font-luxury-serif text-2xl font-bold text-[#1C3829] tracking-tight group-hover:text-[#2D5540] transition-colors">
+                Sous Chef Chansy
+              </h3>
+              <span className="text-[11px] font-semibold text-[#A8824B] uppercase tracking-[0.14em] mt-1">
                 Culinary Excellence
               </span>
-              <p className="text-xs text-[#555F59] font-light mt-3 leading-relaxed">
-                Behind every memorable dish, preparing authentic Cambodian specialties like traditional Fish Amok and Lok Lak with fresh local care.
+
+              <div className="w-12 h-px bg-gradient-to-r from-transparent via-[#C5A880] to-transparent my-3.5" />
+
+              <p className="text-xs text-[#555F59] font-light leading-relaxed flex-1">
+                Behind every authentic dining experience, masterfully preparing traditional Cambodian classics like Fish Amok and Lok Lak with fresh local market ingredients.
               </p>
+
+              <div className="mt-5 pt-3.5 border-t border-[#E7E0D5]/70 w-full flex items-center justify-between text-[11px] text-[#8C7654]">
+                <span className="font-medium tracking-wide">Family Leadership</span>
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#C5A880]" />
+                <span className="italic font-light">Le Vert Angkor</span>
+              </div>
             </div>
           </div>
 

@@ -97,35 +97,44 @@ export const ToursView: React.FC<ToursViewProps> = ({
         </div>
 
         {/* Personalized Concierge Tour Assistance */}
-        <div className="mt-12 p-8 sm:p-10 rounded-3xl bg-[#FAF8F5] border border-[#E7E0D5] flex flex-col md:flex-row items-center gap-8 shadow-xs">
-          <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border-2 border-[#C5A880]/60 shrink-0 shadow-sm">
-            <img
-              src="/images/staff-image/deepool-front-office-manager.jpg"
-              alt="Deepool - Front Office Manager"
-              className="w-full h-full object-cover object-top"
-            />
+        <div className="mt-12 relative bg-gradient-to-b from-white via-[#FCFAF7] to-[#F7F2E9] rounded-3xl p-8 sm:p-12 border border-[#E4DDD3] hover:border-[#C5A880] flex flex-col md:flex-row items-center gap-8 shadow-[0_4px_25px_-5px_rgba(28,56,41,0.06)] hover:shadow-[0_20px_40px_-10px_rgba(28,56,41,0.14)] transition-all duration-500 overflow-hidden group">
+          <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#C5A880] to-transparent opacity-40 group-hover:opacity-100 transition-opacity duration-500" />
+          
+          <div className="relative shrink-0">
+            <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-full p-1.5 bg-gradient-to-tr from-[#C5A880] via-[#DFCAA8] to-[#1C3829]/40 shadow-md group-hover:shadow-[0_10px_25px_rgba(197,168,128,0.35)] transition-all duration-500 group-hover:scale-105">
+              <div className="w-full h-full rounded-full overflow-hidden bg-white ring-2 ring-white/90 shadow-inner">
+                <img
+                  src="/images/staff-image/deepool-front-office-manager.jpg"
+                  alt="Deepool - Front Office Manager"
+                  className="w-full h-full object-cover object-top filter contrast-[1.02] group-hover:scale-110 transition-transform duration-700"
+                />
+              </div>
+            </div>
+            <div className="absolute -bottom-1 -right-1 w-9 h-9 rounded-full bg-[#1C3829] border-2 border-white text-[#DFCAA8] flex items-center justify-center shadow-md">
+              <Compass className="w-4 h-4" />
+            </div>
           </div>
 
           <div className="space-y-3 flex-1 text-center md:text-left">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#1C3829]/10 text-[#1C3829] text-xs font-semibold uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5 text-[#C5A880]" />
+            <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-[10px] font-bold tracking-[0.16em] uppercase bg-[#1C3829]/5 text-[#1C3829] border border-[#1C3829]/10">
+              <Sparkles className="w-3 h-3 text-[#C5A880]" />
               <span>Personalized Concierge Care</span>
-            </div>
-            <h3 className="font-luxury-serif text-2xl sm:text-3xl font-bold text-[#1C3829]">
+            </span>
+            <h3 className="font-luxury-serif text-2xl sm:text-3xl font-bold text-[#1C3829] tracking-tight group-hover:text-[#2D5540] transition-colors">
               Custom Angkor Itineraries with Deepool &amp; Team
             </h3>
-            <p className="text-xs sm:text-sm text-[#4A554F] font-light leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#4A554F] font-light leading-relaxed italic">
               &quot;Whether you wish to experience the dawn serenity of Angkor Wat, explore the jungle-entangled stone roots of Ta Prohm, or arrange private air-conditioned transport with cold water and towels, our front-desk team ensures every detail of your journey feels personalized and effortless.&quot;
             </p>
-            <div className="text-xs font-semibold text-[#1C3829]">
-              — Deepool, <span className="text-[#C5A880]">Front Office Manager</span>
+            <div className="text-xs font-semibold text-[#1C3829] pt-1">
+              — Deepool, <span className="text-[#A8824B] uppercase tracking-wider text-[11px]">Front Office Manager</span>
             </div>
           </div>
 
           <div className="shrink-0">
             <button
               onClick={() => onOpenBooking('tour-custom-concierge')}
-              className="px-6 py-3.5 rounded-full bg-[#1C3829] hover:bg-[#12241A] text-[#FAF8F5] text-xs font-semibold uppercase tracking-wider transition-all shadow-md active:scale-95 flex items-center space-x-2 cursor-pointer"
+              className="px-7 py-4 rounded-full bg-[#1C3829] hover:bg-[#12241A] text-[#FAF8F5] text-xs font-semibold uppercase tracking-wider transition-all shadow-md hover:shadow-lg active:scale-95 flex items-center space-x-2.5 cursor-pointer"
             >
               <Compass className="w-4 h-4 text-[#C5A880]" />
               <span>Customize Your Tour</span>

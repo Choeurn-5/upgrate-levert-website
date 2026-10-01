@@ -15,6 +15,7 @@ import {
   Moon,
   Eye,
   FileText,
+  Wine,
 } from 'lucide-react';
 import { Hero } from '../components/Hero';
 import { HeroConfig, AppRoute, DiningExperience } from '../types';
@@ -241,44 +242,74 @@ export const DiningView: React.FC<DiningViewProps> = ({
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Veasna Card */}
-            <div className="bg-white rounded-2xl p-6 sm:p-7 border border-[#E7E0D5] flex flex-col sm:flex-row gap-5 items-center sm:items-start shadow-xs hover:border-[#C5A880] transition-colors">
-              <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden border-2 border-[#C5A880]/60 shrink-0 shadow-sm">
-                <img
-                  src="/images/staff-image/veasna-restaurant-supervisor.jpg"
-                  alt="Veasna - Restaurant & Rooftop Sky Bar Supervisor"
-                  className="w-full h-full object-cover object-top"
-                />
-              </div>
-              <div className="space-y-2 text-center sm:text-left flex-1">
-                <div>
-                  <h4 className="font-luxury-serif text-xl font-bold text-[#1C3829]">Veasna</h4>
-                  <div className="text-xs font-semibold text-[#C5A880] uppercase tracking-wider">
-                    Restaurant &amp; Rooftop Sky Bar Supervisor
+            <div className="relative bg-gradient-to-b from-white via-[#FCFAF7] to-[#F7F2E9] rounded-3xl p-7 sm:p-8 border border-[#E4DDD3] hover:border-[#C5A880] shadow-[0_4px_25px_-5px_rgba(28,56,41,0.06)] hover:shadow-[0_20px_40px_-10px_rgba(28,56,41,0.14)] transition-all duration-500 flex flex-col sm:flex-row gap-6 items-center sm:items-start group overflow-hidden">
+              <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#C5A880] to-transparent opacity-40 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              <div className="relative shrink-0">
+                <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-full p-1.5 bg-gradient-to-tr from-[#C5A880] via-[#DFCAA8] to-[#1C3829]/40 shadow-md group-hover:shadow-[0_10px_25px_rgba(197,168,128,0.35)] transition-all duration-500 group-hover:scale-105">
+                  <div className="w-full h-full rounded-full overflow-hidden bg-white ring-2 ring-white/90 shadow-inner">
+                    <img
+                      src="/images/staff-image/veasna-restaurant-supervisor.jpg"
+                      alt="Veasna - Restaurant & Rooftop Sky Bar Supervisor"
+                      className="w-full h-full object-cover object-top filter contrast-[1.02] group-hover:scale-110 transition-transform duration-700"
+                    />
                   </div>
                 </div>
-                <p className="text-xs text-[#4A554F] font-light leading-relaxed">
+                <div className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-[#1C3829] border-2 border-white text-[#DFCAA8] flex items-center justify-center shadow-md">
+                  <Wine className="w-4 h-4" />
+                </div>
+              </div>
+
+              <div className="space-y-2 text-center sm:text-left flex-1">
+                <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-[10px] font-bold tracking-[0.16em] uppercase bg-[#1C3829]/5 text-[#1C3829] border border-[#1C3829]/10">
+                  <Wine className="w-3 h-3 text-[#C5A880]" />
+                  <span>Food &amp; Beverage</span>
+                </span>
+                <h4 className="font-luxury-serif text-2xl font-bold text-[#1C3829] tracking-tight group-hover:text-[#2D5540] transition-colors pt-1">
+                  Veasna
+                </h4>
+                <div className="text-xs font-semibold text-[#A8824B] uppercase tracking-[0.12em]">
+                  Restaurant &amp; Rooftop Sky Bar Supervisor
+                </div>
+                <div className="w-12 h-px bg-gradient-to-r from-transparent via-[#C5A880] to-transparent my-2" />
+                <p className="text-xs text-[#555F59] font-light leading-relaxed">
                   Dining and relaxing at Le Vert Angkor Hotel is an essential part of the experience. Veasna oversees both our main dining venue and our scenic Rooftop Sky Bar. Whether you are enjoying a peaceful breakfast or sipping sunset cocktails by the rooftop pool overlooking the Siem Reap skyline, Veasna ensures a warm, attentive, and cozy atmosphere.
                 </p>
               </div>
             </div>
 
             {/* Sous Chef Chansy Card */}
-            <div className="bg-white rounded-2xl p-6 sm:p-7 border border-[#E7E0D5] flex flex-col sm:flex-row gap-5 items-center sm:items-start shadow-xs hover:border-[#C5A880] transition-colors">
-              <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden border-2 border-[#C5A880]/60 shrink-0 shadow-sm bg-[#1C3829]/5">
-                <img
-                  src="/images/Home/home-dining-image/IMG_8302.jpg"
-                  alt="Sous Chef Chansy - Culinary Artistry"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="space-y-2 text-center sm:text-left flex-1">
-                <div>
-                  <h4 className="font-luxury-serif text-xl font-bold text-[#1C3829]">Sous Chef Chansy</h4>
-                  <div className="text-xs font-semibold text-[#C5A880] uppercase tracking-wider">
-                    Culinary Excellence &amp; Khmer Specialties
+            <div className="relative bg-gradient-to-b from-white via-[#FCFAF7] to-[#F7F2E9] rounded-3xl p-7 sm:p-8 border border-[#E4DDD3] hover:border-[#C5A880] shadow-[0_4px_25px_-5px_rgba(28,56,41,0.06)] hover:shadow-[0_20px_40px_-10px_rgba(28,56,41,0.14)] transition-all duration-500 flex flex-col sm:flex-row gap-6 items-center sm:items-start group overflow-hidden">
+              <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#C5A880] to-transparent opacity-40 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              <div className="relative shrink-0">
+                <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-full p-1.5 bg-gradient-to-tr from-[#C5A880] via-[#DFCAA8] to-[#1C3829]/40 shadow-md group-hover:shadow-[0_10px_25px_rgba(197,168,128,0.35)] transition-all duration-500 group-hover:scale-105">
+                  <div className="w-full h-full rounded-full overflow-hidden bg-white ring-2 ring-white/90 shadow-inner">
+                    <img
+                      src="/images/staff-image/chansy-sous-chef-avatar.jpg"
+                      alt="Sous Chef Chansy - Culinary Artistry"
+                      className="w-full h-full object-cover filter contrast-[1.02] group-hover:scale-110 transition-transform duration-700"
+                    />
                   </div>
                 </div>
-                <p className="text-xs text-[#4A554F] font-light leading-relaxed">
+                <div className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-[#1C3829] border-2 border-white text-[#DFCAA8] flex items-center justify-center shadow-md">
+                  <Utensils className="w-4 h-4" />
+                </div>
+              </div>
+
+              <div className="space-y-2 text-center sm:text-left flex-1">
+                <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-[10px] font-bold tracking-[0.16em] uppercase bg-[#1C3829]/5 text-[#1C3829] border border-[#1C3829]/10">
+                  <Utensils className="w-3 h-3 text-[#C5A880]" />
+                  <span>Culinary Arts</span>
+                </span>
+                <h4 className="font-luxury-serif text-2xl font-bold text-[#1C3829] tracking-tight group-hover:text-[#2D5540] transition-colors pt-1">
+                  Sous Chef Chansy
+                </h4>
+                <div className="text-xs font-semibold text-[#A8824B] uppercase tracking-[0.12em]">
+                  Culinary Excellence &amp; Khmer Specialties
+                </div>
+                <div className="w-12 h-px bg-gradient-to-r from-transparent via-[#C5A880] to-transparent my-2" />
+                <p className="text-xs text-[#555F59] font-light leading-relaxed">
                   Behind every memorable dish is the culinary artistry of Sous Chef Chansy. Crafting menus that celebrate authentic Cambodian specialties—such as traditional Fish Amok and Lok Lak—alongside popular international favorites, Chansy prepares every meal using fresh local ingredients and heartfelt care.
                 </p>
               </div>

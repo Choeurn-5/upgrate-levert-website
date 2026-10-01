@@ -82,7 +82,7 @@ const AUTHOR_PRESETS = [
   {
     name: 'Sous Chef Chansy',
     role: 'Sous Chef & Culinary Team',
-    avatar: '/images/Home/home-dining-image/IMG_8302.jpg',
+    avatar: '/images/staff-image/chansy-sous-chef-avatar.jpg',
   },
   {
     name: 'Rin Kongvin',

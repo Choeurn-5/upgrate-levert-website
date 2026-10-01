@@ -126,39 +126,55 @@ export const ContactView: React.FC<ContactViewProps> = ({
                 Every aspect of your stay—from private transport to custom Angkor itineraries—is looked after with genuine care by our front office leaders:
               </p>
 
-              <div className="space-y-3 pt-1">
+              <div className="space-y-4 pt-1">
                 {/* Deepool */}
-                <div className="p-3.5 rounded-2xl bg-white border border-[#E7E0D5] flex items-center space-x-3.5 shadow-xs">
-                  <div className="w-12 h-12 rounded-xl overflow-hidden border border-[#C5A880]/60 shrink-0">
-                    <img
-                      src="/images/staff-image/deepool-front-office-manager.jpg"
-                      alt="Deepool - Front Office Manager"
-                      className="w-full h-full object-cover object-top"
-                    />
+                <div className="p-4 rounded-2xl bg-white border border-[#E7E0D5] hover:border-[#C5A880] flex items-center space-x-4 shadow-xs hover:shadow-md transition-all duration-300 group">
+                  <div className="relative shrink-0">
+                    <div className="w-16 h-16 rounded-full p-1 bg-gradient-to-tr from-[#C5A880] to-[#1C3829]/30 shadow-sm group-hover:scale-105 transition-transform duration-300">
+                      <div className="w-full h-full rounded-full overflow-hidden bg-white ring-1 ring-white">
+                        <img
+                          src="/images/staff-image/deepool-front-office-manager.jpg"
+                          alt="Deepool - Front Office Manager"
+                          className="w-full h-full object-cover object-top filter contrast-[1.02]"
+                        />
+                      </div>
+                    </div>
                   </div>
                   <div className="flex-1">
-                    <div className="text-sm font-bold text-[#1C3829]">Deepool</div>
-                    <div className="text-[11px] font-semibold text-[#C5A880]">Front Office Manager</div>
-                    <p className="text-[11px] text-[#68726B] font-light mt-0.5">
-                      Attentive seamless service, temple itineraries, and airport private transfers.
+                    <div className="font-luxury-serif text-base font-bold text-[#1C3829] group-hover:text-[#2D5540] transition-colors">
+                      Deepool
+                    </div>
+                    <div className="text-[10px] font-semibold text-[#A8824B] uppercase tracking-wider">
+                      Front Office Manager
+                    </div>
+                    <p className="text-xs text-[#555F59] font-light mt-1 leading-relaxed">
+                      Attentive seamless service, personalized temple itineraries, and airport private transfers.
                     </p>
                   </div>
                 </div>
 
                 {/* Sotheara */}
-                <div className="p-3.5 rounded-2xl bg-white border border-[#E7E0D5] flex items-center space-x-3.5 shadow-xs">
-                  <div className="w-12 h-12 rounded-xl overflow-hidden border border-[#C5A880]/60 shrink-0">
-                    <img
-                      src="/images/staff-image/sotheara-front-office-supervisor.jpg"
-                      alt="Sotheara - Front Office Supervisor"
-                      className="w-full h-full object-cover object-top"
-                    />
+                <div className="p-4 rounded-2xl bg-white border border-[#E7E0D5] hover:border-[#C5A880] flex items-center space-x-4 shadow-xs hover:shadow-md transition-all duration-300 group">
+                  <div className="relative shrink-0">
+                    <div className="w-16 h-16 rounded-full p-1 bg-gradient-to-tr from-[#C5A880] to-[#1C3829]/30 shadow-sm group-hover:scale-105 transition-transform duration-300">
+                      <div className="w-full h-full rounded-full overflow-hidden bg-white ring-1 ring-white">
+                        <img
+                          src="/images/staff-image/sotheara-front-office-supervisor.jpg"
+                          alt="Sotheara - Front Office Supervisor"
+                          className="w-full h-full object-cover object-top filter contrast-[1.02]"
+                        />
+                      </div>
+                    </div>
                   </div>
                   <div className="flex-1">
-                    <div className="text-sm font-bold text-[#1C3829]">Sotheara</div>
-                    <div className="text-[11px] font-semibold text-[#C5A880]">Front Office Supervisor</div>
-                    <p className="text-[11px] text-[#68726B] font-light mt-0.5">
-                      Warm lobby presence, ensuring seamless arrivals, departures, and local tips.
+                    <div className="font-luxury-serif text-base font-bold text-[#1C3829] group-hover:text-[#2D5540] transition-colors">
+                      Sotheara
+                    </div>
+                    <div className="text-[10px] font-semibold text-[#A8824B] uppercase tracking-wider">
+                      Front Office Supervisor
+                    </div>
+                    <p className="text-xs text-[#555F59] font-light mt-1 leading-relaxed">
+                      Warm lobby presence, ensuring seamless arrivals, effortless departures, and local tips.
                     </p>
                   </div>
                 </div>
