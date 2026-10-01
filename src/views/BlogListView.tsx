@@ -11,6 +11,7 @@ interface BlogListViewProps {
   posts: BlogPost[];
   onNavigate: (route: AppRoute, slug?: string) => void;
   onOpenHeroManager: () => void;
+  isLoading?: boolean;
 }
 
 export const BlogListView: React.FC<BlogListViewProps> = ({
@@ -18,6 +19,7 @@ export const BlogListView: React.FC<BlogListViewProps> = ({
   posts,
   onNavigate,
   onOpenHeroManager,
+  isLoading = false,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All Stories');
   const [searchQuery, setSearchQuery] = useState('');
@@ -208,10 +210,42 @@ export const BlogListView: React.FC<BlogListViewProps> = ({
             </button>
           )}
         </div>
+
+        {/* Loading State */}
+        {isLoading && (
+          <div className="flex flex-col items-center justify-center py-20 text-center">
+            <div className="w-8 h-8 border-2 border-[#C5A880] border-t-transparent rounded-full animate-spin mb-4 mx-auto"></div>
+            <h3 className="text-xl font-luxury-serif text-[#1C3829] mb-2">Loading Journals...</h3>
+          </div>
+        )}
+
+        {/* Empty State */}
+        {!isLoading && filteredPosts.length === 0 && (
+          <div className="text-center py-24 bg-white rounded-3xl border border-[#E7E0D5] mt-8">
+            <div className="w-16 h-16 bg-[#2D5540]/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Search className="w-8 h-8 text-[#1C3829]" />
+            </div>
+            <h3 className="text-2xl font-luxury-serif text-[#1C3829] mb-3">No articles match your criteria</h3>
+            <p className="text-[#68726B] font-light max-w-md mx-auto mb-8">
+              Try adjusting your search terms or selecting a different category to discover our curated stories.
+            </p>
+            {(searchQuery || selectedCategory !== 'All Stories') && (
+              <button
+                onClick={() => {
+                  setSelectedCategory('All Stories');
+                  setSearchQuery('');
+                }}
+                className="text-[#C5A880] hover:underline font-medium"
+              >
+                Reset filters
+              </button>
+            )}
+          </div>
+        )}
       </section>
 
       {/* 3. Featured Story Showcase (Only if no active search or filter) */}
-      {!searchQuery && selectedCategory === 'All Stories' && featuredPost && (
+      {!isLoading && !searchQuery && selectedCategory === 'All Stories' && featuredPost && (
         <section className="pb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
             onClick={() => handlePostClick(featuredPost.slug)}

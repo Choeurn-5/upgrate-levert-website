@@ -869,10 +869,10 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
             <div className="mt-8 text-center">
               <button
-                onClick={() => onNavigate('/blog/', 'welcoming-you-to-our-family-heartfelt-hospitality-le-vert-angkor-hotel')}
+                onClick={() => onNavigate('/blog/')}
                 className="inline-flex items-center space-x-2 text-xs font-semibold uppercase tracking-wider text-[#1C3829] hover:text-[#C5A880] transition-colors"
               >
-                <span>Read Full Story: Welcoming You to Our Family</span>
+                <span>Read More Hotel Stories</span>
                 <ArrowRight className="w-4 h-4 text-[#C5A880]" />
               </button>
             </div>

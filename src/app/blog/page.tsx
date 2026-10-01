@@ -9,7 +9,8 @@ import { BlogPost } from '@/types';
 
 export default function BlogPage() {
   const { heroConfigs, handleNavigate, setIsHeroManagerOpen } = useGlobalContext();
-  const [posts, setPosts] = useState<BlogPost[]>(INITIAL_BLOG_POSTS);
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Fetch updated posts from API
   useEffect(() => {
@@ -31,8 +32,11 @@ export default function BlogPage() {
           }
         }
       } catch (err) {
-        // Fall back gracefully to static posts
-        console.warn('Using static blog posts fallback:', err);
+        console.warn('Failed to fetch live blog posts', err);
+      } finally {
+        if (isMounted) {
+          setIsLoading(false);
+        }
       }
     }
 
@@ -59,6 +63,7 @@ export default function BlogPage() {
           badge: 'Curated Heritage Journal',
         }}
         posts={posts}
+        isLoading={isLoading}
         onNavigate={handleNavigate}
         onOpenHeroManager={() => setIsHeroManagerOpen(true)}
       />
