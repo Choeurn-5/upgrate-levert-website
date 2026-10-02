@@ -9,5 +9,5 @@ coverage/
 .next/
 .build/
 *.tsbuildinfo
-data/
-public/data/
+/data/
+/public/data/
