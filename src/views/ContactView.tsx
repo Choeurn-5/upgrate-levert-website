@@ -53,7 +53,7 @@ export const ContactView: React.FC<ContactViewProps> = ({
                 We Are Here to Assist Your Siem Reap Journey
               </h2>
               <p className="text-sm text-[#4A554F] font-light leading-relaxed">
-                Whether you need assistance with airport transfers, special anniversary arrangements, or temple pass questions, our front desk is available around the clock.
+                Whether you need assistance with bus station transfers, special anniversary arrangements, or temple pass questions, our front desk is available around the clock.
               </p>
             </div>
 
@@ -148,7 +148,7 @@ export const ContactView: React.FC<ContactViewProps> = ({
                       Front Office Manager
                     </div>
                     <p className="text-xs text-[#555F59] font-light mt-1 leading-relaxed">
-                      Attentive seamless service, personalized temple itineraries, and airport private transfers.
+                      Attentive seamless service, personalized temple itineraries, and bus station private transfers.
                     </p>
                   </div>
                 </div>
@@ -295,7 +295,7 @@ export const ContactView: React.FC<ContactViewProps> = ({
                       >
                         <option value="Room Reservation Inquiry">Room Reservation Inquiry</option>
                         <option value="Angkor Temple Tour Arrangements">Angkor Temple Tour Arrangements</option>
-                        <option value="Airport Transfer Assistance">Airport Transfer Assistance</option>
+                        <option value="Bus Station Transfer Assistance">Bus Station Transfer Assistance</option>
                         <option value="Rooftop Dining & Event">Rooftop Dining & Event</option>
                         <option value="General Question">General Question</option>
                       </select>

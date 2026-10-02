@@ -163,7 +163,7 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({
               <span>Direct Booking Guarantee</span>
             </div>
             <p className="text-xs text-[#FAF8F5]/80 leading-relaxed mb-4">
-              Book directly with us for guaranteed lowest rates, priority early check-in, complimentary airport pick-up, and 15% discount on spa treatments.
+              Book directly with us for guaranteed lowest rates, priority early check-in, complimentary bus station pick-up, and 15% discount on spa treatments.
             </p>
             <a
               href={SITE_SETTINGS.bookingUrl}

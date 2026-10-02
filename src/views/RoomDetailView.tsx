@@ -188,7 +188,7 @@ export const RoomDetailView: React.FC<RoomDetailViewProps> = ({
               <div className="space-y-2.5 text-xs text-[#4A554F]">
                 <div className="flex items-center space-x-2">
                   <Check className="w-4 h-4 text-[#C5A880]" />
-                  <span>Free Airport Arrival Pick-up</span>
+                  <span>Free Bus Station Arrival Pick-up</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Check className="w-4 h-4 text-[#C5A880]" />

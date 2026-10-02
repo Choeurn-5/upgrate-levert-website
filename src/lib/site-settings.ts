@@ -25,7 +25,7 @@ export const SITE_SETTINGS = {
     'Signature Khmer Herbal Spa & Massage',
     'Authentic Khmer & Western Gourmet Dining',
     'Complimentary High-Speed Fiber Wi-Fi',
-    '24-Hour Concierge & Airport Transfer Services',
+    '24-Hour Concierge & Bus Station Transfer Services',
   ],
 };
 

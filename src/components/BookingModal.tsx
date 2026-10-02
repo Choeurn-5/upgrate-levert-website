@@ -36,7 +36,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   const [email, setEmail] = useState('');
   const [phoneNum, setPhoneNum] = useState('');
   const [specialRequests, setSpecialRequests] = useState('');
-  const [airportPickup, setAirportPickup] = useState(true);
+  const [busPickup, setBusPickup] = useState(true);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const tomorrow = new Date();
@@ -101,7 +101,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               Reserve Your Stay at Le Vert Angkor
             </h3>
             <p className="text-xs sm:text-sm text-[#FAF8F5]/80 mt-1 font-light">
-              Guaranteed lowest rates, complimentary airport pick-up & breakfast included.
+              Guaranteed lowest rates, complimentary bus station pick-up & breakfast included.
             </p>
 
             {/* Tab switch */}
@@ -162,7 +162,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 p-4 rounded-2xl bg-emerald-50/70 border border-emerald-900/10 text-xs text-[#1C3829]">
                   <div className="flex items-center space-x-2">
                     <CheckCircle2 className="w-4 h-4 text-[#2D5540]" />
-                    <span>Free Airport Transfer (Arrival)</span>
+                    <span>Free Bus Station Transfer (Arrival)</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <CheckCircle2 className="w-4 h-4 text-[#2D5540]" />
@@ -349,12 +349,12 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                   <input
                     type="checkbox"
                     id="pickup"
-                    checked={airportPickup}
-                    onChange={(e) => setAirportPickup(e.target.checked)}
+                    checked={busPickup}
+                    onChange={(e) => setBusPickup(e.target.checked)}
                     className="w-4 h-4 rounded text-[#1C3829] focus:ring-0 cursor-pointer"
                   />
                   <label htmlFor="pickup" className="text-xs text-[#1C3829] font-medium cursor-pointer">
-                    Request Complimentary Airport Pick-Up (Flight details can be provided later)
+                    Request Complimentary Bus Station Pick-Up (Bus details can be provided later)
                   </label>
                 </div>
 

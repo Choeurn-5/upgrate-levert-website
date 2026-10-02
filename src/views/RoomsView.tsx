@@ -318,7 +318,7 @@ export const RoomsView: React.FC<RoomsViewProps> = ({
 
             <div className="p-4 bg-[#FAF8F5] rounded-2xl border border-[#E7E0D5]/70">
               <ShieldCheck className="w-5 h-5 text-[#C5A880] mx-auto mb-2" />
-              <div className="text-xs font-semibold text-[#1C3829]">Airport Transfer</div>
+              <div className="text-xs font-semibold text-[#1C3829]">Bus Station Transfer</div>
               <div className="text-[10px] text-[#68726B] mt-0.5">Arrival on request</div>
             </div>
 
@@ -570,7 +570,7 @@ export const RoomsView: React.FC<RoomsViewProps> = ({
                 Found Your Ideal Room or Suite?
               </h3>
               <p className="text-sm text-[#DFCAA8]/80 font-light mt-1 max-w-xl">
-                Reserve directly with Le Vert Angkor Hotel for guaranteed best rates, complimentary welcome beverage, and personalized airport pickup service.
+                Reserve directly with Le Vert Angkor Hotel for guaranteed best rates, complimentary welcome beverage, and personalized bus station pickup service.
               </p>
             </div>
             <a
