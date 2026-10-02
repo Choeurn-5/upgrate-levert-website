@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Plus, Trash2, Image as ImageIcon, Upload, X, Loader2, CheckCircle2, AlertCircle, RefreshCw } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion } from 'motion/react';
+import { FolderOpen, RefreshCw, Trash2, Image as ImageIcon, Info } from 'lucide-react';
 import { GalleryPhoto } from '@/types';
 
 interface GalleryCategory {
@@ -12,363 +12,136 @@ interface GalleryCategory {
 export const AdminGalleryView: React.FC = () => {
   const [photos, setPhotos] = useState<GalleryPhoto[]>([]);
   const [categories, setCategories] = useState<GalleryCategory[]>([]);
-  
-  const [isUploading, setIsUploading] = useState(false);
-  const [uploadCategory, setUploadCategory] = useState('all');
-  const [uploadStatus, setUploadStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
-  
-  const [newCatLabel, setNewCatLabel] = useState('');
-  const [newCatValue, setNewCatValue] = useState('');
-  const [isCreatingCat, setIsCreatingCat] = useState(false);
-
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [activeCategory, setActiveCategory] = useState<string>('all');
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetchCategories();
-    fetchPhotos();
+    loadAll();
   }, []);
 
-  const fetchCategories = async () => {
+  const loadAll = async () => {
+    setIsLoading(true);
     try {
-      const res = await fetch('/api/gallery/categories');
-      if (res.ok) {
-        const data = await res.json();
-        setCategories(data);
-        if (data.length > 1) {
-          setUploadCategory(data[1].value); // Default to first non-'all' category
-        }
-      }
+      const [photosRes, catsRes] = await Promise.all([
+        fetch('/api/gallery'),
+        fetch('/api/gallery/categories'),
+      ]);
+      if (photosRes.ok) setPhotos(await photosRes.json());
+      if (catsRes.ok) setCategories(await catsRes.json());
     } catch (err) {
-      console.error('Failed to fetch categories:', err);
-    }
-  };
-
-  const fetchPhotos = async () => {
-    try {
-      const res = await fetch('/api/gallery');
-      if (res.ok) setPhotos(await res.json());
-    } catch (err) {
-      console.error('Failed to fetch photos:', err);
-    }
-  };
-
-  const handleCreateCategory = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newCatLabel || !newCatValue) return;
-
-    try {
-      setIsCreatingCat(true);
-      const res = await fetch('/api/gallery/categories', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ label: newCatLabel, value: newCatValue }),
-      });
-      if (res.ok) {
-        const data = await res.json();
-        setCategories(data);
-        setNewCatLabel('');
-        setNewCatValue('');
-      } else {
-        const err = await res.json();
-        alert(err.error || 'Failed to create category');
-      }
-    } catch (error) {
-      console.error(error);
+      console.error('Failed to load gallery:', err);
     } finally {
-      setIsCreatingCat(false);
+      setIsLoading(false);
     }
   };
 
-  const handleDeleteCategory = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this category? (Photos will still have the category value)')) return;
-    try {
-      const res = await fetch(`/api/gallery/categories?id=${id}`, { method: 'DELETE' });
-      if (res.ok) {
-        const data = await res.json();
-        setCategories(data.categories);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const filteredPhotos = photos.filter(p =>
+    activeCategory === 'all' ? true : p.category === activeCategory
+  );
 
-  const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files || e.target.files.length === 0) return;
-
-    if (uploadCategory === 'all') {
-      setUploadStatus({ type: 'error', message: 'Please select a specific category, not "All Photos".' });
-      return;
-    }
-
-    const files = Array.from(e.target.files);
-    setIsUploading(true);
-    setUploadStatus(null);
-
-    const newPhotosMetadata: Partial<GalleryPhoto>[] = [];
-    const failedFiles: string[] = [];
-
-    try {
-      for (const file of files) {
-        const formData = new FormData();
-        formData.append('file', file);
-
-        const uploadRes = await fetch('/api/upload', {
-          method: 'POST',
-          body: formData,
-        });
-
-        if (uploadRes.ok) {
-          const uploaded = await uploadRes.json();
-          newPhotosMetadata.push({
-            url: uploaded.url,
-            title: file.name.replace(/\.[^/.]+$/, '') || 'Gallery Photo',
-            alt: file.name.replace(/\.[^/.]+$/, '') || 'Gallery Photo',
-            category: uploadCategory,
-          });
-        } else {
-          const errData = await uploadRes.json().catch(() => ({ error: 'Upload failed' }));
-          console.error(`Failed to upload ${file.name}:`, errData.error);
-          failedFiles.push(`${file.name}: ${errData.error || 'unknown error'}`);
-        }
-      }
-
-      if (newPhotosMetadata.length > 0) {
-        const dbRes = await fetch('/api/gallery', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ photos: newPhotosMetadata }),
-        });
-
-        if (dbRes.ok) {
-          const data = await dbRes.json();
-          setPhotos(data);
-          const successMsg = `✓ ${newPhotosMetadata.length} photo${newPhotosMetadata.length > 1 ? 's' : ''} uploaded successfully.`;
-          const failMsg = failedFiles.length > 0 ? ` ${failedFiles.length} failed.` : '';
-          setUploadStatus({ type: failedFiles.length > 0 ? 'error' : 'success', message: successMsg + failMsg });
-        } else {
-          const errData = await dbRes.json().catch(() => ({ error: 'Save failed' }));
-          setUploadStatus({ type: 'error', message: `Upload succeeded but saving failed: ${errData.error}` });
-        }
-      } else {
-        setUploadStatus({
-          type: 'error',
-          message: failedFiles.length > 0
-            ? `All uploads failed:\n${failedFiles.join('\n')}`
-            : 'No files were uploaded.',
-        });
-      }
-    } catch (error: any) {
-      console.error('Upload process failed', error);
-      setUploadStatus({ type: 'error', message: `Unexpected error: ${error?.message || 'Unknown error'}` });
-    } finally {
-      setIsUploading(false);
-      if (fileInputRef.current) fileInputRef.current.value = '';
-    }
-  };
-
-  const handleDeletePhoto = async (id: string | number) => {
-    if (!confirm('Are you sure you want to delete this photo?')) return;
-    try {
-      const res = await fetch(`/api/gallery?id=${id}`, { method: 'DELETE' });
-      if (res.ok) {
-        const data = await res.json();
-        setPhotos(data.photos);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const getCategoryLabel = (value: string) =>
+    categories.find(c => c.value === value)?.label || value;
 
   return (
-    <div className="max-w-7xl mx-auto space-y-12 pb-24">
-      {/* Category Management */}
-      <section className="bg-white rounded-3xl p-8 border border-[#E7E0D5] shadow-sm">
-        <h2 className="text-xl font-luxury-serif text-[#1C3829] mb-6 flex items-center space-x-2">
-          <ImageIcon className="w-5 h-5 text-[#C5A880]" />
-          <span>Gallery Categories</span>
-        </h2>
-        
-        <div className="flex flex-wrap gap-2 mb-8">
-          {categories.map((cat) => (
-            <div key={cat.id} className="flex items-center space-x-2 bg-[#F2EDE4] px-4 py-2 rounded-full border border-[#E7E0D5]">
-              <span className="text-sm text-[#1C3829] font-medium">{cat.label}</span>
-              {cat.value !== 'all' && (
-                <button onClick={() => handleDeleteCategory(cat.id)} className="text-red-400 hover:text-red-600 transition p-0.5">
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              )}
-            </div>
-          ))}
+    <div className="max-w-7xl mx-auto space-y-10 pb-24">
+
+      {/* How it works banner */}
+      <div className="flex items-start gap-4 bg-[#F2EDE4] border border-[#E7E0D5] rounded-2xl p-6">
+        <Info className="w-5 h-5 text-[#C5A880] shrink-0 mt-0.5" />
+        <div className="space-y-1 text-sm text-[#4A554F]">
+          <p className="font-semibold text-[#1C3829]">How to add gallery images</p>
+          <p>Place your image files inside the correct subfolder:</p>
+          <ul className="list-disc list-inside space-y-0.5 mt-1">
+            <li><code className="bg-white px-1 rounded text-xs">public/images/Gallery/room/</code> → Suites &amp; Rooms</li>
+            <li><code className="bg-white px-1 rounded text-xs">public/images/Gallery/pool/</code> → Rooftop Pool</li>
+            <li><code className="bg-white px-1 rounded text-xs">public/images/Gallery/dinning/</code> → Dining &amp; Cocktails</li>
+            <li><code className="bg-white px-1 rounded text-xs">public/images/Gallery/tour/</code> → Temple Tours</li>
+          </ul>
+          <p className="mt-2">After adding files, commit &amp; push to GitHub — Vercel will auto-deploy and the gallery will update instantly.</p>
         </div>
+      </div>
 
-        <form onSubmit={handleCreateCategory} className="flex items-end gap-4 max-w-2xl bg-stone-50 p-6 rounded-2xl border border-stone-200">
-          <div className="flex-1 space-y-2">
-            <label className="text-xs font-semibold uppercase tracking-wider text-[#1C3829]">Category Label (Display)</label>
-            <input 
-              required
-              type="text" 
-              placeholder="e.g. Vintage Cars"
-              value={newCatLabel}
-              onChange={(e) => {
-                setNewCatLabel(e.target.value);
-                setNewCatValue(e.target.value.toLowerCase().replace(/[^a-z0-9]/g, '-'));
-              }}
-              className="w-full px-4 py-2 rounded-xl bg-white border border-[#E7E0D5] focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] outline-none transition text-sm text-stone-800"
-            />
-          </div>
-          <div className="flex-1 space-y-2">
-            <label className="text-xs font-semibold uppercase tracking-wider text-[#1C3829]">Internal Value</label>
-            <input 
-              required
-              type="text" 
-              placeholder="e.g. vintage-cars"
-              value={newCatValue}
-              onChange={(e) => setNewCatValue(e.target.value)}
-              className="w-full px-4 py-2 rounded-xl bg-white border border-[#E7E0D5] focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] outline-none transition text-sm text-stone-800"
-            />
-          </div>
-          <button 
-            type="submit"
-            disabled={isCreatingCat}
-            className="px-6 py-2 h-10 rounded-xl bg-[#1C3829] hover:bg-[#2D5540] text-white text-sm font-semibold tracking-wide transition whitespace-nowrap"
-          >
-            {isCreatingCat ? 'Adding...' : 'Add Category'}
-          </button>
-        </form>
-      </section>
-
-      {/* Upload Section */}
-      <section className="bg-white rounded-3xl p-8 border border-[#E7E0D5] shadow-sm">
-        <h2 className="text-xl font-luxury-serif text-[#1C3829] mb-6 flex items-center space-x-2">
-          <Upload className="w-5 h-5 text-[#C5A880]" />
-          <span>Upload Photos</span>
-        </h2>
-        
-        <div className="flex flex-col md:flex-row gap-6 items-start">
-          <div className="w-full md:w-64 space-y-3 shrink-0">
-            <label className="text-xs font-semibold uppercase tracking-wider text-[#1C3829]">Assign Category</label>
-            <select
-              value={uploadCategory}
-              onChange={(e) => setUploadCategory(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl bg-stone-50 border border-[#E7E0D5] focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] outline-none transition text-sm text-stone-800"
-            >
-              {categories.map((cat) => (
-                <option key={cat.id} value={cat.value} disabled={cat.value === 'all'}>
-                  {cat.label} {cat.value === 'all' ? '(Select another)' : ''}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="flex-1 w-full">
-            <input 
-              type="file" 
-              multiple 
-              accept="image/*"
-              className="hidden" 
-              ref={fileInputRef}
-              onChange={handleFileSelect}
-            />
-            <div 
-              onClick={() => !isUploading && fileInputRef.current?.click()}
-              className={`border-2 border-dashed rounded-2xl flex flex-col items-center justify-center py-16 transition-colors ${
-                isUploading 
-                  ? 'border-[#C5A880] bg-[#C5A880]/10 cursor-not-allowed'
-                  : 'border-[#E7E0D5] bg-stone-50 hover:bg-[#F2EDE4] hover:border-[#C5A880] cursor-pointer'
-              }`}
-            >
-              {isUploading ? (
-                <>
-                  <Loader2 className="w-10 h-10 text-[#C5A880] animate-spin mb-4" />
-                  <p className="text-[#1C3829] font-semibold text-lg">Uploading photos...</p>
-                  <p className="text-[#68726B] text-sm mt-1">Please do not close this window.</p>
-                </>
-              ) : (
-                <>
-                  <Upload className="w-10 h-10 text-[#C5A880] mb-4" />
-                  <p className="text-[#1C3829] font-semibold text-lg">Click to Browse Images</p>
-                  <p className="text-[#68726B] text-sm mt-1">Upload multiple luxury photos at once (JPG, PNG, WebP)</p>
-                </>
-              )}
+      {/* Stats */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        {categories.filter(c => c.value !== 'all').map(cat => {
+          const count = photos.filter(p => p.category === cat.value).length;
+          return (
+            <div key={cat.id} className="bg-white rounded-2xl border border-[#E7E0D5] p-5 text-center shadow-sm">
+              <p className="text-3xl font-bold text-[#1C3829]">{count}</p>
+              <p className="text-xs text-[#68726B] mt-1 font-medium">{cat.label}</p>
             </div>
-          </div>
-        </div>
+          );
+        })}
+      </div>
 
-        {/* Upload status banner */}
-        <AnimatePresence>
-          {uploadStatus && (
-            <motion.div
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              className={`mt-6 flex items-start gap-3 p-4 rounded-2xl border text-sm whitespace-pre-line ${
-                uploadStatus.type === 'success'
-                  ? 'bg-green-50 border-green-200 text-green-800'
-                  : 'bg-red-50 border-red-200 text-red-800'
-              }`}
-            >
-              {uploadStatus.type === 'success'
-                ? <CheckCircle2 className="w-5 h-5 shrink-0 mt-0.5 text-green-600" />
-                : <AlertCircle className="w-5 h-5 shrink-0 mt-0.5 text-red-500" />
-              }
-              <span>{uploadStatus.message}</span>
-              <button onClick={() => setUploadStatus(null)} className="ml-auto text-current opacity-50 hover:opacity-100">
-                <X className="w-4 h-4" />
-              </button>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </section>
-
-      {/* Grid */}
-      <section>
-        <h2 className="text-xl font-luxury-serif text-[#1C3829] mb-6 flex items-center justify-between">
-          <span>All Uploaded Photos ({photos.length})</span>
+      {/* Photo Grid */}
+      <section className="bg-white rounded-3xl p-8 border border-[#E7E0D5] shadow-sm">
+        <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
+          <h2 className="text-xl font-luxury-serif text-[#1C3829] flex items-center gap-2">
+            <ImageIcon className="w-5 h-5 text-[#C5A880]" />
+            <span>Gallery Photos ({photos.length} total)</span>
+          </h2>
           <button
-            onClick={fetchPhotos}
+            onClick={loadAll}
             className="flex items-center gap-2 text-sm text-[#68726B] hover:text-[#1C3829] transition px-4 py-2 rounded-xl border border-[#E7E0D5] hover:bg-[#F2EDE4]"
           >
             <RefreshCw className="w-4 h-4" />
             Refresh
           </button>
-        </h2>
-        
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {photos.map((photo) => {
-            const catLabel = categories.find(c => c.value === photo.category)?.label || photo.category;
-            return (
+        </div>
+
+        {/* Category filter */}
+        <div className="flex flex-wrap gap-2 mb-8">
+          {categories.map(cat => (
+            <button
+              key={cat.id}
+              onClick={() => setActiveCategory(cat.value)}
+              className={`px-4 py-2 rounded-full text-xs font-medium transition-all ${
+                activeCategory === cat.value
+                  ? 'bg-[#1C3829] text-white shadow-sm font-semibold'
+                  : 'bg-[#F2EDE4] text-[#4A554F] hover:text-[#1C3829] border border-[#E7E0D5]'
+              }`}
+            >
+              {cat.label} {cat.value !== 'all' && `(${photos.filter(p => p.category === cat.value).length})`}
+            </button>
+          ))}
+        </div>
+
+        {isLoading ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <div key={i} className="h-44 rounded-2xl bg-stone-200 animate-pulse" />
+            ))}
+          </div>
+        ) : filteredPhotos.length === 0 ? (
+          <div className="py-16 text-center text-[#68726B]">
+            <FolderOpen className="w-12 h-12 mx-auto mb-3 text-[#C5A880] opacity-50" />
+            <p className="font-medium">No photos found in this category.</p>
+            <p className="text-sm mt-1">Add image files to the corresponding folder and refresh.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {filteredPhotos.map(photo => (
               <motion.div
                 key={photo.id}
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="group relative rounded-2xl overflow-hidden bg-stone-200 aspect-[4/3] border border-[#E7E0D5]"
+                className="group relative rounded-2xl overflow-hidden bg-stone-100 aspect-[4/3] border border-[#E7E0D5]"
               >
-                <img 
-                  src={photo.url} 
+                <img
+                  src={photo.url}
                   alt={photo.alt}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-4">
-                  <span className="text-white text-xs font-semibold tracking-wider uppercase bg-[#C5A880] px-3 py-1 rounded-full mb-4">
-                    {catLabel}
+                <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 to-transparent p-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="text-white text-[10px] font-semibold uppercase tracking-wider bg-[#C5A880] px-2 py-0.5 rounded-full">
+                    {getCategoryLabel(photo.category)}
                   </span>
-                  <button 
-                    onClick={() => handleDeletePhoto(photo.id)}
-                    className="flex items-center space-x-1 text-xs font-semibold bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-full transition-colors"
-                  >
-                    <Trash2 className="w-3.5 h-3.5" />
-                    <span>Delete</span>
-                  </button>
                 </div>
               </motion.div>
-            );
-          })}
-          {photos.length === 0 && (
-            <div className="col-span-full py-12 text-center bg-white rounded-3xl border border-[#E7E0D5]">
-              <p className="text-[#68726B]">No photos found. Upload some above!</p>
-            </div>
-          )}
-        </div>
+            ))}
+          </div>
+        )}
       </section>
     </div>
   );
