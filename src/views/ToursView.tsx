@@ -52,7 +52,7 @@ export const ToursView: React.FC<ToursViewProps> = ({
       {/* 1. Hero Section */}
       <Hero
         config={heroConfig}
-        onPrimaryClick={() => window.open('https://t.me/LeVertAngkorHotelSR', '_blank')}
+        onPrimaryClick={() => window.open(`https://wa.me/85570247282?text=${encodeURIComponent('Hello Le Vert Angkor Hotel, I would like to inquire about a private temple tour in Siem Reap. Please share your available circuits and pricing. Thank you!')}`, '_blank')}
         primaryButtonText="Inquire Private Temple Tour"
         onOpenHeroManager={onOpenHeroManager}
       />
@@ -240,7 +240,7 @@ export const ToursView: React.FC<ToursViewProps> = ({
             {/* CTA */}
             <div className="shrink-0">
               <a
-                href="https://t.me/LeVertAngkorHotelSR"
+                href={`https://wa.me/85570247282?text=${encodeURIComponent('Hello Le Vert Angkor Hotel, I would like to customize a private temple tour itinerary. Please help me plan! Thank you!')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group/cta px-7 py-4 rounded-2xl bg-[#C5A880] hover:bg-[#D4BC94] text-[#0A1A10] text-xs font-bold uppercase tracking-wider transition-all shadow-[0_8px_25px_rgba(197,168,128,0.35)] hover:shadow-[0_12px_35px_rgba(197,168,128,0.45)] active:scale-95 flex items-center space-x-2.5 cursor-pointer"

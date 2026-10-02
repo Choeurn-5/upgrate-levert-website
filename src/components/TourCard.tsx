@@ -172,7 +172,7 @@ export const TourCard: React.FC<TourCardProps> = ({ tour, onViewDetails, onBookT
             <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover/btn:translate-x-0.5" />
           </button>
           <a
-            href="https://t.me/LeVertAngkorHotelSR"
+            href={`https://wa.me/85570247282?text=${encodeURIComponent(`Hello Le Vert Angkor Hotel, I would like to book the "${tour.title}" private tour. Please share availability and details. Thank you!`)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="py-3 px-5 rounded-2xl bg-[#1C3829] hover:bg-[#12241A] text-[#FAF8F5] transition-all text-xs font-bold uppercase tracking-wider shadow-[0_4px_14px_rgba(28,56,41,0.3)] hover:shadow-[0_6px_20px_rgba(28,56,41,0.4)] active:scale-95 cursor-pointer"

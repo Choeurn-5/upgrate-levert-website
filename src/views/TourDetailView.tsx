@@ -176,7 +176,7 @@ export const TourDetailView: React.FC<TourDetailViewProps> = ({
                 </div>
 
                 <a
-                  href="https://t.me/LeVertAngkorHotelSR"
+                  href={`https://wa.me/85570247282?text=${encodeURIComponent(`Hello Le Vert Angkor Hotel, I would like to book the "${tour.title}" private tour. Please share availability and pricing. Thank you!`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full py-4 rounded-xl bg-[#1C3829] text-[#FAF8F5] font-semibold text-xs uppercase tracking-widest hover:bg-[#12241A] transition-all shadow-md active:scale-95 flex items-center justify-center space-x-2"
