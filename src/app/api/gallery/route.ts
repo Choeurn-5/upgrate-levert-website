@@ -43,6 +43,15 @@ export async function POST(request: NextRequest) {
       id: `photo-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
     }));
 
+    // Guard: reject base64 data URLs — they are too large for Redis (10MB limit per request)
+    const hasBase64 = newPhotos.some(p => typeof p.url === 'string' && p.url.startsWith('data:'));
+    if (hasBase64) {
+      return NextResponse.json(
+        { error: 'Cannot store base64 image data in the database. Please configure Cloudinary (CLOUDINARY_URL) for image hosting.' },
+        { status: 400 }
+      );
+    }
+
     const updated = [...newPhotos, ...currentPhotos];
     await redis.set(REDIS_KEYS.GALLERY_PHOTOS || 'levert:gallery_photos', updated);
 

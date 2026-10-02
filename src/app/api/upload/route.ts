@@ -101,10 +101,17 @@ export async function POST(request: NextRequest) {
       const publicUrl = `/uploads/${filename}`;
       return NextResponse.json({ url: publicUrl, filename, provider: 'local' });
     } catch (writeErr) {
-      console.warn('Filesystem write error, falling back to data URL:', writeErr);
-      const base64 = buffer.toString('base64');
-      const dataUrl = `data:${file.type};base64,${base64}`;
-      return NextResponse.json({ url: dataUrl, filename, provider: 'base64' });
+      // Do NOT fall back to base64 — storing large data URLs in Redis causes the
+      // Upstash 10MB per-request limit to be hit and breaks the gallery.
+      // Configure CLOUDINARY_URL in your environment variables for production image hosting.
+      console.error('Filesystem write failed and Cloudinary is not configured:', writeErr);
+      return NextResponse.json(
+        {
+          error:
+            'Image upload failed: the server filesystem is read-only (Vercel) and Cloudinary is not configured. Please add CLOUDINARY_URL to your environment variables.',
+        },
+        { status: 500 }
+      );
     }
   } catch (error: any) {
     console.error('Image upload error:', error);
