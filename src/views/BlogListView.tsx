@@ -488,6 +488,150 @@ export const BlogListView: React.FC<BlogListViewProps> = ({
         )}
       </section>
 
+      {/* Philosophy & Leadership Section */}
+      <section className="py-20 bg-white border-t border-[#E7E0D5]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
+          
+          {/* 1. Vision & Core Philosophy */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <span className="text-[#C5A880] font-bold tracking-widest uppercase text-xs">Our Heritage</span>
+                <h2 className="font-luxury-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#1C3829] leading-tight">
+                  A Vision Rooted in <br/> Family and Passion
+                </h2>
+              </div>
+              <p className="text-[#68726B] font-light leading-relaxed">
+                At the heart of our hotel philosophy is our owner, <strong>Ek Darin</strong>, alongside his son, <strong>Rin Kongvin</strong>, who leads daily operations as our Operations Manager.
+                For Ek Darin, hospitality is a labor of love and a tribute to rich Cambodian culture. Working side by side, the father-and-son duo brings a unique balance of tradition and modern standards to Le Vert Angkor Hotel.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4">
+                <div className="space-y-2">
+                  <div className="w-10 h-10 rounded-full bg-[#F5F2ED] flex items-center justify-center text-[#1C3829]">
+                    <Heart className="w-5 h-5" />
+                  </div>
+                  <h4 className="font-semibold text-[#1C3829] text-sm">Authentic Khmer Warmth</h4>
+                  <p className="text-xs text-[#68726B] font-light">Sharing local culture, flavors, and genuine hospitality.</p>
+                </div>
+                <div className="space-y-2">
+                  <div className="w-10 h-10 rounded-full bg-[#F5F2ED] flex items-center justify-center text-[#1C3829]">
+                    <User className="w-5 h-5" />
+                  </div>
+                  <h4 className="font-semibold text-[#1C3829] text-sm">Personalized Service</h4>
+                  <p className="text-xs text-[#68726B] font-light">Tailoring recommendations and service to your preferences.</p>
+                </div>
+                <div className="space-y-2">
+                  <div className="w-10 h-10 rounded-full bg-[#F5F2ED] flex items-center justify-center text-[#1C3829]">
+                    <Sparkles className="w-5 h-5" />
+                  </div>
+                  <h4 className="font-semibold text-[#1C3829] text-sm">A Peaceful Sanctuary</h4>
+                  <p className="text-xs text-[#68726B] font-light">A refreshing retreat with a rooftop pool and lush gardens.</p>
+                </div>
+                <div className="space-y-2">
+                  <div className="w-10 h-10 rounded-full bg-[#F5F2ED] flex items-center justify-center text-[#1C3829]">
+                    <Heart className="w-5 h-5" />
+                  </div>
+                  <h4 className="font-semibold text-[#1C3829] text-sm">Community & Care</h4>
+                  <p className="text-xs text-[#68726B] font-light">Operating as a close family unit to ensure an uplifting stay.</p>
+                </div>
+              </div>
+            </div>
+            <div className="relative">
+              <div className="aspect-[4/5] rounded-3xl overflow-hidden bg-stone-100 shadow-2xl relative z-10">
+                <img 
+                  src="/images/Home/home-hotel-story/DSCF7100.jpg" 
+                  alt="Le Vert Angkor Hotel Philosophy" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="absolute -bottom-8 -left-8 w-64 h-64 bg-[#F5F2ED] rounded-full z-0"></div>
+              <div className="absolute -top-8 -right-8 w-32 h-32 bg-[#2D5540]/10 rounded-full z-0"></div>
+            </div>
+          </div>
+
+          {/* 2. Leadership Team */}
+          <div className="space-y-12">
+            <div className="text-center space-y-4 max-w-2xl mx-auto">
+              <span className="text-[#C5A880] font-bold tracking-widest uppercase text-xs">Our People</span>
+              <h2 className="font-luxury-serif text-3xl sm:text-4xl font-semibold text-[#1C3829]">
+                Service Driven by Heart
+              </h2>
+              <p className="text-[#68726B] font-light">
+                Every step of your stay is looked after by passionate leaders who care about your comfort.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+              
+              {/* Deepool */}
+              <div className="group flex flex-col sm:flex-row gap-6 items-start p-6 rounded-3xl hover:bg-[#F5F2ED] transition-colors border border-transparent hover:border-[#E7E0D5]">
+                <div className="shrink-0 w-24 h-24 sm:w-32 sm:h-32 rounded-2xl overflow-hidden bg-stone-100 shadow-md">
+                  <img src="/images/staff-image/deepool-front-office-manager.jpg" alt="Deepool - Front Office Manager" className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" />
+                </div>
+                <div className="space-y-3">
+                  <div>
+                    <h4 className="font-luxury-serif text-xl font-semibold text-[#1C3829]">Deepool</h4>
+                    <p className="text-xs font-bold uppercase tracking-wider text-[#C5A880]">Front Office Manager</p>
+                  </div>
+                  <p className="text-sm text-[#68726B] font-light leading-relaxed">
+                    Deepool leads our front-desk team with an emphasis on attentive, seamless service. Whether overseeing operations, organizing tours, or arranging transport, he ensures your visit feels personalized.
+                  </p>
+                </div>
+              </div>
+
+              {/* Sotheara */}
+              <div className="group flex flex-col sm:flex-row gap-6 items-start p-6 rounded-3xl hover:bg-[#F5F2ED] transition-colors border border-transparent hover:border-[#E7E0D5]">
+                <div className="shrink-0 w-24 h-24 sm:w-32 sm:h-32 rounded-2xl overflow-hidden bg-stone-100 shadow-md">
+                  <img src="/images/staff-image/sotheara-front-office-supervisor.jpg" alt="Sotheara - Front Office Supervisor" className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                </div>
+                <div className="space-y-3">
+                  <div>
+                    <h4 className="font-luxury-serif text-xl font-semibold text-[#1C3829]">Sotheara</h4>
+                    <p className="text-xs font-bold uppercase tracking-wider text-[#C5A880]">Front Office Supervisor</p>
+                  </div>
+                  <p className="text-sm text-[#68726B] font-light leading-relaxed">
+                    Working alongside Deepool, Sotheara brings a warm, welcoming presence to the lobby. She is always ready to share local secrets and assist with guest requests to ensure a smooth stay.
+                  </p>
+                </div>
+              </div>
+
+              {/* Veasna */}
+              <div className="group flex flex-col sm:flex-row gap-6 items-start p-6 rounded-3xl hover:bg-[#F5F2ED] transition-colors border border-transparent hover:border-[#E7E0D5]">
+                <div className="shrink-0 w-24 h-24 sm:w-32 sm:h-32 rounded-2xl overflow-hidden bg-stone-100 shadow-md">
+                  <img src="/images/staff-image/veasna-restaurant-supervisor.jpg" alt="Veasna - Restaurant Supervisor" className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                </div>
+                <div className="space-y-3">
+                  <div>
+                    <h4 className="font-luxury-serif text-xl font-semibold text-[#1C3829]">Veasna</h4>
+                    <p className="text-xs font-bold uppercase tracking-wider text-[#C5A880]">Restaurant & Sky Bar Supervisor</p>
+                  </div>
+                  <p className="text-sm text-[#68726B] font-light leading-relaxed">
+                    Veasna oversees our dining venue and Rooftop Sky Bar. Whether you're enjoying breakfast or sipping sunset cocktails by the pool, he ensures a warm, attentive, and cozy atmosphere.
+                  </p>
+                </div>
+              </div>
+
+              {/* Sous Chef Chansy */}
+              <div className="group flex flex-col sm:flex-row gap-6 items-start p-6 rounded-3xl hover:bg-[#F5F2ED] transition-colors border border-transparent hover:border-[#E7E0D5]">
+                <div className="shrink-0 w-24 h-24 sm:w-32 sm:h-32 rounded-2xl overflow-hidden bg-stone-100 shadow-md">
+                  <img src="/images/staff-image/chansy-sous-chef.jpg" alt="Sous Chef Chansy" className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" />
+                </div>
+                <div className="space-y-3">
+                  <div>
+                    <h4 className="font-luxury-serif text-xl font-semibold text-[#1C3829]">Chansy</h4>
+                    <p className="text-xs font-bold uppercase tracking-wider text-[#C5A880]">Sous Chef</p>
+                  </div>
+                  <p className="text-sm text-[#68726B] font-light leading-relaxed">
+                    Behind every memorable dish is the culinary artistry of Sous Chef Chansy. Crafting menus that celebrate authentic Cambodian specialties, Chansy prepares every meal with heartfelt care.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 5. Concierge & Travel Inquiries Reassurance Strip */}
       <section className="py-16 bg-[#14281D] text-[#FAF8F5] border-t border-[#2D5540]/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-8">
