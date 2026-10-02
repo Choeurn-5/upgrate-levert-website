@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'motion/react';
-import { Plus, Trash2, Image as ImageIcon, Upload, X, Loader2, CheckCircle2 } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Plus, Trash2, Image as ImageIcon, Upload, X, Loader2, CheckCircle2, AlertCircle, RefreshCw } from 'lucide-react';
 import { GalleryPhoto } from '@/types';
 
 interface GalleryCategory {
@@ -14,7 +14,8 @@ export const AdminGalleryView: React.FC = () => {
   const [categories, setCategories] = useState<GalleryCategory[]>([]);
   
   const [isUploading, setIsUploading] = useState(false);
-  const [uploadCategory, setUploadCategory] = useState('all'); // all is bad, should default to a real one or ask to select
+  const [uploadCategory, setUploadCategory] = useState('all');
+  const [uploadStatus, setUploadStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
   
   const [newCatLabel, setNewCatLabel] = useState('');
   const [newCatValue, setNewCatValue] = useState('');
@@ -93,23 +94,24 @@ export const AdminGalleryView: React.FC = () => {
 
   const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || e.target.files.length === 0) return;
-    
+
     if (uploadCategory === 'all') {
-      alert('Please select a specific category for upload, not "All Photos".');
+      setUploadStatus({ type: 'error', message: 'Please select a specific category, not "All Photos".' });
       return;
     }
 
     const files = Array.from(e.target.files);
     setIsUploading(true);
-    
+    setUploadStatus(null);
+
     const newPhotosMetadata: Partial<GalleryPhoto>[] = [];
+    const failedFiles: string[] = [];
 
     try {
-      // Upload each file
       for (const file of files) {
         const formData = new FormData();
         formData.append('file', file);
-        
+
         const uploadRes = await fetch('/api/upload', {
           method: 'POST',
           body: formData,
@@ -117,39 +119,50 @@ export const AdminGalleryView: React.FC = () => {
 
         if (uploadRes.ok) {
           const uploaded = await uploadRes.json();
-          // Create metadata
           newPhotosMetadata.push({
             url: uploaded.url,
-            title: file.name.split('.')[0] || 'Gallery Photo',
-            alt: file.name.split('.')[0] || 'Gallery Photo',
+            title: file.name.replace(/\.[^/.]+$/, '') || 'Gallery Photo',
+            alt: file.name.replace(/\.[^/.]+$/, '') || 'Gallery Photo',
             category: uploadCategory,
           });
         } else {
-          console.error(`Failed to upload ${file.name}`);
+          const errData = await uploadRes.json().catch(() => ({ error: 'Upload failed' }));
+          console.error(`Failed to upload ${file.name}:`, errData.error);
+          failedFiles.push(`${file.name}: ${errData.error || 'unknown error'}`);
         }
       }
 
-      // Save to gallery database
       if (newPhotosMetadata.length > 0) {
         const dbRes = await fetch('/api/gallery', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ photos: newPhotosMetadata }),
         });
-        
+
         if (dbRes.ok) {
           const data = await dbRes.json();
           setPhotos(data);
+          const successMsg = `✓ ${newPhotosMetadata.length} photo${newPhotosMetadata.length > 1 ? 's' : ''} uploaded successfully.`;
+          const failMsg = failedFiles.length > 0 ? ` ${failedFiles.length} failed.` : '';
+          setUploadStatus({ type: failedFiles.length > 0 ? 'error' : 'success', message: successMsg + failMsg });
+        } else {
+          const errData = await dbRes.json().catch(() => ({ error: 'Save failed' }));
+          setUploadStatus({ type: 'error', message: `Upload succeeded but saving failed: ${errData.error}` });
         }
+      } else {
+        setUploadStatus({
+          type: 'error',
+          message: failedFiles.length > 0
+            ? `All uploads failed:\n${failedFiles.join('\n')}`
+            : 'No files were uploaded.',
+        });
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Upload process failed', error);
-      alert('An error occurred during upload.');
+      setUploadStatus({ type: 'error', message: `Unexpected error: ${error?.message || 'Unknown error'}` });
     } finally {
       setIsUploading(false);
-      if (fileInputRef.current) {
-        fileInputRef.current.value = ''; // reset
-      }
+      if (fileInputRef.current) fileInputRef.current.value = '';
     }
   };
 
@@ -280,12 +293,44 @@ export const AdminGalleryView: React.FC = () => {
             </div>
           </div>
         </div>
+
+        {/* Upload status banner */}
+        <AnimatePresence>
+          {uploadStatus && (
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              className={`mt-6 flex items-start gap-3 p-4 rounded-2xl border text-sm whitespace-pre-line ${
+                uploadStatus.type === 'success'
+                  ? 'bg-green-50 border-green-200 text-green-800'
+                  : 'bg-red-50 border-red-200 text-red-800'
+              }`}
+            >
+              {uploadStatus.type === 'success'
+                ? <CheckCircle2 className="w-5 h-5 shrink-0 mt-0.5 text-green-600" />
+                : <AlertCircle className="w-5 h-5 shrink-0 mt-0.5 text-red-500" />
+              }
+              <span>{uploadStatus.message}</span>
+              <button onClick={() => setUploadStatus(null)} className="ml-auto text-current opacity-50 hover:opacity-100">
+                <X className="w-4 h-4" />
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </section>
 
       {/* Grid */}
       <section>
         <h2 className="text-xl font-luxury-serif text-[#1C3829] mb-6 flex items-center justify-between">
           <span>All Uploaded Photos ({photos.length})</span>
+          <button
+            onClick={fetchPhotos}
+            className="flex items-center gap-2 text-sm text-[#68726B] hover:text-[#1C3829] transition px-4 py-2 rounded-xl border border-[#E7E0D5] hover:bg-[#F2EDE4]"
+          >
+            <RefreshCw className="w-4 h-4" />
+            Refresh
+          </button>
         </h2>
         
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
