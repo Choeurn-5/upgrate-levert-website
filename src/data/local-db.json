@@ -1,0 +1,408 @@
+{
+  "levert:tours": [
+    {
+      "id": 876,
+      "slug": "big-circuit",
+      "title": "Big Circuit Temple Tour",
+      "price": 80,
+      "currency": "USD",
+      "duration": "Full Day (~8:00 AM – 5:30 PM)",
+      "vehicleType": "Private Air-Conditioned SUV / Van with Licensed English Driver",
+      "shortDescription": "Traverse the majestic grand loop of Angkor: Preah Khan monastic labyrinth, the enigmatic island temple of Neak Poan, Ta Som, East Mebon, and sunset at Pre Rup.",
+      "longDescription": "The Big Circuit (Grand Loop) takes you beyond the central city into the magnificent outer royal complexes built during the zenith of the Khmer Empire. Encounter towering strangler figs weaving through Preah Khan, witness the holy medicinal waters of Neak Poan, and marvel at the massive stone elephants guarding East Mebon before witnessing a golden sunset over the ancient brick spires of Pre Rup.",
+      "featuredImage": "https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/03/Things-to-Do-in-Siem-Reap.jpg",
+      "itinerary": [
+        {
+          "time": "08:00 AM",
+          "templeName": "Preah Khan",
+          "description": "Explore the vast monastic complex built by King Jayavarman VII for his father, featuring endless colonnaded corridors, delicate devata carvings, and tranquil forest surroundings.",
+          "highlight": "Two-story Greek-style pavilion and sacred stupa hall"
+        },
+        {
+          "time": "10:15 AM",
+          "templeName": "Neak Poan",
+          "description": "Cross an ethereal wooden boardwalk over lotus-filled waters to reach the circular island sanctuary symbolizing the mythical Himalayan lake Anavatapta.",
+          "highlight": "Intricate carved serpent spirits (Naga) and medicinal cleansing pools"
+        },
+        {
+          "time": "11:45 AM",
+          "templeName": "Ta Som",
+          "description": "A miniature jewel famous for its eastern gopura entrance completely swallowed by the roots of a giant sacred fig tree.",
+          "highlight": "Iconic tree-root frame of the four-faced Avalokiteshvara tower"
+        },
+        {
+          "time": "01:00 PM",
+          "templeName": "East Mebon & Traditional Khmer Lunch",
+          "description": "Pause for lunch at an authentic countryside pavilion, then examine the 10th-century temple mountain with monolithic stone elephants at each terrace corner.",
+          "highlight": "Full-scale freestanding guardian elephants carved from sandstone"
+        },
+        {
+          "time": "03:00 PM",
+          "templeName": "Banteay Kdei & Sras Srang",
+          "description": "Visit the \"Citadel of Chambers\" in its quiet forest clearing, followed by a reflective stroll across the ancient Royal Bathing Pool of Sras Srang.",
+          "highlight": "Peaceful uncrowded atmosphere and cloistered galleries"
+        },
+        {
+          "time": "04:30 PM",
+          "templeName": "Pre Rup (Sunset Panorama)",
+          "description": "Ascend the steep tiers of this fiery laterite and brick pyramid to catch panoramic sunset vistas across the tropical jungle canopy.",
+          "highlight": "Sunset viewing over the Siem Reap countryside"
+        }
+      ],
+      "inclusions": [
+        "Private air-conditioned vehicle with dedicated professional driver",
+        "Hotel pick-up and return directly from Le Vert Angkor Hotel",
+        "Unlimited chilled mineral water bottles throughout the journey",
+        "Refreshing cold towels after each temple exploration",
+        "All vehicle parking fees, tolls, and fuel"
+      ],
+      "exclusions": [
+        "Angkor Archaeological Park Pass ($37 for 1-day, $62 for 3-day)",
+        "Personal lunch and refreshments",
+        "Licensed English Tour Guide ($40 optional add-on available upon request)",
+        "Personal travel insurance and gratuities"
+      ],
+      "tips": [
+        "Dress code: Shoulders and knees must be covered (shawls over bare shoulders are not permitted by temple authorities).",
+        "Comfortable walking shoes with good grip are strongly recommended for climbing steep temple staircases.",
+        "Bring sun protection: wide-brim hat, sunglasses, and reef-safe sunscreen."
+      ]
+    },
+    {
+      "id": 562,
+      "slug": "small-circuit",
+      "title": "Small Circuit Temple Tour",
+      "price": 70,
+      "currency": "USD",
+      "duration": "Full Day (~8:00 AM – 5:00 PM or Sunrise ~4:45 AM)",
+      "vehicleType": "Private Air-Conditioned SUV / Van with Licensed English Driver",
+      "shortDescription": "The quintessential Angkor experience: world-renowned Angkor Wat, the 216 enigmatic stone faces of the Bayon, the Royal Enclosure of Angkor Thom, and jungle-engulfed Ta Prohm.",
+      "longDescription": "The Small Circuit encompasses the crown jewels of Angkor. Begin at Angkor Wat, the largest religious monument in the world, stand in awe beneath the serenely smiling colossal faces of Bayon in Angkor Thom, and wander through Ta Prohm where century-old silk-cotton trees hold ancient sandstone walls in an eternal embrace.",
+      "featuredImage": "https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/01/R-3.jpg",
+      "itinerary": [
+        {
+          "time": "08:00 AM",
+          "templeName": "Angkor Wat",
+          "description": "Cross the grand causeway into the pinnacle of classical Khmer architecture. Admire over 2,000 celestial Apsara dancers and the breathtaking 600-meter bas-relief murals depicting Hindu epics.",
+          "highlight": "World-famous central sanctuary towers and reflecting pools"
+        },
+        {
+          "time": "10:45 AM",
+          "templeName": "Angkor Thom & South Gate",
+          "description": "Cross the causeway lined with 108 gods and demons pulling the cosmic serpent Vasuki to enter the fortified city of King Jayavarman VII.",
+          "highlight": "Monumental 23-meter stone gateway crowned with four smiling faces"
+        },
+        {
+          "time": "11:30 AM",
+          "templeName": "The Bayon Temple",
+          "description": "The hypnotic center of Angkor Thom featuring 54 Gothic-style towers adorned with 216 giant smiling faces of Avalokiteshvara.",
+          "highlight": "Fascinating everyday historical bas-reliefs of ancient Khmer market life and naval battles"
+        },
+        {
+          "time": "01:00 PM",
+          "templeName": "Baphuon, Phimeanakas & Terrace of Elephants",
+          "description": "Wander through the sprawling Royal Palace compound, see the 350-meter Terrace of Elephants used as a royal reviewing stand, and the mysterious Terrace of the Leper King.",
+          "highlight": "Giant reclining Buddha hidden in the rear facade of Baphuon"
+        },
+        {
+          "time": "02:45 PM",
+          "templeName": "Ta Prohm (Tomb Raider Temple)",
+          "description": "The most atmospheric temple in the park, deliberately preserved as it was first encountered by 19th-century explorers, intertwined with giant banyan and silk-cotton roots.",
+          "highlight": "Immense roots cascading over stone doorways and courtyard galleries"
+        },
+        {
+          "time": "04:15 PM",
+          "templeName": "Banteay Kdei & Return to Hotel",
+          "description": "A serene final stop through the quiet, shaded corridors of Banteay Kdei before heading back to relax by Le Vert’s rooftop pool.",
+          "highlight": "Peaceful golden hour lighting filtering through ancient courtyards"
+        }
+      ],
+      "inclusions": [
+        "Private air-conditioned vehicle with dedicated professional driver",
+        "Hotel pick-up and return directly from Le Vert Angkor Hotel",
+        "Unlimited chilled mineral water bottles and cold refreshing towels",
+        "All parking, fuel, and municipal access fees"
+      ],
+      "exclusions": [
+        "Angkor Park Pass ($37 per person for 1-day pass)",
+        "Meals and personal drinks",
+        "Official Angkor Temple Guide ($40 optional upon booking)",
+        "Gratuities and tips"
+      ],
+      "tips": [
+        "Sunrise option: Departure at 4:45 AM can be arranged with takeaway hotel breakfast box upon advance notice to our front desk.",
+        "Strict attire: shoulders and knees covered with non-transparent fabric."
+      ]
+    }
+  ],
+  "levert:hero_settings": {
+    "home": {
+      "eyebrow": "SIEM REAP • CAMBODIA",
+      "title": "A Sanctuary of Calm & Khmer Elegance",
+      "subtitle": "Step into an oasis of understated luxury, perched just 5 minutes from the lively Old Market and moments from the timeless wonder of Angkor Wat.",
+      "imageUrl": "/images/Home/home-hero-image/1.jpg",
+      "images": [
+        "/images/Home/home-hero-image/1.jpg",
+        "/images/Home/home-hero-image/2.jpg",
+        "/images/Home/home-hero-image/3.jpg",
+        "/images/Home/home-hero-image/4.jpg",
+        "/images/Home/home-hero-image/5.jpg"
+      ],
+      "imagePlaceholderNote": "Hotel Authentic Photography Slideshow (5 scenes)",
+      "badge": "TripAdvisor Travelers’ Choice 2026"
+    },
+    "rooms": {
+      "eyebrow": "ACCOMMODATIONS",
+      "title": "Refined Living Spaces with Private Balconies",
+      "subtitle": "Six bespoke room categories designed for effortless tranquility, boasting artisan furnishings, city vistas, and contemporary Khmer comforts.",
+      "imageUrl": "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=2000&q=85",
+      "imagePlaceholderNote": "Replaceable Hero Asset (Serene Luxury Suite Aesthetic)",
+      "badge": "Private Balconies in Every Room"
+    },
+    "roomDetail": {
+      "eyebrow": "EXCLUSIVE SUITE",
+      "title": "Your Private Siem Reap Sanctuary",
+      "subtitle": "Thoughtfully crafted with spacious king bedding, panoramic balcony vistas, bespoke woodcraft, and rain showers.",
+      "imageUrl": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=2000&q=85",
+      "imagePlaceholderNote": "Replaceable Hero Asset (Boutique Bedroom Detail)"
+    },
+    "touring": {
+      "eyebrow": "EXPEDITIONS & HERITAGE",
+      "title": "Unveil the Timeless Secrets of Angkor",
+      "subtitle": "Curated private temple tours led by knowledgeable English-speaking guides in climate-controlled luxury vehicles with chilled refreshments.",
+      "imageUrl": "https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/03/Things-to-Do-in-Siem-Reap.jpg",
+      "imagePlaceholderNote": "WordPress Tour Asset (Big Circuit Angkor Heritage)",
+      "badge": "Big Circuit & Small Circuit"
+    },
+    "tourDetail": {
+      "eyebrow": "HERITAGE JOURNEY",
+      "title": "Curated Angkor Archaeological Discovery",
+      "subtitle": "A private itinerary crafted to experience the temples at their most majestic hours, avoiding the midday crowds.",
+      "imageUrl": "https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/01/R-3.jpg",
+      "imagePlaceholderNote": "WordPress Tour Asset (Angkor Wat Small Circuit Heritage)"
+    },
+    "dining": {
+      "eyebrow": "DINING & CULINARY ARTS",
+      "title": "Le Vert Restaurant & Bar",
+      "subtitle": "Savor authentic Cambodian-style cuisine combined with Western favorites, crafted with fresh local ingredients, artisanal beverages, and gracious Khmer hospitality.",
+      "imageUrl": "https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/09/0D9A3910-2048x1366.jpg",
+      "images": [
+        "https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/09/0D9A3910-2048x1366.jpg"
+      ],
+      "imagePlaceholderNote": "Authentic Le Vert Angkor Hotel Restaurant Photography",
+      "badge": "All-Day Dining 06:30 – 22:00"
+    },
+    "facilities": {
+      "eyebrow": "HOTEL FACILITIES",
+      "title": "Rooftop Swimming Pool",
+      "subtitle": "Our rooftop pool is open from 10:00 hours to 22:00 hours. Relax after sightseeing with sunset panoramic views over Siem Reap city.",
+      "imageUrl": "https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/09/IMG_2364-2.jpg",
+      "images": [
+        "https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/09/IMG_2364-2.jpg",
+        "https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/01/513212141.jpg"
+      ],
+      "imagePlaceholderNote": "Authentic Le Vert Angkor Hotel Rooftop Swimming Pool",
+      "badge": "Open Daily 10:00 – 22:00"
+    },
+    "spa": {
+      "eyebrow": "WELLNESS & REJUVENATION",
+      "title": "Authentic Khmer Spa & Healing Arts",
+      "subtitle": "Surrender yourself to our skilled full therapists to soothe chronic fatigue, relieve muscle spasms, and experience Traditional Khmer therapeutic arts and Asian aromatherapy.",
+      "imageUrl": "https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/09/fgsdfg-4200-x-2938-scaled.jpg",
+      "images": [
+        "https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/09/fgsdfg-4200-x-2938-scaled.jpg",
+        "https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/09/sad-4200-x-2963-scaled.jpg",
+        "https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/09/Spa-treatment.webp"
+      ],
+      "imagePlaceholderNote": "Authentic Le Vert Angkor Hotel Spa Photography",
+      "badge": "Traditional \"Chab Ta Shai\" Therapy"
+    },
+    "gallery": {
+      "eyebrow": "VISUAL CHRONICLE",
+      "title": "Moments of Serenity & Discovery",
+      "subtitle": "Explore our visual portfolio encompassing peaceful suites, temple wonders, artisanal cuisine, and soothing spa therapies.",
+      "imageUrl": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=2000&q=85",
+      "imagePlaceholderNote": "Replaceable Hero Asset (Boutique Architecture View)"
+    },
+    "contact": {
+      "eyebrow": "GET IN TOUCH",
+      "title": "We Await the Pleasure of Welcoming You",
+      "subtitle": "Located on Steung Thmey Village, 5 minutes from the heartbeat of Siem Reap. Reach out to our concierge for bespoke requests and direct booking benefits.",
+      "imageUrl": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=2000&q=85",
+      "imagePlaceholderNote": "Replaceable Hero Asset (Concierge Hospitality Setting)"
+    },
+    "awards": {
+      "eyebrow": "ACCOLADES & RECOGNITION",
+      "title": "Celebrated by Travelers Across the Globe",
+      "subtitle": "Recognized for warm hospitality, prime location, and meticulous guest care on premier global travel platforms.",
+      "imageUrl": "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=2000&q=85",
+      "imagePlaceholderNote": "Replaceable Hero Asset (Award-Winning Hospitality Atmosphere)",
+      "badge": "TripAdvisor Travelers’ Choice 2026"
+    },
+    "blog": {
+      "eyebrow": "STORIES & INSIDER GUIDES",
+      "title": "Journeys Through Angkor & Siem Reap",
+      "subtitle": "Curated travel advice, temple secrets, authentic Khmer culinary traditions, and wellness rituals from our local concierge experts.",
+      "imageUrl": "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=2000&q=85",
+      "imagePlaceholderNote": "Replaceable Hero Asset (Angkor Wat Twilight Horizon)",
+      "badge": "Curated Heritage Journal"
+    }
+  },
+  "levert:blog_posts": [
+    {
+      "id": "post-family-hospitality",
+      "slug": "welcoming-you-to-our-family-heartfelt-hospitality-le-vert-angkor-hotel",
+      "title": "Welcoming You to Our Family: Heartfelt Hospitality at Le Vert Angkor Hotel",
+      "excerpt": "Discover the family vision, guiding philosophy, and dedicated leadership team behind Le Vert Angkor Hotel — from our founders Ek Darin and Rin Kongvin to our front office and culinary artisans.",
+      "content": "When travelers step through the doors of a boutique hotel in Siem Reap, they often look for more than just a place to rest—they seek an authentic local connection, thoughtful care, and a warm sense of home away from home. Located in Steung Thmei Village, just minutes from the vibrant Old Market and the legendary temples of Angkor, Le Vert Angkor Hotel was founded on a simple yet profound vision: to blend authentic Khmer hospitality, genuine warmth, and passionate family leadership into an unforgettable stay.\n\nIn this blog post, we want to open our doors wider and share the guiding principles and dedicated team behind our boutique sanctuary.\n\n---\n\n## 1. A Vision Rooted in Family and Passion\n\nAt the heart of our hotel philosophy is our owner, **Ek Darin**, alongside his son, **Rin Kongvin**, who leads daily operations as our Operations Manager.\n\nFor **Ek Darin**, hospitality is a labor of love and a tribute to rich Cambodian culture. Working side by side with his son, **Kongvin**, the father-and-son duo brings a unique balance of tradition and modern standards to Le Vert Angkor Hotel. While Ek Darin keeps our vision grounded in genuine Khmer warmth and long-term values, Kongvin ensures that every operational detail—from room comfort to guest experiences—runs seamlessly.\n\nTogether, their goal is to create an intimate retreat where every guest feels valued, cared for, and personally welcomed into our extended family.\n\n---\n\n## 2. Service Driven by Heart: Meet Our Leadership Team\n\nA vision can only flourish when carried by a team that shares the same values. Every step of your stay at Le Vert Angkor Hotel is looked after by passionate leaders who care about your comfort:\n\n### Deepool – Front Office Manager\n![Deepool – Front Office Manager](/images/staff-image/deepool-front-office-manager.jpg)\n\n**Deepool** leads our front-desk team with an emphasis on attentive, seamless service. Whether overseeing daily operations, organizing temple tour itineraries, or arranging private transport, Deepool ensures every aspect of your visit feels personalized and effortless.\n\n---\n\n### Sotheara – Front Office Supervisor\n![Sotheara – Front Office Supervisor](/images/staff-image/sotheara-front-office-supervisor.jpg)\n\nWorking closely alongside Deepool, **Sotheara** ensures your arrival, stay, and departure run smoothly. Sotheara brings a warm, welcoming presence to the lobby, always ready to share local secrets and assist with any guest requests.\n\n---\n\n### Veasna – Restaurant & Rooftop Sky Bar Supervisor\n![Veasna – Restaurant Supervisor](/images/staff-image/veasna-restaurant-supervisor.jpg)\n\nDining and relaxing at Le Vert Angkor Hotel is an essential part of the experience. **Veasna** oversees both our main dining venue and our scenic Rooftop Sky Bar. Whether you are enjoying a peaceful breakfast or sipping sunset cocktails by the rooftop pool overlooking the Siem Reap skyline, Veasna ensures a warm, attentive, and cozy atmosphere.\n\n---\n\n### Sous Chef Chansy – Culinary Excellence\n![Authentic Khmer Gastronomy at Le Vert Angkor](/images/Home/home-dining-image/IMG_8302.jpg)\n\nBehind every memorable dish is the culinary artistry of **Sous Chef Chansy**. Crafting menus that celebrate authentic Cambodian specialties—such as traditional Fish Amok and Lok Lak—alongside popular international favorites, Chansy prepares every meal using fresh local ingredients and heartfelt care.\n\n---\n\n## 3. Our Core Philosophy: What Boutique Hospitality Means to Us\n\nBeing an intimate boutique hotel gives us a distinct privilege: the power of quality, warmth, and personal connection over scale.\n\n* **Authentic Khmer Warmth:** We take pride in sharing local Cambodian culture, flavors, and genuine hospitality with travelers from across the globe.\n* **Personalized Service:** You are never just a room number to us. We tailor our recommendations and service to your specific preferences.\n* **A Peaceful Sanctuary:** Nestled quietly in Steung Thmei Village, our hotel offers a peaceful retreat complete with a refreshing rooftop pool, lush garden vibes, and cozy balconies after a day of exploring Angkor Wat.\n* **Community and Care:** We operate as a close family unit, supporting one another to ensure our guests enjoy an authentic and uplifting stay.\n\n---\n\n## Come Experience Our Hospitality\n\nBuilding a lasting reputation in the heart of Siem Reap requires dedication, consistency, and above all, heart. Under the guidance of **Ek Darin** and **Rin Kongvin**, and supported by **Deepool**, **Sotheara**, **Veasna**, and **Sous Chef Chansy**, we warmly invite you to experience hospitality that feels true, relaxed, and deeply welcoming.\n\nWhether you are visiting Siem Reap for the first time or returning to explore more of Angkor, our doors—and hearts—are open for you.\n\nWe look forward to welcoming you soon to your home away from home at Le Vert Angkor Hotel!",
+      "coverImage": "/images/Home/home-about-image/building-view.png",
+      "category": "Hotel News & Stories",
+      "tags": [
+        "Le Vert Family",
+        "Khmer Hospitality",
+        "Meet Our Team",
+        "Siem Reap",
+        "Our Philosophy"
+      ],
+      "author": {
+        "name": "Rin Kongvin",
+        "role": "Operations Manager",
+        "avatar": "/images/default-avatar.svg"
+      },
+      "publishedAt": "2026-10-01",
+      "readTimeMinutes": 5,
+      "isFeatured": true,
+      "status": "published"
+    },
+    {
+      "id": "post-1",
+      "slug": "angkor-wat-sunrise-guide-secrets",
+      "title": "The Connoisseur’s Guide to Angkor Wat Sunrise: Secrets for an Unforgettable Dawn",
+      "excerpt": "Experience the magic of twilight reflecting over the ancient lotus ponds of Angkor Wat with insider timing, crowd avoidance tips, and post-dawn breakfast spots.",
+      "content": "## The Timeless Magic of Dawn at Angkor\n\nThere are few sights in Southeast Asia as emotionally evocative as watching the first pale lavender hues of dawn give way to amber gold behind the iconic five lotus towers of **Angkor Wat**. For centuries, pilgrims, archaeologists, and curious wanderers have stood in hushed reverence as the silhouette of the world's largest religious monument slowly awakens from the darkness.\n\nHowever, experiencing this wonder gracefully requires careful planning. Here is our concierge team's curated guide to ensuring your Angkor Wat sunrise is serene, comfortable, and truly unforgettable.\n\n---\n\n### 1. Timing Is Everything: The Ideal Departure Window\n\nMany first-time visitors underestimate the logistics of early morning entry. \n\n* **4:45 AM Departure:** We strongly recommend departing Le Vert Angkor Hotel no later than 4:45 AM. Our hotel is positioned conveniently just 15 minutes by chauffeured car from the Angkor Archaeological Park checkpoint.\n* **5:15 AM Arrival at the West Gate:** Arriving by 5:15 AM allows you to cross the ancient stone causeway under a blanket of stars before the main wave of group tour buses arrives.\n* **5:45 AM – 6:15 AM Golden Hour:** The softest pastel sky usually appears 20 to 30 minutes *before* the sun physically crests the central sanctuary tower.\n\n> **Concierge Tip:** Ask our front desk the evening prior for an **Early Bird Temple Breakfast Box**. Our kitchen team will pack freshly baked croissants, fresh tropical fruit, boiled farm eggs, and artisanal Cambodian coffee ready for your dawn departure.\n\n---\n\n### 2. Choosing Your Vantage Point: Left Pond vs. Hidden Angles\n\nMost visitors crowd around the **Northern (Left) Reflection Pond**. While this classic angle provides the postcard-perfect double reflection of the towers, it can get crowded during peak season.\n\nConsider these insider alternatives:\n* **The Southern (Right) Pond:** Often half as crowded as the northern pond, with identical morning reflection quality and surrounding palm trees framing the composition.\n* **The Outer Gallery Grasslands:** Position yourself slightly further back along the ancient library terraces. You will capture the wide panoramic scale of the temple with the reflection pond softly nestled in the foreground.\n* **Upper Level Entry at 6:30 AM:** As soon as the sun rises, 90% of sunrise watchers immediately head toward the exits or restaurants. This is precisely the moment to step inside the central galleries while the corridors are serene and cool.\n\n---\n\n### 3. What to Pack for the Morning\n\nDress with both reverence and tropical practicality in mind:\n* **Respectful Attire:** Shoulders and knees must remain covered in accordance with the Angkor Code of Conduct (lightweight linen pants and breathable cotton shirts work best).\n* **Footwear:** Comfortable walking shoes with good tread for uneven sandstone steps.\n* **Small Torch or Phone Flashlight:** Essential for navigating the historic causeway before dusk dissolves.\n* **Hydration:** Chilled bottled mineral water (complimentary in our hotel chauffeured tour vehicles).\n\n---\n\n### 4. Returning to Le Vert for Rest and Rejuvenation\n\nAfter walking through the central sanctuaries between 6:30 AM and 8:30 AM, the equatorial sun begins to warm the stone courtyards. \n\nThis is the perfect juncture to return to Le Vert Angkor Hotel. Relax by our **crystal-clear rooftop saltwater swimming pool**, indulge in our full gourmet breakfast menu, and schedule a restorative **60-minute Khmer herbal foot acupressure session at Le Vert Spa** before setting out for your afternoon temple circuit.",
+      "coverImage": "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1600&q=85",
+      "category": "Temple Guides",
+      "tags": [
+        "Angkor Wat",
+        "Sunrise Guide",
+        "Photography",
+        "Siem Reap Tips"
+      ],
+      "author": {
+        "name": "Sophea Chan",
+        "role": "Chief Concierge & Heritage Specialist",
+        "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80"
+      },
+      "publishedAt": "2026-03-20",
+      "readTimeMinutes": 6,
+      "isFeatured": false,
+      "status": "published"
+    },
+    {
+      "id": "post-2",
+      "slug": "authentic-khmer-cuisine-flavors-siem-reap",
+      "title": "Tasting Siem Reap: An Insider Journey into Authentic Khmer Flavors",
+      "excerpt": "From silky Fish Amok steamed in banana leaf baskets to fragrant Kampot pepper beef Lok Lak, explore the rich culinary heritage waiting at Le Vert Restaurant.",
+      "content": "## Beyond the Temples: The Subtle Art of Cambodian Gastronomy\n\nWhile Angkor Wat commands the eyes of the world, Cambodian cuisine captivates the palate with an elegant balance of flavors that many international travelers are just beginning to discover. \n\nUnlike the fiery heat often associated with neighboring cuisines, **Khmer gastronomy** focuses on intricate herbal aromatics, subtle citrus brightness, gentle coconut undertones, and the ancient umami complexity of *prahok* and freshwater river fish.\n\n---\n\n### The Soul of Khmer Cooking: Kroeung Paste\n\nAt the core of virtually every traditional Cambodian stew, curry, and marinade is **Kroeung**—a fragrant spice paste pounded fresh each morning using a granite mortar and pestle.\n\nThe signature Royal Yellow Kroeung incorporates:\n* Fresh lemongrass stalks (bruised and finely sliced)\n* Wild kaffir lime zest and leaves\n* Fresh golden galangal and aromatic turmeric\n* Sweet shallots and pungent purple garlic\n* Hand-harvested sea salt\n\nThe aroma released when fresh Kroeung hits hot coconut oil in the wok is the unmistakable signature fragrance of a traditional Cambodian kitchen.\n\n---\n\n### Two Dishes You Must Savor in Siem Reap\n\n#### 1. Signature Steamed Fish Amok (*Amok Trey*)\nConsidered Cambodia's undisputed culinary masterpiece, authentic Amok is not a watery soup; it is a delicate savory custard. Fresh Tonle Sap freshwater fish fillet is gently whisked with fresh coconut cream, eggs, yellow kroeung, and native *slok ngor* (morinda leaves) which provide a distinct pleasant herbal bitterness. The mousse is wrapped into an origami-like banana leaf parcel and steamed to cloud-like perfection.\n\nAt **Le Vert Restaurant**, our kitchen team prepares Fish Amok using heritage family recipes handed down through three generations of Siem Reap cooks.\n\n#### 2. Wok-Tossed Beef Lok Lak with Kampot Peppercorn Dip\nTender strips of marinated beef flash-seared at high heat with garlic, sweet soy, and crisp onions, served over a bed of garden lettuce, ripe tomatoes, and cucumber. \n\nThe centerpiece of the dish is the dipping sauce: a zesty emulsion of fresh lime juice, sea salt, and hand-crushed **IGP-certified Kampot black peppercorns**, famous worldwide for their eucalyptus and floral fragrance.\n\n---\n\n### Sunset Cocktails at Le Vert Rooftop\n\nAfter a day traversing the sun-drenched stone galleries of the temples, there is no finer prelude to dinner than our **Angkor Sunset Infusion**—infused with local lemongrass, fresh lime, Cambodian wild honey, and premium botanical rum—served poolside overlooking the tree canopy of Siem Reap.",
+      "coverImage": "/images/Home/home-dining-image/0D9A2325.jpg",
+      "category": "Khmer Gastronomy",
+      "tags": [
+        "Khmer Food",
+        "Fish Amok",
+        "Lok Lak",
+        "Dining",
+        "Cocktails"
+      ],
+      "author": {
+        "name": "Chef Rattanak",
+        "role": "Executive Chef at Le Vert Angkor",
+        "avatar": "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=200&q=80"
+      },
+      "publishedAt": "2026-03-14",
+      "readTimeMinutes": 5,
+      "isFeatured": false,
+      "status": "published"
+    },
+    {
+      "id": "post-3",
+      "slug": "small-circuit-vs-grand-circuit-angkor",
+      "title": "Small Circuit vs. Grand Circuit: Which Angkor Itinerary Fits Your Schedule?",
+      "excerpt": "A detailed breakdown of temple routes, walking distances, photography highlights, and climate-controlled travel advice for first-time and returning visitors.",
+      "content": "## Navigating the 400-Square-Kilometer Wonder of Angkor\n\nWhen planning your Angkor exploration from Le Vert Angkor Hotel, the two fundamental itineraries established during the French conservation era are the **Small Circuit** (*Petit Circuit*) and the **Grand Circuit** (*Grand Circuit*).\n\nBoth circuits depart conveniently from Siem Reap town, but each offers a distinctly different atmosphere, architectural rhythm, and physical demand. Here is how to choose the ideal route for your schedule—or combine them into the ultimate 2-day discovery.\n\n---\n\n### The Small Circuit: The Iconic Architectural Giants (17 km Loop)\n\nThe Small Circuit concentrates on the most famous, grandest, and artistically dense monuments within the immediate vicinity of Angkor Thom.\n\n* **Angkor Wat:** The masterpiece of classic Khmer art and architecture.\n* **Angkor Thom & Bayon:** The enigmatic city center featuring 216 smiling stone faces gazing serene and omniscient in four cardinal directions.\n* **Baphuon & Terrace of the Elephants:** Magnificent ceremonial stairways and towering pyramidal bas-reliefs.\n* **Ta Prohm (\"Tomb Raider Temple\"):** The spellbinding monastery where giant silk-cotton tree roots straddle collapsing stone lintels.\n* **Banteay Kdei & Srah Srang:** A peaceful Buddhist monastery overlooking the royal bathing reservoir.\n\n**Ideal For:** First-time travelers, photography enthusiasts wanting the world-famous iconic landmarks, and visitors with limited time (1 to 2 days).\n\n**Estimated Duration:** 6 to 8 hours with lunch break.\n\n---\n\n### The Grand Circuit: Expansive Lakes, Wild Nature & Serenity (26 km Loop)\n\nThe Grand Circuit ventures slightly further north and east, tracing the outer monumental works constructed by King Jayavarman VII. The temples here feature fewer crowds, vast jungle settings, and fascinating water engineering.\n\n* **Preah Khan:** A sprawling maze of corridors, sacred stupas, and ancient libraries wrapped in jungle vines. Far less crowded than Ta Prohm, allowing for contemplative exploration.\n* **Neak Pean:** A tranquil island sanctuary sitting in the center of the Jayatataka Baray, accessed by a long wooden boardwalk across shimmering lotus waters.\n* **Ta Som:** A charming boutique temple featuring an iconic rear doorway completely engulfed by a strangler fig tree.\n* **East Mebon:** A massive five-tiered mountain temple guarded by monolithic freestanding stone elephants.\n* **Pre Rup:** A dramatic laterite pyramid temple, traditionally favored for warm golden hour and sunset views across the Cambodian plains.\n\n**Ideal For:** Returning travelers, nature and jungle lovers, and guests who appreciate quiet temple corridors without heavy tour crowds.\n\n---\n\n### The Le Vert Private Chauffeured Advantage\n\nVisiting Angkor in the tropical heat requires stamina. With our hotel's **Private Chauffeur Tour Service**:\n* You travel in climate-controlled SUV or private luxury van comfort between each temple stop.\n* Chilled lemongrass scented towels and unlimited bottled cold water await you after every walk.\n* Flexible departure timing allows you to take a midday pool break at Le Vert during peak noon heat and resume exploration in the late afternoon glow.",
+      "coverImage": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=85",
+      "category": "Temple Guides",
+      "tags": [
+        "Small Circuit",
+        "Grand Circuit",
+        "Bayon",
+        "Ta Prohm",
+        "Itinerary"
+      ],
+      "author": {
+        "name": "Vireak Meas",
+        "role": "Heritage Guide & Tour Coordinator",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80"
+      },
+      "publishedAt": "2026-03-08",
+      "readTimeMinutes": 7,
+      "isFeatured": false,
+      "status": "published"
+    },
+    {
+      "id": "post-4",
+      "slug": "ancient-khmer-herbal-spa-rituals",
+      "title": "The Healing Touch: Ancient Khmer Herbal Traditions & Modern Spa Therapy",
+      "excerpt": "Discover how indigenous Cambodian botanicals like lemongrass, kaffir lime, and wild ginger are infused into our signature therapies at Le Vert Spa to restore body and mind.",
+      "content": "## Rediscovering the Traditional Healing Philosophy of Angkor\n\nIn ancient Khmer society, health was viewed not merely as the absence of illness, but as a harmonious equilibrium among the body's four constitutional elements: Earth (*Dat Dey*), Water (*Dat Teuk*), Wind (*Dat Kbal*), and Fire (*Dat Pleung*).\n\nLong before modern wellness spas existed, traditional village healers—known as **Krou Khmer**—harnessed the medicinal vitality of Cambodia's wild jungle herbs, warm herbal steam, and pressure-point bodywork to restore balance to tired travelers and farmers alike.\n\n---\n\n### Indigenous Botanicals at the Heart of Our Treatments\n\nAt **Le Vert Spa**, we honor this ancient heritage by hand-sourcing organic herbs from local organic farmers in Siem Reap province:\n\n1. **Wild Lemongrass (*Slek Krey*):** Renowned for its natural antiseptic properties, high citral content, and ability to alleviate muscular soreness while invigorating mental clarity.\n2. **Kaffir Lime (*Krouch Saeuch*):** The fragrant rind and crushed leaves stimulate circulation and tone the skin with natural alpha hydroxy acids.\n3. **Plai & Wild Turmeric (*Pkar Romdeng*):** A botanical relative of ginger celebrated across Southeast Asian traditional medicine for profound anti-inflammatory benefits on aching joints.\n4. **Organic Virgin Coconut Oil:** Cold-pressed in Siem Reap, rich in lauric acid to nourish skin after exposure to tropical sunshine.\n\n---\n\n### The Signature Khmer Herbal Compress (*Kompri*)\n\nOne of our guests' most beloved rituals after trekking the stone steps of Angkor is the **Hot Herbal Poultice Therapy**.\n\nMuslin fabric packets packed with coarse sea salt and freshly roasted herbs are gently steamed over boiling water until fragrant oils release. The therapist applies these warm compresses along the body's energy meridian lines with rhythmic circular rolling motions. The gentle moist heat penetrates deep into muscular tissue, softening tension and flushing lactic acid with astonishing speed.\n\n---\n\n### Creating Your Personal Sanctuary\n\nEvery treatment at Le Vert Spa begins with an aromatic floral foot bath scented with fresh lime slices and lemongrass sea salt, followed by a chilled infusion of pandan and butterfly pea flower tea.\n\nWhether you choose a gentle 60-minute relaxing oil massage or our comprehensive 120-minute **Angkor Heritage Rejuvenation Package**, your time with us is designed to be a restorative retreat within your journey.",
+      "coverImage": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1600&q=85",
+      "category": "Wellness & Retreat",
+      "tags": [
+        "Spa & Wellness",
+        "Khmer Massage",
+        "Herbal Therapy",
+        "Relaxation"
+      ],
+      "author": {
+        "name": "Bopha Khem",
+        "role": "Lead Spa Therapist at Le Vert Spa",
+        "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80"
+      },
+      "publishedAt": "2026-02-28",
+      "readTimeMinutes": 4,
+      "isFeatured": false,
+      "status": "published"
+    },
+    {
+      "id": "post-5",
+      "slug": "siem-reap-after-dark-hidden-cocktails-culture",
+      "title": "Siem Reap After Dark: Beyond Pub Street into Hidden Cocktails & Cultural Gems",
+      "excerpt": "From artisanal gin lounges in Kandal Village to Phare Circus performances and rooftop pool vistas, here is how to spend an unforgettable evening in Siem Reap.",
+      "content": "## A City with Two Souls\n\nBy daylight, Siem Reap is the peaceful, dust-dappled gateway to the ancient Khmer empire. But as the sun dips below the horizon and the temple gates close, the city transforms into one of the most vibrant, creative, and welcoming evening destinations in Asia.\n\nWhile nearly every traveler has heard of the neon lights and energetic music of **Pub Street**, there is an entirely different side to Siem Reap's nightlife waiting to be experienced: refined speakeasies, contemporary Khmer circus arts, artisanal night markets, and peaceful riverside cocktail gardens.\n\n---\n\n### 1. Sunset Aperitifs at Le Vert Rooftop Bar\n\nBefore venturing out into town, begin your evening right upstairs. From our **Rooftop Pool & Sky Bar**, you can watch the sunset paint the sky in fiery orange over the rooftops and palm trees of Siem Reap. Sip our signature lemongrass-infused gin tonic and enjoy complimentary Khmer spiced roasted peanuts as the evening breeze cools the air.\n\n---\n\n### 2. Witness the Magic of Phare, The Cambodian Circus\n\nForget traditional animal circuses: **Phare Circus** is an electrifying fusion of theater, live traditional and rock music, dance, and jaw-dropping acrobatics performed by graduates of the renowned Battambang NGO arts school.\n\nEach performance tells a poignant Cambodian folktale or modern story of resilience with extraordinary physical daring, humor, and heart. Our concierge can book VIP front-row tickets and arrange your private round-trip tuk-tuk transfer in minutes.\n\n---\n\n### 3. Stroll Kandal Village & Hup Guan Street\n\nLocated just 5 minutes on foot from Le Vert Angkor Hotel, the tree-lined neighborhood of **Kandal Village** is Siem Reap's creative hub. Here you will find:\n* Thoughtful boutiques showcasing hand-woven Cambodian silk, ethical silver jewelry, and ceramics.\n* French-Khmer wine bars with intimate sidewalk tables.\n* Specialty coffee roasters and gelato parlors open late into the evening.\n\n---\n\n### 4. Hidden Cocktail Speakeasies\n\nFor discerning cocktail lovers, Siem Reap offers a surprising depth of mixology:\n* **Miss Wong:** A 1930s Shanghai-inspired cocktail sanctuary nestled in an alley near the river, famed for house-infused rose gins and dim sum.\n* **Asana Old Wooden House:** The last surviving traditional wooden stilt house in the old town, now serving cocktails crafted with infused local rice spirits (*Sombai*).\n\nWhen you are ready to retire, you can stroll quietly back to your peaceful sanctuary at **Le Vert Angkor Hotel**—tucked safely away from noisy nightlife corridors, ensuring a deep and sound night's sleep before your next morning adventure.",
+      "coverImage": "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1600&q=85",
+      "category": "Siem Reap Insider",
+      "tags": [
+        "Nightlife",
+        "Phare Circus",
+        "Siem Reap",
+        "Cocktails",
+        "Kandal Village"
+      ],
+      "author": {
+        "name": "Le Vert Concierge Team",
+        "role": "Guest Experience & Insider Guides",
+        "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80"
+      },
+      "publishedAt": "2026-02-18",
+      "readTimeMinutes": 5,
+      "isFeatured": false,
+      "status": "published"
+    }
+  ],
+  "levert:blog_categories": [
+    "Temple Guides",
+    "Siem Reap Insider",
+    "Khmer Gastronomy",
+    "Wellness & Retreat",
+    "Hotel News & Stories"
+  ]
+}
