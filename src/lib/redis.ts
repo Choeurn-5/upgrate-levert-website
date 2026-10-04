@@ -11,6 +11,7 @@ if (!getApps().length) {
         // Replace \\n with actual newline characters
         privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
       }),
+      storageBucket: `${process.env.FIREBASE_PROJECT_ID}.appspot.com`
     });
   } catch (error) {
     console.error('Firebase admin initialization error', error);
