@@ -2,14 +2,14 @@ import { initializeApp, cert, getApps } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
 
 // Initialize Firebase Admin if it hasn't been initialized yet
-if (!getApps().length) {
+if (!getApps().length && process.env.FIREBASE_PROJECT_ID && process.env.FIREBASE_PRIVATE_KEY) {
   try {
     initializeApp({
       credential: cert({
         projectId: process.env.FIREBASE_PROJECT_ID,
         clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
         // Replace \\n with actual newline characters
-        privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+        privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
       }),
       storageBucket: `${process.env.FIREBASE_PROJECT_ID}.appspot.com`
     });
@@ -18,7 +18,12 @@ if (!getApps().length) {
   }
 }
 
-const db = getFirestore();
+const getDb = () => {
+  if (!getApps().length) return null;
+  return getFirestore();
+};
+
+
 
 export const REDIS_KEYS = {
   BLOG_POSTS: 'levert:blog_posts',
@@ -41,6 +46,9 @@ export function getRedis() {
   return {
     async get(key: string) {
       try {
+        const db = getDb();
+        if (!db) return null;
+        
         const docRef = db.collection('database').doc(key);
         const doc = await docRef.get();
         if (doc.exists) {
@@ -54,6 +62,9 @@ export function getRedis() {
     },
     async set(key: string, value: any) {
       try {
+        const db = getDb();
+        if (!db) return 'OK';
+
         const docRef = db.collection('database').doc(key);
         await docRef.set({ value });
         return 'OK';
