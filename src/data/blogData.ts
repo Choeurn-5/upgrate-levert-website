@@ -67,7 +67,7 @@ This is the perfect juncture to return to Le Vert Angkor Hotel. Relax by our **c
     author: {
       name: 'Deepool',
       role: 'Front Office Manager',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+      avatar: '/images/staff-image/deepool-front-office-manager.jpg',
     },
     publishedAt: '2026-03-20',
     readTimeMinutes: 6,
@@ -125,7 +125,7 @@ After a day traversing the sun-drenched stone galleries of the temples, there is
     author: {
       name: 'Sous Chef Chansy',
       role: 'Culinary Excellence',
-      avatar: 'https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=200&q=80',
+      avatar: '/images/staff-image/chansy-sous-chef-avatar.jpg',
     },
     publishedAt: '2026-03-14',
     readTimeMinutes: 5,
@@ -187,7 +187,7 @@ Visiting Angkor in the tropical heat requires stamina. With our hotel's **Privat
     author: {
       name: 'Sotheara',
       role: 'Front Office Supervisor',
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
+      avatar: '/images/staff-image/sotheara-front-office-supervisor.jpg',
     },
     publishedAt: '2026-03-08',
     readTimeMinutes: 7,
@@ -293,7 +293,7 @@ When you are ready to retire, you can stroll quietly back to your peaceful sanct
     author: {
       name: 'Veasna',
       role: 'Restaurant & Rooftop Sky Bar Supervisor',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+      avatar: '/images/staff-image/veasna-restaurant-supervisor.jpg',
     },
     publishedAt: '2026-02-18',
     readTimeMinutes: 5,
@@ -337,7 +337,7 @@ Bon appétit!`,
     author: {
       name: 'Veasna',
       role: 'Restaurant & Rooftop Sky Bar Supervisor',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+      avatar: '/images/staff-image/veasna-restaurant-supervisor.jpg',
     },
     publishedAt: '2026-03-25',
     readTimeMinutes: 4,
@@ -419,7 +419,7 @@ Speak to our front desk team at Le Vert Angkor Hotel, and we can arrange private
     author: {
       name: 'Sotheara',
       role: 'Front Office Supervisor',
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
+      avatar: '/images/staff-image/sotheara-front-office-supervisor.jpg',
     },
     publishedAt: '2026-04-12',
     readTimeMinutes: 5,
@@ -459,7 +459,7 @@ Arrive early in the morning (before 9 AM) to see the fresh produce section at it
     author: {
       name: 'Veasna',
       role: 'Restaurant & Rooftop Sky Bar Supervisor',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+      avatar: '/images/staff-image/veasna-restaurant-supervisor.jpg',
     },
     publishedAt: '2026-04-18',
     readTimeMinutes: 4,
@@ -500,7 +500,7 @@ Start your evening with sunset cocktails at **Le Vert Rooftop Bar**, then walk 5
     author: {
       name: 'Veasna',
       role: 'Restaurant & Rooftop Sky Bar Supervisor',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+      avatar: '/images/staff-image/veasna-restaurant-supervisor.jpg',
     },
     publishedAt: '2026-04-25',
     readTimeMinutes: 4,
@@ -543,7 +543,7 @@ This is a truly unforgettable evening experience that we recommend to every sing
     author: {
       name: 'Veasna',
       role: 'Restaurant & Rooftop Sky Bar Supervisor',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+      avatar: '/images/staff-image/veasna-restaurant-supervisor.jpg',
     },
     publishedAt: '2026-05-02',
     readTimeMinutes: 4,
@@ -584,7 +584,7 @@ Our hotel can arrange a comfortable, air-conditioned private car with an English
     author: {
       name: 'Sotheara',
       role: 'Front Office Supervisor',
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
+      avatar: '/images/staff-image/sotheara-front-office-supervisor.jpg',
     },
     publishedAt: '2026-05-10',
     readTimeMinutes: 4,
@@ -620,7 +620,7 @@ If you have already explored the main Angkor temples and want something more adv
     author: {
       name: 'Deepool',
       role: 'Front Office Manager',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+      avatar: '/images/staff-image/deepool-front-office-manager.jpg',
     },
     publishedAt: '2026-05-18',
     readTimeMinutes: 4,
@@ -661,7 +661,7 @@ For a longer ride, follow **National Road 63** south toward Tonle Sap Lake. The 
     author: {
       name: 'Sotheara',
       role: 'Front Office Supervisor',
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
+      avatar: '/images/staff-image/sotheara-front-office-supervisor.jpg',
     },
     publishedAt: '2026-05-25',
     readTimeMinutes: 4,
@@ -702,7 +702,7 @@ During major festivals, Siem Reap fills up quickly! We recommend booking your st
     author: {
       name: 'Veasna',
       role: 'Restaurant & Rooftop Sky Bar Supervisor',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+      avatar: '/images/staff-image/veasna-restaurant-supervisor.jpg',
     },
     publishedAt: '2026-06-01',
     readTimeMinutes: 4,
@@ -744,7 +744,7 @@ Siem Reap and the Angkor Archaeological Park offer some of the most photogenic s
     author: {
       name: 'Deepool',
       role: 'Front Office Manager',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+      avatar: '/images/staff-image/deepool-front-office-manager.jpg',
     },
     publishedAt: '2026-06-08',
     readTimeMinutes: 4,
@@ -788,7 +788,7 @@ Our restaurant serves kid-friendly options including pasta, burgers, french frie
     author: {
       name: 'Veasna',
       role: 'Restaurant & Rooftop Sky Bar Supervisor',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+      avatar: '/images/staff-image/veasna-restaurant-supervisor.jpg',
     },
     publishedAt: '2026-06-15',
     readTimeMinutes: 4,
@@ -834,7 +834,7 @@ Our concierge team is happy to help you decide which pass is best for your itine
     author: {
       name: 'Deepool',
       role: 'Front Office Manager',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+      avatar: '/images/staff-image/deepool-front-office-manager.jpg',
     },
     publishedAt: '2026-06-22',
     readTimeMinutes: 4,
@@ -881,7 +881,7 @@ Bring a compact rain poncho (available at Old Market for $1), waterproof shoes, 
     author: {
       name: 'Sotheara',
       role: 'Front Office Supervisor',
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
+      avatar: '/images/staff-image/sotheara-front-office-supervisor.jpg',
     },
     publishedAt: '2026-06-30',
     readTimeMinutes: 4,
