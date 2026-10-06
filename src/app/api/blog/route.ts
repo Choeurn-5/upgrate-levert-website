@@ -139,8 +139,12 @@ export async function GET(request: NextRequest) {
       filtered = filtered.filter((p) => p.category.toLowerCase() === category.toLowerCase());
     }
 
-    // Sort by published date descending
-    filtered.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
+    // Sort by updatedAt descending (newest on top), fallback to publishedAt
+    filtered.sort((a, b) => {
+      const timeA = a.updatedAt ? new Date(a.updatedAt).getTime() : new Date(a.publishedAt).getTime();
+      const timeB = b.updatedAt ? new Date(b.updatedAt).getTime() : new Date(b.publishedAt).getTime();
+      return timeB - timeA;
+    });
 
     return NextResponse.json(filtered);
   } catch (err: any) {

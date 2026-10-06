@@ -57,6 +57,8 @@ export interface Tour {
   options: TourPricingOption[];
   featuredImage: string;
   longDescription: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface MenuItem {

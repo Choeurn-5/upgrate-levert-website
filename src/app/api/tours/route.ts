@@ -70,7 +70,15 @@ export async function GET(request: NextRequest) {
     const slug = searchParams.get('slug');
     const id = searchParams.get('id');
     const reset = searchParams.get('reset') === 'true';
-    const tours = await getStoredTours(reset);
+    const tours = [...await getStoredTours(reset)];
+
+    // Sort tours by last updated (newest on top)
+    tours.sort((a, b) => {
+      const timeA = a.updatedAt ? new Date(a.updatedAt).getTime() : a.id;
+      const timeB = b.updatedAt ? new Date(b.updatedAt).getTime() : b.id;
+      return timeB - timeA;
+    });
+
     if (slug) { const t = tours.find((t) => t.slug === slug); return t ? NextResponse.json(t) : NextResponse.json({ error: 'Tour not found' }, { status: 404 }); }
     if (id) { const t = tours.find((t) => String(t.id) === id); return t ? NextResponse.json(t) : NextResponse.json({ error: 'Tour not found' }, { status: 404 }); }
     return NextResponse.json(tours);
@@ -93,8 +101,10 @@ export async function POST(request: NextRequest) {
       featuredImage: featuredImage || 'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1600&q=85',
       highlights: Array.isArray(highlights) ? highlights : [],
       options: Array.isArray(options) ? options : [],
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
     };
-    tours.push(newTour);
+    tours.unshift(newTour);
     await saveStoredTours(tours);
     return NextResponse.json(newTour, { status: 201 });
   } catch (err: any) { return NextResponse.json({ error: err.message || 'Failed to create tour' }, { status: 500 }); }
@@ -122,6 +132,7 @@ export async function PUT(request: NextRequest) {
       featuredImage: body.featuredImage ?? existing.featuredImage,
       highlights: body.highlights ?? existing.highlights,
       options: body.options ?? existing.options,
+      updatedAt: new Date().toISOString(),
     };
     tours[index] = updatedTour;
     await saveStoredTours(tours);
