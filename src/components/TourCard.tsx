@@ -38,13 +38,25 @@ export const TourCard: React.FC<TourCardProps> = ({ tour, onViewDetails, onBookT
         {/* Price Badge */}
         <div className="absolute bottom-4 right-4 z-10">
           <div className="relative">
-            <div className="absolute inset-0 bg-[#C5A880]/20 blur-xl rounded-full" />
-            <div className="relative px-4 py-2 rounded-2xl bg-white/95 backdrop-blur-md border border-[#E8E0D4] shadow-lg">
-              <span className="text-[9px] uppercase font-bold tracking-[0.15em] text-[#8A7A64] block -mb-0.5">Private Tour</span>
-              <div className="flex items-baseline space-x-0.5">
-                <span className="font-luxury-serif text-2xl font-bold text-[#1C3829]">${tour.price}</span>
-                <span className="text-xs text-[#8A7A64]">/ group</span>
+            <div className="absolute inset-0 bg-[#C5A880]/20 blur-xl rounded-2xl" />
+            <div className="relative px-4 py-2 rounded-2xl bg-white/95 backdrop-blur-md border border-[#E8E0D4] shadow-lg flex flex-col gap-1">
+              <div className="flex items-center justify-between gap-3">
+                <span className="text-[9px] uppercase font-bold tracking-[0.15em] text-[#8A7A64]">{tour.priceLabel || 'Private Tour'}</span>
+                <div className="flex items-baseline space-x-0.5">
+                  <span className="font-luxury-serif text-xl font-bold text-[#1C3829]">${tour.price}</span>
+                </div>
               </div>
+              {tour.secondaryPrice && (
+                <>
+                  <div className="h-px w-full bg-[#EDE8E0]" />
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="text-[9px] uppercase font-bold tracking-[0.15em] text-[#8A7A64]">{tour.secondaryPriceLabel || 'Option 2'}</span>
+                    <div className="flex items-baseline space-x-0.5">
+                      <span className="font-luxury-serif text-xl font-bold text-[#1C3829]">${tour.secondaryPrice}</span>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>

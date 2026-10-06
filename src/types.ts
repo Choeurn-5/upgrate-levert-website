@@ -55,6 +55,9 @@ export interface Tour {
   slug: string;
   title: string;
   price: number;
+  priceLabel?: string;
+  secondaryPrice?: number;
+  secondaryPriceLabel?: string;
   currency: string;
   duration: string;
   vehicleType: string;

@@ -232,18 +232,49 @@ export const AdminToursView: React.FC<AdminToursViewProps> = ({ onNavigate }) =>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="text-xs font-semibold text-[#68726B] uppercase tracking-wider block mb-1">Price (USD) *</label>
-                <div className="relative">
-                  <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#C5A880]" />
+                <label className="text-xs font-semibold text-[#68726B] uppercase tracking-wider block mb-1">Primary Price (USD) *</label>
+                <div className="flex gap-2">
+                  <div className="relative flex-1">
+                    <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#C5A880]" />
+                    <input
+                      type="number"
+                      value={editingTour.price || ''}
+                      onChange={e => setEditingTour({ ...editingTour, price: Number(e.target.value) })}
+                      placeholder="80"
+                      className="w-full pl-9 pr-4 py-3 rounded-xl border border-[#EDE8E0] focus:border-[#C5A880] text-sm text-[#1C3829] outline-none transition"
+                    />
+                  </div>
                   <input
-                    type="number"
-                    value={editingTour.price || ''}
-                    onChange={e => setEditingTour({ ...editingTour, price: Number(e.target.value) })}
-                    placeholder="80"
-                    className="w-full pl-9 pr-4 py-3 rounded-xl border border-[#EDE8E0] focus:border-[#C5A880] text-sm text-[#1C3829] outline-none transition"
+                    value={editingTour.priceLabel || ''}
+                    onChange={e => setEditingTour({ ...editingTour, priceLabel: e.target.value })}
+                    placeholder="Label (e.g. Tuk Tuk)"
+                    className="w-full flex-1 px-4 py-3 rounded-xl border border-[#EDE8E0] focus:border-[#C5A880] text-sm text-[#1C3829] outline-none transition"
                   />
                 </div>
               </div>
+              
+              <div>
+                <label className="text-xs font-semibold text-[#68726B] uppercase tracking-wider block mb-1">Secondary Price (USD)</label>
+                <div className="flex gap-2">
+                  <div className="relative flex-1">
+                    <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#C5A880]" />
+                    <input
+                      type="number"
+                      value={editingTour.secondaryPrice || ''}
+                      onChange={e => setEditingTour({ ...editingTour, secondaryPrice: Number(e.target.value) })}
+                      placeholder="Optional"
+                      className="w-full pl-9 pr-4 py-3 rounded-xl border border-[#EDE8E0] focus:border-[#C5A880] text-sm text-[#1C3829] outline-none transition"
+                    />
+                  </div>
+                  <input
+                    value={editingTour.secondaryPriceLabel || ''}
+                    onChange={e => setEditingTour({ ...editingTour, secondaryPriceLabel: e.target.value })}
+                    placeholder="Label (e.g. Car)"
+                    className="w-full flex-1 px-4 py-3 rounded-xl border border-[#EDE8E0] focus:border-[#C5A880] text-sm text-[#1C3829] outline-none transition"
+                  />
+                </div>
+              </div>
+
               <div>
                 <label className="text-xs font-semibold text-[#68726B] uppercase tracking-wider block mb-1">Duration</label>
                 <div className="relative">
@@ -539,7 +570,9 @@ export const AdminToursView: React.FC<AdminToursViewProps> = ({ onNavigate }) =>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-luxury-serif text-base font-bold text-[#1C3829] truncate">{tour.title}</h3>
                   <div className="flex items-center flex-wrap gap-x-3 gap-y-1 mt-1">
-                    <span className="text-xs text-[#C5A880] font-bold">${tour.price} USD</span>
+                    <span className="text-xs text-[#C5A880] font-bold">
+                      ${tour.price} {tour.secondaryPrice ? `/ $${tour.secondaryPrice}` : ''} USD
+                    </span>
                     <span className="text-xs text-[#8A9490]">{tour.duration}</span>
                     <span className="text-xs text-[#8A9490]">{tour.itinerary.length} stops</span>
                   </div>

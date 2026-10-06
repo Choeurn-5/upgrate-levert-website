@@ -1,0 +1,136 @@
+[
+  {
+    "id": 876,
+    "slug": "big-circuit",
+    "title": "Big Circuit Temple Tour",
+    "price": 80,
+    "currency": "USD",
+    "duration": "Full Day (~8:00 AM – 5:30 PM)",
+    "vehicleType": "Private Air-Conditioned SUV / Van with Licensed English Driver",
+    "shortDescription": "Traverse the majestic grand loop of Angkor: Preah Khan monastic labyrinth, the enigmatic island temple of Neak Poan, Ta Som, East Mebon, and sunset at Pre Rup.",
+    "longDescription": "The Big Circuit (Grand Loop) takes you beyond the central city into the magnificent outer royal complexes built during the zenith of the Khmer Empire. Encounter towering strangler figs weaving through Preah Khan, witness the holy medicinal waters of Neak Poan, and marvel at the massive stone elephants guarding East Mebon before witnessing a golden sunset over the ancient brick spires of Pre Rup.",
+    "featuredImage": "https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/03/Things-to-Do-in-Siem-Reap.jpg",
+    "itinerary": [
+      {
+        "time": "08:00 AM",
+        "templeName": "Preah Khan",
+        "description": "Explore the vast monastic complex built by King Jayavarman VII for his father, featuring endless colonnaded corridors, delicate devata carvings, and tranquil forest surroundings.",
+        "highlight": "Two-story Greek-style pavilion and sacred stupa hall"
+      },
+      {
+        "time": "10:15 AM",
+        "templeName": "Neak Poan",
+        "description": "Cross an ethereal wooden boardwalk over lotus-filled waters to reach the circular island sanctuary symbolizing the mythical Himalayan lake Anavatapta.",
+        "highlight": "Intricate carved serpent spirits (Naga) and medicinal cleansing pools"
+      },
+      {
+        "time": "11:45 AM",
+        "templeName": "Ta Som",
+        "description": "A miniature jewel famous for its eastern gopura entrance completely swallowed by the roots of a giant sacred fig tree.",
+        "highlight": "Iconic tree-root frame of the four-faced Avalokiteshvara tower"
+      },
+      {
+        "time": "01:00 PM",
+        "templeName": "East Mebon & Traditional Khmer Lunch",
+        "description": "Pause for lunch at an authentic countryside pavilion, then examine the 10th-century temple mountain with monolithic stone elephants at each terrace corner.",
+        "highlight": "Full-scale freestanding guardian elephants carved from sandstone"
+      },
+      {
+        "time": "03:00 PM",
+        "templeName": "Banteay Kdei & Sras Srang",
+        "description": "Visit the \"Citadel of Chambers\" in its quiet forest clearing, followed by a reflective stroll across the ancient Royal Bathing Pool of Sras Srang.",
+        "highlight": "Peaceful uncrowded atmosphere and cloistered galleries"
+      },
+      {
+        "time": "04:30 PM",
+        "templeName": "Pre Rup (Sunset Panorama)",
+        "description": "Ascend the steep tiers of this fiery laterite and brick pyramid to catch panoramic sunset vistas across the tropical jungle canopy.",
+        "highlight": "Sunset viewing over the Siem Reap countryside"
+      }
+    ],
+    "inclusions": [
+      "Private air-conditioned vehicle with dedicated professional driver",
+      "Hotel pick-up and return directly from Le Vert Angkor Hotel",
+      "Unlimited chilled mineral water bottles throughout the journey",
+      "Refreshing cold towels after each temple exploration",
+      "All vehicle parking fees, tolls, and fuel"
+    ],
+    "exclusions": [
+      "Angkor Archaeological Park Pass ($37 for 1-day, $62 for 3-day)",
+      "Personal lunch and refreshments",
+      "Licensed English Tour Guide ($40 optional add-on available upon request)",
+      "Personal travel insurance and gratuities"
+    ],
+    "tips": [
+      "Dress code: Shoulders and knees must be covered (shawls over bare shoulders are not permitted by temple authorities).",
+      "Comfortable walking shoes with good grip are strongly recommended for climbing steep temple staircases.",
+      "Bring sun protection: wide-brim hat, sunglasses, and reef-safe sunscreen."
+    ]
+  },
+  {
+    "id": 562,
+    "slug": "small-circuit",
+    "title": "Small Circuit Temple Tour",
+    "price": 70,
+    "currency": "USD",
+    "duration": "Full Day (~8:00 AM – 5:00 PM or Sunrise ~4:45 AM)",
+    "vehicleType": "Private Air-Conditioned SUV / Van with Licensed English Driver",
+    "shortDescription": "The quintessential Angkor experience: world-renowned Angkor Wat, the 216 enigmatic stone faces of the Bayon, the Royal Enclosure of Angkor Thom, and jungle-engulfed Ta Prohm.",
+    "longDescription": "The Small Circuit encompasses the crown jewels of Angkor. Begin at Angkor Wat, the largest religious monument in the world, stand in awe beneath the serenely smiling colossal faces of Bayon in Angkor Thom, and wander through Ta Prohm where century-old silk-cotton trees hold ancient sandstone walls in an eternal embrace.",
+    "featuredImage": "https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/01/R-3.jpg",
+    "itinerary": [
+      {
+        "time": "08:00 AM",
+        "templeName": "Angkor Wat",
+        "description": "Cross the grand causeway into the pinnacle of classical Khmer architecture. Admire over 2,000 celestial Apsara dancers and the breathtaking 600-meter bas-relief murals depicting Hindu epics.",
+        "highlight": "World-famous central sanctuary towers and reflecting pools"
+      },
+      {
+        "time": "10:45 AM",
+        "templeName": "Angkor Thom & South Gate",
+        "description": "Cross the causeway lined with 108 gods and demons pulling the cosmic serpent Vasuki to enter the fortified city of King Jayavarman VII.",
+        "highlight": "Monumental 23-meter stone gateway crowned with four smiling faces"
+      },
+      {
+        "time": "11:30 AM",
+        "templeName": "The Bayon Temple",
+        "description": "The hypnotic center of Angkor Thom featuring 54 Gothic-style towers adorned with 216 giant smiling faces of Avalokiteshvara.",
+        "highlight": "Fascinating everyday historical bas-reliefs of ancient Khmer market life and naval battles"
+      },
+      {
+        "time": "01:00 PM",
+        "templeName": "Baphuon, Phimeanakas & Terrace of Elephants",
+        "description": "Wander through the sprawling Royal Palace compound, see the 350-meter Terrace of Elephants used as a royal reviewing stand, and the mysterious Terrace of the Leper King.",
+        "highlight": "Giant reclining Buddha hidden in the rear facade of Baphuon"
+      },
+      {
+        "time": "02:45 PM",
+        "templeName": "Ta Prohm (Tomb Raider Temple)",
+        "description": "The most atmospheric temple in the park, deliberately preserved as it was first encountered by 19th-century explorers, intertwined with giant banyan and silk-cotton roots.",
+        "highlight": "Immense roots cascading over stone doorways and courtyard galleries"
+      },
+      {
+        "time": "04:15 PM",
+        "templeName": "Banteay Kdei & Return to Hotel",
+        "description": "A serene final stop through the quiet, shaded corridors of Banteay Kdei before heading back to relax by Le Vert’s rooftop pool.",
+        "highlight": "Peaceful golden hour lighting filtering through ancient courtyards"
+      }
+    ],
+    "inclusions": [
+      "Private air-conditioned vehicle with dedicated professional driver",
+      "Hotel pick-up and return directly from Le Vert Angkor Hotel",
+      "Unlimited chilled mineral water bottles and cold refreshing towels",
+      "All parking, fuel, and municipal access fees"
+    ],
+    "exclusions": [
+      "Angkor Park Pass ($37 per person for 1-day pass)",
+      "Meals and personal drinks",
+      "Official Angkor Temple Guide ($40 optional upon booking)",
+      "Gratuities and tips"
+    ],
+    "tips": [
+      "Sunrise option: Departure at 4:45 AM can be arranged with takeaway hotel breakfast box upon advance notice to our front desk.",
+      "Strict attire: shoulders and knees covered with non-transparent fabric."
+    ]
+  }
+]

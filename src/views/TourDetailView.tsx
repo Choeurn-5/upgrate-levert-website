@@ -160,18 +160,38 @@ export const TourDetailView: React.FC<TourDetailViewProps> = ({
           <div className="lg:col-span-4">
             <div className="sticky top-28 space-y-6">
               <div className="p-8 rounded-3xl bg-[#FAF8F5] border border-[#E7E0D5] shadow-xl space-y-6">
-                <div>
-                  <span className="text-xs uppercase font-semibold text-[#68726B] tracking-wider block mb-1">
-                    Private Tour Rate
-                  </span>
-                  <div className="flex items-baseline space-x-2">
-                    <span className="font-luxury-serif text-4xl font-bold text-[#1C3829]">
-                      ${tour.price}
+                <div className="space-y-4">
+                  <div>
+                    <span className="text-xs uppercase font-semibold text-[#68726B] tracking-wider block mb-1">
+                      {tour.priceLabel || 'Private Tour Rate'}
                     </span>
-                    <span className="text-sm text-[#68726B]">USD / vehicle (up to 4 guests)</span>
+                    <div className="flex items-baseline space-x-2">
+                      <span className="font-luxury-serif text-3xl font-bold text-[#1C3829]">
+                        ${tour.price}
+                      </span>
+                      <span className="text-sm text-[#68726B]">USD</span>
+                    </div>
                   </div>
-                  <p className="text-xs text-[#68726B] mt-1">
-                    Door-to-door hotel pick-up and drop-off
+
+                  {tour.secondaryPrice && (
+                    <>
+                      <div className="h-px bg-[#E7E0D5]" />
+                      <div>
+                        <span className="text-xs uppercase font-semibold text-[#68726B] tracking-wider block mb-1">
+                          {tour.secondaryPriceLabel || 'Option 2'}
+                        </span>
+                        <div className="flex items-baseline space-x-2">
+                          <span className="font-luxury-serif text-3xl font-bold text-[#1C3829]">
+                            ${tour.secondaryPrice}
+                          </span>
+                          <span className="text-sm text-[#68726B]">USD</span>
+                        </div>
+                      </div>
+                    </>
+                  )}
+
+                  <p className="text-xs text-[#68726B] pt-2">
+                    Door-to-door hotel pick-up and drop-off included
                   </p>
                 </div>
 

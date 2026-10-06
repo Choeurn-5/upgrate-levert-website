@@ -1,4 +1,4 @@
-﻿import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
 import { Tour } from '@/types';
@@ -77,7 +77,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { title, shortDescription, longDescription, price, currency, duration, vehicleType, featuredImage, itinerary, inclusions, exclusions, tips } = body;
+    const { title, shortDescription, longDescription, price, priceLabel, secondaryPrice, secondaryPriceLabel, currency, duration, vehicleType, featuredImage, itinerary, inclusions, exclusions, tips } = body;
     if (!title || !shortDescription) return NextResponse.json({ error: 'Title and shortDescription are required' }, { status: 400 });
     const tours = await getStoredTours();
     let slug = body.slug ? slugify(body.slug) : slugify(title);
@@ -85,7 +85,10 @@ export async function POST(request: NextRequest) {
     while (tours.some((t) => t.slug === uniqueSlug)) { uniqueSlug = `${slug}-${counter}`; counter++; }
     const newTour: Tour = {
       id: Date.now(), slug: uniqueSlug, title: title.trim(),
-      price: Number(price) || 0, currency: currency || 'USD',
+      price: Number(price) || 0, priceLabel: priceLabel,
+      secondaryPrice: secondaryPrice ? Number(secondaryPrice) : undefined,
+      secondaryPriceLabel: secondaryPriceLabel,
+      currency: currency || 'USD',
       duration: duration || '', vehicleType: vehicleType || 'Private Air-Conditioned Vehicle',
       shortDescription: shortDescription.trim(), longDescription: longDescription?.trim() || shortDescription.trim(),
       featuredImage: featuredImage || 'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1600&q=85',
@@ -118,6 +121,9 @@ export async function PUT(request: NextRequest) {
       ...existing, slug: newSlug,
       title: body.title !== undefined ? body.title.trim() : existing.title,
       price: body.price !== undefined ? Number(body.price) : existing.price,
+      priceLabel: body.priceLabel ?? existing.priceLabel,
+      secondaryPrice: body.secondaryPrice !== undefined ? Number(body.secondaryPrice) : existing.secondaryPrice,
+      secondaryPriceLabel: body.secondaryPriceLabel ?? existing.secondaryPriceLabel,
       currency: body.currency ?? existing.currency,
       duration: body.duration ?? existing.duration,
       vehicleType: body.vehicleType ?? existing.vehicleType,
