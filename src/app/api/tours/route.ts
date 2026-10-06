@@ -18,14 +18,16 @@ declare global {
   var __LEVERT_TOURS__: Tour[] | undefined;
 }
 
-async function getStoredTours(): Promise<Tour[]> {
+async function getStoredTours(reset: boolean = false): Promise<Tour[]> {
   const redis = getRedis();
   if (redis) {
     try {
-      const cached = await redis.get<Tour[]>(REDIS_KEYS.TOURS);
-      if (Array.isArray(cached)) {
-        globalThis.__LEVERT_TOURS__ = cached;
-        return cached;
+      if (!reset) {
+        const cached = await redis.get<Tour[]>(REDIS_KEYS.TOURS);
+        if (Array.isArray(cached)) {
+          globalThis.__LEVERT_TOURS__ = cached;
+          return cached;
+        }
       }
       const initial = [...TOURS_DATA];
       await redis.set(REDIS_KEYS.TOURS, initial);
@@ -67,7 +69,8 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const slug = searchParams.get('slug');
     const id = searchParams.get('id');
-    const tours = await getStoredTours();
+    const reset = searchParams.get('reset') === 'true';
+    const tours = await getStoredTours(reset);
     if (slug) { const t = tours.find((t) => t.slug === slug); return t ? NextResponse.json(t) : NextResponse.json({ error: 'Tour not found' }, { status: 404 }); }
     if (id) { const t = tours.find((t) => String(t.id) === id); return t ? NextResponse.json(t) : NextResponse.json({ error: 'Tour not found' }, { status: 404 }); }
     return NextResponse.json(tours);
@@ -77,25 +80,19 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { title, shortDescription, longDescription, price, priceLabel, secondaryPrice, secondaryPriceLabel, currency, duration, vehicleType, featuredImage, itinerary, inclusions, exclusions, tips } = body;
-    if (!title || !shortDescription) return NextResponse.json({ error: 'Title and shortDescription are required' }, { status: 400 });
+    const { title, durationLabel, longDescription, featuredImage, highlights, options } = body;
+    if (!title) return NextResponse.json({ error: 'Title is required' }, { status: 400 });
     const tours = await getStoredTours();
     let slug = body.slug ? slugify(body.slug) : slugify(title);
     let uniqueSlug = slug; let counter = 1;
     while (tours.some((t) => t.slug === uniqueSlug)) { uniqueSlug = `${slug}-${counter}`; counter++; }
     const newTour: Tour = {
       id: Date.now(), slug: uniqueSlug, title: title.trim(),
-      price: Number(price) || 0, priceLabel: priceLabel,
-      secondaryPrice: secondaryPrice ? Number(secondaryPrice) : undefined,
-      secondaryPriceLabel: secondaryPriceLabel,
-      currency: currency || 'USD',
-      duration: duration || '', vehicleType: vehicleType || 'Private Air-Conditioned Vehicle',
-      shortDescription: shortDescription.trim(), longDescription: longDescription?.trim() || shortDescription.trim(),
+      durationLabel: durationLabel || '',
+      longDescription: longDescription?.trim() || '',
       featuredImage: featuredImage || 'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1600&q=85',
-      itinerary: Array.isArray(itinerary) ? itinerary : [],
-      inclusions: Array.isArray(inclusions) ? inclusions : [],
-      exclusions: Array.isArray(exclusions) ? exclusions : [],
-      tips: Array.isArray(tips) ? tips : [],
+      highlights: Array.isArray(highlights) ? highlights : [],
+      options: Array.isArray(options) ? options : [],
     };
     tours.push(newTour);
     await saveStoredTours(tours);
@@ -120,20 +117,11 @@ export async function PUT(request: NextRequest) {
     const updatedTour: Tour = {
       ...existing, slug: newSlug,
       title: body.title !== undefined ? body.title.trim() : existing.title,
-      price: body.price !== undefined ? Number(body.price) : existing.price,
-      priceLabel: body.priceLabel ?? existing.priceLabel,
-      secondaryPrice: body.secondaryPrice !== undefined ? Number(body.secondaryPrice) : existing.secondaryPrice,
-      secondaryPriceLabel: body.secondaryPriceLabel ?? existing.secondaryPriceLabel,
-      currency: body.currency ?? existing.currency,
-      duration: body.duration ?? existing.duration,
-      vehicleType: body.vehicleType ?? existing.vehicleType,
-      shortDescription: body.shortDescription !== undefined ? body.shortDescription.trim() : existing.shortDescription,
+      durationLabel: body.durationLabel ?? existing.durationLabel,
       longDescription: body.longDescription !== undefined ? body.longDescription.trim() : existing.longDescription,
       featuredImage: body.featuredImage ?? existing.featuredImage,
-      itinerary: body.itinerary ?? existing.itinerary,
-      inclusions: body.inclusions ?? existing.inclusions,
-      exclusions: body.exclusions ?? existing.exclusions,
-      tips: body.tips ?? existing.tips,
+      highlights: body.highlights ?? existing.highlights,
+      options: body.options ?? existing.options,
     };
     tours[index] = updatedTour;
     await saveStoredTours(tours);

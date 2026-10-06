@@ -1,39 +1,24 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import {
   Plus, Trash2, Edit3, Eye, Save, X, RefreshCw, Check, ChevronDown, ChevronUp,
-  Compass, Car, Clock, DollarSign, Image as ImageIcon, AlignLeft, List, AlertCircle,
-  GripVertical, Lightbulb, Upload, Loader2,
+  Image as ImageIcon, AlignLeft, AlertCircle, Upload, Loader2, DollarSign, Star
 } from 'lucide-react';
-import { Tour, TourStop, AppRoute } from '../types';
+import { Tour, TourPricingOption, AppRoute } from '../types';
 
 interface AdminToursViewProps {
   onNavigate: (route: AppRoute, slug?: string) => void;
 }
 
-const EMPTY_STOP: TourStop = { time: '', templeName: '', description: '', highlight: '' };
+const EMPTY_OPTION: TourPricingOption = { title: '', details: [''] };
 
 const EMPTY_TOUR: Omit<Tour, 'id' | 'slug'> = {
   title: '',
-  price: 0,
-  currency: 'USD',
-  duration: '',
-  vehicleType: 'Private Air-Conditioned SUV / Van',
-  shortDescription: '',
+  durationLabel: '',
   longDescription: '',
   featuredImage: '',
-  itinerary: [{ ...EMPTY_STOP }],
-  inclusions: ['Private air-conditioned vehicle with dedicated professional driver', 'Hotel pick-up and return from Le Vert Angkor Hotel', 'Unlimited chilled mineral water and cold refreshing towels', 'All parking, fuel, and municipal access fees'],
-  exclusions: ['Angkor Park Pass ($37 for 1-day, $62 for 3-day)', 'Meals and personal drinks', 'Tour Guide ($40 optional)', 'Gratuities and tips'],
-  tips: ['Dress code: Shoulders and knees must be covered.', 'Comfortable walking shoes recommended.', 'Bring sun protection.'],
+  highlights: [''],
+  options: [{ ...EMPTY_OPTION }],
 };
-
-const IMAGE_PRESETS = [
-  { label: 'Angkor Wat Sunrise', url: 'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1600&q=85' },
-  { label: 'Bayon Temple Faces', url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=85' },
-  { label: 'Siem Reap Temples', url: 'https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/03/Things-to-Do-in-Siem-Reap.jpg' },
-  { label: 'Angkor Small Circuit', url: 'https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/01/R-3.jpg' },
-  { label: 'Ta Prohm (Tomb Raider)', url: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1600&q=85' },
-];
 
 export const AdminToursView: React.FC<AdminToursViewProps> = ({ onNavigate }) => {
   const [tours, setTours] = useState<Tour[]>([]);
@@ -114,7 +99,6 @@ export const AdminToursView: React.FC<AdminToursViewProps> = ({ onNavigate }) =>
   const handleSave = async () => {
     if (!editingTour) return;
     if (!editingTour.title?.trim()) { setError('Title is required'); return; }
-    if (!editingTour.shortDescription?.trim()) { setError('Short description is required'); return; }
 
     setIsSaving(true);
     setError(null);
@@ -154,36 +138,60 @@ export const AdminToursView: React.FC<AdminToursViewProps> = ({ onNavigate }) =>
     }
   };
 
-  // Helpers for editing arrays (itinerary, inclusions, exclusions, tips)
-  const updateStop = (i: number, field: keyof TourStop, val: string) => {
+  // Highlights helpers
+  const updateHighlight = (i: number, val: string) => {
     if (!editingTour) return;
-    const stops = [...(editingTour.itinerary || [])];
-    stops[i] = { ...stops[i], [field]: val };
-    setEditingTour({ ...editingTour, itinerary: stops });
+    const arr = [...(editingTour.highlights || [])];
+    arr[i] = val;
+    setEditingTour({ ...editingTour, highlights: arr });
   };
-  const addStop = () => {
+  const addHighlight = () => {
     if (!editingTour) return;
-    setEditingTour({ ...editingTour, itinerary: [...(editingTour.itinerary || []), { ...EMPTY_STOP }] });
+    setEditingTour({ ...editingTour, highlights: [...(editingTour.highlights || []), ''] });
   };
-  const removeStop = (i: number) => {
+  const removeHighlight = (i: number) => {
     if (!editingTour) return;
-    setEditingTour({ ...editingTour, itinerary: (editingTour.itinerary || []).filter((_, idx) => idx !== i) });
+    setEditingTour({ ...editingTour, highlights: (editingTour.highlights || []).filter((_, idx) => idx !== i) });
   };
 
-  const updateListItem = (field: 'inclusions' | 'exclusions' | 'tips', i: number, val: string) => {
+  // Options helpers
+  const updateOptionTitle = (optIdx: number, val: string) => {
     if (!editingTour) return;
-    const arr = [...(editingTour[field] as string[] || [])];
-    arr[i] = val;
-    setEditingTour({ ...editingTour, [field]: arr });
+    const opts = [...(editingTour.options || [])];
+    opts[optIdx] = { ...opts[optIdx], title: val };
+    setEditingTour({ ...editingTour, options: opts });
   };
-  const addListItem = (field: 'inclusions' | 'exclusions' | 'tips') => {
+  const addOption = () => {
     if (!editingTour) return;
-    setEditingTour({ ...editingTour, [field]: [...(editingTour[field] as string[] || []), ''] });
+    setEditingTour({ ...editingTour, options: [...(editingTour.options || []), { title: '', details: [''] }] });
   };
-  const removeListItem = (field: 'inclusions' | 'exclusions' | 'tips', i: number) => {
+  const removeOption = (optIdx: number) => {
     if (!editingTour) return;
-    setEditingTour({ ...editingTour, [field]: (editingTour[field] as string[] || []).filter((_, idx) => idx !== i) });
+    setEditingTour({ ...editingTour, options: (editingTour.options || []).filter((_, idx) => idx !== optIdx) });
   };
+
+  // Option details helpers
+  const updateOptionDetail = (optIdx: number, detailIdx: number, val: string) => {
+    if (!editingTour) return;
+    const opts = [...(editingTour.options || [])];
+    const details = [...opts[optIdx].details];
+    details[detailIdx] = val;
+    opts[optIdx] = { ...opts[optIdx], details };
+    setEditingTour({ ...editingTour, options: opts });
+  };
+  const addOptionDetail = (optIdx: number) => {
+    if (!editingTour) return;
+    const opts = [...(editingTour.options || [])];
+    opts[optIdx].details = [...opts[optIdx].details, ''];
+    setEditingTour({ ...editingTour, options: opts });
+  };
+  const removeOptionDetail = (optIdx: number, detailIdx: number) => {
+    if (!editingTour) return;
+    const opts = [...(editingTour.options || [])];
+    opts[optIdx].details = opts[optIdx].details.filter((_, idx) => idx !== detailIdx);
+    setEditingTour({ ...editingTour, options: opts });
+  };
+
 
   if (isLoading) {
     return (
@@ -226,88 +234,17 @@ export const AdminToursView: React.FC<AdminToursViewProps> = ({ onNavigate }) =>
               <input
                 value={editingTour.title || ''}
                 onChange={e => setEditingTour({ ...editingTour, title: e.target.value })}
-                placeholder="e.g. Big Circuit Temple Tour"
+                placeholder="e.g. Sunrise Angkor Small Temple Tour"
                 className="w-full px-4 py-3 rounded-xl border border-[#EDE8E0] focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880]/20 text-sm text-[#1C3829] outline-none transition"
               />
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="text-xs font-semibold text-[#68726B] uppercase tracking-wider block mb-1">Primary Price (USD) *</label>
-                <div className="flex gap-2">
-                  <div className="relative flex-1">
-                    <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#C5A880]" />
-                    <input
-                      type="number"
-                      value={editingTour.price || ''}
-                      onChange={e => setEditingTour({ ...editingTour, price: Number(e.target.value) })}
-                      placeholder="80"
-                      className="w-full pl-9 pr-4 py-3 rounded-xl border border-[#EDE8E0] focus:border-[#C5A880] text-sm text-[#1C3829] outline-none transition"
-                    />
-                  </div>
-                  <input
-                    value={editingTour.priceLabel || ''}
-                    onChange={e => setEditingTour({ ...editingTour, priceLabel: e.target.value })}
-                    placeholder="Label (e.g. Tuk Tuk)"
-                    className="w-full flex-1 px-4 py-3 rounded-xl border border-[#EDE8E0] focus:border-[#C5A880] text-sm text-[#1C3829] outline-none transition"
-                  />
-                </div>
-              </div>
-              
-              <div>
-                <label className="text-xs font-semibold text-[#68726B] uppercase tracking-wider block mb-1">Secondary Price (USD)</label>
-                <div className="flex gap-2">
-                  <div className="relative flex-1">
-                    <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#C5A880]" />
-                    <input
-                      type="number"
-                      value={editingTour.secondaryPrice || ''}
-                      onChange={e => setEditingTour({ ...editingTour, secondaryPrice: Number(e.target.value) })}
-                      placeholder="Optional"
-                      className="w-full pl-9 pr-4 py-3 rounded-xl border border-[#EDE8E0] focus:border-[#C5A880] text-sm text-[#1C3829] outline-none transition"
-                    />
-                  </div>
-                  <input
-                    value={editingTour.secondaryPriceLabel || ''}
-                    onChange={e => setEditingTour({ ...editingTour, secondaryPriceLabel: e.target.value })}
-                    placeholder="Label (e.g. Car)"
-                    className="w-full flex-1 px-4 py-3 rounded-xl border border-[#EDE8E0] focus:border-[#C5A880] text-sm text-[#1C3829] outline-none transition"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="text-xs font-semibold text-[#68726B] uppercase tracking-wider block mb-1">Duration</label>
-                <div className="relative">
-                  <Clock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#C5A880]" />
-                  <input
-                    value={editingTour.duration || ''}
-                    onChange={e => setEditingTour({ ...editingTour, duration: e.target.value })}
-                    placeholder="Full Day (~8:00 AM – 5:30 PM)"
-                    className="w-full pl-9 pr-4 py-3 rounded-xl border border-[#EDE8E0] focus:border-[#C5A880] text-sm text-[#1C3829] outline-none transition"
-                  />
-                </div>
-              </div>
-            </div>
             <div>
-              <label className="text-xs font-semibold text-[#68726B] uppercase tracking-wider block mb-1">Vehicle Type</label>
-              <div className="relative">
-                <Car className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#C5A880]" />
-                <input
-                  value={editingTour.vehicleType || ''}
-                  onChange={e => setEditingTour({ ...editingTour, vehicleType: e.target.value })}
-                  placeholder="Private Air-Conditioned SUV / Van"
-                  className="w-full pl-9 pr-4 py-3 rounded-xl border border-[#EDE8E0] focus:border-[#C5A880] text-sm text-[#1C3829] outline-none transition"
-                />
-              </div>
-            </div>
-            <div>
-              <label className="text-xs font-semibold text-[#68726B] uppercase tracking-wider block mb-1">Short Description *</label>
-              <textarea
-                value={editingTour.shortDescription || ''}
-                onChange={e => setEditingTour({ ...editingTour, shortDescription: e.target.value })}
-                rows={2}
-                placeholder="One-sentence tour summary shown on the card..."
-                className="w-full px-4 py-3 rounded-xl border border-[#EDE8E0] focus:border-[#C5A880] text-sm text-[#1C3829] outline-none transition resize-none"
+              <label className="text-xs font-semibold text-[#68726B] uppercase tracking-wider block mb-1">Duration Label</label>
+              <input
+                value={editingTour.durationLabel || ''}
+                onChange={e => setEditingTour({ ...editingTour, durationLabel: e.target.value })}
+                placeholder="e.g. Half-Day Tour"
+                className="w-full px-4 py-3 rounded-xl border border-[#EDE8E0] focus:border-[#C5A880] text-sm text-[#1C3829] outline-none transition"
               />
             </div>
             <div>
@@ -393,89 +330,84 @@ export const AdminToursView: React.FC<AdminToursViewProps> = ({ onNavigate }) =>
             )}
           </div>
 
-          {/* Itinerary */}
+          {/* Highlights */}
           <div className="bg-white rounded-2xl border border-[#EDE8E0] p-6 space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="text-sm font-bold text-[#1C3829] uppercase tracking-wider flex items-center space-x-2">
-                <Compass className="w-4 h-4 text-[#C5A880]" />
-                <span>Temple Itinerary Stops</span>
+                <Star className="w-4 h-4 text-[#C5A880]" />
+                <span>Highlights</span>
               </h3>
-              <button onClick={addStop} className="flex items-center space-x-1.5 text-xs font-semibold text-[#C5A880] hover:text-[#A8824B] cursor-pointer">
+              <button onClick={addHighlight} className="flex items-center space-x-1.5 text-xs font-semibold text-[#C5A880] hover:text-[#A8824B] cursor-pointer">
                 <Plus className="w-4 h-4" />
-                <span>Add Stop</span>
+                <span>Add Highlight</span>
               </button>
             </div>
-            {(editingTour.itinerary || []).map((stop, i) => (
-              <div key={i} className="p-4 rounded-xl border border-[#EDE8E0] bg-[#FDFBF8] space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-[#1C3829]">Stop {i + 1}</span>
-                  {(editingTour.itinerary || []).length > 1 && (
-                    <button onClick={() => removeStop(i)} className="text-red-400 hover:text-red-600 cursor-pointer">
-                      <X className="w-3.5 h-3.5" />
-                    </button>
-                  )}
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <input
-                    value={stop.time || ''}
-                    onChange={e => updateStop(i, 'time', e.target.value)}
-                    placeholder="08:00 AM"
-                    className="px-3 py-2.5 rounded-lg border border-[#EDE8E0] text-xs text-[#1C3829] outline-none focus:border-[#C5A880] transition"
-                  />
-                  <input
-                    value={stop.templeName}
-                    onChange={e => updateStop(i, 'templeName', e.target.value)}
-                    placeholder="Temple Name *"
-                    className="px-3 py-2.5 rounded-lg border border-[#EDE8E0] text-xs text-[#1C3829] outline-none focus:border-[#C5A880] transition"
-                  />
-                </div>
-                <textarea
-                  value={stop.description}
-                  onChange={e => updateStop(i, 'description', e.target.value)}
-                  placeholder="Description of this stop..."
-                  rows={2}
-                  className="w-full px-3 py-2.5 rounded-lg border border-[#EDE8E0] text-xs text-[#1C3829] outline-none focus:border-[#C5A880] transition resize-none"
-                />
+            {((editingTour.highlights as string[]) || []).map((highlight, i) => (
+              <div key={i} className="flex items-center space-x-2">
                 <input
-                  value={stop.highlight || ''}
-                  onChange={e => updateStop(i, 'highlight', e.target.value)}
-                  placeholder="Key highlight (optional)"
-                  className="w-full px-3 py-2.5 rounded-lg border border-[#EDE8E0] text-xs text-[#1C3829] outline-none focus:border-[#C5A880] transition"
+                  value={highlight}
+                  onChange={e => updateHighlight(i, e.target.value)}
+                  placeholder="e.g. Visit Angkor Wat at sunrise..."
+                  className="flex-1 px-3 py-2.5 rounded-lg border border-[#EDE8E0] text-xs text-[#1C3829] outline-none focus:border-[#C5A880] transition"
                 />
+                <button onClick={() => removeHighlight(i)} className="text-red-400 hover:text-red-600 cursor-pointer shrink-0">
+                  <X className="w-3.5 h-3.5" />
+                </button>
               </div>
             ))}
           </div>
 
-          {/* Inclusions, Exclusions, Tips */}
-          {(['inclusions', 'exclusions', 'tips'] as const).map((field) => (
-            <div key={field} className="bg-white rounded-2xl border border-[#EDE8E0] p-6 space-y-3">
-              <div className="flex items-center justify-between">
-                <h3 className="text-sm font-bold text-[#1C3829] uppercase tracking-wider flex items-center space-x-2">
-                  {field === 'inclusions' && <Check className="w-4 h-4 text-[#C5A880]" />}
-                  {field === 'exclusions' && <X className="w-4 h-4 text-[#C5A880]" />}
-                  {field === 'tips' && <Lightbulb className="w-4 h-4 text-[#C5A880]" />}
-                  <span>{field.charAt(0).toUpperCase() + field.slice(1)}</span>
-                </h3>
-                <button onClick={() => addListItem(field)} className="flex items-center space-x-1 text-xs font-semibold text-[#C5A880] hover:text-[#A8824B] cursor-pointer">
-                  <Plus className="w-3.5 h-3.5" />
-                  <span>Add</span>
-                </button>
-              </div>
-              {((editingTour[field] as string[]) || []).map((item, i) => (
-                <div key={i} className="flex items-center space-x-2">
-                  <input
-                    value={item}
-                    onChange={e => updateListItem(field, i, e.target.value)}
-                    placeholder={`${field.charAt(0).toUpperCase() + field.slice(1, -1)} item...`}
-                    className="flex-1 px-3 py-2.5 rounded-lg border border-[#EDE8E0] text-xs text-[#1C3829] outline-none focus:border-[#C5A880] transition"
-                  />
-                  <button onClick={() => removeListItem(field, i)} className="text-red-400 hover:text-red-600 cursor-pointer shrink-0">
-                    <X className="w-3.5 h-3.5" />
+          {/* Pricing Options */}
+          <div className="bg-white rounded-2xl border border-[#EDE8E0] p-6 space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="text-sm font-bold text-[#1C3829] uppercase tracking-wider flex items-center space-x-2">
+                <DollarSign className="w-4 h-4 text-[#C5A880]" />
+                <span>Pricing Options</span>
+              </h3>
+              <button onClick={addOption} className="flex items-center space-x-1.5 text-xs font-semibold text-[#C5A880] hover:text-[#A8824B] cursor-pointer">
+                <Plus className="w-4 h-4" />
+                <span>Add Option</span>
+              </button>
+            </div>
+            {(editingTour.options || []).map((option, i) => (
+              <div key={i} className="p-4 rounded-xl border border-[#EDE8E0] bg-[#FDFBF8] space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-[#1C3829]">Option {i + 1}</span>
+                  {(editingTour.options || []).length > 1 && (
+                    <button onClick={() => removeOption(i)} className="text-red-400 hover:text-red-600 cursor-pointer">
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  )}
+                </div>
+                <input
+                  value={option.title || ''}
+                  onChange={e => updateOptionTitle(i, e.target.value)}
+                  placeholder="e.g. Private Options: Tuk-Tuk $22 (2-3pax)"
+                  className="w-full px-3 py-2.5 rounded-lg border border-[#EDE8E0] text-xs font-semibold text-[#1C3829] outline-none focus:border-[#C5A880] transition"
+                />
+                
+                {/* Details within Option */}
+                <div className="pl-4 space-y-2 border-l-2 border-[#E4DDD3]">
+                  {option.details.map((detail, dIdx) => (
+                    <div key={dIdx} className="flex items-center space-x-2">
+                      <input
+                        value={detail}
+                        onChange={e => updateOptionDetail(i, dIdx, e.target.value)}
+                        placeholder="e.g. Provide cold pure drinking water"
+                        className="flex-1 px-3 py-2 rounded-lg border border-[#EDE8E0] text-xs text-[#1C3829] outline-none focus:border-[#C5A880] transition"
+                      />
+                      <button onClick={() => removeOptionDetail(i, dIdx)} className="text-red-400 hover:text-red-600 cursor-pointer shrink-0">
+                        <X className="w-3 h-3" />
+                      </button>
+                    </div>
+                  ))}
+                  <button onClick={() => addOptionDetail(i)} className="text-[11px] font-semibold text-[#C5A880] hover:text-[#A8824B] cursor-pointer flex items-center">
+                    <Plus className="w-3 h-3 mr-1" /> Add Detail
                   </button>
                 </div>
-              ))}
-            </div>
-          ))}
+              </div>
+            ))}
+          </div>
 
           {/* Save / Cancel */}
           <div className="flex items-center space-x-3 pb-8">
@@ -547,7 +479,6 @@ export const AdminToursView: React.FC<AdminToursViewProps> = ({ onNavigate }) =>
 
       {tours.length === 0 ? (
         <div className="text-center py-20 border-2 border-dashed border-[#EDE8E0] rounded-2xl">
-          <Compass className="w-12 h-12 mx-auto text-[#C5A880]/40 mb-4" />
           <p className="text-[#68726B] font-medium mb-2">No tours yet</p>
           <p className="text-sm text-[#8A9490] mb-6">Create your first tour package to display on the website.</p>
           <button onClick={handleCreate} className="inline-flex items-center space-x-2 px-6 py-3 rounded-xl bg-[#1C3829] text-white text-sm font-bold cursor-pointer">
@@ -570,11 +501,7 @@ export const AdminToursView: React.FC<AdminToursViewProps> = ({ onNavigate }) =>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-luxury-serif text-base font-bold text-[#1C3829] truncate">{tour.title}</h3>
                   <div className="flex items-center flex-wrap gap-x-3 gap-y-1 mt-1">
-                    <span className="text-xs text-[#C5A880] font-bold">
-                      ${tour.price} {tour.secondaryPrice ? `/ $${tour.secondaryPrice}` : ''} USD
-                    </span>
-                    <span className="text-xs text-[#8A9490]">{tour.duration}</span>
-                    <span className="text-xs text-[#8A9490]">{tour.itinerary.length} stops</span>
+                    <span className="text-xs text-[#8A9490]">{tour.durationLabel}</span>
                   </div>
                 </div>
                 {/* Actions */}
@@ -612,12 +539,7 @@ export const AdminToursView: React.FC<AdminToursViewProps> = ({ onNavigate }) =>
               {/* Expanded Preview */}
               {expandedId === tour.id && (
                 <div className="border-t border-[#EDE8E0] bg-[#FDFBF8] px-5 py-4 space-y-3">
-                  <p className="text-xs text-[#68726B] leading-relaxed">{tour.shortDescription}</p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {tour.itinerary.slice(0, 5).map((stop, i) => (
-                      <span key={i} className="px-2.5 py-1 rounded-lg bg-[#F4EFE6] text-[#5A4A2E] text-[11px] font-medium border border-[#E4DAC8]/60">{stop.templeName}</span>
-                    ))}
-                  </div>
+                  <p className="text-xs text-[#68726B] leading-relaxed line-clamp-3">{tour.longDescription}</p>
                 </div>
               )}
             </div>

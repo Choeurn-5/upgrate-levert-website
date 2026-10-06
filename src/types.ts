@@ -43,31 +43,20 @@ export interface Room {
   featured?: boolean;
 }
 
-export interface TourStop {
-  time?: string;
-  templeName: string;
-  description: string;
-  highlight?: string;
+export interface TourPricingOption {
+  title: string;
+  details: string[];
 }
 
 export interface Tour {
   id: number;
   slug: string;
   title: string;
-  price: number;
-  priceLabel?: string;
-  secondaryPrice?: number;
-  secondaryPriceLabel?: string;
-  currency: string;
-  duration: string;
-  vehicleType: string;
-  shortDescription: string;
-  longDescription: string;
+  durationLabel: string;
+  highlights: string[];
+  options: TourPricingOption[];
   featuredImage: string;
-  itinerary: TourStop[];
-  inclusions: string[];
-  exclusions: string[];
-  tips: string[];
+  longDescription: string;
 }
 
 export interface MenuItem {

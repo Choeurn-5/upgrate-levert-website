@@ -20,14 +20,16 @@ declare global {
   var __LEVERT_BLOG_POSTS__: BlogPost[] | undefined;
 }
 
-async function getStoredPosts(): Promise<BlogPost[]> {
+async function getStoredPosts(reset: boolean = false): Promise<BlogPost[]> {
   const redis = getRedis();
   if (redis) {
     try {
-      const cached = await redis.get<BlogPost[]>(REDIS_KEYS.BLOG_POSTS);
-      if (Array.isArray(cached)) {
-        globalThis.__LEVERT_BLOG_POSTS__ = cached;
-        return cached;
+      if (!reset) {
+        const cached = await redis.get<BlogPost[]>(REDIS_KEYS.BLOG_POSTS);
+        if (Array.isArray(cached)) {
+          globalThis.__LEVERT_BLOG_POSTS__ = cached;
+          return cached;
+        }
       }
       // If redis is connected but key not found yet, seed it once
       const initial = [...INITIAL_BLOG_POSTS];
@@ -39,7 +41,7 @@ async function getStoredPosts(): Promise<BlogPost[]> {
     }
   }
 
-  if (globalThis.__LEVERT_BLOG_POSTS__ !== undefined) {
+  if (!reset && globalThis.__LEVERT_BLOG_POSTS__ !== undefined) {
     return globalThis.__LEVERT_BLOG_POSTS__;
   }
 
@@ -101,7 +103,6 @@ function slugify(text: string): string {
     .replace(/-+$/, '');
 }
 
-// GET /api/blog
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
@@ -109,8 +110,9 @@ export async function GET(request: NextRequest) {
     const id = searchParams.get('id');
     const category = searchParams.get('category');
     const includeDrafts = searchParams.get('admin') === 'true';
+    const reset = searchParams.get('reset') === 'true';
 
-    const posts = await getStoredPosts();
+    const posts = await getStoredPosts(reset);
 
     if (slug) {
       const post = posts.find((p) => p.slug === slug);

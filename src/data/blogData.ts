@@ -11,90 +11,6 @@ export const BLOG_CATEGORIES = [
 
 export const INITIAL_BLOG_POSTS: BlogPost[] = [
   {
-    id: 'post-family-hospitality',
-    slug: 'welcoming-you-to-our-family-heartfelt-hospitality-le-vert-angkor-hotel',
-    title: 'Welcoming You to Our Family: Heartfelt Hospitality at Le Vert Angkor Hotel',
-    excerpt: 'Discover the family vision, guiding philosophy, and dedicated leadership team behind Le Vert Angkor Hotel — from our founders Ek Darin and Rin Kongvin to our front office and culinary artisans.',
-    content: `When travelers step through the doors of a boutique hotel in Siem Reap, they often look for more than just a place to rest—they seek an authentic local connection, thoughtful care, and a warm sense of home away from home. Located in Steung Thmei Village, just minutes from the vibrant Old Market and the legendary temples of Angkor, Le Vert Angkor Hotel was founded on a simple yet profound vision: to blend authentic Khmer hospitality, genuine warmth, and passionate family leadership into an unforgettable stay.
-
-In this blog post, we want to open our doors wider and share the guiding principles and dedicated team behind our boutique sanctuary.
-
----
-
-## 1. A Vision Rooted in Family and Passion
-
-At the heart of our hotel philosophy is our owner, **Ek Darin**, alongside his son, **Rin Kongvin**, who leads daily operations as our Operations Manager.
-
-For **Ek Darin**, hospitality is a labor of love and a tribute to rich Cambodian culture. Working side by side with his son, **Kongvin**, the father-and-son duo brings a unique balance of tradition and modern standards to Le Vert Angkor Hotel. While Ek Darin keeps our vision grounded in genuine Khmer warmth and long-term values, Kongvin ensures that every operational detail—from room comfort to guest experiences—runs seamlessly.
-
-Together, their goal is to create an intimate retreat where every guest feels valued, cared for, and personally welcomed into our extended family.
-
----
-
-## 2. Service Driven by Heart: Meet Our Leadership Team
-
-A vision can only flourish when carried by a team that shares the same values. Every step of your stay at Le Vert Angkor Hotel is looked after by passionate leaders who care about your comfort:
-
-### Deepool – Front Office Manager
-![Deepool – Front Office Manager](/images/staff-image/deepool-front-office-manager.jpg)
-
-**Deepool** leads our front-desk team with an emphasis on attentive, seamless service. Whether overseeing daily operations, organizing temple tour itineraries, or arranging private transport, Deepool ensures every aspect of your visit feels personalized and effortless.
-
----
-
-### Sotheara – Front Office Supervisor
-![Sotheara – Front Office Supervisor](/images/staff-image/sotheara-front-office-supervisor.jpg)
-
-Working closely alongside Deepool, **Sotheara** ensures your arrival, stay, and departure run smoothly. Sotheara brings a warm, welcoming presence to the lobby, always ready to share local secrets and assist with any guest requests.
-
----
-
-### Veasna – Restaurant & Rooftop Sky Bar Supervisor
-![Veasna – Restaurant Supervisor](/images/staff-image/veasna-restaurant-supervisor.jpg)
-
-Dining and relaxing at Le Vert Angkor Hotel is an essential part of the experience. **Veasna** oversees both our main dining venue and our scenic Rooftop Sky Bar. Whether you are enjoying a peaceful breakfast or sipping sunset cocktails by the rooftop pool overlooking the Siem Reap skyline, Veasna ensures a warm, attentive, and cozy atmosphere.
-
----
-
-### Sous Chef Chansy – Culinary Excellence
-![Authentic Khmer Gastronomy at Le Vert Angkor](/images/Home/home-dining-image/IMG_8302.jpg)
-
-Behind every memorable dish is the culinary artistry of **Sous Chef Chansy**. Crafting menus that celebrate authentic Cambodian specialties—such as traditional Fish Amok and Lok Lak—alongside popular international favorites, Chansy prepares every meal using fresh local ingredients and heartfelt care.
-
----
-
-## 3. Our Core Philosophy: What Boutique Hospitality Means to Us
-
-Being an intimate boutique hotel gives us a distinct privilege: the power of quality, warmth, and personal connection over scale.
-
-* **Authentic Khmer Warmth:** We take pride in sharing local Cambodian culture, flavors, and genuine hospitality with travelers from across the globe.
-* **Personalized Service:** You are never just a room number to us. We tailor our recommendations and service to your specific preferences.
-* **A Peaceful Sanctuary:** Nestled quietly in Steung Thmei Village, our hotel offers a peaceful retreat complete with a refreshing rooftop pool, lush garden vibes, and cozy balconies after a day of exploring Angkor Wat.
-* **Community and Care:** We operate as a close family unit, supporting one another to ensure our guests enjoy an authentic and uplifting stay.
-
----
-
-## Come Experience Our Hospitality
-
-Building a lasting reputation in the heart of Siem Reap requires dedication, consistency, and above all, heart. Under the guidance of **Ek Darin** and **Rin Kongvin**, and supported by **Deepool**, **Sotheara**, **Veasna**, and **Sous Chef Chansy**, we warmly invite you to experience hospitality that feels true, relaxed, and deeply welcoming.
-
-Whether you are visiting Siem Reap for the first time or returning to explore more of Angkor, our doors—and hearts—are open for you.
-
-We look forward to welcoming you soon to your home away from home at Le Vert Angkor Hotel!`,
-    coverImage: '/images/Home/home-about-image/building-view.png',
-    category: 'Hotel News & Stories',
-    tags: ['Le Vert Family', 'Khmer Hospitality', 'Meet Our Team', 'Siem Reap', 'Our Philosophy'],
-    author: {
-      name: 'Rin Kongvin',
-      role: 'Operations Manager',
-      avatar: '/images/default-avatar.svg',
-    },
-    publishedAt: '2026-10-01',
-    readTimeMinutes: 5,
-    isFeatured: true,
-    status: 'published',
-  },
-  {
     id: 'post-1',
     slug: 'angkor-wat-sunrise-guide-secrets',
     title: 'The Connoisseur’s Guide to Angkor Wat Sunrise: Secrets for an Unforgettable Dawn',
@@ -155,7 +71,7 @@ This is the perfect juncture to return to Le Vert Angkor Hotel. Relax by our **c
     },
     publishedAt: '2026-03-20',
     readTimeMinutes: 6,
-    isFeatured: false,
+    isFeatured: true,
     status: 'published',
   },
   {
@@ -381,6 +297,594 @@ When you are ready to retire, you can stroll quietly back to your peaceful sanct
     },
     publishedAt: '2026-02-18',
     readTimeMinutes: 5,
+    isFeatured: false,
+    status: 'published',
+  },
+  {
+    id: 'post-where-to-eat',
+    slug: 'where-to-eat-in-siem-reap-local-favorites',
+    title: 'Where to Eat in Siem Reap: From Street Food to Fine Dining',
+    excerpt: 'Discover our top recommendations for the best places to eat in Siem Reap, featuring authentic local street food, hidden cafes, and upscale Khmer dining experiences.',
+    content: `## A Culinary Adventure in Siem Reap
+
+Siem Reap is not just a destination for ancient temples; it is also a fast-growing hub for incredible food. Whether you are craving a steaming bowl of Nom Banh Chok (Khmer noodles) in the morning or an elegant multi-course tasting menu at night, the city has something for every palate.
+
+Here is our curated guide to the best places to eat in Siem Reap.
+
+---
+
+### 1. Authentic Street Food: Route 60 Market
+For the adventurous foodie, the **Kyung Yu Night Market (Route 60)** is where locals go. Open every evening, this bustling stretch is lined with stalls grilling everything from lemongrass-stuffed frogs and skewers of local beef to the famous Cambodian sweet treats like Nom Krok (coconut rice pancakes). 
+
+**What to try:** 
+- *Lort Cha* (stir-fried pin noodles with chives, bean sprouts, and a fried egg)
+- Fresh tropical fruit smoothies
+- Grilled stuffed frog (for the brave!)
+
+### 2. Modern Khmer Fine Dining: Cuisine Wat Damnak
+If you are looking for an upscale experience, **Cuisine Wat Damnak** (a regular on Asia's 50 Best Restaurants list) is a must-visit. Chef Joannès Rivière and his team take hyper-local Cambodian ingredients—such as wild water lily, Mekong langoustine, and local truffles—and elevate them into world-class tasting menus.
+
+### 3. Cozy Cafes & Brunch: The Little Red Fox Espresso
+Located in the trendy Kandal Village, **The Little Red Fox Espresso** is the perfect spot for your morning caffeine fix before or after a temple run. They serve excellent Australian-style coffee, healthy smoothie bowls, and delicious pastries in a relaxed, artsy environment.
+
+### 4. Dinner at Le Vert Restaurant
+Of course, you don't have to go far to experience incredible food! Right here at **Le Vert Angkor Hotel**, our Executive Chef crafts authentic dishes like Fish Amok and Kampot Pepper Beef Lok Lak, using organic ingredients sourced directly from local farmers. Enjoy your meal by the pool or in our elegant dining room.
+
+Bon appétit!`,
+    coverImage: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1600&q=80',
+    category: 'Khmer Gastronomy',
+    tags: ['Siem Reap', 'Food Guide', 'Street Food', 'Fine Dining', 'Restaurants'],
+    author: {
+      name: 'Le Vert Concierge Team',
+      role: 'Guest Experience & Insider Guides',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+    },
+    publishedAt: '2026-03-25',
+    readTimeMinutes: 4,
+    isFeatured: false,
+    status: 'published',
+  },
+  {
+    id: 'post-where-to-relax',
+    slug: 'where-to-relax-siem-reap-spa-wellness',
+    title: 'Where to Relax in Siem Reap: Spas, Yoga, and Serene Retreats',
+    excerpt: 'After days of exploring ancient ruins, your body deserves a break. Here are the best ways to unwind, relax, and rejuvenate in Siem Reap.',
+    content: `## Finding Your Zen in the Temple Town
+
+Exploring the vast Angkor Archaeological Park is a breathtaking experience, but the early mornings, intense tropical heat, and miles of walking can leave you physically exhausted. Fortunately, Siem Reap is also a premier destination for wellness, offering world-class spas, yoga studios, and peaceful retreats.
+
+Here are our top recommendations for where to relax in Siem Reap.
+
+---
+
+### 1. Traditional Khmer Massage at Le Vert Spa
+The most convenient and luxurious way to unwind is right inside our hotel at **Le Vert Spa**. We highly recommend the Traditional Khmer Body Massage—a therapeutic, oil-free massage that uses deep pressure and stretching to relieve muscle tension. For ultimate relaxation, try our *Angkor Heritage Rejuvenation Package*, which includes an herbal compress therapy.
+
+### 2. Yoga and Meditation Classes
+Siem Reap has a thriving wellness community. We recommend visiting places like **Navutu Dreams Resort & Wellness Retreat** or **Angkor Bodhi Tree** for drop-in yoga classes. Whether you prefer a gentle restorative Yin Yoga session or an energizing Vinyasa flow, these studios provide peaceful sanctuaries away from the bustling town.
+
+### 3. A Day Pass at a Luxury Pool
+If you just want to read a book and sip a coconut, spending the day by a beautiful pool is the perfect remedy. While Le Vert Angkor Hotel has its own stunning **Rooftop Swimming Pool & Sun Deck** exclusively for our guests, there are also several tropical garden pools around town that offer day passes if you want a change of scenery.
+
+### 4. Mindful Walks in the Royal Independence Gardens
+For a peaceful afternoon stroll, head to the **Royal Independence Gardens** along the Siem Reap River. These manicured gardens are home to hundreds of giant fruit bats hanging in the tall trees. It is a quiet, shaded area perfect for a mindful walk, meditation, or simply sitting on a bench and watching the world go by.
+
+Take the time to listen to your body and balance your temple adventures with deep relaxation!`,
+    coverImage: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1600&q=80',
+    category: 'Wellness & Retreat',
+    tags: ['Siem Reap', 'Spa', 'Yoga', 'Relaxation', 'Wellness'],
+    author: {
+      name: 'Bopha Khem',
+      role: 'Lead Spa Therapist at Le Vert Spa',
+      avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80',
+    },
+    publishedAt: '2026-04-05',
+    readTimeMinutes: 4,
+    isFeatured: false,
+    status: 'published',
+  },
+  {
+    id: 'post-where-to-visit-beyond-angkor',
+    slug: 'where-to-visit-beyond-angkor-wat',
+    title: 'Where to Visit in Siem Reap (Beyond Angkor Wat)',
+    excerpt: 'Angkor Wat is just the beginning. Discover floating villages, mountain waterfalls, and cultural museums that you must visit during your stay in Siem Reap.',
+    content: `## Exploring the Hidden Wonders of Siem Reap Province
+
+While the temples of Angkor are the undeniable main attraction, Siem Reap province holds a wealth of natural beauty, living culture, and history waiting to be explored. If you have an extra day or two in your itinerary, we highly recommend venturing beyond the temple walls.
+
+Here are the best places to visit in Siem Reap that aren't Angkor Wat.
+
+---
+
+### 1. Tonle Sap Lake & Kampong Phluk Floating Village
+Experience the fascinating aquatic life of Southeast Asia's largest freshwater lake. A boat tour to **Kampong Phluk** reveals a community that lives entirely on the water. During the wet season, the houses sit on towering stilts rising from the flooded mangrove forests. It is an incredible opportunity to witness traditional Cambodian fishing life and catch a spectacular sunset over the water.
+
+### 2. Phnom Kulen National Park (The Sacred Mountain)
+Considered the birthplace of the ancient Khmer Empire, **Phnom Kulen** is a lush, forested mountain located about 90 minutes from Siem Reap. 
+Highlights include:
+- The stunning **Kulen Waterfall**, perfect for a refreshing swim.
+- The **River of 1000 Lingas**, where ancient Hindu carvings are etched directly into the riverbed.
+- The massive reclining Buddha carved into the top of a giant sandstone boulder at Preah Ang Thom.
+
+### 3. APOPO Visitor Center (The HeroRATs)
+For a truly unique and heartwarming experience, visit the **APOPO Visitor Center**. Here, you can learn about and meet the incredible African Giant Pouched Rats (known as HeroRATs) that are trained to detect landmines. It's a fascinating look at how these intelligent animals are helping to clear dangerous areas and save lives in Cambodia.
+
+### 4. Angkor National Museum
+Before you even step foot in the temples, a visit to the **Angkor National Museum** provides invaluable context. The museum houses an impressive collection of Khmer artifacts, statues, and multimedia exhibits that explain the history, religion, and rise and fall of the Khmer Empire. It will make your temple visits far more meaningful.
+
+Speak to our front desk team at Le Vert Angkor Hotel, and we can arrange private, air-conditioned transport and expert guides for all of these amazing destinations!`,
+    coverImage: 'https://images.unsplash.com/photo-1582236371587-873b22ed7675?auto=format&fit=crop&w=1600&q=80',
+    category: 'Siem Reap Insider',
+    tags: ['Siem Reap', 'Tonle Sap', 'Kulen Mountain', 'Attractions', 'Travel Guide'],
+    author: {
+      name: 'Vireak Meas',
+      role: 'Heritage Guide & Tour Coordinator',
+      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
+    },
+    publishedAt: '2026-04-12',
+    readTimeMinutes: 5,
+    isFeatured: false,
+    status: 'published',
+  },
+  {
+    id: 'post-old-market-guide',
+    slug: 'old-market-phsar-chas-siem-reap-guide',
+    title: 'A Local\'s Guide to Old Market (Phsar Chas): Shopping, Souvenirs & Street Snacks',
+    excerpt: 'Discover the vibrant chaos and hidden treasures of Siem Reap\'s most iconic market — from handwoven silk scarves to sizzling Khmer street food.',
+    content: `## The Beating Heart of Siem Reap
+
+**Old Market (Phsar Chas)** has been the commercial and cultural center of Siem Reap for over a century. Located just a 5-minute walk from Le Vert Angkor Hotel, this sprawling open-air market is a feast for all senses.
+
+---
+
+### What to Buy
+
+- **Cambodian Silk Scarves & Kramas:** The traditional checkered *krama* scarf is Cambodia's national textile. Pick up beautifully handwoven versions in silk or cotton — perfect gifts.
+- **Silver Jewelry:** Artisan-crafted silver rings, bracelets, and earrings featuring Apsara dancer motifs and lotus designs.
+- **Kampot Pepper & Spices:** Bring home the world-famous Kampot peppercorns — black, red, or white varieties, vacuum-sealed for freshness.
+- **Local Art & Prints:** Small galleries around the market sell original watercolors and prints of Angkor temple scenes.
+
+### What to Eat
+
+- **Num Pang** (Cambodian baguette sandwiches with pâté, pickled vegetables, and herbs)
+- **Lok Lak** from the tiny stalls behind the main building
+- **Fresh coconut ice cream** served inside a young coconut shell
+
+### Tips for Visitors
+
+Arrive early in the morning (before 9 AM) to see the fresh produce section at its liveliest, or visit in the cool evening hours when the surrounding streets fill with food vendors and live music.`,
+    coverImage: 'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1600&q=80',
+    category: 'Siem Reap Insider',
+    tags: ['Old Market', 'Shopping', 'Street Food', 'Siem Reap', 'Souvenirs'],
+    author: {
+      name: 'Le Vert Concierge Team',
+      role: 'Guest Experience & Insider Guides',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+    },
+    publishedAt: '2026-04-18',
+    readTimeMinutes: 4,
+    isFeatured: false,
+    status: 'published',
+  },
+  {
+    id: 'post-pub-street-guide',
+    slug: 'pub-street-siem-reap-complete-guide',
+    title: 'Pub Street Siem Reap: The Complete Visitor\'s Guide to Nightlife & Dining',
+    excerpt: 'Everything you need to know about Siem Reap\'s famous Pub Street — the best bars, restaurants, happy hours, and tips for a fun night out.',
+    content: `## The Most Famous Street in Siem Reap
+
+**Pub Street** is the vibrant, neon-lit pedestrian strip that has become synonymous with Siem Reap nightlife. Running parallel to the Siem Reap River and just steps from the Old Market, this lively street comes alive every evening with an infectious energy.
+
+---
+
+### Best Bars & Restaurants
+
+- **The Red Piano:** A Siem Reap institution since 2000, famous for the "Tomb Raider" cocktail (Angelina Jolie reportedly drank here during filming).
+- **Angkor What? Bar:** The original Pub Street bar with affordable drinks and a rooftop terrace.
+- **Khmer Kitchen:** Authentic, affordable Cambodian food right on the strip — their Fish Amok is excellent.
+- **Haven Training Restaurant:** A social enterprise restaurant where young Cambodians train in hospitality. The food is outstanding and the cause is wonderful.
+
+### What to Expect
+
+- **Happy Hours** typically run from 4 PM to 8 PM with $0.50 draft beers.
+- **Live Music** starts around 8 PM at several venues.
+- The street is pedestrian-only from 5 PM onwards.
+- The atmosphere is fun and safe but expect persistent tuk-tuk drivers offering rides!
+
+### Our Tip
+
+Start your evening with sunset cocktails at **Le Vert Rooftop Bar**, then walk 5 minutes to Pub Street for dinner and entertainment. You get the best of both worlds — a serene start and a lively finish!`,
+    coverImage: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1600&q=80',
+    category: 'Siem Reap Insider',
+    tags: ['Pub Street', 'Nightlife', 'Bars', 'Siem Reap', 'Dining'],
+    author: {
+      name: 'Le Vert Concierge Team',
+      role: 'Guest Experience & Insider Guides',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+    },
+    publishedAt: '2026-04-25',
+    readTimeMinutes: 4,
+    isFeatured: false,
+    status: 'published',
+  },
+  {
+    id: 'post-phare-circus',
+    slug: 'phare-cambodian-circus-siem-reap-must-see',
+    title: 'Phare, The Cambodian Circus: Why It\'s the #1 Must-See Show in Siem Reap',
+    excerpt: 'An electrifying fusion of acrobatics, theater, music, and Cambodian storytelling — discover why Phare Circus is rated the top evening experience in Siem Reap.',
+    content: `## More Than a Circus — A Cambodian Story
+
+**Phare, The Cambodian Circus** is not your typical circus. There are no animals, no giant tent rings. Instead, Phare delivers an extraordinary blend of acrobatics, contortion, theater, live music, and deeply moving Cambodian storytelling.
+
+---
+
+### The Story Behind Phare
+
+Phare was founded in Battambang by graduates of **Phare Ponleu Selpak**, a renowned NGO arts school that uses creative arts to help vulnerable youth. The performers are graduates of this program, and every ticket sold directly supports art education and social programs for Cambodian youth.
+
+### What to Expect
+
+- **60-minute shows** that rotate nightly, each telling a different story rooted in Cambodian folklore, history, or modern social themes.
+- **Jaw-dropping acrobatics** — backflips, human towers, fire breathing, and aerial silk performances.
+- **Live traditional and rock music** performed by a talented band alongside the action.
+- **Pre-show market** with food, drinks, and Cambodian handicrafts.
+
+### Practical Information
+
+- Shows start at **8:00 PM** nightly.
+- **VIP and Standard seating** available.
+- Located about 10 minutes by tuk-tuk from Le Vert Angkor Hotel.
+- Our front desk can book your tickets and arrange round-trip transportation.
+
+This is a truly unforgettable evening experience that we recommend to every single guest at Le Vert!`,
+    coverImage: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1600&q=80',
+    category: 'Siem Reap Insider',
+    tags: ['Phare Circus', 'Entertainment', 'Culture', 'Siem Reap', 'Must-See'],
+    author: {
+      name: 'Le Vert Concierge Team',
+      role: 'Guest Experience & Insider Guides',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+    },
+    publishedAt: '2026-05-02',
+    readTimeMinutes: 4,
+    isFeatured: false,
+    status: 'published',
+  },
+  {
+    id: 'post-battambang-day-trip',
+    slug: 'battambang-day-trip-from-siem-reap-guide',
+    title: 'Battambang Day Trip: Colonial Architecture, Bamboo Trains & the Bat Cave',
+    excerpt: 'Discover Cambodia\'s charming second city with its French colonial streets, the legendary Bamboo Train, and the spectacular bat exodus at Phnom Sampeau.',
+    content: `## Cambodia's Best-Kept Secret City
+
+Just 3 hours from Siem Reap, **Battambang** is Cambodia's second-largest city and one of its most charming. With beautifully preserved French colonial architecture, a thriving arts scene, and stunning countryside, it makes for a perfect day trip or overnight adventure.
+
+---
+
+### Highlights of a Battambang Day Trip
+
+#### 1. The Bamboo Train (Norry)
+Ride the legendary **Bamboo Train** — a simple bamboo platform on wheels that glides along old French railway tracks through lush rice paddies. It is a one-of-a-kind experience unique to Cambodia.
+
+#### 2. French Colonial Architecture
+Stroll along the **Sangker River** to admire well-preserved colonial-era shophouses, the Provincial Hall, and the iconic Governor's Residence.
+
+#### 3. Phnom Sampeau (The Killing Cave & Bat Cave)
+Visit the sobering **Killing Cave**, a memorial to victims of the Khmer Rouge era. Then at dusk, witness millions of bats streaming out of the nearby **Bat Cave** in a swirling ribbon that stretches across the sky — a truly spectacular natural phenomenon.
+
+#### 4. Phare Ponleu Selpak
+Visit the **original Phare arts school** where the famous Phare Circus performers trained. You can watch students rehearsing and visit their gallery.
+
+### Getting There
+
+Our hotel can arrange a comfortable, air-conditioned private car with an English-speaking driver for the round trip. Depart early morning and return by sunset.`,
+    coverImage: 'https://images.unsplash.com/photo-1616453915152-780c1df0f4e1?auto=format&fit=crop&w=1600&q=80',
+    category: 'Siem Reap Insider',
+    tags: ['Battambang', 'Day Trip', 'Bamboo Train', 'Bat Cave', 'Cambodia'],
+    author: {
+      name: 'Vireak Meas',
+      role: 'Heritage Guide & Tour Coordinator',
+      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
+    },
+    publishedAt: '2026-05-10',
+    readTimeMinutes: 4,
+    isFeatured: false,
+    status: 'published',
+  },
+  {
+    id: 'post-beng-mealea-guide',
+    slug: 'beng-mealea-temple-jungle-adventure-guide',
+    title: 'Beng Mealea: The Jungle Temple Adventure You Can\'t Miss',
+    excerpt: 'Discover the sprawling, vine-covered ruins of Beng Mealea — one of the most atmospheric and adventurous temple experiences outside the main Angkor park.',
+    content: `## The Indiana Jones Temple
+
+If you have already explored the main Angkor temples and want something more adventurous and off-the-beaten-path, **Beng Mealea** is the temple for you. Located about 70 km east of Siem Reap, this massive 12th-century Hindu temple has been left largely unrestored, creating an incredibly atmospheric experience.
+
+---
+
+### Why Visit Beng Mealea?
+
+- **Unrestored and Wild:** Unlike the manicured paths of Angkor Wat, Beng Mealea is largely consumed by jungle. Giant trees burst through crumbling stone walls, moss blankets ancient corridors, and collapsed galleries create a maze of rubble.
+- **Far Fewer Crowds:** Because of its distance from Siem Reap, Beng Mealea sees only a fraction of the visitors that the main Angkor complex gets. You can explore in peaceful solitude.
+- **Adventure Atmosphere:** Wooden walkways wind through the ruins, but you can also scramble over fallen stone blocks and through dark, vine-draped corridors. It genuinely feels like discovering a lost temple.
+
+### Practical Tips
+
+- **Getting There:** About 1.5 hours by car from Siem Reap. Our hotel can arrange a private vehicle.
+- **Combine It:** Beng Mealea pairs perfectly with a visit to **Koh Ker** (the ancient 10th-century pyramid temple) for a full-day expedition.
+- **Bring:** Good walking shoes, insect repellent, and a flashlight for the dark corridors.
+- **Entry:** Covered by the Angkor Pass.`,
+    coverImage: 'https://images.unsplash.com/photo-1582236371587-873b22ed7675?auto=format&fit=crop&w=1600&q=80',
+    category: 'Temple Guides',
+    tags: ['Beng Mealea', 'Temples', 'Adventure', 'Off-the-beaten-path', 'Siem Reap'],
+    author: {
+      name: 'Sophea Chan',
+      role: 'Chief Concierge & Heritage Specialist',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+    },
+    publishedAt: '2026-05-18',
+    readTimeMinutes: 4,
+    isFeatured: false,
+    status: 'published',
+  },
+  {
+    id: 'post-cycling-siem-reap',
+    slug: 'cycling-siem-reap-countryside-villages-rice-paddies',
+    title: 'Cycling Through Siem Reap: Villages, Rice Paddies & Hidden Pagodas',
+    excerpt: 'One of the best ways to experience the real Cambodia is by bicycle. Explore quiet village paths, emerald rice paddies, and friendly local communities.',
+    content: `## Slow Travel at Its Best
+
+While most visitors to Siem Reap explore by tuk-tuk or air-conditioned car, cycling offers a completely different and deeply rewarding perspective. The flat terrain, quiet back roads, and friendly local communities make Siem Reap one of the best cycling destinations in Southeast Asia.
+
+---
+
+### Best Cycling Routes
+
+#### 1. The Countryside Loop (15 km)
+Head south from Le Vert Angkor Hotel through **Steung Thmei Village** and follow the quiet red-dirt paths past emerald green rice paddies, lotus ponds, and palm-sugar farms. Stop at a family-run palm sugar workshop to taste fresh-squeezed palm juice and see how traditional palm sugar is made.
+
+#### 2. Angkor Temples by Bike (17 km Small Circuit)
+Cycling between the temples is magical in the early morning. The tree-lined roads connecting Angkor Wat, Bayon, and Ta Prohm are flat and well-maintained, with dappled shade from towering trees.
+
+#### 3. Floating Village Road (25 km)
+For a longer ride, follow **National Road 63** south toward Tonle Sap Lake. The road passes through several authentic Cambodian villages with stilted houses, small markets, and waving children.
+
+### Practical Tips
+
+- **Bike Rental:** Our hotel can arrange quality mountain bike rentals for $3–5 per day.
+- **Best Time:** Early morning (6–9 AM) before the heat, or late afternoon (4–5:30 PM) for golden light.
+- **Bring:** Sunscreen, a hat, water bottle, and your camera.
+- **Safety:** Stick to back roads where traffic is minimal. Always carry your hotel business card for directions.`,
+    coverImage: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=1600&q=80',
+    category: 'Siem Reap Insider',
+    tags: ['Cycling', 'Countryside', 'Villages', 'Siem Reap', 'Eco-Tourism'],
+    author: {
+      name: 'Vireak Meas',
+      role: 'Heritage Guide & Tour Coordinator',
+      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
+    },
+    publishedAt: '2026-05-25',
+    readTimeMinutes: 4,
+    isFeatured: false,
+    status: 'published',
+  },
+  {
+    id: 'post-cambodian-festivals',
+    slug: 'cambodian-festivals-best-time-to-visit-siem-reap',
+    title: 'Cambodian Festivals: The Best Times to Visit Siem Reap',
+    excerpt: 'Plan your trip around Cambodia\'s most vibrant festivals — from the Water Festival boat races to Khmer New Year celebrations in the temples.',
+    content: `## Experience Cambodia's Living Culture
+
+Cambodia's festivals are among the most colorful and joyous celebrations in Southeast Asia. Timing your visit to coincide with one of these events adds an extraordinary cultural layer to your temple explorations.
+
+---
+
+### The Major Festivals
+
+#### 1. Khmer New Year (Choul Chnam Thmey) — April 13–16
+The biggest celebration of the year! For three days, the entire country is in festive mode. Temples are decorated with flowers, families gather for feasts, and traditional games fill the streets. In Siem Reap, the atmosphere around the temples and the riverside is electric.
+
+#### 2. Water Festival (Bon Om Touk) — November
+Celebrating the reversal of the Tonle Sap River's flow, the **Water Festival** features dramatic longboat races on the Siem Reap River, illuminated floating lanterns, and fireworks. The atmosphere is carnival-like with food stalls, live music, and hundreds of thousands of celebrants.
+
+#### 3. Pchum Ben (Ancestor's Day) — September/October
+One of Cambodia's most important spiritual holidays. Families visit pagodas to offer food to the spirits of their ancestors over 15 days. It is a deeply moving and respectful tradition to witness.
+
+#### 4. Visak Bochea (Buddha's Birthday) — May
+A serene celebration of the birth, enlightenment, and passing of the Buddha. Beautiful candlelit processions circle the temples in the evening.
+
+### Planning Tips
+
+During major festivals, Siem Reap fills up quickly! We recommend booking your stay at Le Vert Angkor Hotel well in advance to secure your room.`,
+    coverImage: 'https://images.unsplash.com/photo-1596765792518-e37ea3df7409?auto=format&fit=crop&w=1600&q=80',
+    category: 'Siem Reap Insider',
+    tags: ['Festivals', 'Khmer New Year', 'Water Festival', 'Culture', 'Best Time to Visit'],
+    author: {
+      name: 'Le Vert Concierge Team',
+      role: 'Guest Experience & Insider Guides',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+    },
+    publishedAt: '2026-06-01',
+    readTimeMinutes: 4,
+    isFeatured: false,
+    status: 'published',
+  },
+  {
+    id: 'post-photography-spots',
+    slug: 'best-photography-spots-siem-reap-angkor',
+    title: '10 Best Photography Spots in Siem Reap & Angkor',
+    excerpt: 'From the iconic Angkor Wat reflection pool to hidden jungle temples and golden hour rooftop views — our top picks for stunning photos in Siem Reap.',
+    content: `## Capture Unforgettable Moments
+
+Siem Reap and the Angkor Archaeological Park offer some of the most photogenic scenes in the world. Whether you are a professional photographer or just love capturing memories on your phone, these are the spots you cannot miss.
+
+---
+
+### Our Top 10 Photography Spots
+
+1. **Angkor Wat Reflection Pool** — The classic sunrise shot. Arrive before 5:30 AM for the best reflection.
+2. **Bayon Temple Face Towers** — The 216 smiling stone faces make for incredible close-up portraits and wide-angle compositions.
+3. **Ta Prohm Tree Roots** — The famous strangler fig trees wrapping around stone doorways are endlessly photogenic.
+4. **Preah Khan Corridors** — Long, symmetrical stone corridors with beautiful light streaming through windows.
+5. **Srah Srang Royal Bathing Pool** — A peaceful alternative sunrise spot with fewer crowds than Angkor Wat.
+6. **Phnom Bakheng Sunset** — Panoramic views of the Angkor plain at golden hour.
+7. **Bantey Srei Pink Carvings** — The most detailed stone carvings in all of Angkor, glowing pink in morning light.
+8. **Tonle Sap Floating Village** — Dramatic stilted houses and fishermen casting nets at sunset.
+9. **Le Vert Rooftop Pool** — Our own rooftop offers stunning sunset views over the Siem Reap skyline!
+10. **Kandal Village Street Art** — Colorful murals and boutique storefronts in the creative neighborhood just steps from our hotel.
+
+### Photography Tips
+
+- **Golden Hours:** Sunrise (5:30–7 AM) and late afternoon (4–5:30 PM) offer the best warm light.
+- **Rainy Season Bonus:** The wet season (June–October) brings dramatic skies, lush green landscapes, and moody temple atmospheres.
+- **Respect:** Always ask before photographing monks or local people.`,
+    coverImage: 'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1600&q=80',
+    category: 'Temple Guides',
+    tags: ['Photography', 'Angkor Wat', 'Siem Reap', 'Golden Hour', 'Travel Tips'],
+    author: {
+      name: 'Sophea Chan',
+      role: 'Chief Concierge & Heritage Specialist',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+    },
+    publishedAt: '2026-06-08',
+    readTimeMinutes: 4,
+    isFeatured: false,
+    status: 'published',
+  },
+  {
+    id: 'post-family-activities',
+    slug: 'best-family-activities-siem-reap-kids',
+    title: 'Best Family Activities in Siem Reap: Fun Things to Do with Kids',
+    excerpt: 'Traveling with children? Discover the best family-friendly activities in Siem Reap — from cooking classes to quad biking, zip-lining, and temple treasure hunts.',
+    content: `## Siem Reap is a Family Paradise
+
+Siem Reap is not just for history buffs and backpackers — it is an incredible destination for families too! With a mix of educational, adventurous, and fun activities, your kids will have just as much fun as the adults.
+
+---
+
+### Top Family Activities
+
+#### 1. Khmer Cooking Class
+Several cooking schools in town offer **kid-friendly classes** where the whole family learns to make traditional Cambodian dishes like spring rolls, Fish Amok, and mango sticky rice. It is hands-on, fun, and you get to eat everything you make!
+
+#### 2. Quad Biking Through Rice Paddies
+For older kids and teens, **quad bike tours** through the Siem Reap countryside are a thrilling adventure. Ride through muddy trails, splash through puddles, and explore remote villages.
+
+#### 3. Angkor Zip Line
+**Angkor Zipline** offers a canopy tour through the jungle with zip lines, sky bridges, and rappelling — all with professional guides and safety gear. Minimum age is typically 5 years.
+
+#### 4. Temple Treasure Hunt
+Turn your temple visit into an adventure! Before visiting Angkor Wat or Bayon, create a scavenger hunt list for your kids: "Find an Apsara dancer carving," "Spot a monkey," "Count the face towers at Bayon." It keeps them engaged and excited.
+
+#### 5. Artisans Angkor Workshop
+Visit **Artisans Angkor** for free guided tours of their silk weaving and stone-carving workshops. Kids love watching artisans at work, and the shop has beautiful (and affordable) souvenirs.
+
+### Family-Friendly Dining at Le Vert
+
+Our restaurant serves kid-friendly options including pasta, burgers, french fries, and fresh fruit smoothies alongside our Khmer specialties. We also offer Family Suite accommodations designed specifically for comfortable family stays.`,
+    coverImage: 'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=1600&q=80',
+    category: 'Siem Reap Insider',
+    tags: ['Family Travel', 'Kids Activities', 'Siem Reap', 'Cooking Class', 'Adventure'],
+    author: {
+      name: 'Le Vert Concierge Team',
+      role: 'Guest Experience & Insider Guides',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+    },
+    publishedAt: '2026-06-15',
+    readTimeMinutes: 4,
+    isFeatured: false,
+    status: 'published',
+  },
+  {
+    id: 'post-angkor-pass-guide',
+    slug: 'angkor-pass-guide-which-ticket-to-buy',
+    title: 'Angkor Pass Explained: Which Ticket Should You Buy? (1-Day, 3-Day, or 7-Day)',
+    excerpt: 'A practical breakdown of the Angkor Pass options, pricing, what\'s included, and our expert recommendation on how many days you actually need.',
+    content: `## Everything You Need to Know About the Angkor Pass
+
+Planning your temple visit starts with one important decision: **which Angkor Pass should you buy?** Here is a clear, practical guide based on our years of experience helping guests at Le Vert Angkor Hotel.
+
+---
+
+### The Three Options
+
+| Pass Type | Duration | Price (2026) |
+|-----------|----------|-------------|
+| **1-Day Pass** | 1 calendar day | $37 USD |
+| **3-Day Pass** | Any 3 days within 10 days | $62 USD |
+| **7-Day Pass** | Any 7 days within 1 month | $72 USD |
+
+### Our Recommendations
+
+- **First-time visitors with limited time:** The **1-Day Pass** is sufficient if you focus on the Small Circuit (Angkor Wat, Bayon, Ta Prohm). Start at sunrise and end at sunset.
+- **Most travelers (recommended):** The **3-Day Pass** is the sweet spot. Day 1 for the Small Circuit, Day 2 for the Grand Circuit (Preah Khan, Neak Pean, Pre Rup), and Day 3 for outer temples like Banteay Srei.
+- **Temple enthusiasts & photographers:** The **7-Day Pass** lets you revisit favorites at different times of day and explore remote sites like Beng Mealea and Koh Ker at leisure.
+
+### Important Tips
+
+- **Photos are taken at the ticket office** — no need to bring a passport photo.
+- **Passes are checked at every temple** — always carry yours.
+- **The ticket office** is located on the road to Angkor, about 10 minutes from our hotel.
+- **Beng Mealea** is now included in the Angkor Pass (previously a separate ticket).
+
+Our concierge team is happy to help you decide which pass is best for your itinerary!`,
+    coverImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80',
+    category: 'Temple Guides',
+    tags: ['Angkor Pass', 'Tickets', 'Planning', 'Temple Guide', 'Budget Tips'],
+    author: {
+      name: 'Sophea Chan',
+      role: 'Chief Concierge & Heritage Specialist',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+    },
+    publishedAt: '2026-06-22',
+    readTimeMinutes: 4,
+    isFeatured: false,
+    status: 'published',
+  },
+  {
+    id: 'post-rainy-season-travel',
+    slug: 'visiting-siem-reap-rainy-season-guide',
+    title: 'Why You Should Visit Siem Reap in Rainy Season (The Secret Best Time)',
+    excerpt: 'Think rainy season is bad for travel? Think again. Discover why June to October might actually be the best time to explore Angkor and Siem Reap.',
+    content: `## The Best-Kept Secret in Cambodian Travel
+
+Most travel guides tell you to visit Siem Reap during the dry season (November to March). But experienced travelers and photographers know that the **rainy season (June to October)** offers some of the most magical and rewarding experiences — with far fewer crowds and lower prices.
+
+---
+
+### Why Rainy Season is Amazing
+
+#### 1. Dramatically Fewer Crowds
+During rainy season, tourist numbers drop by over 50%. You can explore **Angkor Wat almost entirely to yourself** in the early morning. The corridors of Ta Prohm, usually packed shoulder-to-shoulder, become eerily peaceful.
+
+#### 2. Lush Green Landscapes
+The temples transform after the rains. Moats fill to the brim with crystal-clear water, moss blankets the ancient stones in vivid green, and the surrounding jungle becomes impossibly lush and vibrant.
+
+#### 3. Incredible Photography
+Dramatic cloud formations, misty temple mornings, reflections in rain-filled moats, and golden light breaking through storm clouds create photographs that dry-season visitors simply cannot capture.
+
+#### 4. Lower Prices
+Hotels, tours, and flights are all significantly cheaper during green season. You can enjoy a higher level of luxury for less.
+
+### But What About the Rain?
+
+- Rain typically falls in **short, intense afternoon bursts** (1–2 hours), not all day.
+- Mornings are usually sunny and clear — perfect for temple visits.
+- Temperatures are slightly cooler and more comfortable than the scorching March–May heat.
+
+### Our Rainy Season Tip
+
+Bring a compact rain poncho (available at Old Market for $1), waterproof shoes, and embrace the adventure. Some of our most delighted guests have visited during rainy season!`,
+    coverImage: 'https://images.unsplash.com/photo-1549429402-999335607a75?auto=format&fit=crop&w=1600&q=80',
+    category: 'Siem Reap Insider',
+    tags: ['Rainy Season', 'Green Season', 'Best Time to Visit', 'Travel Tips', 'Siem Reap'],
+    author: {
+      name: 'Vireak Meas',
+      role: 'Heritage Guide & Tour Coordinator',
+      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
+    },
+    publishedAt: '2026-06-30',
+    readTimeMinutes: 4,
     isFeatured: false,
     status: 'published',
   },

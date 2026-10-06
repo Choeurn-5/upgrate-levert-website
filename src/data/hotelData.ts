@@ -206,139 +206,270 @@ export const ROOMS_DATA: Room[] = [
 
 export const TOURS_DATA: Tour[] = [
   {
-    id: 876,
-    slug: 'big-circuit',
-    title: 'Big Circuit Temple Tour',
-    price: 80,
-    currency: 'USD',
-    duration: 'Full Day (~8:00 AM – 5:30 PM)',
-    vehicleType: 'Private Air-Conditioned SUV / Van with Licensed English Driver',
-    shortDescription: 'Traverse the majestic grand loop of Angkor: Preah Khan monastic labyrinth, the enigmatic island temple of Neak Poan, Ta Som, East Mebon, and sunset at Pre Rup.',
-    longDescription: 'The Big Circuit (Grand Loop) takes you beyond the central city into the magnificent outer royal complexes built during the zenith of the Khmer Empire. Encounter towering strangler figs weaving through Preah Khan, witness the holy medicinal waters of Neak Poan, and marvel at the massive stone elephants guarding East Mebon before witnessing a golden sunset over the ancient brick spires of Pre Rup.',
-    featuredImage: 'https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/03/Things-to-Do-in-Siem-Reap.jpg',
-    itinerary: [
-      {
-        time: '08:00 AM',
-        templeName: 'Preah Khan',
-        description: 'Explore the vast monastic complex built by King Jayavarman VII for his father, featuring endless colonnaded corridors, delicate devata carvings, and tranquil forest surroundings.',
-        highlight: 'Two-story Greek-style pavilion and sacred stupa hall',
-      },
-      {
-        time: '10:15 AM',
-        templeName: 'Neak Poan',
-        description: 'Cross an ethereal wooden boardwalk over lotus-filled waters to reach the circular island sanctuary symbolizing the mythical Himalayan lake Anavatapta.',
-        highlight: 'Intricate carved serpent spirits (Naga) and medicinal cleansing pools',
-      },
-      {
-        time: '11:45 AM',
-        templeName: 'Ta Som',
-        description: 'A miniature jewel famous for its eastern gopura entrance completely swallowed by the roots of a giant sacred fig tree.',
-        highlight: 'Iconic tree-root frame of the four-faced Avalokiteshvara tower',
-      },
-      {
-        time: '01:00 PM',
-        templeName: 'East Mebon & Traditional Khmer Lunch',
-        description: 'Pause for lunch at an authentic countryside pavilion, then examine the 10th-century temple mountain with monolithic stone elephants at each terrace corner.',
-        highlight: 'Full-scale freestanding guardian elephants carved from sandstone',
-      },
-      {
-        time: '03:00 PM',
-        templeName: 'Banteay Kdei & Sras Srang',
-        description: 'Visit the "Citadel of Chambers" in its quiet forest clearing, followed by a reflective stroll across the ancient Royal Bathing Pool of Sras Srang.',
-        highlight: 'Peaceful uncrowded atmosphere and cloistered galleries',
-      },
-      {
-        time: '04:30 PM',
-        templeName: 'Pre Rup (Sunset Panorama)',
-        description: 'Ascend the steep tiers of this fiery laterite and brick pyramid to catch panoramic sunset vistas across the tropical jungle canopy.',
-        highlight: 'Sunset viewing over the Siem Reap countryside',
-      },
+    id: 1,
+    slug: 'sunrise-angkor-small-temple-tour',
+    title: 'Sunrise Angkor Small Temple Tour',
+    durationLabel: 'Half-Day Tour',
+    highlights: [
+      'Watch the sunrise behind the world-famous towers of Angkor Wat Temple.',
+      'Explore Bayon Temple, famous for its hundreds of smiling stone faces carved into the towers.',
+      'Visit Ta Prohm Temple (the "Tomb Raider" temple), overgrown with gigantic silk-cotton tree roots wrapping around ancient stone walls.'
     ],
-    inclusions: [
-      'Private air-conditioned vehicle with dedicated professional driver',
-      'Hotel pick-up and return directly from Le Vert Angkor Hotel',
-      'Unlimited chilled mineral water bottles throughout the journey',
-      'Refreshing cold towels after each temple exploration',
-      'All vehicle parking fees, tolls, and fuel',
+    options: [
+      {
+        title: 'Private Options: Tuk-Tuk $22 (2–3 pax)',
+        details: [
+          'Pickup-dropoff by tuk-tuk',
+          'Cold Bottled Water & Towels',
+          'Pickup Time: 4:30 AM'
+        ]
+      },
+      {
+        title: 'Shared Options: AC Car ($15 per person)',
+        details: [
+          'Pickup-Dropoff by AC Car',
+          'English Speaking Guide',
+          'Cold Bottled Water & Towels',
+          'Insurance',
+          'Pickup Time: between 4:20 AM – 4:50 AM'
+        ]
+      }
     ],
-    exclusions: [
-      'Angkor Archaeological Park Pass ($37 for 1-day, $62 for 3-day)',
-      'Personal lunch and refreshments',
-      'Licensed English Tour Guide ($40 optional add-on available upon request)',
-      'Personal travel insurance and gratuities',
-    ],
-    tips: [
-      'Dress code: Shoulders and knees must be covered (shawls over bare shoulders are not permitted by temple authorities).',
-      'Comfortable walking shoes with good grip are strongly recommended for climbing steep temple staircases.',
-      'Bring sun protection: wide-brim hat, sunglasses, and reef-safe sunscreen.',
-    ],
+    featuredImage: 'https://images.unsplash.com/photo-1596765792518-e37ea3df7409?auto=format&fit=crop&w=1600&q=80',
+    longDescription: 'Experience the magic of dawn over the ancient Khmer Empire. This half-day tour takes you to the iconic centerpieces of the Angkor Archaeological Park, starting early to catch the breathtaking sunrise over the central towers of Angkor Wat.'
   },
   {
-    id: 562,
-    slug: 'small-circuit',
-    title: 'Small Circuit Temple Tour',
-    price: 70,
-    currency: 'USD',
-    duration: 'Full Day (~8:00 AM – 5:00 PM or Sunrise ~4:45 AM)',
-    vehicleType: 'Private Air-Conditioned SUV / Van with Licensed English Driver',
-    shortDescription: 'The quintessential Angkor experience: world-renowned Angkor Wat, the 216 enigmatic stone faces of the Bayon, the Royal Enclosure of Angkor Thom, and jungle-engulfed Ta Prohm.',
-    longDescription: 'The Small Circuit encompasses the crown jewels of Angkor. Begin at Angkor Wat, the largest religious monument in the world, stand in awe beneath the serenely smiling colossal faces of Bayon in Angkor Thom, and wander through Ta Prohm where century-old silk-cotton trees hold ancient sandstone walls in an eternal embrace.',
-    featuredImage: 'https://www.cms.levertangkorhotel.com/wp-content/uploads/2024/01/R-3.jpg',
-    itinerary: [
-      {
-        time: '08:00 AM',
-        templeName: 'Angkor Wat',
-        description: 'Cross the grand causeway into the pinnacle of classical Khmer architecture. Admire over 2,000 celestial Apsara dancers and the breathtaking 600-meter bas-relief murals depicting Hindu epics.',
-        highlight: 'World-famous central sanctuary towers and reflecting pools',
-      },
-      {
-        time: '10:45 AM',
-        templeName: 'Angkor Thom & South Gate',
-        description: 'Cross the causeway lined with 108 gods and demons pulling the cosmic serpent Vasuki to enter the fortified city of King Jayavarman VII.',
-        highlight: 'Monumental 23-meter stone gateway crowned with four smiling faces',
-      },
-      {
-        time: '11:30 AM',
-        templeName: 'The Bayon Temple',
-        description: 'The hypnotic center of Angkor Thom featuring 54 Gothic-style towers adorned with 216 giant smiling faces of Avalokiteshvara.',
-        highlight: 'Fascinating everyday historical bas-reliefs of ancient Khmer market life and naval battles',
-      },
-      {
-        time: '01:00 PM',
-        templeName: 'Baphuon, Phimeanakas & Terrace of Elephants',
-        description: 'Wander through the sprawling Royal Palace compound, see the 350-meter Terrace of Elephants used as a royal reviewing stand, and the mysterious Terrace of the Leper King.',
-        highlight: 'Giant reclining Buddha hidden in the rear facade of Baphuon',
-      },
-      {
-        time: '02:45 PM',
-        templeName: 'Ta Prohm (Tomb Raider Temple)',
-        description: 'The most atmospheric temple in the park, deliberately preserved as it was first encountered by 19th-century explorers, intertwined with giant banyan and silk-cotton roots.',
-        highlight: 'Immense roots cascading over stone doorways and courtyard galleries',
-      },
-      {
-        time: '04:15 PM',
-        templeName: 'Banteay Kdei & Return to Hotel',
-        description: 'A serene final stop through the quiet, shaded corridors of Banteay Kdei before heading back to relax by Le Vert’s rooftop pool.',
-        highlight: 'Peaceful golden hour lighting filtering through ancient courtyards',
-      },
+    id: 2,
+    slug: 'sunset-angkor-small-temple-tour',
+    title: 'Sunset Angkor Small Temple Tour',
+    durationLabel: 'Full-Day Tour',
+    highlights: [
+      'Walk through the vast corridors and intricate bas-reliefs of Angkor Wat Temple.',
+      'Discover the enigmatic stone face towers of Bayon Temple at the heart of Angkor Thom.',
+      'Wander through the atmospheric, root-entwined ruins of Ta Prohm Temple.',
+      'Climb up to Phnom Bakheng Hill for a panoramic sunset view over the Angkor region.'
     ],
-    inclusions: [
-      'Private air-conditioned vehicle with dedicated professional driver',
-      'Hotel pick-up and return directly from Le Vert Angkor Hotel',
-      'Unlimited chilled mineral water bottles and cold refreshing towels',
-      'All parking, fuel, and municipal access fees',
+    options: [
+      {
+        title: 'Private Options: Tuk-Tuk $22 (2–3 pax)',
+        details: [
+          'Pickup-dropoff by tuk-tuk',
+          'Cold Bottled Water & Towels',
+          'Pickup Time: 10:00 AM'
+        ]
+      },
+      {
+        title: 'Shared Options: AC Car ($20 per person)',
+        details: [
+          'Pickup-Dropoff by AC Car',
+          'English Speaking Guide',
+          'Cold Bottled Water & Towels',
+          'Insurance',
+          'Pickup Time: between 7:40 AM – 8:10 AM'
+        ]
+      }
     ],
-    exclusions: [
-      'Angkor Park Pass ($37 per person for 1-day pass)',
-      'Meals and personal drinks',
-      'Official Angkor Temple Guide ($40 optional upon booking)',
-      'Gratuities and tips',
-    ],
-    tips: [
-      'Sunrise option: Departure at 4:45 AM can be arranged with takeaway hotel breakfast box upon advance notice to our front desk.',
-      'Strict attire: shoulders and knees covered with non-transparent fabric.',
-    ],
+    featuredImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80',
+    longDescription: 'If you prefer a relaxed morning before exploring the temples, this full-day tour covers the top architectural masterpieces of Angkor and concludes with an unforgettable sunset view over the Cambodian countryside.'
   },
+  {
+    id: 3,
+    slug: 'banteay-srei-grand-temple-tour',
+    title: 'Banteay Srei & Grand Temple Tour',
+    durationLabel: 'Full-Day Tour',
+    highlights: [
+      'Banteay Srei Temple: A 10th-century pink sandstone temple renowned for having the most detailed and delicate carvings in all of Angkor.',
+      'Pre Rup & East Mebon: Impressive mountain-temples offering sweeping surrounding views.',
+      'Ta Som & Neak Pean: Explore the tree-strangled eastern gate of Ta Som and the peaceful island shrine of Neak Pean.',
+      'Preah Khan Temple: A huge, labyrinthine monastery complex nestled in the jungle.'
+    ],
+    options: [
+      {
+        title: 'Private Options: Tuk-Tuk $30 (2–3 pax)',
+        details: [
+          'Pickup-dropoff by tuk-tuk',
+          'Cold Bottled Water & Towels',
+          'Pickup Time: 8:00 AM'
+        ]
+      },
+      {
+        title: 'Shared Options: AC Car ($20 per person)',
+        details: [
+          'Pickup-Dropoff by AC Car',
+          'English Speaking Guide',
+          'Cold Bottled Water & Towels',
+          'Insurance',
+          'Pickup Time: between 7:40 AM – 8:10 AM'
+        ]
+      }
+    ],
+    featuredImage: 'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1600&q=85',
+    longDescription: 'Go beyond the main circuit to discover the exquisite artistry and hidden gems of the Grand Circuit, including the famed "Jewel of Khmer Art".'
+  },
+  {
+    id: 4,
+    slug: 'kampong-phluk-floating-village-tour',
+    title: 'Kampong Phluk Floating Village Tour',
+    durationLabel: 'Half-Day Tour (Morning or Afternoon)',
+    highlights: [
+      'Stroll through a bustling Local Market to see daily Cambodian life.',
+      'View towering Long-Stilts Houses designed to adapt to the seasonal water level changes of Tonle Sap Lake.',
+      'Take a wooden boat cruise through the lush, submerged Mangrove Forest.',
+      'Watch the golden sunset on Tonle Sap Lake directly from your boat.'
+    ],
+    options: [
+      {
+        title: 'Private Options: Tuk-Tuk $30 (2–3 pax)',
+        details: [
+          'Pickup-dropoff by tuk-tuk',
+          'Cold Bottled Water & Towels',
+          'Pickup Time: 2:00 PM'
+        ]
+      },
+      {
+        title: 'Shared Options: AC Car ($24 per person)',
+        details: [
+          'Pickup-Dropoff by AC Car',
+          'English Speaking Guide',
+          'Cold Bottled Water & Towels',
+          'Insurance',
+          'Afternoon departures available (Pickup between 1:40 PM – 2:10 PM)'
+        ]
+      }
+    ],
+    featuredImage: 'https://images.unsplash.com/photo-1629815049533-3118ee18cc00?auto=format&fit=crop&w=1600&q=80',
+    longDescription: 'Immerse yourself in authentic rural life along the shores of Tonle Sap, Southeast Asia\'s largest freshwater lake.'
+  },
+  {
+    id: 5,
+    slug: 'kulen-waterfall-1000-lingas-tour',
+    title: 'Kulen Waterfall & 1000 Lingas Tour',
+    durationLabel: 'Full-Day Tour',
+    highlights: [
+      'Visit the Giant Reclining Buddha carved directly into a massive sandstone boulder at Preah Ang Thom.',
+      'See the sacred River of 1000 Lingas, where ancient carvings cover the sandstone riverbed under crystal-clear water.',
+      'Enjoy breathtaking views from the mountain cliffs and cool off with a swim at the scenic Kulen Waterfall.'
+    ],
+    options: [
+      {
+        title: 'Private Options: AC Car $75 (2–3 pax)',
+        details: [
+          'Includes private air-conditioned car & driver',
+          'Cold Bottled Water & Towels',
+          'Pickup Time: 8:00 AM'
+        ]
+      },
+      {
+        title: 'Shared Options: AC Car ($48 per person)',
+        details: [
+          'Pickup-Dropoff by AC Car',
+          'English Speaking Guide',
+          'Cold Bottled Water & Towels',
+          'Insurance',
+          'Pickup Time: between 7:40 AM – 8:10 AM'
+        ]
+      }
+    ],
+    featuredImage: 'https://images.unsplash.com/photo-1549429402-999335607a75?auto=format&fit=crop&w=1600&q=80',
+    longDescription: 'Escape the city into the sacred mountain range of Phnom Kulen, a place of spiritual pilgrimage, lush tropical foliage, and natural waterfalls.'
+  },
+  {
+    id: 6,
+    slug: 'koh-ker-beng-mealea-temple-tour',
+    title: 'Koh Ker & Beng Mealea Temple Tour',
+    durationLabel: 'Full-Day Tour',
+    highlights: [
+      'Beng Mealea Temple: A sprawling, unrestored 12th-century temple heavily overgrown by nature, allowing you to explore crumbling stone arches and mossy corridors.',
+      'Koh Ker Temple Complex: The 10th-century capital of the Khmer Empire, featuring Prasat Prang, an imposing 7-tiered pyramid temple rising above the trees.',
+      'Visit Prasat Pram, famous for its ruined towers wrapped tightly by strangler fig trees.'
+    ],
+    options: [
+      {
+        title: 'Private Options: AC Car $120 (2–4 pax)',
+        details: [
+          'Includes private air-conditioned car & driver',
+          'Cold Bottled Water & Towels',
+          'Pickup Time: 8:00 AM'
+        ]
+      },
+      {
+        title: 'Shared Options: AC Car ($50 per person)',
+        details: [
+          'Pickup-Dropoff by AC Car',
+          'English Speaking Guide',
+          'Cold Bottled Water & Towels',
+          'Insurance',
+          'Pickup Time: between 7:40 AM – 8:10 AM'
+        ]
+      }
+    ],
+    featuredImage: 'https://images.unsplash.com/photo-1582236371587-873b22ed7675?auto=format&fit=crop&w=1600&q=80',
+    longDescription: 'Journey deep into the Cambodian jungle to discover remote, mysterious temple complexes that feel straight out of an adventure film.'
+  },
+  {
+    id: 7,
+    slug: 'battambang-day-trip',
+    title: 'Battambang Day-Trip from Siem Reap',
+    durationLabel: 'Full-Day Tour',
+    highlights: [
+      'Ride the famous local Lorry / Bamboo Train through rice fields and scenery.',
+      'Admire French colonial architecture, the Ancient House, and the historic Provincial Hall.',
+      'Visit the historic Killing Cave atop Phnom Sampeau and witness millions of bats emerging from the Bat Cave at dusk.'
+    ],
+    options: [
+      {
+        title: 'Private Options: AC Car $160 (2–3 pax)',
+        details: [
+          'Includes private air-conditioned car & driver',
+          'Cold Bottled Water & Towels',
+          'Pickup Time: 7:00 AM'
+        ]
+      },
+      {
+        title: 'Shared Options: AC Car ($50 per person)',
+        details: [
+          'Pickup-Dropoff by AC Car',
+          'English Speaking Guide',
+          'Cold Bottled Water & Towels',
+          'Insurance',
+          'Pickup Time: between 6:30 AM – 7:00 AM'
+        ]
+      }
+    ],
+    featuredImage: 'https://images.unsplash.com/photo-1616453915152-780c1df0f4e1?auto=format&fit=crop&w=1600&q=80',
+    longDescription: 'Explore Cambodia\'s charming countryside and cultural capital of Battambang on an action-packed day trip.'
+  },
+  {
+    id: 8,
+    slug: 'inter-city-transfers',
+    title: 'Inter-City Transfer Services (Siem Reap ↔ Phnom Penh)',
+    durationLabel: 'Approx. 5–6 hours',
+    highlights: [
+      'Smooth, hassle-free transportation connecting Siem Reap and Phnom Penh.',
+      'Private Transfers: Door-to-Door Service with flexible pickup time based on your preference.',
+      'Shared Bus Transfers: E-booking options with top regional bus providers.'
+    ],
+    options: [
+      {
+        title: 'Private Transfers (Door-to-Door)',
+        details: [
+          'SUV (2–3 pax): $90 per vehicle',
+          'Minivan (4–6 pax): $110 per vehicle',
+          'Toyota Hi-Ace (6–8 pax): $230 per vehicle',
+          'Schedule: Flexible pickup time'
+        ]
+      },
+      {
+        title: 'Shared Bus Transfers',
+        details: [
+          'Larryta Bus Company, VET Bus Company, and E-booking Bus Company.',
+          'Please inquire at our reception desk for exact departure times and ticket pricing.'
+        ]
+      }
+    ],
+    featuredImage: 'https://images.unsplash.com/photo-1549429402-999335607a75?auto=format&fit=crop&w=1600&q=80',
+    longDescription: 'We provide smooth, hassle-free private and shared transportation options connecting Siem Reap and Phnom Penh.'
+  }
 ];
 
 export interface DiningArtboard {
