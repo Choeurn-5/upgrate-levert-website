@@ -6,15 +6,15 @@ import path from 'path';
 
 export const dynamic = 'force-dynamic';
 
-// Configure Cloudinary using environment variables
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
-
 export async function POST(request: NextRequest) {
   try {
+    // Configure Cloudinary inside the route to ensure it catches runtime env vars
+    cloudinary.config({
+      cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+      api_key: process.env.CLOUDINARY_API_KEY,
+      api_secret: process.env.CLOUDINARY_API_SECRET,
+    });
+
     const formData = await request.formData();
     const file = formData.get('file') as File | null;
 
@@ -49,7 +49,17 @@ export async function POST(request: NextRequest) {
         success: true
       });
     } catch (cloudError: any) {
-      console.warn('Cloudinary upload failed, falling back to local storage:', cloudError.message);
+      console.error('Cloudinary upload failed:', cloudError);
+      
+      // If we are on Vercel, local storage WILL fail, so we must return the Cloudinary error
+      if (process.env.VERCEL) {
+        return NextResponse.json(
+          { error: 'Cloudinary upload failed on Vercel', details: cloudError.message || String(cloudError) },
+          { status: 500 }
+        );
+      }
+
+      console.warn('Falling back to local storage...');
       
       // Generate unique filename for local fallback
       const uniqueId = crypto.randomUUID();
@@ -81,3 +91,4 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
