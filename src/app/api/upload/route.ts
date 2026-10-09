@@ -1,28 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getApps, initializeApp, cert } from 'firebase-admin/app';
-import { getStorage } from 'firebase-admin/storage';
+import { v2 as cloudinary } from 'cloudinary';
 import crypto from 'crypto';
 import fs from 'fs';
 import path from 'path';
 
 export const dynamic = 'force-dynamic';
 
-// Initialize Firebase Admin if it hasn't been initialized yet
-if (!getApps().length && process.env.FIREBASE_PROJECT_ID && process.env.FIREBASE_PRIVATE_KEY) {
-  try {
-    initializeApp({
-      credential: cert({
-        projectId: process.env.FIREBASE_PROJECT_ID,
-        clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-        // Replace \\n with actual newline characters
-        privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
-      }),
-      storageBucket: `${process.env.FIREBASE_PROJECT_ID}.appspot.com`
-    });
-  } catch (error) {
-    console.error('Firebase admin initialization error', error);
-  }
-}
+// Configure Cloudinary using environment variables
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export async function POST(request: NextRequest) {
   try {
@@ -36,36 +25,37 @@ export async function POST(request: NextRequest) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Generate unique filename
-    const uniqueId = crypto.randomUUID();
-    const extension = file.name.split('.').pop() || 'jpg';
-    const filename = `uploads/${uniqueId}.${extension}`;
-
     try {
-      // Attempt Upload to Firebase Storage
-      const bucket = getStorage().bucket();
-      const fileRef = bucket.file(filename);
-      
-      await fileRef.save(buffer, {
-        metadata: {
-          contentType: file.type,
-        },
+      // Require Cloudinary setup
+      if (!process.env.CLOUDINARY_CLOUD_NAME || !process.env.CLOUDINARY_API_KEY || !process.env.CLOUDINARY_API_SECRET) {
+        throw new Error('Cloudinary credentials are not configured in environment variables');
+      }
+
+      // Upload to Cloudinary using a stream
+      const uploadResult = await new Promise((resolve, reject) => {
+        const uploadStream = cloudinary.uploader.upload_stream(
+          { folder: 'le_vert_blog_uploads' },
+          (error, result) => {
+            if (error) return reject(error);
+            resolve(result);
+          }
+        );
+        uploadStream.end(buffer);
       });
-
-      // Make the file publicly accessible
-      await fileRef.makePublic();
-
-      // Get the public URL
-      const publicUrl = `https://storage.googleapis.com/${bucket.name}/${filename}`;
 
       return NextResponse.json({
-        url: publicUrl,
-        provider: 'firebase',
+        url: (uploadResult as any).secure_url,
+        provider: 'cloudinary',
         success: true
       });
-    } catch (firebaseError: any) {
-      console.warn('Firebase upload failed, falling back to local storage:', firebaseError.message);
+    } catch (cloudError: any) {
+      console.warn('Cloudinary upload failed, falling back to local storage:', cloudError.message);
       
+      // Generate unique filename for local fallback
+      const uniqueId = crypto.randomUUID();
+      const extension = file.name.split('.').pop() || 'jpg';
+      const filename = `uploads/${uniqueId}.${extension}`;
+
       // Fallback: Upload to local public/uploads directory
       const publicDir = path.join(process.cwd(), 'public');
       const uploadDir = path.join(publicDir, 'uploads');
