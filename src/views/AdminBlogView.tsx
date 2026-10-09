@@ -297,7 +297,8 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
         } catch (e) {
           throw new Error(`Upload failed with status ${res.status}. File might be too large.`);
         }
-        throw new Error(errData.error || 'Failed to upload image');
+        const errorMsg = errData.details ? `${errData.error}: ${errData.details}` : (errData.error || 'Failed to upload image');
+        throw new Error(errorMsg);
       }
 
       const data = await res.json();
@@ -422,7 +423,8 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
         } catch (e) {
           throw new Error(`Upload failed with status ${res.status}.`);
         }
-        throw new Error(errData.error || 'Failed to save post');
+        const errorMsg = errData.details ? `${errData.error}: ${errData.details}` : (errData.error || 'Failed to save post');
+        throw new Error(errorMsg);
       }
 
       await fetchPosts();
