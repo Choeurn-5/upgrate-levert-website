@@ -284,6 +284,7 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
     try {
       const formData = new FormData();
       formData.append('file', file);
+      formData.append('folder', 'le_vert_blog_uploads');
 
       const res = await fetch('/api/upload', {
         method: 'POST',

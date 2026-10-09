@@ -67,6 +67,7 @@ export const AdminToursView: React.FC<AdminToursViewProps> = ({ onNavigate }) =>
     try {
       const formData = new FormData();
       formData.append('file', file);
+      formData.append('folder', 'le_vert_tours_uploads');
       const res = await fetch('/api/upload', { method: 'POST', body: formData });
       if (!res.ok) {
         let err;

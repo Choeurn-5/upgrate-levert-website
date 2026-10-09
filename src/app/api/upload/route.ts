@@ -22,6 +22,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'No file provided' }, { status: 400 });
     }
 
+    const folder = (formData.get('folder') as string) || 'le_vert_uploads';
+
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
@@ -34,7 +36,7 @@ export async function POST(request: NextRequest) {
       // Upload to Cloudinary using a stream
       const uploadResult = await new Promise((resolve, reject) => {
         const uploadStream = cloudinary.uploader.upload_stream(
-          { folder: 'le_vert_blog_uploads' },
+          { folder: folder },
           (error, result) => {
             if (error) return reject(error);
             resolve(result);

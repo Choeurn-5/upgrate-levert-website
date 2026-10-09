@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion } from 'motion/react';
-import { Clock, ArrowRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Clock, ArrowRight, ChevronDown } from 'lucide-react';
 import { Tour } from '../types';
 
 interface TourCardProps {
@@ -10,6 +10,8 @@ interface TourCardProps {
 }
 
 export const TourCard: React.FC<TourCardProps> = ({ tour, onViewDetails, index = 0 }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -22,7 +24,10 @@ export const TourCard: React.FC<TourCardProps> = ({ tour, onViewDetails, index =
       <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#C5A880] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-20" />
 
       {/* Image Banner */}
-      <div className="relative h-60 sm:h-64 w-full overflow-hidden bg-stone-100 shrink-0">
+      <div 
+        className="relative h-56 w-full overflow-hidden bg-stone-100 shrink-0 cursor-pointer"
+        onClick={() => onViewDetails(tour.slug)}
+      >
         <img
           src={tour.featuredImage}
           alt={tour.title}
@@ -42,14 +47,35 @@ export const TourCard: React.FC<TourCardProps> = ({ tour, onViewDetails, index =
       </div>
 
       {/* Content */}
-      <div className="p-6 sm:p-7 flex-1 flex flex-col">
+      <div className="p-5 sm:p-6 flex-1 flex flex-col">
         {/* Title */}
-        <h3 className="font-luxury-serif text-xl sm:text-2xl font-bold text-[#1C3829] group-hover:text-[#2D5540] transition-colors leading-snug mb-4">
+        <h3 
+          className="font-luxury-serif text-xl font-bold text-[#1C3829] group-hover:text-[#2D5540] transition-colors leading-snug mb-3 cursor-pointer"
+          onClick={() => onViewDetails(tour.slug)}
+        >
           {tour.title}
         </h3>
 
-        {/* Tour Highlights */}
-        <div className="mb-5">
+        {/* Expand Details Toggle */}
+        <button 
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="flex items-center space-x-1.5 text-[13px] font-bold text-[#C5A880] mb-4 hover:text-[#A68A60] transition-colors w-fit"
+        >
+          <span>{isExpanded ? 'Hide Quick Details' : 'View Quick Details'}</span>
+          <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
+        </button>
+
+        <AnimatePresence initial={false}>
+          {isExpanded && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="overflow-hidden"
+            >
+              {/* Tour Highlights */}
+              <div className="mb-5">
           <p className="text-[13px] font-bold text-[#1C3829] mb-2.5 flex items-center gap-1.5">
             <span className="text-[#C5A880]">Tour Highlight:</span> 
             {tour.durationLabel}
@@ -81,23 +107,27 @@ export const TourCard: React.FC<TourCardProps> = ({ tour, onViewDetails, index =
           ))}
         </div>
 
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {/* Spacer */}
         <div className="flex-1" />
 
         {/* Action Buttons */}
-        <div className="flex items-center space-x-3 pt-5 border-t border-[#EDE8E0]">
+        <div className="flex items-center space-x-2 pt-5 border-t border-[#EDE8E0] mt-auto">
           <button
             onClick={() => onViewDetails(tour.slug)}
-            className="flex-1 group/btn py-3.5 px-4 rounded-2xl border border-[#1C3829]/15 text-[#1C3829] hover:bg-[#F4EFE6] transition-all text-[13px] font-bold uppercase tracking-wider flex items-center justify-center space-x-1.5 cursor-pointer"
+            className="flex-1 group/btn py-3 px-3 rounded-2xl border border-[#1C3829]/15 text-[#1C3829] hover:bg-[#F4EFE6] transition-all text-xs font-bold uppercase tracking-wider flex items-center justify-center space-x-1.5 cursor-pointer"
           >
-            <span>Read Details</span>
-            <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover/btn:translate-x-1" />
+            <span>Details</span>
+            <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover/btn:translate-x-1" />
           </button>
           <a
             href={`https://wa.me/85570247282?text=${encodeURIComponent(`Hello Le Vert Angkor Hotel, I would like to book the "${tour.title}". Please share availability and details. Thank you!`)}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="py-3.5 px-6 rounded-2xl bg-[#1C3829] hover:bg-[#12241A] text-[#FAF8F5] transition-all text-[13px] font-bold uppercase tracking-wider shadow-[0_4px_14px_rgba(28,56,41,0.3)] hover:shadow-[0_6px_20px_rgba(28,56,41,0.4)] active:scale-95 cursor-pointer"
+            className="py-3 px-5 rounded-2xl bg-[#1C3829] hover:bg-[#12241A] text-[#FAF8F5] transition-all text-xs font-bold uppercase tracking-wider shadow-[0_4px_14px_rgba(28,56,41,0.3)] hover:shadow-[0_6px_20px_rgba(28,56,41,0.4)] active:scale-95 cursor-pointer text-center"
           >
             Book Now
           </a>

@@ -17,7 +17,7 @@ export const SITE_SETTINGS = {
   social: {
     facebook: 'https://www.facebook.com/Lyvertangkor168',
     instagram: 'https://www.instagram.com/levertangkor/',
-    tiktok: 'https://www.tiktok.com/',
+    tiktok: 'https://www.tiktok.com/@levertangkor',
     tripadvisor: 'https://www.tripadvisor.com/Hotel_Review-g297390-d26986566-Reviews-Le_Vert_Angkor_Hotel-Siem_Reap_Siem_Reap_Province.html',
   },
   amenityHighlights: [

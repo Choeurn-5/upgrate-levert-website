@@ -1,5 +1,6 @@
 import React from 'react';
-import { Phone, Mail, MapPin, ExternalLink, ShieldCheck, Award, Heart, Facebook, Instagram, Music } from 'lucide-react';
+import { Phone, Mail, MapPin, ExternalLink, ShieldCheck, Award, Heart, Facebook, Instagram } from 'lucide-react';
+import { motion } from 'motion/react';
 import { SITE_SETTINGS } from '../lib/site-settings';
 import { AppRoute } from '../types';
 
@@ -48,16 +49,36 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({
             
             {/* Social Links */}
             <div className="pt-5 flex items-center space-x-3">
-              <a href={SITE_SETTINGS.social.facebook} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-10 h-10 rounded-full bg-[#2D5540]/30 border border-[#C5A880]/20 text-[#C5A880] hover:bg-[#C5A880] hover:text-[#12241A] hover:border-[#C5A880] hover:scale-105 transition-all duration-300 shadow-sm" aria-label="Facebook">
+              <motion.a 
+                href={SITE_SETTINGS.social.facebook} target="_blank" rel="noopener noreferrer" 
+                whileHover={{ scale: 1.15, rotate: -6 }}
+                whileTap={{ scale: 0.9 }}
+                className="flex items-center justify-center w-10 h-10 rounded-full bg-[#2D5540]/30 border border-[#C5A880]/20 text-[#C5A880] hover:bg-[#C5A880] hover:text-[#12241A] transition-colors shadow-sm" aria-label="Facebook">
                 <Facebook className="w-4 h-4" />
-              </a>
-              <a href={SITE_SETTINGS.social.instagram} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-10 h-10 rounded-full bg-[#2D5540]/30 border border-[#C5A880]/20 text-[#C5A880] hover:bg-[#C5A880] hover:text-[#12241A] hover:border-[#C5A880] hover:scale-105 transition-all duration-300 shadow-sm" aria-label="Instagram">
+              </motion.a>
+              <motion.a 
+                href={SITE_SETTINGS.social.instagram} target="_blank" rel="noopener noreferrer" 
+                whileHover={{ scale: 1.15, rotate: 6 }}
+                whileTap={{ scale: 0.9 }}
+                className="flex items-center justify-center w-10 h-10 rounded-full bg-[#2D5540]/30 border border-[#C5A880]/20 text-[#C5A880] hover:bg-[#C5A880] hover:text-[#12241A] transition-colors shadow-sm" aria-label="Instagram">
                 <Instagram className="w-4 h-4" />
-              </a>
-              <a href={SITE_SETTINGS.social.tiktok} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center space-x-2 h-10 px-4 rounded-full bg-[#2D5540]/30 border border-[#C5A880]/20 text-[#C5A880] hover:bg-[#C5A880] hover:text-[#12241A] hover:border-[#C5A880] hover:scale-105 transition-all duration-300 shadow-sm font-medium text-xs tracking-wide uppercase" aria-label="TikTok">
-                <Music className="w-3.5 h-3.5" />
+              </motion.a>
+              <motion.a 
+                href={SITE_SETTINGS.social.tiktok} target="_blank" rel="noopener noreferrer" 
+                whileHover={{ scale: 1.05, y: -4 }}
+                whileTap={{ scale: 0.95 }}
+                className="group flex items-center justify-center space-x-2 h-10 px-4 rounded-full bg-[#2D5540]/30 border border-[#C5A880]/20 text-[#C5A880] hover:bg-[#C5A880] hover:text-[#12241A] transition-colors shadow-sm font-medium text-xs tracking-wide uppercase" aria-label="TikTok">
+                <motion.div
+                  className="origin-bottom"
+                  animate={{ rotate: [0, -15, 15, -15, 15, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", repeatDelay: 1 }}
+                >
+                  <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19.589 6.686a4.793 4.793 0 0 1-3.97-1.535 4.755 4.755 0 0 1-1.127-3.666h-3.916v14.496c-.05 1.706-1.464 3.064-3.178 3.016-1.636-.046-2.933-1.417-2.916-3.056.015-1.666 1.378-3.003 3.044-3.003.18 0 .357.018.527.052v-3.967c-.201-.016-.402-.025-.603-.025-3.834.02-6.918 3.167-6.883 7.001.033 3.81 3.14 6.892 6.949 6.91 3.864.017 7.02-3.109 7.042-6.973V8.89a8.625 8.625 0 0 0 5.03 1.631V6.686z" />
+                  </svg>
+                </motion.div>
                 <span>TikTok</span>
-              </a>
+              </motion.a>
             </div>
           </div>
 
