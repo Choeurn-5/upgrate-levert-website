@@ -135,6 +135,7 @@ export interface HeroConfig {
   images?: string[];
   imagePlaceholderNote?: string;
   badge?: string;
+  philosophyImage?: string;
 }
 
 export interface BlogAuthor {

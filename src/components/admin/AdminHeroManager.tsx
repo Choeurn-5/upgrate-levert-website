@@ -84,6 +84,10 @@ export const AdminHeroManager: React.FC<AdminHeroManagerProps> = ({ showToast })
   const [isSaving, setIsSaving] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
+  const [philosophyImage, setPhilosophyImage] = useState('');
+  const [isUploadingPhilosophy, setIsUploadingPhilosophy] = useState(false);
+  const philosophyInputRef = useRef<HTMLInputElement | null>(null);
+
   // Sync form values when selected page changes or heroConfigs updates
   useEffect(() => {
     const config = heroConfigs[selectedKey];
@@ -93,6 +97,7 @@ export const AdminHeroManager: React.FC<AdminHeroManagerProps> = ({ showToast })
       setEyebrow(config.eyebrow || '');
       setBadge(config.badge || '');
       setImageUrl(config.imageUrl || '');
+      setPhilosophyImage(config.philosophyImage || '');
     }
   }, [selectedKey, heroConfigs]);
 
@@ -144,6 +149,55 @@ export const AdminHeroManager: React.FC<AdminHeroManagerProps> = ({ showToast })
     }
   };
 
+  // Upload philosophy image
+  const handlePhilosophyUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      showToast('error', 'Please select an image file (JPEG, PNG, WebP)');
+      return;
+    }
+
+    if (file.size > 15 * 1024 * 1024) {
+      showToast('error', 'Image size must be less than 15MB');
+      return;
+    }
+
+    setIsUploadingPhilosophy(true);
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('folder', 'le-vert/blogs');
+
+    try {
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || 'Upload failed');
+      }
+
+      setPhilosophyImage(data.url);
+      showToast(
+        'success',
+        data.provider === 'cloudinary'
+          ? 'Image uploaded to Cloudinary CDN!'
+          : 'Image uploaded successfully!'
+      );
+    } catch (err: any) {
+      console.error('Philosophy upload error:', err);
+      showToast('error', err.message || 'Image upload failed');
+    } finally {
+      setIsUploadingPhilosophy(false);
+      if (philosophyInputRef.current) {
+        philosophyInputRef.current.value = '';
+      }
+    }
+  };
+
   // Save changes to current hero banner
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -166,6 +220,7 @@ export const AdminHeroManager: React.FC<AdminHeroManagerProps> = ({ showToast })
         subtitle: subtitle.trim(),
         badge: badge.trim(),
         imageUrl: imageUrl.trim(),
+        ...(selectedKey === 'blog' && { philosophyImage: philosophyImage.trim() }),
       };
 
       await handleUpdateHero(selectedKey, newConfig);
@@ -390,6 +445,58 @@ export const AdminHeroManager: React.FC<AdminHeroManagerProps> = ({ showToast })
               </div>
             </div>
           </div>
+
+          {/* Philosophy Section Image (Blog Only) */}
+          {selectedKey === 'blog' && (
+            <div className="space-y-4 p-5 rounded-2xl bg-[#FAF8F5] border border-[#E7E0D5]">
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-semibold text-[#1C3829] uppercase tracking-wider flex items-center space-x-1.5">
+                  <ImageIcon className="w-3.5 h-3.5 text-[#C5A880]" />
+                  <span>Philosophy Section Image *</span>
+                </label>
+                <span className="text-[11px] text-[#68726B]">
+                  Cloudinary CDN Enabled
+                </span>
+              </div>
+
+              <input
+                type="file"
+                ref={philosophyInputRef}
+                onChange={handlePhilosophyUpload}
+                accept="image/*"
+                className="hidden"
+              />
+
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => philosophyInputRef.current?.click()}
+                  disabled={isUploadingPhilosophy}
+                  className="px-4 py-2.5 rounded-xl bg-[#1C3829] hover:bg-[#2D5540] text-white text-xs font-semibold uppercase tracking-wider flex items-center justify-center space-x-2 transition-transform active:scale-95 disabled:opacity-50 cursor-pointer shadow-xs shrink-0"
+                >
+                  {isUploadingPhilosophy ? (
+                    <>
+                      <RefreshCw className="w-3.5 h-3.5 animate-spin text-[#C5A880]" />
+                      <span>Uploading to Cloudinary...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Upload className="w-3.5 h-3.5 text-[#C5A880]" />
+                      <span>Upload Philosophy Image</span>
+                    </>
+                  )}
+                </button>
+
+                <input
+                  type="url"
+                  value={philosophyImage}
+                  onChange={(e) => setPhilosophyImage(e.target.value)}
+                  placeholder="Or paste image URL (https://...)"
+                  className="flex-1 px-3 py-2 rounded-xl bg-white border border-[#E7E0D5] text-xs font-mono text-stone-700 focus:outline-none focus:border-[#C5A880]"
+                />
+              </div>
+            </div>
+          )}
 
           {/* Submit Button */}
           <div className="pt-2">

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
-import { Sparkles, MapPin, Award, ArrowRight, ShieldCheck, Utensils, Compass, Heart, Check, Clock, Phone, ChevronRight, ChevronLeft, Wine, Coffee, Star } from 'lucide-react';
+import { Sparkles, MapPin, Award, ArrowRight, ShieldCheck, Utensils, Compass, Heart, Check, Clock, Phone, ChevronRight, ChevronLeft, Wine, Coffee, Star, Globe } from 'lucide-react';
+import { SiTripadvisor, SiBookingdotcom, SiTripdotcom, SiHotelsdotcom, SiQantas } from '@icons-pack/react-simple-icons';
 import { Hero } from '../components/Hero';
 import { RoomCard } from '../components/RoomCard';
 import { TourCard } from '../components/TourCard';
@@ -970,10 +971,31 @@ export const HomeView: React.FC<HomeViewProps> = ({
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 items-center text-center">
-            {AWARDS_PLATFORMS.slice(0, 6).map((platform) => (
+            {AWARDS_PLATFORMS.slice(0, 6).map((platform) => {
+              let BrandIcon: React.ElementType = Globe;
+              let iconColor = "#1C3829";
+
+              if (platform.name.includes('TripAdvisor')) {
+                BrandIcon = SiTripadvisor;
+                iconColor = "#34E0A1";
+              } else if (platform.name.includes('Booking.com')) {
+                BrandIcon = SiBookingdotcom;
+                iconColor = "#003580";
+              } else if (platform.name.includes('Trip.com')) {
+                BrandIcon = SiTripdotcom;
+                iconColor = "#3370FF";
+              } else if (platform.name.includes('Hotels.com')) {
+                BrandIcon = SiHotelsdotcom;
+                iconColor = "#D32F2F";
+              } else if (platform.name.includes('Qantas')) {
+                BrandIcon = SiQantas;
+                iconColor = "#E40000";
+              }
+
+              return (
               <div
                 key={platform.name}
-                className="p-4 rounded-2xl bg-[#F2EDE4]/70 border border-[#E7E0D5]/80 hover:border-[#C5A880] transition-colors"
+                className="p-4 rounded-2xl bg-[#F2EDE4]/70 border border-[#E7E0D5]/80 hover:border-[#C5A880] transition-colors group"
               >
                 <div className="font-luxury-serif text-2xl font-bold text-[#1C3829]">
                   {platform.ratingScore}
@@ -981,14 +1003,20 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     /{platform.maxScore}
                   </span>
                 </div>
-                <div className="text-xs font-semibold text-[#1C3829] mt-1">
+                <div className="flex justify-center items-center my-2 h-8 relative">
+                   <BrandIcon 
+                    className="w-8 h-8 text-[#68726B] filter grayscale group-hover:grayscale-0 transition-all duration-300" 
+                    style={{ color: iconColor }}
+                  />
+                </div>
+                <div className="text-xs font-semibold text-[#1C3829]">
                   {platform.name}
                 </div>
                 <div className="text-[10px] text-[#68726B] truncate mt-0.5">
                   {platform.category}
                 </div>
               </div>
-            ))}
+            )})}
           </div>
 
           <div className="mt-8 text-center">

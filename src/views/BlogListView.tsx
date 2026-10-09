@@ -536,17 +536,33 @@ export const BlogListView: React.FC<BlogListViewProps> = ({
                 </div>
               </div>
             </div>
-            <div className="relative">
-              <div className="aspect-[4/5] rounded-3xl overflow-hidden bg-stone-100 shadow-2xl relative z-10">
-                <img 
-                  src="/images/Home/home-hotel-story/DSCF7100.jpg" 
+            <motion.div 
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="relative"
+            >
+              <div className="aspect-[4/5] rounded-3xl overflow-hidden bg-stone-100 shadow-2xl relative z-10 group">
+                <motion.img 
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  src={heroConfig?.philosophyImage || "/images/Home/home-hotel-story/DSCF7100.jpg"} 
                   alt="Le Vert Angkor Hotel Philosophy" 
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="absolute -bottom-8 -left-8 w-64 h-64 bg-[#F5F2ED] rounded-full z-0"></div>
-              <div className="absolute -top-8 -right-8 w-32 h-32 bg-[#2D5540]/10 rounded-full z-0"></div>
-            </div>
+              <motion.div 
+                animate={{ rotate: 360 }}
+                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                className="absolute -bottom-8 -left-8 w-64 h-64 border-[40px] border-[#F5F2ED] rounded-full z-0"
+              />
+              <motion.div 
+                animate={{ y: [0, -20, 0], scale: [1, 1.1, 1] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -top-8 -right-8 w-32 h-32 bg-[#2D5540]/10 rounded-full z-0"
+              />
+            </motion.div>
           </div>
 
           {/* 2. Leadership Team */}
