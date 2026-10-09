@@ -69,7 +69,12 @@ export const AdminToursView: React.FC<AdminToursViewProps> = ({ onNavigate }) =>
       formData.append('file', file);
       const res = await fetch('/api/upload', { method: 'POST', body: formData });
       if (!res.ok) {
-        const err = await res.json();
+        let err;
+        try {
+          err = await res.json();
+        } catch (e) {
+          throw new Error(`Upload failed with status ${res.status}.`);
+        }
         throw new Error(err.error || 'Upload failed');
       }
       const data = await res.json();

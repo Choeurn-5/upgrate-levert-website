@@ -291,7 +291,12 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
       });
 
       if (!res.ok) {
-        const errData = await res.json();
+        let errData;
+        try {
+          errData = await res.json();
+        } catch (e) {
+          throw new Error(`Upload failed with status ${res.status}. File might be too large.`);
+        }
         throw new Error(errData.error || 'Failed to upload image');
       }
 
@@ -411,8 +416,13 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
       });
 
       if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.error || 'Failed to save post');
+        let errData;
+        try {
+          errData = await res.json();
+        } catch (e) {
+          throw new Error(`Upload failed with status ${res.status}.`);
+        }
+        throw new Error(errData.error || 'Failed to save post');
       }
 
       await fetchPosts();
@@ -571,7 +581,7 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
       {/* Toast Notification */}
       {notification && (
         <div
-          className={`fixed top-4 right-4 z-50 px-5 py-3 rounded-2xl shadow-xl border text-xs font-semibold flex items-center space-x-2 transition-all ${
+          className={`fixed top-4 right-4 z-[9999] px-5 py-3 rounded-2xl shadow-xl border text-xs font-semibold flex items-center space-x-2 transition-all ${
             notification.type === 'success'
               ? 'bg-emerald-900 text-emerald-100 border-emerald-700'
               : 'bg-rose-900 text-rose-100 border-rose-700'
