@@ -272,7 +272,8 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
   // Upload image to /api/upload
   const handleFileUpload = async (file: File, type: 'cover' | 'avatar') => {
     if (!file) return;
-    if (!file.type.startsWith('image/')) {
+    const isImage = file.type.startsWith('image/') || /\\.(jpg|jpeg|png|webp|svg|gif)$/i.test(file.name);
+    if (!isImage) {
       showToast('error', 'Please upload a valid image file (PNG, JPG, WebP, SVG).');
       return;
     }
@@ -1108,7 +1109,10 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
                       type="file"
                       ref={coverFileInputRef}
                       onChange={(e) => {
-                        if (e.target.files?.[0]) handleFileUpload(e.target.files[0], 'cover');
+                        if (e.target.files?.[0]) {
+                          handleFileUpload(e.target.files[0], 'cover');
+                        }
+                        e.target.value = '';
                       }}
                       accept="image/*"
                       className="hidden"
@@ -1206,7 +1210,10 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
                       type="file"
                       ref={avatarFileInputRef}
                       onChange={(e) => {
-                        if (e.target.files?.[0]) handleFileUpload(e.target.files[0], 'avatar');
+                        if (e.target.files?.[0]) {
+                          handleFileUpload(e.target.files[0], 'avatar');
+                        }
+                        e.target.value = '';
                       }}
                       accept="image/*"
                       className="hidden"

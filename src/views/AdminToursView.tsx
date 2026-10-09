@@ -57,7 +57,8 @@ export const AdminToursView: React.FC<AdminToursViewProps> = ({ onNavigate }) =>
 
   const handleImageUpload = async (file: File) => {
     if (!file) return;
-    if (!file.type.startsWith('image/')) {
+    const isImage = file.type.startsWith('image/') || /\\.(jpg|jpeg|png|webp|svg|gif)$/i.test(file.name);
+    if (!isImage) {
       setError('Please upload a valid image file (JPG, PNG, WebP).');
       return;
     }
