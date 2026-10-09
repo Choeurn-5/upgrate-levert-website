@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Mail, MapPin, ExternalLink, ShieldCheck, Award, Heart } from 'lucide-react';
+import { Phone, Mail, MapPin, ExternalLink, ShieldCheck, Award, Heart, Facebook, Instagram, Music } from 'lucide-react';
 import { SITE_SETTINGS } from '../lib/site-settings';
 import { AppRoute } from '../types';
 
@@ -44,6 +44,20 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({
                 <Award className="w-3.5 h-3.5 text-[#C5A880]" />
                 <span>TripAdvisor Choice 2026</span>
               </span>
+            </div>
+            
+            {/* Social Links */}
+            <div className="pt-5 flex items-center space-x-3">
+              <a href={SITE_SETTINGS.social.facebook} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-10 h-10 rounded-full bg-[#2D5540]/30 border border-[#C5A880]/20 text-[#C5A880] hover:bg-[#C5A880] hover:text-[#12241A] hover:border-[#C5A880] hover:scale-105 transition-all duration-300 shadow-sm" aria-label="Facebook">
+                <Facebook className="w-4 h-4" />
+              </a>
+              <a href={SITE_SETTINGS.social.instagram} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-10 h-10 rounded-full bg-[#2D5540]/30 border border-[#C5A880]/20 text-[#C5A880] hover:bg-[#C5A880] hover:text-[#12241A] hover:border-[#C5A880] hover:scale-105 transition-all duration-300 shadow-sm" aria-label="Instagram">
+                <Instagram className="w-4 h-4" />
+              </a>
+              <a href={SITE_SETTINGS.social.tiktok} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center space-x-2 h-10 px-4 rounded-full bg-[#2D5540]/30 border border-[#C5A880]/20 text-[#C5A880] hover:bg-[#C5A880] hover:text-[#12241A] hover:border-[#C5A880] hover:scale-105 transition-all duration-300 shadow-sm font-medium text-xs tracking-wide uppercase" aria-label="TikTok">
+                <Music className="w-3.5 h-3.5" />
+                <span>TikTok</span>
+              </a>
             </div>
           </div>
 

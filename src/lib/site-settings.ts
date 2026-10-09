@@ -15,8 +15,9 @@ export const SITE_SETTINGS = {
   locationSummary: '5 minutes to Old Market & Pub Street • 15 minutes to Angkor Wat Temple Complex',
   googleMapsEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3881.8!2d103.8526337!3d13.3564172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311017870ea64b49%3A0xea19638c55ed9f85!2sLe%20Vert%20Angkor%20Hotel!5e0!3m2!1sen!2skh!4v1700000000000!5m2!1sen!2skh',
   social: {
-    facebook: 'https://www.facebook.com/levertangkorhotel',
-    instagram: 'https://www.instagram.com/levertangkorhotel',
+    facebook: 'https://www.facebook.com/Lyvertangkor168',
+    instagram: 'https://www.instagram.com/levertangkor/',
+    tiktok: 'https://www.tiktok.com/',
     tripadvisor: 'https://www.tripadvisor.com/Hotel_Review-g297390-d26986566-Reviews-Le_Vert_Angkor_Hotel-Siem_Reap_Siem_Reap_Province.html',
   },
   amenityHighlights: [
