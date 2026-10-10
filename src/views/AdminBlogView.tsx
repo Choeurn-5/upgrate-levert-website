@@ -223,7 +223,7 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
           if (typeof window !== 'undefined') {
             try {
               deletedIds = JSON.parse(localStorage.getItem('levert_deleted_post_ids') || '[]');
-            } catch {}
+            } catch { }
           }
           const filtered = data.filter((p: BlogPost) => !deletedIds.includes(p.id));
           setPosts(filtered);
@@ -452,7 +452,7 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
           storedDeleted.push(id);
           localStorage.setItem('levert_deleted_post_ids', JSON.stringify(storedDeleted));
         }
-      } catch {}
+      } catch { }
     }
 
     // Immediately remove from UI state
@@ -584,11 +584,10 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
       {/* Toast Notification */}
       {notification && (
         <div
-          className={`fixed top-4 right-4 z-[9999] px-5 py-3 rounded-2xl shadow-xl border text-xs font-semibold flex items-center space-x-2 transition-all ${
-            notification.type === 'success'
+          className={`fixed top-4 right-4 z-[9999] px-5 py-3 rounded-2xl shadow-xl border text-xs font-semibold flex items-center space-x-2 transition-all ${notification.type === 'success'
               ? 'bg-emerald-900 text-emerald-100 border-emerald-700'
               : 'bg-rose-900 text-rose-100 border-rose-700'
-          }`}
+            }`}
         >
           {notification.type === 'success' ? (
             <CheckCircle className="w-4 h-4 text-emerald-400" />
@@ -654,11 +653,10 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
           <button
             type="button"
             onClick={() => setAdminSection('posts')}
-            className={`flex items-center space-x-2 px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
-              adminSection === 'posts'
+            className={`flex items-center space-x-2 px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${adminSection === 'posts'
                 ? 'bg-[#1C3829] text-white shadow-sm'
                 : 'bg-white text-[#68726B] hover:text-[#1C3829] border border-[#E7E0D5]'
-            }`}
+              }`}
           >
             <FileText className="w-3.5 h-3.5" />
             <span>Articles ({posts.length})</span>
@@ -667,11 +665,10 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
           <button
             type="button"
             onClick={() => setAdminSection('categories')}
-            className={`flex items-center space-x-2 px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
-              adminSection === 'categories'
+            className={`flex items-center space-x-2 px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${adminSection === 'categories'
                 ? 'bg-[#1C3829] text-white shadow-sm'
                 : 'bg-white text-[#68726B] hover:text-[#1C3829] border border-[#E7E0D5]'
-            }`}
+              }`}
           >
             <Tag className="w-3.5 h-3.5" />
             <span>Categories ({categories.length})</span>
@@ -680,11 +677,10 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
           <button
             type="button"
             onClick={() => setAdminSection('hero')}
-            className={`flex items-center space-x-2 px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
-              adminSection === 'hero'
+            className={`flex items-center space-x-2 px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${adminSection === 'hero'
                 ? 'bg-[#1C3829] text-white shadow-sm'
                 : 'bg-white text-[#68726B] hover:text-[#1C3829] border border-[#E7E0D5]'
-            }`}
+              }`}
           >
             <ImageIcon className="w-3.5 h-3.5" />
             <span>Hero &amp; Page Banners</span>
@@ -709,232 +705,230 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
           <>
             {/* Top Summary Metrics */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <div className="bg-white p-5 rounded-2xl border border-[#E7E0D5] shadow-xs space-y-1">
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-[#68726B]">
-              Total Articles
-            </span>
-            <div className="text-2xl font-bold font-luxury-serif text-[#1C3829]">
-              {posts.length}
-            </div>
-          </div>
+              <div className="bg-white p-5 rounded-2xl border border-[#E7E0D5] shadow-xs space-y-1">
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-[#68726B]">
+                  Total Articles
+                </span>
+                <div className="text-2xl font-bold font-luxury-serif text-[#1C3829]">
+                  {posts.length}
+                </div>
+              </div>
 
-          <div className="bg-white p-5 rounded-2xl border border-[#E7E0D5] shadow-xs space-y-1">
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-emerald-700">
-              Published
-            </span>
-            <div className="text-2xl font-bold font-luxury-serif text-emerald-800">
-              {posts.filter((p) => p.status === 'published').length}
-            </div>
-          </div>
+              <div className="bg-white p-5 rounded-2xl border border-[#E7E0D5] shadow-xs space-y-1">
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-emerald-700">
+                  Published
+                </span>
+                <div className="text-2xl font-bold font-luxury-serif text-emerald-800">
+                  {posts.filter((p) => p.status === 'published').length}
+                </div>
+              </div>
 
-          <div className="bg-white p-5 rounded-2xl border border-[#E7E0D5] shadow-xs space-y-1">
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-amber-700">
-              Drafts
-            </span>
-            <div className="text-2xl font-bold font-luxury-serif text-amber-800">
-              {posts.filter((p) => p.status === 'draft').length}
-            </div>
-          </div>
+              <div className="bg-white p-5 rounded-2xl border border-[#E7E0D5] shadow-xs space-y-1">
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-amber-700">
+                  Drafts
+                </span>
+                <div className="text-2xl font-bold font-luxury-serif text-amber-800">
+                  {posts.filter((p) => p.status === 'draft').length}
+                </div>
+              </div>
 
-          <div className="bg-white p-5 rounded-2xl border border-[#E7E0D5] shadow-xs space-y-1">
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-[#68726B]">
-              Categories
-            </span>
-            <div className="text-2xl font-bold font-luxury-serif text-[#1C3829]">
-              {categories.length}
-            </div>
-          </div>
-        </div>
-
-        {/* Filters and Search Bar */}
-        <div className="bg-white p-5 rounded-3xl border border-[#E7E0D5] shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="flex flex-wrap items-center gap-3">
-            {/* Status Segment */}
-            <div className="inline-flex rounded-full bg-[#FAF8F5] p-1 border border-[#E7E0D5]">
-              {(['all', 'published', 'draft'] as const).map((st) => (
-                <button
-                  key={st}
-                  onClick={() => setStatusFilter(st)}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-semibold capitalize transition-all ${
-                    statusFilter === st
-                      ? 'bg-[#1C3829] text-[#FAF8F5] shadow-xs'
-                      : 'text-[#68726B] hover:text-[#1C3829]'
-                  }`}
-                >
-                  {st}
-                </button>
-              ))}
+              <div className="bg-white p-5 rounded-2xl border border-[#E7E0D5] shadow-xs space-y-1">
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-[#68726B]">
+                  Categories
+                </span>
+                <div className="text-2xl font-bold font-luxury-serif text-[#1C3829]">
+                  {categories.length}
+                </div>
+              </div>
             </div>
 
-            {/* Category Dropdown */}
-            <select
-              value={categoryFilter}
-              onChange={(e) => setCategoryFilter(e.target.value)}
-              className="px-3 py-2 rounded-xl bg-[#FAF8F5] border border-[#E7E0D5] text-xs font-medium text-[#1C3829] focus:outline-none focus:border-[#C5A880]"
-            >
-              <option value="All">All Categories ({categories.length})</option>
-              {categories.map((c) => (
-                <option key={c} value={c}>
-                  {c}
-                </option>
-              ))}
-            </select>
-
-            <button
-              onClick={fetchPosts}
-              className="p-2 rounded-xl bg-[#FAF8F5] border border-[#E7E0D5] text-[#68726B] hover:text-[#1C3829] transition-colors"
-              title="Refresh Articles"
-            >
-              <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
-            </button>
-          </div>
-
-          {/* Search Box */}
-          <div className="relative w-full md:w-64">
-            <Search className="w-4 h-4 text-[#8C9690] absolute left-3 top-1/2 -translate-y-1/2" />
-            <input
-              type="text"
-              value={searchFilter}
-              onChange={(e) => setSearchFilter(e.target.value)}
-              placeholder="Search by title or author..."
-              className="w-full pl-9 pr-3 py-2 rounded-xl bg-[#FAF8F5] border border-[#E7E0D5] text-xs text-[#1C3829] focus:outline-none focus:border-[#C5A880]"
-            />
-          </div>
-        </div>
-
-        {/* Posts Table / Card List */}
-        <div className="bg-white rounded-3xl border border-[#E7E0D5] shadow-xs overflow-hidden">
-          {displayPosts.length === 0 ? (
-            <div className="p-12 text-center space-y-3">
-              <FileText className="w-8 h-8 text-stone-300 mx-auto" />
-              <h3 className="font-luxury-serif text-lg font-semibold text-[#1C3829]">
-                No Articles Found
-              </h3>
-              <p className="text-xs text-[#68726B]">
-                Try adjusting your search query or create your first blog article.
-              </p>
-              <button
-                onClick={handleOpenCreate}
-                className="mt-2 px-5 py-2 rounded-full bg-[#1C3829] text-[#FAF8F5] text-xs font-semibold uppercase tracking-wider"
-              >
-                Write New Story
-              </button>
-            </div>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse text-xs">
-                <thead>
-                  <tr className="border-b border-[#E7E0D5] bg-[#FAF8F5] text-[#68726B] font-semibold uppercase tracking-wider text-[10px]">
-                    <th className="py-4 px-6">Story</th>
-                    <th className="py-4 px-4">Category</th>
-                    <th className="py-4 px-4">Author</th>
-                    <th className="py-4 px-4">Date</th>
-                    <th className="py-4 px-4">Status</th>
-                    <th className="py-4 px-6 text-right">Actions</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-[#E7E0D5]">
-                  {displayPosts.map((post) => (
-                    <tr key={post.id} className="hover:bg-[#FAF8F5]/80 transition-colors">
-                      {/* Story Info */}
-                      <td className="py-4 px-6">
-                        <div className="flex items-center space-x-3.5">
-                          <img
-                            src={post.coverImage}
-                            alt=""
-                            className="w-14 h-11 rounded-lg object-cover bg-stone-100 shrink-0 border border-[#E7E0D5]"
-                          />
-                          <div className="space-y-1">
-                            <h4 className="font-luxury-serif text-sm font-bold text-[#1C3829] line-clamp-1 hover:text-[#2D5540]">
-                              {post.title}
-                            </h4>
-                            <p className="text-[11px] text-[#68726B] font-mono">
-                              /blog/{post.slug}/
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-
-                      {/* Category */}
-                      <td className="py-4 px-4 whitespace-nowrap">
-                        <span className="px-2.5 py-1 rounded-md bg-[#FAF8F5] border border-[#E7E0D5] text-[#1C3829] font-medium text-[11px]">
-                          {post.category}
-                        </span>
-                      </td>
-
-                      {/* Author */}
-                      <td className="py-4 px-4 whitespace-nowrap">
-                        <div className="flex items-center space-x-2">
-                          {post.author.avatar ? (
-                            <img
-                              src={post.author.avatar}
-                              alt=""
-                              className="w-6 h-6 rounded-full object-cover"
-                            />
-                          ) : (
-                            <div className="w-6 h-6 rounded-full bg-[#1C3829] text-white flex items-center justify-center font-bold text-[10px]">
-                              {post.author.name[0]}
-                            </div>
-                          )}
-                          <span className="font-medium text-[#1C3829]">
-                            {post.author.name}
-                          </span>
-                        </div>
-                      </td>
-
-                      {/* Date */}
-                      <td className="py-4 px-4 whitespace-nowrap text-[#68726B]">
-                        {post.publishedAt}
-                      </td>
-
-                      {/* Status */}
-                      <td className="py-4 px-4 whitespace-nowrap">
-                        <button
-                          onClick={() => handleToggleStatus(post)}
-                          className={`px-3 py-1 rounded-full font-semibold text-[11px] transition-colors cursor-pointer ${
-                            post.status === 'published'
-                              ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200'
-                              : 'bg-amber-100 text-amber-800 hover:bg-amber-200'
-                          }`}
-                          title="Click to toggle Published / Draft"
-                        >
-                          {post.status === 'published' ? '● Published' : '○ Draft'}
-                        </button>
-                      </td>
-
-                      {/* Action Buttons */}
-                      <td className="py-4 px-6 text-right whitespace-nowrap">
-                        <div className="flex items-center justify-end space-x-2">
-                          <button
-                            onClick={() => onNavigate('/blog/', post.slug)}
-                            className="p-1.5 rounded-lg text-stone-500 hover:text-[#1C3829] hover:bg-stone-100 transition-colors"
-                            title="View Public Post"
-                          >
-                            <ExternalLink className="w-4 h-4" />
-                          </button>
-                          <button
-                            onClick={() => handleOpenEdit(post)}
-                            className="p-1.5 rounded-lg text-stone-500 hover:text-[#1C3829] hover:bg-stone-100 transition-colors"
-                            title="Edit Post"
-                          >
-                            <Edit3 className="w-4 h-4" />
-                          </button>
-                          <button
-                            onClick={() => handleDeletePost(post.id, post.title)}
-                            className="p-1.5 rounded-lg text-stone-400 hover:text-rose-600 hover:bg-rose-50 transition-colors"
-                            title="Delete Post"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
+            {/* Filters and Search Bar */}
+            <div className="bg-white p-5 rounded-3xl border border-[#E7E0D5] shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="flex flex-wrap items-center gap-3">
+                {/* Status Segment */}
+                <div className="inline-flex rounded-full bg-[#FAF8F5] p-1 border border-[#E7E0D5]">
+                  {(['all', 'published', 'draft'] as const).map((st) => (
+                    <button
+                      key={st}
+                      onClick={() => setStatusFilter(st)}
+                      className={`px-3.5 py-1.5 rounded-full text-xs font-semibold capitalize transition-all ${statusFilter === st
+                          ? 'bg-[#1C3829] text-[#FAF8F5] shadow-xs'
+                          : 'text-[#68726B] hover:text-[#1C3829]'
+                        }`}
+                    >
+                      {st}
+                    </button>
                   ))}
-                </tbody>
-              </table>
+                </div>
+
+                {/* Category Dropdown */}
+                <select
+                  value={categoryFilter}
+                  onChange={(e) => setCategoryFilter(e.target.value)}
+                  className="px-3 py-2 rounded-xl bg-[#FAF8F5] border border-[#E7E0D5] text-xs font-medium text-[#1C3829] focus:outline-none focus:border-[#C5A880]"
+                >
+                  <option value="All">All Categories ({categories.length})</option>
+                  {categories.map((c) => (
+                    <option key={c} value={c}>
+                      {c}
+                    </option>
+                  ))}
+                </select>
+
+                <button
+                  onClick={fetchPosts}
+                  className="p-2 rounded-xl bg-[#FAF8F5] border border-[#E7E0D5] text-[#68726B] hover:text-[#1C3829] transition-colors"
+                  title="Refresh Articles"
+                >
+                  <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
+                </button>
+              </div>
+
+              {/* Search Box */}
+              <div className="relative w-full md:w-64">
+                <Search className="w-4 h-4 text-[#8C9690] absolute left-3 top-1/2 -translate-y-1/2" />
+                <input
+                  type="text"
+                  value={searchFilter}
+                  onChange={(e) => setSearchFilter(e.target.value)}
+                  placeholder="Search by title or author..."
+                  className="w-full pl-9 pr-3 py-2 rounded-xl bg-[#FAF8F5] border border-[#E7E0D5] text-xs text-[#1C3829] focus:outline-none focus:border-[#C5A880]"
+                />
+              </div>
             </div>
-          )}
-        </div>
+
+            {/* Posts Table / Card List */}
+            <div className="bg-white rounded-3xl border border-[#E7E0D5] shadow-xs overflow-hidden">
+              {displayPosts.length === 0 ? (
+                <div className="p-12 text-center space-y-3">
+                  <FileText className="w-8 h-8 text-stone-300 mx-auto" />
+                  <h3 className="font-luxury-serif text-lg font-semibold text-[#1C3829]">
+                    No Articles Found
+                  </h3>
+                  <p className="text-xs text-[#68726B]">
+                    Try adjusting your search query or create your first blog article.
+                  </p>
+                  <button
+                    onClick={handleOpenCreate}
+                    className="mt-2 px-5 py-2 rounded-full bg-[#1C3829] text-[#FAF8F5] text-xs font-semibold uppercase tracking-wider"
+                  >
+                    Write New Story
+                  </button>
+                </div>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left border-collapse text-xs">
+                    <thead>
+                      <tr className="border-b border-[#E7E0D5] bg-[#FAF8F5] text-[#68726B] font-semibold uppercase tracking-wider text-[10px]">
+                        <th className="py-4 px-6">Story</th>
+                        <th className="py-4 px-4">Category</th>
+                        <th className="py-4 px-4">Author</th>
+                        <th className="py-4 px-4">Date</th>
+                        <th className="py-4 px-4">Status</th>
+                        <th className="py-4 px-6 text-right">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-[#E7E0D5]">
+                      {displayPosts.map((post) => (
+                        <tr key={post.id} className="hover:bg-[#FAF8F5]/80 transition-colors">
+                          {/* Story Info */}
+                          <td className="py-4 px-6">
+                            <div className="flex items-center space-x-3.5">
+                              <img
+                                src={post.coverImage}
+                                alt=""
+                                className="w-14 h-11 rounded-lg object-cover bg-stone-100 shrink-0 border border-[#E7E0D5]"
+                              />
+                              <div className="space-y-1">
+                                <h4 className="font-luxury-serif text-sm font-bold text-[#1C3829] line-clamp-1 hover:text-[#2D5540]">
+                                  {post.title}
+                                </h4>
+                                <p className="text-[11px] text-[#68726B] font-mono">
+                                  /blog/{post.slug}/
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+
+                          {/* Category */}
+                          <td className="py-4 px-4 whitespace-nowrap">
+                            <span className="px-2.5 py-1 rounded-md bg-[#FAF8F5] border border-[#E7E0D5] text-[#1C3829] font-medium text-[11px]">
+                              {post.category}
+                            </span>
+                          </td>
+
+                          {/* Author */}
+                          <td className="py-4 px-4 whitespace-nowrap">
+                            <div className="flex items-center space-x-2">
+                              {post.author.avatar ? (
+                                <img
+                                  src={post.author.avatar}
+                                  alt=""
+                                  className="w-6 h-6 rounded-full object-cover"
+                                />
+                              ) : (
+                                <div className="w-6 h-6 rounded-full bg-[#1C3829] text-white flex items-center justify-center font-bold text-[10px]">
+                                  {post.author.name[0]}
+                                </div>
+                              )}
+                              <span className="font-medium text-[#1C3829]">
+                                {post.author.name}
+                              </span>
+                            </div>
+                          </td>
+
+                          {/* Date */}
+                          <td className="py-4 px-4 whitespace-nowrap text-[#68726B]">
+                            {post.publishedAt}
+                          </td>
+
+                          {/* Status */}
+                          <td className="py-4 px-4 whitespace-nowrap">
+                            <button
+                              onClick={() => handleToggleStatus(post)}
+                              className={`px-3 py-1 rounded-full font-semibold text-[11px] transition-colors cursor-pointer ${post.status === 'published'
+                                  ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200'
+                                  : 'bg-amber-100 text-amber-800 hover:bg-amber-200'
+                                }`}
+                              title="Click to toggle Published / Draft"
+                            >
+                              {post.status === 'published' ? '● Published' : '○ Draft'}
+                            </button>
+                          </td>
+
+                          {/* Action Buttons */}
+                          <td className="py-4 px-6 text-right whitespace-nowrap">
+                            <div className="flex items-center justify-end space-x-2">
+                              <button
+                                onClick={() => onNavigate('/blog/', post.slug)}
+                                className="p-1.5 rounded-lg text-stone-500 hover:text-[#1C3829] hover:bg-stone-100 transition-colors"
+                                title="View Public Post"
+                              >
+                                <ExternalLink className="w-4 h-4" />
+                              </button>
+                              <button
+                                onClick={() => handleOpenEdit(post)}
+                                className="p-1.5 rounded-lg text-stone-500 hover:text-[#1C3829] hover:bg-stone-100 transition-colors"
+                                title="Edit Post"
+                              >
+                                <Edit3 className="w-4 h-4" />
+                              </button>
+                              <button
+                                onClick={() => handleDeletePost(post.id, post.title)}
+                                className="p-1.5 rounded-lg text-stone-400 hover:text-rose-600 hover:bg-rose-50 transition-colors"
+                                title="Delete Post"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
           </>
         )}
       </main>
@@ -966,21 +960,19 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
                 <div className="flex bg-white/10 rounded-full p-1 text-xs">
                   <button
                     onClick={() => setEditorTab('edit')}
-                    className={`px-3 py-1 rounded-full font-medium transition-all ${
-                      editorTab === 'edit'
+                    className={`px-3 py-1 rounded-full font-medium transition-all ${editorTab === 'edit'
                         ? 'bg-[#C5A880] text-[#12241A] font-semibold'
                         : 'text-stone-300 hover:text-white'
-                    }`}
+                      }`}
                   >
                     Editor
                   </button>
                   <button
                     onClick={() => setEditorTab('preview')}
-                    className={`px-3 py-1 rounded-full font-medium transition-all ${
-                      editorTab === 'preview'
+                    className={`px-3 py-1 rounded-full font-medium transition-all ${editorTab === 'preview'
                         ? 'bg-[#C5A880] text-[#12241A] font-semibold'
                         : 'text-stone-300 hover:text-white'
-                    }`}
+                      }`}
                   >
                     Preview
                   </button>
@@ -1174,11 +1166,10 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
                             key={preset.label}
                             type="button"
                             onClick={() => setFormCoverImage(preset.url)}
-                            className={`px-3 py-1 rounded-full text-[11px] font-medium transition-colors border cursor-pointer ${
-                              formCoverImage === preset.url
+                            className={`px-3 py-1 rounded-full text-[11px] font-medium transition-colors border cursor-pointer ${formCoverImage === preset.url
                                 ? 'bg-[#1C3829] text-[#FAF8F5] border-[#1C3829]'
                                 : 'bg-white text-stone-700 border-[#E7E0D5] hover:border-[#C5A880]'
-                            }`}
+                              }`}
                           >
                             {preset.label}
                           </button>
@@ -1301,11 +1292,10 @@ export const AdminBlogView: React.FC<AdminBlogViewProps> = ({ onNavigate }) => {
                                 setFormAuthorAvatar(author.avatar);
                               }}
                               title={`${author.name} — ${author.role}`}
-                              className={`inline-flex items-center space-x-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all border cursor-pointer ${
-                                isSelected
+                              className={`inline-flex items-center space-x-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all border cursor-pointer ${isSelected
                                   ? 'bg-[#1C3829] text-[#FAF8F5] border-[#1C3829] shadow-xs'
                                   : 'bg-white text-stone-700 border-[#E7E0D5] hover:border-[#C5A880] hover:bg-[#FAF8F5]'
-                              }`}
+                                }`}
                             >
                               <img
                                 src={author.avatar}
